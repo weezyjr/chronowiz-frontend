@@ -2,9 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
-};
+export const environment =
+  {
+    production: false,
+    backendUrl: 'http://localhost:3000/',
+    s3MediaBucket: 'chronowiz-loc-media',
+    S3MediaBucketUrl: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/',
+  };
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,0 +1,135 @@
+<!--<div class="container">-->
+  <!--<h1>Add Caliber</h1>-->
+  <!--<form #watchForm="ngForm">-->
+    <!--<div class="form-group">-->
+
+      <!--// Caliber Details-->
+
+      <!--<label for="brand">Brand</label>-->
+      <!--<input type="text" class="form-control" id="brand" required-->
+             <!--[(ngModel)]="model.brand" name="brand" #brand="ngModel">-->
+      <!--&lt;!&ndash;<div [hidden]="brand.valid || brand.pristine"&ndash;&gt;-->
+      <!--&lt;!&ndash;class="alert alert-danger">&ndash;&gt;-->
+      <!--&lt;!&ndash;Brand is required&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="model">Caliber Reference</label>-->
+      <!--<input type="text" class="form-control" id="model" required-->
+             <!--[(ngModel)]="model.model" name="model">-->
+    <!--</div>-->
+
+    <!--// Movement Section-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementType">Caliber Type</label>-->
+      <!--<input type="text" class="form-control" id="movementType" required-->
+             <!--[(ngModel)]="model.movementType" name="movementType">-->
+    <!--</div>-->
+    <!--// Multiple values-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementDiameter">Caliber Diameter</label>-->
+      <!--<input type="text" class="form-control" id="movementDiameter" required-->
+             <!--[(ngModel)]="model.movementDiameter" name="movementDiameter">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementHeight">Caliber Height</label>-->
+      <!--<input type="text" class="form-control" id="movementHeight" required-->
+             <!--[(ngModel)]="model.movementHeight" name="movementHeight">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementJewels">Caliber Jewels</label>-->
+      <!--<input type="text" class="form-control" id="movementJewels" required-->
+             <!--[(ngModel)]="model.movementJewels" name="movementHeight">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementFrequency">Caliber Frequency</label>-->
+      <!--<input type="text" class="form-control" id="movementFrequency" required-->
+             <!--[(ngModel)]="model.movementFrequency" name="movementFrequency">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementPowerReserve">Caliber Power Reserve</label>-->
+      <!--<input type="text" class="form-control" id="movementPowerReserve" required-->
+             <!--[(ngModel)]="model.movementPowerReserve" name="movementPowerReserve">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementCertificate">Caliber certificate</label>-->
+      <!--<input type="text" class="form-control" id="movementCertificate" required-->
+             <!--[(ngModel)]="model.movementCertificate" name="movementCertificate">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementCertificateType">Caliber Certificate Type</label>-->
+      <!--<input type="text" class="form-control" id="movementCertificateType" required-->
+             <!--[(ngModel)]="model.movementCertificateType" name="movementCertificateType">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementDecorations">Caliber Decorations</label>-->
+      <!--<select class="form-control" id="movementDecorations" required-->
+              <!--[(ngModel)]="model.movementDecorations" name="movementDecorations">-->
+        <!--<option *ngFor="let movementDecoration of movementDecorations" [value]="movementDecoration">{{movementDecoration}}</option>-->
+      <!--</select>-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="caliberShockProtection">Caliber Shock protection</label>-->
+      <!--<input type="text" class="form-control" id="caliberShockProtection" required-->
+             <!--[(ngModel)]="model.caliberShockProtection" name="caliberShockProtection">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementSpring">Caliber Spring</label>-->
+      <!--<input type="text" class="form-control" id="movementSpring" required-->
+             <!--[(ngModel)]="model.movementSpring" name="movementSpring">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementTourbillon">Caliber Tourbillon</label>-->
+      <!--<input type="text" class="form-control" id="movementTourbillon" required-->
+             <!--[(ngModel)]="model.movementTourbillon" name="movementTourbillon">-->
+    <!--</div>-->
+    <!--//Dropdown: Tourbillon-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementRotor">Caliber Rotor</label>-->
+      <!--<input type="text" class="form-control" id="movementRotor" required-->
+             <!--[(ngModel)]="model.movementRotor" name="movementRotor">-->
+    <!--</div>-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="movementAdditionalFeatures">Caliber Additional Features</label>-->
+      <!--<input type="text" class="form-control" id="movementAdditionalFeatures" required-->
+             <!--[(ngModel)]="model.movementAdditionalFeatures" name="movementAdditionalFeatures">-->
+    <!--</div>-->
+    <!--// Multiple Values-->
+
+    <!--//Functions section-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="functions">Functions</label>-->
+      <!--<input type="text" class="form-control" id="functions" required-->
+             <!--[(ngModel)]="model.functions" name="functions">-->
+    <!--</div>-->
+    <!--// Multiple Values-->
+
+    <!--// Remarks Section-->
+
+    <!--<div class="form-group">-->
+      <!--<label for="functions">Remarks</label>-->
+      <!--<input type="text" class="form-control" id="remarks" required-->
+             <!--[(ngModel)]="model.functions" name="remarks">-->
+    <!--</div>-->
+    <!--// Multiple values-->
+
+    <!--<button type="submit" class="btn btn-success">Submit</button>-->
+
+  <!--</form>-->
+<!--</div>-->

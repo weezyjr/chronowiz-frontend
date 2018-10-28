@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+    - npm install --silent
+    - npm install -g @angular/cli --silent
+  build:
+    commands:
+    - ng build --configuration=${CHRONOWIZ_ENV} --aot --root=dist
+  post_build:
+    commands:
+    - aws s3 rm s3://${CHRONOWIZ_ENV_S3_BUCKET}/ --recursive
+    - aws s3 cp dist s3://${CHRONOWIZ_ENV_S3_BUCKET}/ --recursive --acl public-read
+    - aws cloudfront create-invalidation --distribution-id ${CHRONOWIZ_ENV_CLOUDFRONT_ID} --paths '/*'
