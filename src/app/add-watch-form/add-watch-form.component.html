@@ -342,10 +342,10 @@
       <br/>
 
       <div class="form-horizontal">
-        <label for="mainPhotoFile">Main Photo</label>
+        <label for="mainPhotoFileInput">Main Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" class="form-control" (change)="onMainPhotoChanged($event)" #mainPhotoElementRef id="mainPhotoFile" required [(ngModel)]="watch.mainPhotoFile" name="mainPhotoFile" #mainPhotoFile="ngModel">
+            <input type="file" class="form-control" (change)="onMainPhotoChanged($event)" #mainPhotoElementRef id="mainPhotoFileInput" required [(ngModel)]="watch.mainPhotoFile" name="mainPhotoFile" #mainPhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearMainPhoto()">Clear</button>
@@ -355,10 +355,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="banner1PhotoFile">Banner Photo 1</label>
+        <label for="banner1PhotoFileInput">Banner 1 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef class="form-control" id="banner1PhotoFile" [(ngModel)]="watch.banner1PhotoFile" name="banner1PhotoFile" #banner1PhotoFile="ngModel">
+            <input type="file" class="form-control" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef id="banner1PhotoFileInput" [(ngModel)]="watch.banner1PhotoFile" name="banner1PhotoFile" #banner1PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearBanner1Photo()">Clear</button>
@@ -367,10 +367,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="banner2PhotoFile">Banner Photo 2</label>
+        <label for="banner2PhotoFile">Banner 2 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef class="form-control" id="banner2PhotoFile" [(ngModel)]="watch.banner2PhotoFile" name="banner2PhotoFile" #banner2PhotoFile="ngModel">
+            <input type="file" class="form-control" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef id="banner2PhotoFile" [(ngModel)]="watch.banner2PhotoFile" name="banner2PhotoFile" #banner2PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearBanner2Photo()">Clear</button>
@@ -393,10 +393,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="section1Photo">Section 1 Photo</label>
+        <label for="section1PhotoFileInput">Section 1 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onSection1PhotoChanged($event)" #section1PhotoInputFile class="form-control" id="section1Photo" [(ngModel)]="watch.section1Photo" name="section1Photo" #section1Photo="ngModel">
+            <input type="file" class="form-control" (change)="onSection1PhotoChanged($event)" #section1PhotoElementRef id="section1PhotoFileInput" [(ngModel)]="watch.section1PhotoFile" name="section1PhotoFile" #section1PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearSection1Photo()">Clear</button>
@@ -419,10 +419,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="section2Photo">Section 2 Photo</label>
+        <label for="section2PhotoFileInput">Section 2 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onSection2PhotoChanged($event)" #section2PhotoInputFile class="form-control" id="section2Photo" [(ngModel)]="watch.section2Photo" name="section2Photo" #section2Photo="ngModel">
+            <input type="file" class="form-control" (change)="onSection2PhotoChanged($event)" #section2PhotoElementRef id="section2PhotoFileInput" [(ngModel)]="watch.section2PhotoFile" name="section2PhotoFile" #section2PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearSection2Photo()">Clear</button>
@@ -445,10 +445,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="section3Photo">Section 3 Photo</label>
+        <label for="section3PhotoFileInput">Section 3 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onSection3PhotoChanged($event)" #section3PhotoInputFile class="form-control" id="section3Photo" [(ngModel)]="watch.section3Photo" name="section3Photo" #section3Photo="ngModel">
+            <input type="file" class="form-control" (change)="onSection3PhotoChanged($event)" #section3PhotoElementRef id="section3PhotoFileInput" [(ngModel)]="watch.section3PhotoFile" name="section3PhotoFile" #section3PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearSection3Photo()">Clear</button>
@@ -471,10 +471,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="section4Photo">Section 4 Photo</label>
+        <label for="section4PhotoFileInput">Section 4 Photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" (change)="onSection4PhotoChanged($event)" #section4PhotoInputFile class="form-control" id="section4Photo" [(ngModel)]="watch.section4Photo" name="section4Photo" #section4Photo="ngModel">
+            <input type="file" class="form-control" (change)="onSection4PhotoChanged($event)" #section4PhotoElementRef id="section4PhotoFileInput" [(ngModel)]="watch.section4PhotoFile" name="section4PhotoFile" #section4PhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearSection4Photo()">Clear</button>
@@ -497,10 +497,10 @@
       </div>
 
       <div class="form-horizontal">
-        <label for="section5Photos">Section 5 Photos</label>
+        <label for="section5PhotosFileInput">Section 5 Photos</label>
         <div class="form-group">
           <div class="col-xs-10">
-            <input type="file" (change)="onSection5PhotosChanged($event)" #section5PhotosInputFile class="form-control" id="section5Photos" [(ngModel)]="watch.section5Photos" name="section5Photos" #section5Photos="ngModel">
+            <input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>

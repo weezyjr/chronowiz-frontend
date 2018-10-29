@@ -75,6 +75,16 @@ export class Watch extends ResponseData
   public section5Paragraph?: string;
   public section5PhotoUrls?: string[];
 
+  public mainPhotoFile: File;
+  public banner1PhotoFile?: File;
+  public banner2PhotoFile?: File;
+
+  public section1PhotoFile?: File;
+  public section2PhotoFile?: File;
+  public section3PhotoFile?: File;
+  public section4PhotoFile?: File;
+  public section5PhotoFiles?: File[];
+
   constructor()
   {
     super();

@@ -11,5 +11,5 @@ phases:
   post_build:
     commands:
     - aws s3 rm s3://${CHRONOWIZ_ENV_S3_BUCKET}/ --recursive
-    - aws s3 cp dist s3://${CHRONOWIZ_ENV_S3_BUCKET}/ --recursive --acl public-read
+    - aws s3 cp dist/chronowiz-web s3://${CHRONOWIZ_ENV_S3_BUCKET}/ --recursive --acl public-read
     - aws cloudfront create-invalidation --distribution-id ${CHRONOWIZ_ENV_CLOUDFRONT_ID} --paths '/*'

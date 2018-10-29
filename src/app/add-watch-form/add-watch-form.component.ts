@@ -40,7 +40,7 @@ export class AddWatchFormComponent implements OnInit
   responseData: ResponseData;
   response: Response;
 
-  @ViewChild('mainPhotoFileInput') mainPhotoElementRef: ElementRef;
+  @ViewChild('mainPhotoElementRef') mainPhotoElementRef: ElementRef;
   @ViewChild('banner1PhotoFileInput') banner1PhotoElementRef: ElementRef;
   @ViewChild('banner2PhotoFileInput') banner2PhotoElementRef: ElementRef;
 
@@ -159,6 +159,62 @@ export class AddWatchFormComponent implements OnInit
     this.watch.mainPhotoUrl = '';
   }
 
+  onBanner1PhotoChanged(event)
+  {
+  }
+
+  clearBanner1Photo()
+  {
+  }
+
+  onBanner2PhotoChanged(event)
+  {
+  }
+
+  clearBanner2Photo()
+  {
+  }
+
+  onSection1PhotoChanged(event)
+  {
+  }
+
+  clearSection1Photo()
+  {
+  }
+
+  onSection2PhotoChanged(event)
+  {
+  }
+
+  clearSection2Photo()
+  {
+  }
+
+  onSection3PhotoChanged(event)
+  {
+  }
+
+  clearSection3Photo()
+  {
+  }
+
+  onSection4PhotoChanged(event)
+  {
+  }
+
+  clearSection4Photo()
+  {
+  }
+
+  onSection5PhotosChanged(event)
+  {
+  }
+
+  clearSection5Photos()
+  {
+  }
+
   addMovementAdditionalFeatures()
   {
   }
@@ -166,6 +222,42 @@ export class AddWatchFormComponent implements OnInit
   removeMovementAdditionalFeatures()
   {
   }
+
+  addCaseAdditionalFeatures()
+  {
+  }
+
+  removeCaseAdditionalFeatures()
+  {
+  }
+
+  addDialAdditionalFeatures()
+  {
+  }
+
+  removeDialAdditionalFeatures()
+  {
+  }
+
+  addBandAdditionalFeatures()
+  {
+  }
+
+  removeBandAdditionalFeatures()
+  {
+  }
+
+  addFunctions()
+  {
+  }
+
+  removeFunctions()
+  {
+  }
+
+  addSection5Photos(){}
+
+  removeSection5Photos(){}
 
   submitWatch(): void
   {
