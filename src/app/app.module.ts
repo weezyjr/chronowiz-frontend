@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
-import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -13,26 +13,41 @@ import {WatchesService} from './watches.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {JwtInterceptor} from './jwt.interceptor';
+import {ErrorInterceptor} from './error.interceptor';
+import {AuthGuard} from './auth.guard';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'app-add-watch-form',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'app-add-watch-form',
-    component: AddWatchFormComponent
-  }
+    component: AddWatchFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     AddWatchFormComponent,
-    AddCaliberFormComponent
+    AddCaliberFormComponent,
+    LoginComponent
   ],
   imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -46,7 +61,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [HttpErrorHandlerService, WatchesService],
+  providers: [
+    HttpErrorHandlerService,
+    WatchesService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule

@@ -487,13 +487,13 @@
       <br/>
 
       <div class="form-group">
-        <label for="section5Title">Section 5 Title</label>
-        <input type="text" class="form-control" id="section5Title" [(ngModel)]="watch.section5Title" name="section5Title" #section5Title="ngModel">
+        <label for="section5Titles">Section 5 Title</label>
+        <input type="text" class="form-control" id="section5Titles" [(ngModel)]="watch.section5Titles" name="section5Titles" #section5Titles="ngModel">
       </div>
 
       <div class="form-group">
-        <label for="section5Paragraph">Section 5 Paragraph</label>
-        <input type="text" class="form-control" id="section5Paragraph" [(ngModel)]="watch.section5Paragraph" name="section5Paragraph" #section5Paragraph="ngModel">
+        <label for="section5Paragraphs">Section 5 Paragraph</label>
+        <input type="text" class="form-control" id="section5Paragraphs" [(ngModel)]="watch.section5Paragraphs" name="section5Paragraphs" #section5Paragraphs="ngModel">
       </div>
 
       <div class="form-horizontal">
@@ -517,6 +517,8 @@
         <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!watchForm.form.valid">Submit</button>
         <div class="divider"></div>
         <button type="button" class="btn btn-lg btn-danger" (click)="newWatch(); watchForm.reset()">Clear</button>
+        <div class="divider"></div>
+        <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
       </div>
       <br/><br/><br/><br/><br/>
 

@@ -6,6 +6,8 @@ import {ResponseData} from '../response-data';
 import {Response} from '../response';
 import * as S3 from 'aws-sdk/clients/s3';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../authentication.service';
 
 const s3Bucket = new S3(
   {
@@ -156,7 +158,16 @@ export class AddWatchFormComponent implements OnInit
     }
   }
 
-  constructor(private watchesService: WatchesService, private _notificationsService: NotificationsService)
+  logout()
+  {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  constructor(private watchesService: WatchesService,
+              private _notificationsService: NotificationsService,
+              private router: Router,
+              private authenticationService: AuthenticationService)
   {
   }
 
