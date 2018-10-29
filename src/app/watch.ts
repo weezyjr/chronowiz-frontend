@@ -71,9 +71,9 @@ export class Watch extends ResponseData
   public section4Paragraph?: string;
   public section4PhotoUrl?: string;
 
-  public section5Title?: string;
-  public section5Paragraph?: string;
-  public section5PhotoUrls?: string[];
+  public section5Titles?: string;
+  public section5Paragraphs?: string;
+  public section5PhotoUrls?: string;
 
   public mainPhotoFile: File;
   public banner1PhotoFile?: File;
@@ -83,7 +83,7 @@ export class Watch extends ResponseData
   public section2PhotoFile?: File;
   public section3PhotoFile?: File;
   public section4PhotoFile?: File;
-  public section5PhotoFiles?: File[];
+  public section5PhotoFiles?: File;
 
   constructor()
   {
@@ -94,6 +94,5 @@ export class Watch extends ResponseData
     this.caseAdditionalFeatures = [];
     this.dialAdditionalFeatures = [];
     this.bandAdditionalFeatures = [];
-    this.section5PhotoUrls = [];
   }
 }

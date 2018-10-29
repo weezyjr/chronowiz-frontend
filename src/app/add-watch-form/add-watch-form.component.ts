@@ -36,102 +36,124 @@ export class AddWatchFormComponent implements OnInit
   banner1PhotoFile: File;
   banner2PhotoFile: File;
 
+  section1PhotoFile: File;
+  section2PhotoFile: File;
+  section3PhotoFile: File;
+  section4PhotoFile: File;
+  section5PhotoFiles: File;
+
   watch: Watch = new Watch();
   responseData: ResponseData;
   response: Response;
 
   @ViewChild('mainPhotoElementRef') mainPhotoElementRef: ElementRef;
-  @ViewChild('banner1PhotoFileInput') banner1PhotoElementRef: ElementRef;
-  @ViewChild('banner2PhotoFileInput') banner2PhotoElementRef: ElementRef;
+  @ViewChild('banner1PhotoElementRef') banner1PhotoElementRef: ElementRef;
+  @ViewChild('banner2PhotoElementRef') banner2PhotoElementRef: ElementRef;
+
+  @ViewChild('section1PhotoElementRef') section1PhotoElementRef: ElementRef;
+  @ViewChild('section2PhotoElementRef') section2PhotoElementRef: ElementRef;
+  @ViewChild('section3PhotoElementRef') section3PhotoElementRef: ElementRef;
+  @ViewChild('section4PhotoElementRef') section4PhotoElementRef: ElementRef;
+  @ViewChild('section5PhotosElementRef') section5PhotosElementRef: ElementRef;
 
   newWatch()
   {
     this.watch = new Watch();
-    // this.watch.brand = 'brand';
-    // this.watch.model = 'model';
-    // this.watch.referenceNumber = 'referenceNumber';
-    // this.watch.gender = 'Men';
-    // this.watch.limited = 'limited';
-    //
-    // this.watch.movementType = 'movementType';
-    // this.watch.movementCaliberType = 'movementCaliberType';
-    // this.watch.movementCaliberNumber = 'movementCaliberNumber';
-    // this.watch.movementDiameter = 'movementDiameter';
-    // this.watch.movementHeight = 'movementHeight';
-    // this.watch.movementJewels = 'movementJewels';
-    // this.watch.movementFrequency = 'movementFrequency';
-    // this.watch.movementPowerReserve = 'movementPowerReserve';
-    // this.watch.movementCertificate = 'movementCertificate';
-    // this.watch.movementCertificateType = 'movementCertificateType';
-    // this.watch.movementDecoration = 'Côtes de Genève';
-    // this.watch.movementSpring = 'movementSpring';
-    // this.watch.movementTourbillon = 'Tourbillon';
-    // this.watch.movementRotor = 'movementRotor';
-    // // this.watch.movementAdditionalFeatures = ['movementAdditionalFeatures'];
-    //
-    // this.watch.functions = ['functions'];
-    //
-    // this.watch.caseMaterial = 'caseMaterial';
-    // this.watch.caseDiameter = 'caseDiameter';
-    // this.watch.caseHeight = 'caseHeight';
-    // this.watch.caseFront = 'Saphire Crystal';
-    // this.watch.caseBack = 'Transparent';
-    // this.watch.waterResistance = 'waterResistance';
-    // this.watch.caseCrown = 'Screw-in Crown';
-    // // this.watch.caseAdditionalFeatures = ['caseAdditionalFeatures'];
-    //
-    // this.watch.dialColour = 'dialColour';
-    // this.watch.dialIndex = 'dialIndex';
-    // this.watch.dialFinish = 'dialFinish';
-    // this.watch.dialHands = 'dialHands';
-    // // this.watch.dialAdditionalFeatures = ['dialAdditionalFeatures'];
-    //
-    // this.watch.band = 'band';
-    // this.watch.bandMaterial = 'bandMaterial';
-    // this.watch.bandClasp = 'bandClasp';
-    // this.watch.bandColour = 'bandColour';
-    // this.watch.bandClaspMaterial = 'bandClaspMaterial';
-    // // this.watch.bandAdditionalFeatures = ['bandAdditionalFeatures'];
-    //
-    // this.watch.price = 'price';
-    //
-    // // this.watch.mainPhotoUrl = 'mainPhotoUrl';
-    // // this.watch.banner1PhotoUrl = 'banner1PhotoUrl';
-    // // this.watch.banner2PhotoUrl = 'banner2PhotoUrl';
-    //
-    // this.watch.section1Title = 'section1Title';
-    // this.watch.section1Paragraph = 'section1Paragraph';
-    // // this.watch.section1PhotoUrl = 'section1PhotoUrl';
-    //
-    // this.watch.section2Title = 'section2Title';
-    // this.watch.section2Paragraph = 'section2Paragraph';
-    // // this.watch.section2PhotoUrl = 'section2PhotoUrl';
-    //
-    // this.watch.section3Title = 'section3Title';
-    // this.watch.section3Paragraph = 'section3Paragraph';
-    // // this.watch.section3PhotoUrl = 'section3PhotoUrl';
-    //
-    // this.watch.section4Title = 'section4Title';
-    // this.watch.section4Paragraph = 'section4Paragraph';
-    // // this.watch.section4PhotoUrl = 'section4PhotoUrl';
-    //
-    // this.watch.section5Title = 'section5Title';
-    // this.watch.section5Paragraph = 'section5Paragraph';
-    // // this.watch.section5PhotoUrls = ['section5PhotoUrls'];
+    this.watch.brand = 'brand';
+    this.watch.model = 'model';
+    this.watch.referenceNumber = 'referenceNumber';
+    this.watch.gender = 'Men';
+    this.watch.limited = 'limited';
+
+    this.watch.movementType = 'movementType';
+    this.watch.movementCaliberType = 'movementCaliberType';
+    this.watch.movementCaliberNumber = 'movementCaliberNumber';
+    this.watch.movementDiameter = 'movementDiameter';
+    this.watch.movementHeight = 'movementHeight';
+    this.watch.movementJewels = 'movementJewels';
+    this.watch.movementFrequency = 'movementFrequency';
+    this.watch.movementPowerReserve = 'movementPowerReserve';
+    this.watch.movementCertificate = 'movementCertificate';
+    this.watch.movementCertificateType = 'movementCertificateType';
+    this.watch.movementDecoration = 'Côtes de Genève';
+    this.watch.movementSpring = 'movementSpring';
+    this.watch.movementTourbillon = 'Tourbillon';
+    this.watch.movementRotor = 'movementRotor';
+    // this.watch.movementAdditionalFeatures = ['movementAdditionalFeatures'];
+
+    this.watch.functions = ['functions'];
+
+    this.watch.caseMaterial = 'caseMaterial';
+    this.watch.caseDiameter = 'caseDiameter';
+    this.watch.caseHeight = 'caseHeight';
+    this.watch.caseFront = 'Saphire Crystal';
+    this.watch.caseBack = 'Transparent';
+    this.watch.waterResistance = 'waterResistance';
+    this.watch.caseCrown = 'Screw-in Crown';
+    // this.watch.caseAdditionalFeatures = ['caseAdditionalFeatures'];
+
+    this.watch.dialColour = 'dialColour';
+    this.watch.dialIndex = 'dialIndex';
+    this.watch.dialFinish = 'dialFinish';
+    this.watch.dialHands = 'dialHands';
+    // this.watch.dialAdditionalFeatures = ['dialAdditionalFeatures'];
+
+    this.watch.band = 'band';
+    this.watch.bandMaterial = 'bandMaterial';
+    this.watch.bandClasp = 'bandClasp';
+    this.watch.bandColour = 'bandColour';
+    this.watch.bandClaspMaterial = 'bandClaspMaterial';
+    // this.watch.bandAdditionalFeatures = ['bandAdditionalFeatures'];
+
+    this.watch.price = 'price';
+
+    // this.watch.mainPhotoUrl = 'mainPhotoUrl';
+    // this.watch.banner1PhotoUrl = 'banner1PhotoUrl';
+    // this.watch.banner2PhotoUrl = 'banner2PhotoUrl';
+
+    this.watch.section1Title = 'section1Title';
+    this.watch.section1Paragraph = 'section1Paragraph';
+    // this.watch.section1PhotoUrl = 'section1PhotoUrl';
+
+    this.watch.section2Title = 'section2Title';
+    this.watch.section2Paragraph = 'section2Paragraph';
+    // this.watch.section2PhotoUrl = 'section2PhotoUrl';
+
+    this.watch.section3Title = 'section3Title';
+    this.watch.section3Paragraph = 'section3Paragraph';
+    // this.watch.section3PhotoUrl = 'section3PhotoUrl';
+
+    this.watch.section4Title = 'section4Title';
+    this.watch.section4Paragraph = 'section4Paragraph';
+    // this.watch.section4PhotoUrl = 'section4PhotoUrl';
+
+    this.watch.section5Titles = 'section5Titles';
+    this.watch.section5Paragraphs = 'section5Paragraphs';
+    // this.watch.section5PhotoUrls = 'section5PhotoUrls';
   }
 
-  onSubmit()
+  async onSubmit()
   {
-    // TODO convert to Async
-    this.uploadMainPhotoToS3();
+    try
+    {
+      await this.uploadMainPhotoToS3();
 
-    // TODO convert to Async
-    // this.uploadBanner1PhotoToS3();
+      await this.uploadBanner1PhotoToS3();
 
-    // TODO convert to Async
-    // this.uploadBanner2PhotoToS3();
+      await this.uploadBanner2PhotoToS3();
 
-    // this.submitWatch();
+      await this.uploadSection1PhotoToS3();
+      await this.uploadSection2PhotoToS3();
+      await this.uploadSection3PhotoToS3();
+      await this.uploadSection4PhotoToS3();
+      await this.uploadSection5PhotosToS3();
+
+      this.submitWatch();
+    }
+    catch (error)
+    {
+      this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+    }
   }
 
   constructor(private watchesService: WatchesService, private _notificationsService: NotificationsService)
@@ -152,7 +174,7 @@ export class AddWatchFormComponent implements OnInit
   {
     if (this.mainPhotoElementRef.nativeElement)
     {
-      this.mainPhotoElementRef.nativeElement.value = '';
+      this.mainPhotoElementRef.nativeElement.value = null;
     }
 
     this.mainPhotoFile = null;
@@ -161,58 +183,114 @@ export class AddWatchFormComponent implements OnInit
 
   onBanner1PhotoChanged(event)
   {
+    this.banner1PhotoFile = event.target.files[0];
   }
 
   clearBanner1Photo()
   {
+    if (this.banner1PhotoElementRef.nativeElement)
+    {
+      this.banner1PhotoElementRef.nativeElement.value = '';
+    }
+
+    this.banner1PhotoFile = null;
+    this.watch.banner1PhotoUrl = '';
   }
 
   onBanner2PhotoChanged(event)
   {
+    this.banner2PhotoFile = event.target.files[0];
   }
 
   clearBanner2Photo()
   {
+    if (this.banner2PhotoElementRef.nativeElement)
+    {
+      this.banner2PhotoElementRef.nativeElement.value = '';
+    }
+
+    this.banner2PhotoFile = null;
+    this.watch.banner2PhotoUrl = '';
   }
 
   onSection1PhotoChanged(event)
   {
+    this.section1PhotoFile = event.target.files[0];
   }
 
   clearSection1Photo()
   {
+    if (this.section1PhotoElementRef.nativeElement)
+    {
+      this.section1PhotoElementRef.nativeElement.value = null;
+    }
+
+    this.section1PhotoFile = null;
+    this.watch.section1PhotoUrl = '';
   }
 
   onSection2PhotoChanged(event)
   {
+    this.section2PhotoFile = event.target.files[0];
   }
 
   clearSection2Photo()
   {
+    if (this.section2PhotoElementRef.nativeElement)
+    {
+      this.section2PhotoElementRef.nativeElement.value = null;
+    }
+
+    this.section2PhotoFile = null;
+    this.watch.section2PhotoUrl = '';
   }
 
   onSection3PhotoChanged(event)
   {
+    this.section3PhotoFile = event.target.files[0];
   }
 
   clearSection3Photo()
   {
+    if (this.section3PhotoElementRef.nativeElement)
+    {
+      this.section3PhotoElementRef.nativeElement.value = null;
+    }
+
+    this.section3PhotoFile = null;
+    this.watch.section3PhotoUrl = '';
   }
 
   onSection4PhotoChanged(event)
   {
+    this.section4PhotoFile = event.target.files[0];
   }
 
   clearSection4Photo()
   {
+    if (this.section4PhotoElementRef.nativeElement)
+    {
+      this.section4PhotoElementRef.nativeElement.value = null;
+    }
+
+    this.section4PhotoFile = null;
+    this.watch.section4PhotoUrl = '';
   }
 
   onSection5PhotosChanged(event)
   {
+    this.section5PhotoFiles = event.target.files[0];
   }
 
   clearSection5Photos()
   {
+    if (this.section5PhotosElementRef.nativeElement)
+    {
+      this.section5PhotosElementRef.nativeElement.value = null;
+    }
+
+    this.section5PhotoFiles = null;
+    this.watch.section5PhotoUrls = '';
   }
 
   addMovementAdditionalFeatures()
@@ -255,9 +333,13 @@ export class AddWatchFormComponent implements OnInit
   {
   }
 
-  addSection5Photos(){}
+  addSection5Photos()
+  {
+  }
 
-  removeSection5Photos(){}
+  removeSection5Photos()
+  {
+  }
 
   submitWatch(): void
   {
@@ -282,113 +364,341 @@ export class AddWatchFormComponent implements OnInit
       });
   }
 
-  uploadMainPhotoToS3(): void
+  uploadMainPhotoToS3(): Promise<void>
   {
     const self = this;
 
-    // Uploading Main Photo, it should always be there as it is mandatory
-    const mainPhotoUploadParams =
-      {
-        Bucket: this.env.s3MediaBucket,
-        Key: 'watches/' + this.watch.referenceNumber + '/mainPhoto_' + new Date().getTime() + '.' + this.mainPhotoFile.name.split('.').pop(),
-        Body: this.mainPhotoFile,
-        ACL: 'public-read',
-        ContentType: this.mainPhotoFile.type
-      };
-
-    // TODO convert to Async
-    s3Bucket.upload(mainPhotoUploadParams, function (err, s3Data)
+    return new Promise(function (resolve, reject)
     {
-      if (err)
+      if (!self.mainPhotoFile)
       {
-        console.log(err);
-        self._notificationsService.error('Error', err);
+        reject();
       }
-      else
+
+      // Uploading Main Photo, it should always be there as it is mandatory
+      const mainPhotoUploadParams =
+        {
+          Bucket: self.env.s3MediaBucket,
+          Key: 'watches/' + self.watch.referenceNumber + '/mainPhoto_' + new Date().getTime() + '.' + self.mainPhotoFile.name.split('.').pop(),
+          Body: self.mainPhotoFile,
+          ACL: 'public-read',
+          ContentType: self.mainPhotoFile.type
+        };
+
+      s3Bucket.upload(mainPhotoUploadParams, function (err, s3Data)
       {
-        console.log(s3Data);
-        self._notificationsService.success('Success', self.mainPhotoFile.name + ' uploaded successfully');
-
-        self.watch.mainPhotoUrl = self.env.S3MediaBucketUrl + mainPhotoUploadParams.Key;
-
-        self.submitWatch(); // TODO remove that after converting the functions to async
-      }
+        if (err)
+        {
+          console.log(err);
+          self._notificationsService.error('Error', err);
+          reject();
+        }
+        else
+        {
+          console.log(s3Data);
+          self._notificationsService.success('Success', self.mainPhotoFile.name + ' uploaded successfully');
+          self.watch.mainPhotoUrl = self.env.S3MediaBucketUrl + mainPhotoUploadParams.Key;
+          resolve();
+        }
+      });
     });
   }
 
-  uploadBanner1PhotoToS3(): void
+  uploadBanner1PhotoToS3(): Promise<void>
   {
     const self = this;
 
-    // Uploading Banner 1 Photo
-
-    if (!this.banner1PhotoFile)
+    return new Promise(function (resolve, reject)
     {
-      return;
-    }
-
-    const banner1PhotoUploadParams =
+      // Uploading Banner 1 Photo
+      if (!self.banner1PhotoFile)
       {
-        Bucket: this.env.s3MediaBucket,
-        Key: 'watches/' + this.watch.referenceNumber + '/banner1Photo_' + new Date().getTime() + '.' + this.banner1PhotoFile.name.split('.').pop(),
-        Body: this.banner1PhotoFile,
-        ACL: 'public-read',
-        ContentType: this.banner1PhotoFile.type
-      };
-
-    // TODO convert to Async
-    s3Bucket.upload(banner1PhotoUploadParams, function (err, s3Data)
-    {
-      if (err)
-      {
-        console.log(err);
-        self._notificationsService.error('Error', err);
+        resolve();
       }
-      else
-      {
-        console.log(s3Data);
-        self._notificationsService.success('Success', self.banner1PhotoFile.name + ' uploaded successfully');
 
-        self.watch.mainPhotoUrl = self.env.S3MediaBucketUrl + banner1PhotoUploadParams.Key;
-      }
+      const banner1PhotoUploadParams =
+        {
+          Bucket: self.env.s3MediaBucket,
+          Key: 'watches/' + self.watch.referenceNumber + '/banner1Photo_' + new Date().getTime() + '.' + self.banner1PhotoFile.name.split('.').pop(),
+          Body: self.banner1PhotoFile,
+          ACL: 'public-read',
+          ContentType: self.banner1PhotoFile.type
+        };
+
+      s3Bucket.upload(banner1PhotoUploadParams, function (err, s3Data)
+      {
+        if (err)
+        {
+          console.log(err);
+          self._notificationsService.error('Error', err);
+          reject();
+        }
+        else
+        {
+          console.log(s3Data);
+          self._notificationsService.success('Success', self.banner1PhotoFile.name + ' uploaded successfully');
+          self.watch.banner1PhotoUrl = self.env.S3MediaBucketUrl + banner1PhotoUploadParams.Key;
+          resolve();
+        }
+      });
     });
   }
 
-  uploadBanner2PhotoToS3(): void
+  uploadBanner2PhotoToS3(): Promise<void>
   {
     const self = this;
 
-    // Uploading Banner 2 Photo
-
-    if (!this.banner2PhotoFile)
-    {
-      return;
-    }
-
-    const banner2PhotoUploadParams =
+    return new Promise(function (resolve, reject)
       {
-        Bucket: this.env.s3MediaBucket,
-        Key: 'watches/' + this.watch.referenceNumber + '/banner2Photo_' + new Date().getTime() + '.' + this.banner2PhotoFile.name.split('.').pop(),
-        Body: this.banner2PhotoFile,
-        ACL: 'public-read',
-        ContentType: this.banner2PhotoFile.type
-      };
+        const thisPromise = this;
 
-    // TODO convert to Async
-    s3Bucket.upload(banner2PhotoUploadParams, function (err, s3Data)
-    {
-      if (err)
-      {
-        console.log(err);
-        self._notificationsService.error('Error', err);
+        // Uploading Banner 2 Photo
+        if (!self.banner2PhotoFile)
+        {
+          resolve();
+        }
+
+        const banner2PhotoUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/banner2Photo_' + new Date().getTime() + '.' + self.banner2PhotoFile.name.split('.').pop(),
+            Body: self.banner2PhotoFile,
+            ACL: 'public-read',
+            ContentType: self.banner2PhotoFile.type
+          };
+
+        s3Bucket.upload(banner2PhotoUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.banner2PhotoFile.name + ' uploaded successfully');
+            self.watch.banner2PhotoUrl = self.env.S3MediaBucketUrl + banner2PhotoUploadParams.Key;
+            resolve();
+          }
+        });
       }
-      else
-      {
-        console.log(s3Data);
-        self._notificationsService.success('Success', self.banner2PhotoFile.name + ' uploaded successfully');
+    );
+  }
 
-        self.watch.mainPhotoUrl = self.env.S3MediaBucketUrl + banner2PhotoUploadParams.Key;
+  uploadSection1PhotoToS3(): Promise<void>
+  {
+    const self = this;
+
+    return new Promise(function (resolve, reject)
+      {
+        const thisPromise = this;
+
+        // Uploading Section 1 Photo
+        if (!self.section1PhotoFile)
+        {
+          resolve();
+        }
+
+        const section1PhotoUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/section1Photo_' + new Date().getTime() + '.' + self.section1PhotoFile.name.split('.').pop(),
+            Body: self.section1PhotoFile,
+            ACL: 'public-read',
+            ContentType: self.section1PhotoFile.type
+          };
+
+        s3Bucket.upload(section1PhotoUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.section1PhotoFile.name + ' uploaded successfully');
+            self.watch.section1PhotoUrl = self.env.S3MediaBucketUrl + section1PhotoUploadParams.Key;
+            resolve();
+          }
+        });
       }
-    });
+    );
+  }
+
+  uploadSection2PhotoToS3(): Promise<void>
+  {
+    const self = this;
+
+    return new Promise(function (resolve, reject)
+      {
+        const thisPromise = this;
+
+        // Uploading Section 2 Photo
+        if (!self.section2PhotoFile)
+        {
+          resolve();
+        }
+
+        const section2PhotoUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/section2Photo_' + new Date().getTime() + '.' + self.section2PhotoFile.name.split('.').pop(),
+            Body: self.section2PhotoFile,
+            ACL: 'public-read',
+            ContentType: self.section2PhotoFile.type
+          };
+
+        s3Bucket.upload(section2PhotoUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.section2PhotoFile.name + ' uploaded successfully');
+            self.watch.section2PhotoUrl = self.env.S3MediaBucketUrl + section2PhotoUploadParams.Key;
+            resolve();
+          }
+        });
+      }
+    );
+  }
+
+  uploadSection3PhotoToS3(): Promise<void>
+  {
+    const self = this;
+
+    return new Promise(function (resolve, reject)
+      {
+        const thisPromise = this;
+
+        // Uploading Section 3 Photo
+        if (!self.section3PhotoFile)
+        {
+          resolve();
+        }
+
+        const section3PhotoUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/section3Photo_' + new Date().getTime() + '.' + self.section3PhotoFile.name.split('.').pop(),
+            Body: self.section3PhotoFile,
+            ACL: 'public-read',
+            ContentType: self.section3PhotoFile.type
+          };
+
+        s3Bucket.upload(section3PhotoUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.section3PhotoFile.name + ' uploaded successfully');
+            self.watch.section3PhotoUrl = self.env.S3MediaBucketUrl + section3PhotoUploadParams.Key;
+            resolve();
+          }
+        });
+      }
+    );
+  }
+
+  uploadSection4PhotoToS3(): Promise<void>
+  {
+    const self = this;
+
+    return new Promise(function (resolve, reject)
+      {
+        const thisPromise = this;
+
+        // Uploading Section 4 Photo
+        if (!self.section4PhotoFile)
+        {
+          resolve();
+        }
+
+        const section4PhotoUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/section4Photo_' + new Date().getTime() + '.' + self.section4PhotoFile.name.split('.').pop(),
+            Body: self.section4PhotoFile,
+            ACL: 'public-read',
+            ContentType: self.section4PhotoFile.type
+          };
+
+        s3Bucket.upload(section4PhotoUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.section4PhotoFile.name + ' uploaded successfully');
+            self.watch.section4PhotoUrl = self.env.S3MediaBucketUrl + section4PhotoUploadParams.Key;
+            resolve();
+          }
+        });
+      }
+    );
+  }
+
+  uploadSection5PhotosToS3(): Promise<void>
+  {
+    const self = this;
+
+    return new Promise(function (resolve, reject)
+      {
+        const thisPromise = this;
+
+        // Uploading Section 5 Photo
+        if (!self.section5PhotoFiles)
+        {
+          resolve();
+        }
+
+        const section5PhotosUploadParams =
+          {
+            Bucket: self.env.s3MediaBucket,
+            Key: 'watches/' + self.watch.referenceNumber + '/section5Photos_' + new Date().getTime() + '.' + self.section5PhotoFiles.name.split('.').pop(),
+            Body: self.section5PhotoFiles,
+            ACL: 'public-read',
+            ContentType: self.section5PhotoFiles.type
+          };
+
+        s3Bucket.upload(section5PhotosUploadParams, function (err, s3Data)
+        {
+          if (err)
+          {
+            console.log(err);
+            self._notificationsService.error('Error', err);
+            reject();
+          }
+          else
+          {
+            console.log(s3Data);
+            self._notificationsService.success('Success', self.section5PhotoFiles.name + ' uploaded successfully');
+            self.watch.section5PhotoUrls = self.env.S3MediaBucketUrl + section5PhotosUploadParams.Key;
+            resolve();
+          }
+        });
+      }
+    );
   }
 }
