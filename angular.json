@@ -28,7 +28,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "chronowiz-liv": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -52,7 +52,7 @@
                 }
               ]
             },
-            "dev": {
+            "chronowiz-dev": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -68,11 +68,11 @@
             "browserTarget": "chronowiz-web:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "chronowiz-web:build:production"
+            "chronowiz-liv": {
+              "browserTarget": "chronowiz-web:build:chronowiz-liv"
             },
-            "dev": {
-              "browserTarget": "chronowiz-web:build:dev"
+            "chronowiz-dev": {
+              "browserTarget": "chronowiz-web:build:chronowiz-dev"
             }
           }
         },
@@ -125,11 +125,11 @@
             "devServerTarget": "chronowiz-web:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "chronowiz-web:serve:production"
+            "chronowiz-liv": {
+              "devServerTarget": "chronowiz-web:serve:chronowiz-liv"
             },
-            "dev": {
-              "devServerTarget": "chronowiz-web:serve:dev"
+            "chronowiz-dev": {
+              "devServerTarget": "chronowiz-web:serve:chronowiz-dev"
             }
           }
         },
