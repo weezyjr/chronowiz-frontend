@@ -5,7 +5,7 @@
 export const environment =
   {
     production: false,
-    backendUrl: 'https://localhost:3000/',
+    backendUrl: 'http://localhost:3000/',
     s3MediaBucket: 'chronowiz-loc-media',
     S3MediaBucketUrl: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/',
   };
