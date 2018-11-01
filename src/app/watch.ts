@@ -22,9 +22,9 @@ export class Watch extends ResponseData
   public movementSpring?: string;
   public movementTourbillon?: string;
   public movementRotor?: string;
-  public movementAdditionalFeatures?: string[];
+  public movementAdditionalFeatures?: object[];
 
-  public functions: string[];
+  public functions: object[];
 
   public caseMaterial: string;
   public caseDiameter: string;
@@ -33,20 +33,20 @@ export class Watch extends ResponseData
   public caseBack: string;
   public waterResistance: string;
   public caseCrown: string;
-  public caseAdditionalFeatures?: string[];
+  public caseAdditionalFeatures?: object[];
 
   public dialColour: string;
   public dialIndex: string;
   public dialFinish?: string;
   public dialHands: string;
-  public dialAdditionalFeatures?: string[];
+  public dialAdditionalFeatures?: object[];
 
   public band: string;
   public bandMaterial: string;
   public bandClasp: string;
   public bandColour: string;
   public bandClaspMaterial: string;
-  public bandAdditionalFeatures?: string[];
+  public bandAdditionalFeatures?: object[];
 
   public price: string;
 
@@ -71,8 +71,8 @@ export class Watch extends ResponseData
   public section4Paragraph?: string;
   public section4PhotoUrl?: string;
 
-  public section5Titles?: string;
-  public section5Paragraphs?: string;
+  public section5Title?: string;
+  public section5Paragraph?: string;
   public section5PhotoUrls?: string;
 
   public mainPhotoFile: File;

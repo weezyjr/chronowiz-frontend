@@ -81,9 +81,9 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.movementSpring = 'movementSpring';
     // this.watch.movementTourbillon = 'Tourbillon';
     // this.watch.movementRotor = 'movementRotor';
-    // // this.watch.movementAdditionalFeatures = ['movementAdditionalFeatures'];
+    this.watch.movementAdditionalFeatures = [{value: ''}];
     //
-    // this.watch.functions = ['functions'];
+    this.watch.functions = [{value: ''}];
     //
     // this.watch.caseMaterial = 'caseMaterial';
     // this.watch.caseDiameter = 'caseDiameter';
@@ -92,20 +92,20 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.caseBack = 'Transparent';
     // this.watch.waterResistance = 'waterResistance';
     // this.watch.caseCrown = 'Screw-in Crown';
-    // // this.watch.caseAdditionalFeatures = ['caseAdditionalFeatures'];
+    this.watch.caseAdditionalFeatures = [{value: ''}];
     //
     // this.watch.dialColour = 'dialColour';
     // this.watch.dialIndex = 'dialIndex';
     // this.watch.dialFinish = 'dialFinish';
     // this.watch.dialHands = 'dialHands';
-    // // this.watch.dialAdditionalFeatures = ['dialAdditionalFeatures'];
+    this.watch.dialAdditionalFeatures = [{value: ''}];
     //
     // this.watch.band = 'band';
     // this.watch.bandMaterial = 'bandMaterial';
     // this.watch.bandClasp = 'bandClasp';
     // this.watch.bandColour = 'bandColour';
     // this.watch.bandClaspMaterial = 'bandClaspMaterial';
-    // // this.watch.bandAdditionalFeatures = ['bandAdditionalFeatures'];
+    this.watch.bandAdditionalFeatures = [{value: ''}];
     //
     // this.watch.price = 'price';
     //
@@ -129,8 +129,8 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.section4Paragraph = 'section4Paragraph';
     // // this.watch.section4PhotoUrl = 'section4PhotoUrl';
     //
-    // this.watch.section5Titles = 'section5Titles';
-    // this.watch.section5Paragraphs = 'section5Paragraphs';
+    // this.watch.section5Title = 'section5Title';
+    // this.watch.section5Paragraph = 'section5Paragraph';
     // // this.watch.section5PhotoUrls = 'section5PhotoUrls';
   }
 
@@ -306,42 +306,52 @@ export class AddWatchFormComponent implements OnInit
 
   addMovementAdditionalFeatures()
   {
+    this.watch.movementAdditionalFeatures.push({value: ''});
   }
 
   removeMovementAdditionalFeatures()
   {
-  }
-
-  addCaseAdditionalFeatures()
-  {
-  }
-
-  removeCaseAdditionalFeatures()
-  {
-  }
-
-  addDialAdditionalFeatures()
-  {
-  }
-
-  removeDialAdditionalFeatures()
-  {
-  }
-
-  addBandAdditionalFeatures()
-  {
-  }
-
-  removeBandAdditionalFeatures()
-  {
+    this.watch.movementAdditionalFeatures.pop();
   }
 
   addFunctions()
   {
+    this.watch.functions.push({value: ''});
   }
 
   removeFunctions()
   {
+    this.watch.functions.pop();
+  }
+
+  addCaseAdditionalFeatures()
+  {
+    this.watch.caseAdditionalFeatures.push({value: ''});
+  }
+
+  removeCaseAdditionalFeatures()
+  {
+    this.watch.caseAdditionalFeatures.pop();
+  }
+
+  addDialAdditionalFeatures()
+  {
+    this.watch.dialAdditionalFeatures.push({value: ''});
+  }
+
+  removeDialAdditionalFeatures()
+  {
+    this.watch.dialAdditionalFeatures.pop();
+  }
+
+  addBandAdditionalFeatures()
+  {
+    this.watch.bandAdditionalFeatures.push({value: ''});
+  }
+
+  removeBandAdditionalFeatures()
+  {
+    this.watch.bandAdditionalFeatures.pop();
   }
 
   addSection5Photos()

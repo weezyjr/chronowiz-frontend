@@ -138,8 +138,8 @@
       <div class="form-horizontal">
         <label for="movementAdditionalFeatures">Movement Additional Features</label>
         <div class="form-group">
-          <div class="col-xs-11">
-            <input type="text" class="form-control" id="movementAdditionalFeatures" [(ngModel)]="watch.movementAdditionalFeatures[0]" name="movementAdditionalFeatures" #movementAdditionalFeatures="ngModel">
+          <div class="col-xs-11" *ngFor="let movementAdditionalFeature of watch.movementAdditionalFeatures; let in = index">
+            <input type="text" class="form-control" id="movementAdditionalFeatures" [(ngModel)]="watch.movementAdditionalFeatures[in].value" name="movementAdditionalFeatures{{in}}" #movementAdditionalFeatures="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="addMovementAdditionalFeatures()">+</button>
@@ -155,8 +155,8 @@
       <div class="form-horizontal">
         <label for="functions">Functions</label>
         <div class="form-group">
-          <div class="col-xs-11">
-            <input type="text" class="form-control" id="functions" required [(ngModel)]="watch.functions[0]" name="functions" #functions="ngModel">
+          <div class="col-xs-11" *ngFor="let function of watch.functions; let in=index">
+            <input type="text" class="form-control" id="functions" required [(ngModel)]="watch.functions[in].value" name="functions{{in}}" #functions="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="addFunctions()">+</button>
@@ -207,7 +207,7 @@
 
       <div class="form-group">
         <label for="waterResistance">Water Resistance</label>
-        <input type="text" class="form-control" id="waterResistance" required [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">atm
+        <input type="text" class="form-control" id="waterResistance" required [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">
         <div [hidden]="waterResistance.valid || waterResistance.pristine" class="alert alert-danger">Water Resistance is required</div>
       </div>
 
@@ -223,8 +223,8 @@
       <div class="form-horizontal">
         <label for="caseAdditionalFeatures">Case Additional Features</label>
         <div class="form-group">
-          <div class="col-xs-11">
-            <input type="text" class="form-control" id="caseAdditionalFeatures" [(ngModel)]="watch.caseAdditionalFeatures" name="caseAdditionalFeatures" #caseAdditionalFeatures="ngModel">
+          <div class="col-xs-11" *ngFor="let caseAdditionalFeature of watch.caseAdditionalFeatures; let in = index">
+            <input type="text" class="form-control" id="caseAdditionalFeatures" [(ngModel)]="watch.caseAdditionalFeatures[in].value" name="caseAdditionalFeatures{{in}}" #caseAdditionalFeatures="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="addCaseAdditionalFeatures()">+</button>
@@ -266,8 +266,8 @@
       <div class="form-horizontal">
         <label for="dialAdditionalFeatures">Dial Additional Features</label>
         <div class="form-group">
-          <div class="col-xs-11">
-            <input type="text" class="form-control" id="dialAdditionalFeatures" [(ngModel)]="watch.dialAdditionalFeatures" name="dialAdditionalFeatures" #dialAdditionalFeatures="ngModel">
+          <div class="col-xs-11" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in=index">
+            <input type="text" class="form-control" id="dialAdditionalFeatures" [(ngModel)]="watch.dialAdditionalFeatures[in].value" name="dialAdditionalFeatures{{in}}" #dialAdditionalFeatures="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="addDialAdditionalFeatures()">+</button>
@@ -313,8 +313,8 @@
       <div class="form-horizontal">
         <label for="bandAdditionalFeatures">Band Additional Features</label>
         <div class="form-group">
-          <div class="col-xs-11">
-            <input type="text" class="form-control" id="bandAdditionalFeatures" [(ngModel)]="watch.bandAdditionalFeatures" name="bandAdditionalFeatures" #bandAdditionalFeatures="ngModel">
+          <div class="col-xs-11" *ngFor="let bandAdditionalFeature of watch.bandAdditionalFeatures; let in=index">
+            <input type="text" class="form-control" id="bandAdditionalFeatures" [(ngModel)]="watch.bandAdditionalFeatures[in].value" name="bandAdditionalFeatures{{in}}" #bandAdditionalFeatures="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="addBandAdditionalFeatures()">+</button>
@@ -487,30 +487,30 @@
       <br/>
 
       <div class="form-group">
-        <label for="section5Titles">Section 5 Title</label>
-        <input type="text" class="form-control" id="section5Titles" [(ngModel)]="watch.section5Titles" name="section5Titles" #section5Titles="ngModel">
+        <label for="section5Title">Section 5 Title</label>
+        <input type="text" class="form-control" id="section5Title" [(ngModel)]="watch.section5Title" name="section5Title" #section5Title="ngModel">
       </div>
 
       <div class="form-group">
-        <label for="section5Paragraphs">Section 5 Paragraph</label>
-        <input type="text" class="form-control" id="section5Paragraphs" [(ngModel)]="watch.section5Paragraphs" name="section5Paragraphs" #section5Paragraphs="ngModel">
+        <label for="section5Paragraph">Section 5 Paragraph</label>
+        <input type="text" class="form-control" id="section5Paragraph" [(ngModel)]="watch.section5Paragraph" name="section5Paragraph" #section5Paragraph="ngModel">
       </div>
 
-      <div class="form-horizontal">
-        <label for="section5PhotosFileInput">Section 5 Photos</label>
-        <div class="form-group">
-          <div class="col-xs-10">
-            <input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">
-          </div>
-          <div class="col-xs-1">
-            <button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>
-          </div>
-          <div class="col-xs-1">
-            <button class="btn btn-default" (click)="addSection5Photos()">+</button>
-            <button class="btn btn-default" (click)="removeSection5Photos()">-</button>
-          </div>
-        </div>
-      </div>
+      <!--<div class="form-horizontal">-->
+        <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
+        <!--<div class="form-group">-->
+          <!--<div class="col-xs-10">-->
+            <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">-->
+          <!--</div>-->
+          <!--<div class="col-xs-1">-->
+            <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
+          <!--</div>-->
+          <!--<div class="col-xs-1">-->
+            <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
+            <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <br/>
       <div style="text-align: center">
