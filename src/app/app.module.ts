@@ -57,7 +57,11 @@ const routes: Routes = [
     }),
     FormsModule,
     AppRoutingModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot(
+      {
+        timeOut: 5000
+      }
+    ),
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],

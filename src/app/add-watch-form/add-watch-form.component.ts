@@ -66,24 +66,25 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.referenceNumber = 'referenceNumber';
     // this.watch.gender = 'Men';
     // this.watch.limited = 'limited';
-    // this.watch.awards = 'awards';
+    // this.watch.awards = 'Geneva Seal';
     //
     // this.watch.movementCaliberName = 'movementCaliberName';
+    // this.watch.movementAutomaticOrManual = 'Automatic';
     // this.watch.movementCaliberNumber = 'movementCaliberNumber';
     // this.watch.movementDiameter = 'movementDiameter';
     // this.watch.movementHeight = 'movementHeight';
     // this.watch.movementJewels = 'movementJewels';
     // this.watch.movementFrequency = 'movementFrequency';
     // this.watch.movementPowerReserve = 'movementPowerReserve';
-    // this.watch.movementCertificate = 'movementCertificate';
+    // this.watch.movementCertificate = 'COSC';
     // this.watch.movementDecoration = 'Côtes de Genève';
     // this.watch.movementSpring = 'movementSpring';
-    // this.watch.movementTourbillon = 'Tourbillon';
+    // this.watch.movementTourbillon = 'One Minute Tourbillon';
     // this.watch.movementRotor = 'movementRotor';
     this.watch.movementAdditionalFeatures = [{value: ''}];
 
-    this.watch.functions = [{value: ''}];
-
+    // this.watch.functions = [{value: 'Function1'}];
+    //
     // this.watch.caseMaterial = 'caseMaterial';
     // this.watch.caseDiameter = 'caseDiameter';
     // this.watch.caseHeight = 'caseHeight';
@@ -96,7 +97,7 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.dialColour = 'dialColour';
     // this.watch.dialIndex = 'dialIndex';
     // this.watch.dialFinish = 'dialFinish';
-    // this.watch.dialHands = 'dialHands';
+    // this.watch.dialHands = 'ALPHA HANDS';
     this.watch.dialAdditionalFeatures = [{value: ''}];
 
     // this.watch.band = 'band';
@@ -106,7 +107,8 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.bandClaspMaterial = 'bandClaspMaterial';
     this.watch.bandAdditionalFeatures = [{value: ''}];
 
-    // this.watch.price = 'price';
+    // this.watch.price = '100';
+    // this.watch.priceCurrency = 'priceCurrency';
     //
     // this.watch.section1Title = 'section1Title';
     // this.watch.section1Paragraph = 'section1Paragraph';
@@ -122,6 +124,7 @@ export class AddWatchFormComponent implements OnInit
     //
     // this.watch.section5Title = 'section5Title';
     // this.watch.section5Paragraph = 'section5Paragraph';
+    this.watch.section5PhotoFiles = [{value: ''}];
   }
 
   async onSubmit()
@@ -346,10 +349,12 @@ export class AddWatchFormComponent implements OnInit
 
   addSection5Photos()
   {
+    this.watch.section5PhotoFiles.push({value: ''});
   }
 
   removeSection5Photos()
   {
+    this.watch.section5PhotoFiles.pop();
   }
 
   submitWatch(): void

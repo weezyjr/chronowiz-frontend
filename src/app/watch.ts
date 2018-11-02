@@ -10,6 +10,7 @@ export class Watch extends ResponseData
   public awards?: string;
 
   public movementCaliberName: string;
+  public movementAutomaticOrManual?: string;
   public movementCaliberNumber: string;
   public movementDiameter: string;
   public movementHeight: string;
@@ -30,8 +31,8 @@ export class Watch extends ResponseData
   public caseHeight: string;
   public caseFront: string;
   public caseBack: string;
-  public waterResistance: string;
-  public caseCrown: string;
+  public waterResistance?: string;
+  public caseCrown?: string;
   public caseAdditionalFeatures?: object[];
 
   public dialColour: string;
@@ -48,6 +49,7 @@ export class Watch extends ResponseData
   public bandAdditionalFeatures?: object[];
 
   public price: string;
+  public priceCurrency: string;
 
   public mainPhotoUrl: string;
 
@@ -82,7 +84,7 @@ export class Watch extends ResponseData
   public section2PhotoFile?: File;
   public section3PhotoFile?: File;
   public section4PhotoFile?: File;
-  public section5PhotoFiles?: File;
+  public section5PhotoFiles?: object[];
 
   constructor()
   {
@@ -93,5 +95,6 @@ export class Watch extends ResponseData
     this.caseAdditionalFeatures = [];
     this.dialAdditionalFeatures = [];
     this.bandAdditionalFeatures = [];
+    this.section5PhotoFiles = [];
   }
 }

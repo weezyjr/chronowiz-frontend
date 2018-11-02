@@ -60,6 +60,16 @@
       </div>
 
       <div class="form-group">
+        <label for="movementAutomaticOrManual">Movement Automatic or Manual</label>
+        <select type="text" class="form-control" id="movementAutomaticOrManual" [(ngModel)]="watch.movementAutomaticOrManual" name="movementAutomaticOrManual" #movementAutomaticOrManual="ngModel">
+          <option value=""></option>
+          <option value="Manually Wound">Manually Wound</option>
+          <option value="Automatic">Automatic</option>
+          <option value="Self Winding">Self Winding</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="movementCaliberNumber">Movement Caliber Number</label>
         <input type="text" class="form-control" id="movementCaliberNumber" required [(ngModel)]="watch.movementCaliberNumber" name="movementCaliberNumber" #movementCaliberNumber="ngModel">
         <div [hidden]="movementCaliberNumber.valid || movementCaliberNumber.pristine" class="alert alert-danger">Movement Caliber Number is required</div>
@@ -210,17 +220,15 @@
 
       <div class="form-group">
         <label for="waterResistance">Water Resistance</label>
-        <input type="text" class="form-control" id="waterResistance" required [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">
-        <div [hidden]="waterResistance.valid || waterResistance.pristine" class="alert alert-danger">Water Resistance is required</div>
+        <input type="text" class="form-control" id="waterResistance" [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">
       </div>
 
       <div class="form-group">
         <label for="caseCrown">Case Crown</label>
-        <select type="text" class="form-control" id="caseCrown" required [(ngModel)]="watch.caseCrown" name="caseCrown" #caseCrown="ngModel">
+        <select type="text" class="form-control" id="caseCrown" [(ngModel)]="watch.caseCrown" name="caseCrown" #caseCrown="ngModel">
           <option value=""></option>
           <option value="Screw-in Crown">Screw-in Crown</option>
         </select>
-        <div [hidden]="caseCrown.valid || caseCrown.pristine" class="alert alert-danger">Case Crown is required</div>
       </div>
 
       <div class="form-horizontal">
@@ -350,9 +358,11 @@
         <div [hidden]="price.valid || price.pristine" class="alert alert-danger">Price is required</div>
       </div>
 
-      <!--<br/>-->
-      <!--<h3>Variations Section</h3>-->
-      <!--<br/>-->
+      <div class="form-group">
+        <label for="priceCurrency">Price Currency</label>
+        <input type="text" class="form-control" id="priceCurrency" required [(ngModel)]="watch.priceCurrency" name="priceCurrency" #priceCurrency="ngModel">
+        <div [hidden]="priceCurrency.valid || priceCurrency.pristine" class="alert alert-danger">Price Currency is required</div>
+      </div>
 
       <br/>
       <h3>Media Section</h3>
@@ -514,19 +524,21 @@
       </div>
 
       <!--<div class="form-horizontal">-->
-      <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
-      <!--<div class="form-group">-->
-      <!--<div class="col-xs-10">-->
-      <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">-->
-      <!--</div>-->
-      <!--<div class="col-xs-1">-->
-      <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
-      <!--</div>-->
-      <!--<div class="col-xs-1">-->
-      <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
-      <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
-      <!--</div>-->
-      <!--</div>-->
+        <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
+        <!--<div class="form-group">-->
+          <!--<div *ngFor="let section5PhotoFile of watch.section5PhotoFiles; let in = index">-->
+            <!--<div class="col-xs-10" >-->
+              <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles[in].value" name="section5PhotoFiles{{in}}" #section5PhotoFiles="ngModel">-->
+            <!--</div>-->
+            <!--<div class="col-xs-1">-->
+              <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-1">-->
+              <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
+              <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       <!--</div>-->
 
       <br/>
