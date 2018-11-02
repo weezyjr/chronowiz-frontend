@@ -7,9 +7,9 @@ export class Watch extends ResponseData
   public referenceNumber: string;
   public gender?: string;
   public limited?: string;
+  public awards?: string;
 
-  public movementType: string;
-  public movementCaliberType: string;
+  public movementCaliberName: string;
   public movementCaliberNumber: string;
   public movementDiameter: string;
   public movementHeight: string;
@@ -17,7 +17,6 @@ export class Watch extends ResponseData
   public movementFrequency: string;
   public movementPowerReserve: string;
   public movementCertificate?: string;
-  public movementCertificateType?: string;
   public movementDecoration?: string;
   public movementSpring?: string;
   public movementTourbillon?: string;

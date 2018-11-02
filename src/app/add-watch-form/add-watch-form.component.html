@@ -29,7 +29,7 @@
       <div class="form-group">
         <label for="gender">Gender</label>
         <select type="text" class="form-control" id="gender" [(ngModel)]="watch.gender" name="gender" #gender="ngModel">
-          <option value="undefined"></option>
+          <option value=""></option>
           <option value="Men">Men</option>
           <option value="Women">Women</option>
           <option value="Unisex">Unisex</option>
@@ -41,20 +41,22 @@
         <input type="text" class="form-control" id="limited" [(ngModel)]="watch.limited" name="limited" #limited="ngModel">
       </div>
 
+      <div class="form-group">
+        <label for="awards">Awards</label>
+        <select type="text" class="form-control" id="awards" [(ngModel)]="watch.awards" name="awards" #awards="ngModel">
+          <option value=""></option>
+          <option value="Geneva Seal">Geneva Seal</option>
+        </select>
+      </div>
+
       <br/>
       <h3>Movement Section</h3>
       <br/>
 
       <div class="form-group">
-        <label for="movementType">Movement Type</label>
-        <input type="text" class="form-control" id="movementType" required [(ngModel)]="watch.movementType" name="movementType" #movementType="ngModel">
-        <div [hidden]="movementType.valid || movementType.pristine" class="alert alert-danger">Movement Type is required</div>
-      </div>
-
-      <div class="form-group">
-        <label for="movementCaliberType">Movement Caliber Type</label>
-        <input type="text" class="form-control" id="movementCaliberType" required [(ngModel)]="watch.movementCaliberType" name="movementCaliberType" #movementCaliberType="ngModel">
-        <div [hidden]="movementCaliberType.valid || movementCaliberType.pristine" class="alert alert-danger">Movement Caliber Type is required</div>
+        <label for="movementCaliberName">Movement Caliber Name</label>
+        <input type="text" class="form-control" id="movementCaliberName" required [(ngModel)]="watch.movementCaliberName" name="movementCaliberName" #movementCaliberName="ngModel">
+        <div [hidden]="movementCaliberName.valid || movementCaliberName.pristine" class="alert alert-danger">Movement Caliber Name is required</div>
       </div>
 
       <div class="form-group">
@@ -96,24 +98,18 @@
       <div class="form-group">
         <label for="movementCertificate">Movement Certificate</label>
         <select type="text" class="form-control" id="movementCertificate" [(ngModel)]="watch.movementCertificate" name="movementCertificate" #movementCertificate="ngModel">
-          <option value="undefined"></option>
-          <option value="Movement Certificate">Movement Certificate</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="movementCertificateType">Movement Certificate Type</label>
-        <select type="text" class="form-control" id="movementCertificateType" [(ngModel)]="watch.movementCertificateType" name="movementCertificateType" #movementCertificateType="ngModel">
-          <option value="undefined"></option>
-          <option value="Movement Certificate Type">Movement Certificate Type</option>
+          <option value=""></option>
+          <option value="COSC">COSC</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="movementDecoration">Movement Decoration</label>
         <select type="text" class="form-control" id="movementDecoration" [(ngModel)]="watch.movementDecoration" name="movementDecoration" #movementDecoration="ngModel">
-          <option value="undefined"></option>
+          <option value=""></option>
           <option value="Côtes de Genève">Côtes de Genève</option>
+          <option value="Guilloche">Guilloche</option>
+          <option value="Perlage">Perlage</option>
         </select>
       </div>
 
@@ -125,8 +121,15 @@
       <div class="form-group">
         <label for="movementTourbillon">Movement Tourbillon</label>
         <select type="text" class="form-control" id="movementTourbillon" [(ngModel)]="watch.movementTourbillon" name="movementTourbillon" #movementTourbillon="ngModel">
-          <option value="undefined"></option>
-          <option value="Tourbillon">Tourbillon</option>
+          <option value=""></option>
+          <option value="Flying Tourbillon">Flying Tourbillon</option>
+          <option value="One Minute Tourbillon">One Minute Tourbillon</option>
+          <option value="2 x One Minute Tourbillon">2 x One Minute Tourbillon</option>
+          <option value="One Minute Flying Tourbillon">One Minute Flying Tourbillon</option>
+          <option value="24 Second Tourbillon Cage Inclined at 25 angle">24 Second Tourbillon Cage Inclined at 25 angle</option>
+          <option value="Spherical Double-Axis Tourbillon">Spherical Double-Axis Tourbillon</option>
+          <option value="One Minute Tourbillon with external balance spring">One Minute Tourbillon with external balance spring</option>
+          <option value="Flying Double Tourbillon">Flying Double Tourbillon</option>
         </select>
       </div>
 
@@ -190,7 +193,7 @@
       <div class="form-group">
         <label for="caseFront">Case Front</label>
         <select type="text" class="form-control" id="caseFront" required [(ngModel)]="watch.caseFront" name="caseFront" #caseFront="ngModel">
-          <option value="undefined"></option>
+          <option value=""></option>
           <option value="Saphire Crystal">Saphire Crystal</option>
         </select>
         <div [hidden]="caseFront.valid || caseFront.pristine" class="alert alert-danger">Case Front is required</div>
@@ -199,7 +202,7 @@
       <div class="form-group">
         <label for="caseBack">Case Back</label>
         <select type="text" class="form-control" id="caseBack" required [(ngModel)]="watch.caseBack" name="caseBack" #caseBack="ngModel">
-          <option value="undefined"></option>
+          <option value=""></option>
           <option value="Transparent">Transparent</option>
         </select>
         <div [hidden]="caseBack.valid || caseBack.pristine" class="alert alert-danger">Case Back is required</div>
@@ -214,7 +217,7 @@
       <div class="form-group">
         <label for="caseCrown">Case Crown</label>
         <select type="text" class="form-control" id="caseCrown" required [(ngModel)]="watch.caseCrown" name="caseCrown" #caseCrown="ngModel">
-          <option value="undefined"></option>
+          <option value=""></option>
           <option value="Screw-in Crown">Screw-in Crown</option>
         </select>
         <div [hidden]="caseCrown.valid || caseCrown.pristine" class="alert alert-danger">Case Crown is required</div>
@@ -257,8 +260,22 @@
       <div class="form-group">
         <label for="dialHands">Dial Hands</label>
         <select type="text" class="form-control" id="dialHands" required [(ngModel)]="watch.dialHands" name="dialHands" #dialHands="ngModel">
-          <option value="undefined"></option>
-          <option value="Dial Hands">Dial Hands</option>
+          <option value=""></option>
+          <option value="ALPHA HANDS">ALPHA HANDS</option>
+          <option value="ARROW HANDS">ARROW HANDS</option>
+          <option value="BATON HANDS">BATON HANDS</option>
+          <option value="BREGUET HANDS">BREGUET HANDS</option>
+          <option value="CATHEDRAL HANDS">CATHEDRAL HANDS</option>
+          <option value="DAUPHINE HANDS">DAUPHINE HANDS</option>
+          <option value="FLEUR DE LYS HANDS">FLEUR DE LYS HANDS</option>
+          <option value="LANCE HANDS">LANCE HANDS</option>
+          <option value="LEAF HANDS">LEAF HANDS</option>
+          <option value="MERCEDES HANDS">MERCEDES HANDS</option>
+          <option value="PLONGEUR HANDS">PLONGEUR HANDS</option>
+          <option value="SYRINGE HANDS">SYRINGE HANDS</option>
+          <option value="SNOWFLAKE HANDS">SNOWFLAKE HANDS</option>
+          <option value="SPADE HANDS">SPADE HANDS</option>
+          <option value="SWORD HANDS">SWORD HANDS</option>
         </select>
         <div [hidden]="dialHands.valid || dialHands.pristine" class="alert alert-danger">Dial Hands is required</div>
       </div>
@@ -266,7 +283,7 @@
       <div class="form-horizontal">
         <label for="dialAdditionalFeatures">Dial Additional Features</label>
         <div class="form-group">
-          <div class="col-xs-11" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in=index">
+          <div class="col-xs-11" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in = index">
             <input type="text" class="form-control" id="dialAdditionalFeatures" [(ngModel)]="watch.dialAdditionalFeatures[in].value" name="dialAdditionalFeatures{{in}}" #dialAdditionalFeatures="ngModel">
           </div>
           <div class="col-xs-1">
@@ -497,19 +514,19 @@
       </div>
 
       <!--<div class="form-horizontal">-->
-        <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
-        <!--<div class="form-group">-->
-          <!--<div class="col-xs-10">-->
-            <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">-->
-          <!--</div>-->
-          <!--<div class="col-xs-1">-->
-            <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
-          <!--</div>-->
-          <!--<div class="col-xs-1">-->
-            <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
-            <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
-          <!--</div>-->
-        <!--</div>-->
+      <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
+      <!--<div class="form-group">-->
+      <!--<div class="col-xs-10">-->
+      <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles" name="section5PhotoFiles" #section5PhotoFiles="ngModel">-->
+      <!--</div>-->
+      <!--<div class="col-xs-1">-->
+      <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
+      <!--</div>-->
+      <!--<div class="col-xs-1">-->
+      <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
+      <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
+      <!--</div>-->
+      <!--</div>-->
       <!--</div>-->
 
       <br/>
