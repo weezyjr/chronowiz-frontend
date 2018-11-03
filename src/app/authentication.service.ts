@@ -18,7 +18,7 @@ export class AuthenticationService
 
   env = environment;
 
-  loginUrl = this.env.backendUrl + 'admin/login/';
+  loginUrl = this.env.backendUrl + 'admin/account/login/';
 
   responseData: ResponseData;
   response: Response;
