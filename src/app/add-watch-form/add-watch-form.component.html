@@ -75,9 +75,16 @@
         <div [hidden]="movementCaliberNumber.valid || movementCaliberNumber.pristine" class="alert alert-danger">Movement Caliber Number is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="movementDiameter">Movement Diameter</label>
-        <input type="text" class="form-control" id="movementDiameter" required [(ngModel)]="watch.movementDiameter" name="movementDiameter" #movementDiameter="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="movementDiameter" required [(ngModel)]="watch.movementDiameter" name="movementDiameter" #movementDiameter="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">mm</div>
+          </div>
+        </div>
         <div [hidden]="movementDiameter.valid || movementDiameter.pristine" class="alert alert-danger">Movement Diameter is required</div>
       </div>
 
@@ -93,16 +100,30 @@
         <div [hidden]="movementJewels.valid || movementJewels.pristine" class="alert alert-danger">Movement Jewels is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="movementFrequency">Movement Frequency</label>
-        <input type="text" class="form-control" id="movementFrequency" required [(ngModel)]="watch.movementFrequency" name="movementFrequency" #movementFrequency="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="movementFrequency" required [(ngModel)]="watch.movementFrequency" name="movementFrequency" #movementFrequency="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">vph</div>
+          </div>
+        </div>
         <div [hidden]="movementFrequency.valid || movementFrequency.pristine" class="alert alert-danger">Movement Frequency is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="movementPowerReserve">Movement Power Reserve</label>
-        <input type="text" class="form-control" id="movementPowerReserve" required [(ngModel)]="watch.movementPowerReserve" name="movementPowerReserve" #movementPowerReserve="ngModel">
-        <div [hidden]="movementPowerReserve.valid || movementPowerReserve.pristine" class="alert alert-danger">Movement Power Reserve is required</div>
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="movementPowerReserve" required [(ngModel)]="watch.movementPowerReserve" name="movementPowerReserve" #movementPowerReserve="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">h</div>
+          </div>
+          <div [hidden]="movementPowerReserve.valid || movementPowerReserve.pristine" class="alert alert-danger">Movement Power Reserve is required</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -194,9 +215,16 @@
         <div [hidden]="caseDiameter.valid || caseDiameter.pristine" class="alert alert-danger">Case Diameter is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="caseHeight">Case Height</label>
-        <input type="text" class="form-control" id="caseHeight" required [(ngModel)]="watch.caseHeight" name="caseHeight" #caseHeight="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="caseHeight" required [(ngModel)]="watch.caseHeight" name="caseHeight" #caseHeight="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">mm</div>
+          </div>
+        </div>
         <div [hidden]="caseHeight.valid || caseHeight.pristine" class="alert alert-danger">Case Height is required</div>
       </div>
 
@@ -218,9 +246,16 @@
         <div [hidden]="caseBack.valid || caseBack.pristine" class="alert alert-danger">Case Back is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="waterResistance">Water Resistance</label>
-        <input type="text" class="form-control" id="waterResistance" [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="waterResistance" [(ngModel)]="watch.waterResistance" name="caseBack" #waterResistance="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">atm</div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -352,16 +387,25 @@
       <h3>Price Section</h3>
       <br/>
 
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" class="form-control" id="price" required [(ngModel)]="watch.price" name="price" #price="ngModel">
-        <div [hidden]="price.valid || price.pristine" class="alert alert-danger">Price is required</div>
-      </div>
-
-      <div class="form-group">
-        <label for="priceCurrency">Price Currency</label>
-        <input type="text" class="form-control" id="priceCurrency" required [(ngModel)]="watch.priceCurrency" name="priceCurrency" #priceCurrency="ngModel">
-        <div [hidden]="priceCurrency.valid || priceCurrency.pristine" class="alert alert-danger">Price Currency is required</div>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" required [(ngModel)]="watch.price" name="price" #price="ngModel">
+          </div>
+          <div class="col-xs-6">
+            <label for="priceCurrency">Price Currency</label>
+            <select type="text" class="form-control" id="priceCurrency" required [(ngModel)]="watch.priceCurrency" name="priceCurrency" #priceCurrency="ngModel">
+              <option value=""></option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </div>
+          <div [hidden]="price.valid || price.pristine" class="alert alert-danger">Price is required</div>
+          <div [hidden]="priceCurrency.valid || priceCurrency.pristine" class="alert alert-danger">Price Currency is required</div>
+        </div>
       </div>
 
       <br/>
@@ -524,21 +568,21 @@
       </div>
 
       <!--<div class="form-horizontal">-->
-        <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
-        <!--<div class="form-group">-->
-          <!--<div *ngFor="let section5PhotoFile of watch.section5PhotoFiles; let in = index">-->
-            <!--<div class="col-xs-10" >-->
-              <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles[in].value" name="section5PhotoFiles{{in}}" #section5PhotoFiles="ngModel">-->
-            <!--</div>-->
-            <!--<div class="col-xs-1">-->
-              <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
-            <!--</div>-->
-            <!--<div class="col-xs-1">-->
-              <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
-              <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
+      <!--<label for="section5PhotosFileInput">Section 5 Photos</label>-->
+      <!--<div class="form-group">-->
+      <!--<div *ngFor="let section5PhotoFile of watch.section5PhotoFiles; let in = index">-->
+      <!--<div class="col-xs-10" >-->
+      <!--<input type="file" class="form-control" (change)="onSection5PhotosChanged($event)" #section5PhotosElementRef id="section5PhotosFileInput" [(ngModel)]="watch.section5PhotoFiles[in].value" name="section5PhotoFiles{{in}}" #section5PhotoFiles="ngModel">-->
+      <!--</div>-->
+      <!--<div class="col-xs-1">-->
+      <!--<button class="btn btn-default" (click)="clearSection5Photos()">Clear</button>-->
+      <!--</div>-->
+      <!--<div class="col-xs-1">-->
+      <!--<button class="btn btn-default" (click)="addSection5Photos()">+</button>-->
+      <!--<button class="btn btn-default" (click)="removeSection5Photos()">-</button>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
       <!--</div>-->
 
       <br/>

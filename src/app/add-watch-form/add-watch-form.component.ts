@@ -83,7 +83,7 @@ export class AddWatchFormComponent implements OnInit
     // this.watch.movementRotor = 'movementRotor';
     this.watch.movementAdditionalFeatures = [{value: ''}];
 
-    // this.watch.functions = [{value: 'Function1'}];
+    this.watch.functions = [{value: ''}];
     //
     // this.watch.caseMaterial = 'caseMaterial';
     // this.watch.caseDiameter = 'caseDiameter';
