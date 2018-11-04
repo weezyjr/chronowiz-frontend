@@ -61,69 +61,69 @@ export class AddWatchFormComponent implements OnInit
   newWatch()
   {
     this.watch = new Watch();
-    // this.watch.brand = 'brand';
-    // this.watch.model = 'model';
-    // this.watch.referenceNumber = 'referenceNumber';
-    // this.watch.gender = 'Men';
-    // this.watch.limited = 'limited';
-    // this.watch.awards = 'Geneva Seal';
-    //
-    // this.watch.movementCaliberName = 'movementCaliberName';
-    // this.watch.movementAutomaticOrManual = 'Automatic';
-    // this.watch.movementCaliberNumber = 'movementCaliberNumber';
-    // this.watch.movementDiameter = 'movementDiameter';
-    // this.watch.movementHeight = 'movementHeight';
-    // this.watch.movementJewels = 'movementJewels';
-    // this.watch.movementFrequency = 'movementFrequency';
-    // this.watch.movementPowerReserve = 'movementPowerReserve';
-    // this.watch.movementCertificate = 'COSC';
-    // this.watch.movementDecoration = 'Côtes de Genève';
-    // this.watch.movementSpring = 'movementSpring';
-    // this.watch.movementTourbillon = 'One Minute Tourbillon';
-    // this.watch.movementRotor = 'movementRotor';
+          // this.watch.brand = 'brand';
+          // this.watch.model = 'model';
+          // this.watch.referenceNumber = 'referenceNumber';
+          // this.watch.gender = 'Men';
+          // this.watch.limited = 'limited';
+          // this.watch.awards = 'Geneva Seal';
+          //
+          // this.watch.movementCaliberName = 'movementCaliberName';
+          // this.watch.movementAutomaticOrManual = 'Automatic';
+          // this.watch.movementCaliberNumber = 'movementCaliberNumber';
+          // this.watch.movementDiameter = 'movementDiameter';
+          // this.watch.movementHeight = 'movementHeight';
+          // this.watch.movementJewels = 'movementJewels';
+          // this.watch.movementFrequency = 'movementFrequency';
+          // this.watch.movementPowerReserve = 'movementPowerReserve';
+          // this.watch.movementCertificate = 'COSC';
+          // this.watch.movementDecoration = 'Côtes de Genève';
+          // this.watch.movementSpring = 'movementSpring';
+          // this.watch.movementTourbillon = 'One Minute Tourbillon';
+          // this.watch.movementRotor = 'movementRotor';
     this.watch.movementAdditionalFeatures = [{value: ''}];
 
     this.watch.functions = [{value: ''}];
-    //
-    // this.watch.caseMaterial = 'caseMaterial';
-    // this.watch.caseDiameter = 'caseDiameter';
-    // this.watch.caseHeight = 'caseHeight';
-    // this.watch.caseFront = 'Saphire Crystal';
-    // this.watch.caseBack = 'Transparent';
-    // this.watch.waterResistance = 'waterResistance';
-    // this.watch.caseCrown = 'Screw-in Crown';
+
+          // this.watch.caseMaterial = 'caseMaterial';
+          // this.watch.caseDiameter = 'caseDiameter';
+          // this.watch.caseHeight = 'caseHeight';
+          // this.watch.caseFront = 'Saphire Crystal';
+          // this.watch.caseBack = 'Transparent';
+          // this.watch.waterResistance = 'waterResistance';
+          // this.watch.caseCrown = 'Screw-in Crown';
     this.watch.caseAdditionalFeatures = [{value: ''}];
 
-    // this.watch.dialColour = 'dialColour';
-    // this.watch.dialIndex = 'dialIndex';
-    // this.watch.dialFinish = 'dialFinish';
-    // this.watch.dialHands = 'ALPHA HANDS';
+          // this.watch.dialColour = 'dialColour';
+          // this.watch.dialIndex = 'dialIndex';
+          // this.watch.dialFinish = 'dialFinish';
+          // this.watch.dialHands = 'ALPHA HANDS';
     this.watch.dialAdditionalFeatures = [{value: ''}];
 
-    // this.watch.band = 'band';
-    // this.watch.bandMaterial = 'bandMaterial';
-    // this.watch.bandClasp = 'bandClasp';
-    // this.watch.bandColour = 'bandColour';
-    // this.watch.bandClaspMaterial = 'bandClaspMaterial';
+          // this.watch.band = 'band';
+          // this.watch.bandMaterial = 'bandMaterial';
+          // this.watch.bandClasp = 'bandClasp';
+          // this.watch.bandColour = 'bandColour';
+          // this.watch.bandClaspMaterial = 'bandClaspMaterial';
     this.watch.bandAdditionalFeatures = [{value: ''}];
 
-    // this.watch.price = '100';
-    // this.watch.priceCurrency = 'priceCurrency';
-    //
-    // this.watch.section1Title = 'section1Title';
-    // this.watch.section1Paragraph = 'section1Paragraph';
-    //
-    // this.watch.section2Title = 'section2Title';
-    // this.watch.section2Paragraph = 'section2Paragraph';
-    //
-    // this.watch.section3Title = 'section3Title';
-    // this.watch.section3Paragraph = 'section3Paragraph';
-    //
-    // this.watch.section4Title = 'section4Title';
-    // this.watch.section4Paragraph = 'section4Paragraph';
-    //
-    // this.watch.section5Title = 'section5Title';
-    // this.watch.section5Paragraph = 'section5Paragraph';
+          // this.watch.price = 100.5;
+          // this.watch.priceCurrency = 'USD';
+          //
+          // this.watch.section1Title = 'section1Title';
+          // this.watch.section1Paragraph = 'section1Paragraph';
+          //
+          // this.watch.section2Title = 'section2Title';
+          // this.watch.section2Paragraph = 'section2Paragraph';
+          //
+          // this.watch.section3Title = 'section3Title';
+          // this.watch.section3Paragraph = 'section3Paragraph';
+          //
+          // this.watch.section4Title = 'section4Title';
+          // this.watch.section4Paragraph = 'section4Paragraph';
+          //
+          // this.watch.section5Title = 'section5Title';
+          // this.watch.section5Paragraph = 'section5Paragraph';
     this.watch.section5PhotoFiles = [{value: ''}];
   }
 

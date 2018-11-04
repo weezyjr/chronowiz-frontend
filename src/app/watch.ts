@@ -48,7 +48,7 @@ export class Watch extends ResponseData
   public bandClaspMaterial: string;
   public bandAdditionalFeatures?: object[];
 
-  public price: string;
+  public price: number;
   public priceCurrency: string;
 
   public mainPhotoUrl: string;

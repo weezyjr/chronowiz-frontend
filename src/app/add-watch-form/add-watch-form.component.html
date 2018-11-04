@@ -88,9 +88,16 @@
         <div [hidden]="movementDiameter.valid || movementDiameter.pristine" class="alert alert-danger">Movement Diameter is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="movementHeight">Movement Height</label>
-        <input type="text" class="form-control" id="movementHeight" required [(ngModel)]="watch.movementHeight" name="movementHeight" #movementHeight="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="movementHeight" required [(ngModel)]="watch.movementHeight" name="movementHeight" #movementHeight="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">mm</div>
+          </div>
+        </div>
         <div [hidden]="movementHeight.valid || movementHeight.pristine" class="alert alert-danger">Movement Height is required</div>
       </div>
 
@@ -209,9 +216,16 @@
         <div [hidden]="caseMaterial.valid || caseMaterial.pristine" class="alert alert-danger">Case Material is required</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-horizontal">
         <label for="caseDiameter">Case Diameter</label>
-        <input type="text" class="form-control" id="caseDiameter" required [(ngModel)]="watch.caseDiameter" name="caseDiameter" #caseDiameter="ngModel">
+        <div class="form-group">
+          <div class="col-xs-11">
+            <input type="text" class="form-control" id="caseDiameter" required [(ngModel)]="watch.caseDiameter" name="caseDiameter" #caseDiameter="ngModel">
+          </div>
+          <div class="col-xs-1">
+            <div class="units">mm</div>
+          </div>
+        </div>
         <div [hidden]="caseDiameter.valid || caseDiameter.pristine" class="alert alert-danger">Case Diameter is required</div>
       </div>
 
@@ -391,7 +405,7 @@
         <div class="form-group">
           <div class="col-xs-6">
             <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" required [(ngModel)]="watch.price" name="price" #price="ngModel">
+            <input type="number" class="form-control" id="price" required [(ngModel)]="watch.price" name="price" #price="ngModel">
           </div>
           <div class="col-xs-6">
             <label for="priceCurrency">Price Currency</label>

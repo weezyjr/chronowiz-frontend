@@ -59,7 +59,7 @@ const routes: Routes = [
     AppRoutingModule,
     SimpleNotificationsModule.forRoot(
       {
-        timeOut: 5000
+        timeOut: 30000
       }
     ),
     RouterModule.forRoot(routes)
