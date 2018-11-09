@@ -17,10 +17,20 @@ import {JwtInterceptor} from './jwt.interceptor';
 import {ErrorInterceptor} from './error.interceptor';
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './login/login.component';
+import {HomePageComponent} from './home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'app-home-page',
+    pathMatch: 'full'
+  },
+  {
+    path: 'app-home-page',
+    component: HomePageComponent
+  },
+  {
+    path: 'admin',
     redirectTo: 'app-add-watch-form',
     pathMatch: 'full',
     canActivate: [AuthGuard]
@@ -34,7 +44,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {path: '**', redirectTo: ''}
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
@@ -42,7 +55,8 @@ const routes: Routes = [
     AppComponent,
     AddWatchFormComponent,
     AddCaliberFormComponent,
-    LoginComponent
+    LoginComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

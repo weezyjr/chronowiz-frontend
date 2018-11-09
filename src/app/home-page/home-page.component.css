@@ -1,0 +1,628 @@
+#home-page
+{
+  width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.main-photo
+{
+  width: 1440px;
+  height: 1018px;
+  object-fit: contain;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.Shape
+{
+  width: 17px;
+  height: 16px;
+  object-fit: contain;
+  position: absolute;
+  top: 96px;
+  left: 70px;
+}
+
+.Group-Copy
+{
+  width: 108px;
+  height: 77px;
+  object-fit: contain;
+  position: absolute;
+  top: 36px;
+  left: 666px;
+}
+
+.User-White
+{
+  width: 23px;
+  height: 24px;
+  object-fit: contain;
+  position: absolute;
+  top: 88px;
+  left: 1231px;
+}
+
+.search
+{
+  width: 24px;
+  height: 25px;
+  object-fit: contain;
+  position: absolute;
+  top: 88px;
+  left: 1291px;
+}
+
+.paper-bag
+{
+  width: 18px;
+  height: 28px;
+  object-fit: contain;
+  position: absolute;
+  top: 84px;
+  left: 1353px;
+}
+
+.Brands
+{
+  width: 148px;
+  height: 43px;
+  font-family: Helvetica;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: #212121;
+  position: absolute;
+  top: 1085px;
+  left: 647px;
+}
+
+.Rectangle
+{
+  width: 391px;
+  height: 42px;
+  background-color: #ffffff;
+  position: absolute;
+  top: 1146px;
+  left: 525px;
+}
+
+.Search
+{
+  width: 206.8px;
+  height: 17px;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #c0c0c0;
+}
+
+.Line
+{
+  width: 1189px;
+  height: 1px;
+  background-color: #924443;
+  position: absolute;
+  top: 1217px;
+  left: 126px;
+}
+
+.Audemars-piguet-logo
+{
+  width: 140px;
+  height: 56px;
+  object-fit: contain;
+  position: absolute;
+  top: 1278px;
+  left: 288px;
+}
+
+.download
+{
+  width: 140px;
+  height: 27px;
+  object-fit: contain;
+  position: absolute;
+  top: 1292px;
+  left: 527px;
+}
+
+.Baume__and__Mercier-logo-F4B5E1399B-seeklogocom
+{
+  width: 140px;
+  height: 72px;
+  object-fit: contain;
+  position: absolute;
+  left: 774px;
+  top: 1270px;
+}
+
+.bedat-and-co-logo
+{
+  width: 140px;
+  height: 30.8px;
+  object-fit: contain;
+  position: absolute;
+  left: 1009px;
+  top: 1290px;
+}
+
+.bellross
+{
+  width: 182px;
+  height: 91px;
+  position: absolute;
+  left: 267px;
+  top: 1385px;
+}
+
+.Blancpain-logo
+{
+  width: 153px;
+  height: 47px;
+  position: absolute;
+  left: 524px;
+  top: 1407px;
+}
+
+.ufgkytf
+{
+  width: 152px;
+  height: 152px;
+  position: absolute;
+  left: 760px;
+  top: 1354px;
+}
+
+.px-Breitlizng_logosvg
+{
+  width: 146px;
+  height: 59px;
+  position: absolute;
+  left: 1007px;
+  top: 1401px;
+}
+
+.bremont
+{
+  width: 139px;
+  height: 48px;
+  position: absolute;
+  left: 282px;
+  top: 1544px;
+}
+
+.Unknowrrrn
+{
+  width: 142px;
+  height: 16px;
+  position: absolute;
+  left: 518px;
+  top: 1560px;
+}
+
+.cartier-logo
+{
+  width: 154px;
+  height: 53px;
+  position: absolute;
+  left: 753px;
+  top: 1542px;
+}
+
+.o30
+{
+  width: 145px;
+  height: 145px;
+  position: absolute;
+  left: 1000px;
+  top: 1496px;
+}
+
+.Unknownbvgh
+{
+  width: 144px;
+  height: 56.3px;
+  position: absolute;
+  left: 286px;
+  top: 1664px;
+}
+
+.download-2
+{
+  width: 212px;
+  height: 64.6px;
+  position: absolute;
+  left: 491px;
+  top: 1646px;
+}
+
+.Girard-Perregaux-logo-logotype
+{
+  width: 151px;
+  height: 40.8px;
+  position: absolute;
+  left: 762px;
+  top: 1658px;
+}
+
+.Glashutte
+{
+  width: 169px;
+  height: 76px;
+  position: absolute;
+  left: 997px;
+  top: 1640px;
+}
+
+.Rectangle-8
+{
+  width: 116px;
+  height: 29px;
+  border-radius: 4px;
+  background-color: #7a1c1c;
+  position: absolute;
+  left: 660px;
+  top: 1746px;
+}
+
+.view-all
+{
+  width: 45px;
+  height: 13px;
+  font-family: Helvetica;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  left: 60%;
+  text-align: center;
+}
+
+.Line-Copy
+{
+  width: 1189px;
+  height: 1px;
+  position: absolute;
+  background-color: #924443;
+  left: 126px;
+  top: 1823px;
+}
+
+.Social-media
+{
+  width: 256px;
+  height: 43px;
+  object-fit: contain;
+  font-family: Helvetica;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: #212121;
+  position: absolute;
+  left: 594px;
+  top: 1876px;
+}
+
+.Group-4-Copy
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 252px;
+  top: 1989px;
+}
+
+.Group-5
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 492px;
+  top: 1989px;
+}
+
+.Group-6
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 732px;
+  top: 1989px;
+}
+
+.Group-7
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 972px;
+  top: 1989px;
+}
+
+.Group-8
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 252px;
+  top: 2292px;
+}
+
+.Group-9
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 492px;
+  top: 2292px;
+}
+
+.Group-10
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 733px;
+  top: 2292px;
+}
+
+.Group-11
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  left: 972px;
+  top: 2292px;
+}
+
+.Rectangle-4
+{
+  width: 140px;
+  height: 22px;
+  border-radius: 3px;
+  position: absolute;
+  left: 652px;
+  top: 2550px;
+  border-color: #924443;
+}
+
+.Load-more
+{
+  width: 131px;
+  height: 14px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #7a1c1c;
+}
+
+.Line-Copy-2
+{
+  width: 1189px;
+  height: 1px;
+  background-color: #924443;
+  position: absolute;
+  left: 126px;
+  top: 2599px;
+}
+
+.FireShot_Capture_104_Official_Rolex
+{
+  width: 1440px;
+  height: 704px;
+  object-fit: contain;
+  position: absolute;
+  left: 0px;
+  top: 2602px;
+}
+
+.PERFORMANCE-AND-PRES
+{
+  width: 375px;
+  height: 86px;
+  font-family: Helvetica;
+  font-size: 36px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  position: absolute;
+  left: 253px;
+  top: 2856px;
+}
+
+.DISCOVER-ALL-THE-ROL
+{
+  width: 386px;
+  height: 24px;
+  font-family: Helvetica;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  position: absolute;
+  left: 253px;
+  top: 2970px;
+}
+
+.Rectangle-8-2
+{
+  width: 116px;
+  height: 29px;
+  border-radius: 4px;
+  background-color: #7a1c1c;
+  position: absolute;
+  left: 253px;
+  top: 3022px;
+}
+
+.Discover-more
+{
+  width: 84px;
+  height: 13px;
+  font-family: Helvetica;
+  font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  left: 10%;
+  text-align: center;
+}
+
+.Group
+{
+  width: 60px;
+  height: 42.8px;
+  object-fit: contain;
+  position: absolute;
+  left: 249px;
+  top: 3343px;
+}
+
+.Rectangle-3
+{
+  width: 1440px;
+  height: 48px;
+  background-color: #3e0808;
+  position: absolute;
+  left: 0px;
+  top: 3414px;
+}
+
+.Contact-us
+{
+  width: 106px;
+  height: 31px;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  position: absolute;
+  left: 942px;
+  top: 3428px;
+}
+
+.facebook-letter-logo
+{
+  width: 10px;
+  height: 22px;
+  object-fit: contain;
+  position: absolute;
+  left: 1081px;
+  top: 3427px;
+}
+
+.twitter-logo-silhouette
+{
+  width: 20px;
+  height: 17px;
+  object-fit: contain;
+  position: absolute;
+  left: 1120px;
+  top: 3432px;
+}
+
+.insta
+{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  position: absolute;
+  left: 1170px;
+  top: 3428px;
+}
+
+.-Chrono-Wiz-2018-A
+{
+  width: 211px;
+  height: 14px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7a1c1c;
+  position: absolute;
+  left: 615px;
+  top: 3472px;
+}
+
+.Line-4
+{
+  width: 1434.5px;
+  height: 1px;
+  background-color: #924443;
+  position: absolute;
+  left: 3px;
+  top: 3494px;
+}
+
+.Terms-Conditions-
+{
+  width: 940px;
+  height: 20px;
+  font-family: Helvetica;
+  font-size: 17px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #7a1c1c;
+  position: absolute;
+  left: 249px;
+  top: 3515px;
+  padding-bottom: 50px;
+}

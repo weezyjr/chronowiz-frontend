@@ -305,7 +305,15 @@
 
       <div class="form-group">
         <label for="dialIndex">Dial Index</label>
-        <input type="text" class="form-control" id="dialIndex" required [(ngModel)]="watch.dialIndex" name="dialIndex" #dialIndex="ngModel">
+        <select type="text" class="form-control" id="dialIndex" required [(ngModel)]="watch.dialIndex" name="dialIndex" #dialIndex="ngModel">
+          <option value=""></option>
+          <option value="Roman numeral">Roman numeral</option>
+          <option value="Arabic numeral">Arabic numeral</option>
+          <option value="Breguet numeral">Breguet numeral</option>
+          <option value="Indices">Indices</option>
+          <option value="Blank Dial">Blank Dial</option>
+          <option value="Mixed">Mixed</option>
+        </select>
         <div [hidden]="dialIndex.valid || dialIndex.pristine" class="alert alert-danger">Dial Index is required</div>
       </div>
 
