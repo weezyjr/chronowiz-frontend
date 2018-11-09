@@ -62,7 +62,167 @@
   width: 1388px;
   height: 671px;
   object-fit: contain;
-  position: relative;
+  position: absolute;
   left: 22px;
   top: 195px;
 }
+
+.search_Watches-and-articles
+{
+  width: 141px;
+  height: 20px;
+  font-family: Didot;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7a1c1c;
+  position: absolute;
+  left: 650px;
+  top: 256px;
+}
+
+.search_SearchText
+{
+  width: 88px;
+  height: 15px;
+  object-fit: contain;
+  font-family: Helvetica;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 0.68;
+  letter-spacing: normal;
+  text-align: center;
+  color: #212121;
+  position: absolute;
+  left: 676px;
+  top: 288px;
+}
+
+.search_Rectangle
+{
+  width: 391px;
+  height: 42px;
+  background-color: #ffffff;
+  position: absolute;
+  left: 525px;
+  top: 345px;
+}
+
+.search_Group
+{
+  width: 60px;
+  height: 42.8px;
+  object-fit: contain;
+  position: absolute;
+  left: 249px;
+  top: 900px;
+}
+
+.search_Rectangle-3
+{
+  width: 1440px;
+  height: 48px;
+  background-color: #3e0808;
+  position: absolute;
+  left: 0;
+  top: 971px;
+}
+
+.search_Contact-us
+{
+  width: 106px;
+  height: 31px;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  position: absolute;
+  left: 942px;
+  top: 985px;
+}
+
+.search_facebook-letter-logo
+{
+  width: 10px;
+  height: 22px;
+  object-fit: contain;
+  position: absolute;
+  left: 1081px;
+  top: 985px;
+}
+
+.search_twitter-logo-silhouette
+{
+  width: 20px;
+  height: 17px;
+  object-fit: contain;
+  position: absolute;
+  left: 1120px;
+  top: 985px;
+}
+
+.search_insta
+{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  position: absolute;
+  left: 1170px;
+  top: 985px;
+}
+
+.search_-Chrono-Wiz-2018-A
+{
+  width: 211px;
+  height: 14px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7a1c1c;
+  position: absolute;
+  left: 615px;
+  top: 1029px;
+}
+
+.search_Line-4
+{
+  width: 1434.5px;
+  height: 1px;
+  background-color: #924443;
+  position: absolute;
+  left: 3px;
+  top: 1051px;
+}
+
+.search_Terms-Conditions-
+{
+  width: 940px;
+  height: 20px;
+  font-family: Helvetica;
+  font-size: 17px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #7a1c1c;
+  position: absolute;
+  left: 249px;
+  top: 1072px;
+  padding-bottom: 50px;
+}
+

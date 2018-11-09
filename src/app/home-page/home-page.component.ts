@@ -26,4 +26,8 @@ export class HomePageComponent implements OnInit
     this.router.navigate(['/app-search-page']);
   }
 
+  mainIconButtonClicked(): void
+  {
+    this.router.navigate(['/']);
+  }
 }
