@@ -1,3 +1,4 @@
+<simple-notifications></simple-notifications>
 <div id="search-page">
 
   <input type="image" src="../../assets/images/search_menu.png"
@@ -38,7 +39,7 @@
 
   <div class="search_SearchText">SEARCH</div>
 
-  <input type="text" class="search_Rectangle" placeholder="Search">
+  <input type="text" class="search_Rectangle" placeholder="Search" [(ngModel)]="query" name="query">
 
   <input type="image" src="../../assets/images/search_minisearch.svg"
          class="search_minisearch"

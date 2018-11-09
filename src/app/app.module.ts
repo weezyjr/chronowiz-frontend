@@ -19,6 +19,7 @@ import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './login/login.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {SearchPageComponent} from './search-page/search-page.component';
+import {SearchService} from './search.service';
 
 const routes: Routes = [
   {
@@ -88,6 +89,7 @@ const routes: Routes = [
   providers: [
     HttpErrorHandlerService,
     WatchesService,
+    SearchService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
