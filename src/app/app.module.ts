@@ -18,6 +18,7 @@ import {ErrorInterceptor} from './error.interceptor';
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './login/login.component';
 import {HomePageComponent} from './home-page/home-page.component';
+import {SearchPageComponent} from './search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'app-search-page',
+    component: SearchPageComponent
+  },
+  {
     path: '**',
     redirectTo: ''
   }
@@ -56,7 +61,8 @@ const routes: Routes = [
     AddWatchFormComponent,
     AddCaliberFormComponent,
     LoginComponent,
-    HomePageComponent
+    HomePageComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,

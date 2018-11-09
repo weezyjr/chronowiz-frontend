@@ -1,0 +1,68 @@
+#search-page
+{
+  width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.search_menu
+{
+  width: 17.2px;
+  height: 16px;
+  object-fit: contain;
+  position: absolute;
+  top: 96px;
+  left: 70px;
+}
+
+.search_mainicon
+{
+  width: 108px;
+  height: 77px;
+  object-fit: contain;
+  position: absolute;
+  left: 666px;
+  top: 36px;
+}
+
+.search_account
+{
+  width: 21px;
+  height: 24px;
+  object-fit: contain;
+  position: absolute;
+  left: 1233px;
+  top: 88px;
+}
+
+.search_search
+{
+  width: 23.4px;
+  height: 24.4px;
+  object-fit: contain;
+  position: absolute;
+  left: 1291.5px;
+  top: 88px;
+}
+
+.search_paperbag
+{
+  width: 17px;
+  height: 28px;
+  object-fit: contain;
+  position: absolute;
+  left: 1353px;
+  top: 84px;
+}
+
+.search_FireShot_Capture_104_Official_Rolex
+{
+  width: 1388px;
+  height: 671px;
+  object-fit: contain;
+  position: relative;
+  left: 22px;
+  top: 195px;
+}

@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-search-page',
+  templateUrl: './search-page.component.html',
+  styleUrls: ['./search-page.component.css']
 })
-export class HomePageComponent implements OnInit
+export class SearchPageComponent implements OnInit
 {
   constructor(private router: Router)
   {
@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit
   {
   }
 
-  userButtonClicked(): void
+  accountButtonClicked(): void
   {
     this.router.navigate(['/app-add-watch-form']);
   }
@@ -25,5 +25,4 @@ export class HomePageComponent implements OnInit
   {
     this.router.navigate(['/app-search-page']);
   }
-
 }
