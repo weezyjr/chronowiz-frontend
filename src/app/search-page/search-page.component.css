@@ -113,6 +113,16 @@
   top: 345px;
 }
 
+.search_minisearch
+{
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  position: absolute;
+  left: 889px;
+  top: 358px;
+}
+
 .search_Group
 {
   width: 60px;

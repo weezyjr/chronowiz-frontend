@@ -30,4 +30,9 @@ export class SearchPageComponent implements OnInit
   {
     this.router.navigate(['/']);
   }
+
+  miniSearchButtonClicked(): void
+  {
+    // TODO Send Search Request to API
+  }
 }
