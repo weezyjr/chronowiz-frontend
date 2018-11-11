@@ -20,6 +20,7 @@ import {LoginComponent} from './login/login.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {SearchPageComponent} from './search-page/search-page.component';
 import {SearchService} from './search.service';
+import {WatchDetailsComponent} from './watch-details/watch-details.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
     component: SearchPageComponent
   },
   {
+    path: 'app-watch-details',
+    component: WatchDetailsComponent
+  },
+  {
     path: '**',
     redirectTo: ''
   }
@@ -63,7 +68,8 @@ const routes: Routes = [
     AddCaliberFormComponent,
     LoginComponent,
     HomePageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    WatchDetailsComponent
   ],
   imports: [
     BrowserModule,

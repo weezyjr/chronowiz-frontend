@@ -1,0 +1,62 @@
+<simple-notifications></simple-notifications>
+
+<div id="watchdetails-page">
+
+  <input type="image" src="../../assets/images/search_menu.png"
+         srcset="../../assets/images/search_menu@2x.png 2x,
+             ../../assets/images/search_menu@3x.png 3x"
+         class="watchdetails_menu">
+
+  <input type="image" src="../../assets/images/group2.svg"
+         srcset="../../assets/images/group2@2x.png 2x,
+             ../../assets/images/group2@3x.png 3x"
+         class="watchdetails_mainicon"
+         (click)="mainIconButtonClicked()">
+
+  <input type="image" src="../../assets/images/search_account.png"
+         srcset="../../assets/images/search_account@2x.png 2x,
+             ../../assets/images/search_account@3x.png 3x"
+         class="watchdetails_account"
+         (click)="accountButtonClicked()">
+
+  <input type="image" src="../../assets/images/search_search.png"
+         srcset="../../assets/images/search_search@2x.png 2x,
+             ../../assets/images/search_search@3x.png 3x"
+         class="watchdetails_search"
+         (click)="searchButtonClicked()">
+
+  <input type="image" src="../../assets/images/search_paperbag.png"
+         srcset="../../assets/images/search_paperbag@2x.png 2x,
+             ../../assets/images/search_paperbag@3x.png 3x"
+         class="watchdetails_paperbag">
+
+  <div class="watchdetails_Home">Home > Brands > {{watch.brand}} > {{watch.referenceNumber}}</div>
+
+  <div class="watchdetails_Model">{{watch.model}}</div>
+
+  <img src="../../assets/images/allmodelsicon.png"
+       srcset="../../assets/images/allmodelsicon@2x.png 2x,
+             ../../assets/images/allmodelsicon@3x.png 3x"
+       class="watchdetails_allmodelsicon">
+
+  <div class="watchdetails_allcollectionmodels">VIEW ALL {{watch.brand}} MODELS</div>
+
+  <img src="{{watch.mainPhotoUrl}}"
+       class="watchdetails_mainphoto">
+
+  <div class="watchdetails_shortinfo">{{watch.caseMaterial}}</div>
+
+  <button type="button" class="watchdetails_Rectangle">
+    <img src="../../assets/images/watchdetails_paper-bag.png"
+         srcset="../../assets/images/watchdetails_paper-bag@2x.png 2x,
+             ../../assets/images/watchdetails_paper-bag@3x.png 3x"
+         class="watchdetails_paper-bag">
+    <div class="watchdetails_addToWatchTray">ADD TO WATCH TRAY</div>
+  </button>
+
+  <div class="watchdetails_plusTechnicalDetails">+ Technical detail</div>
+
+  <img src="{{watch.banner1PhotoUrl}}"
+       class="watchdetails_banner1">
+
+</div>

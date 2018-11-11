@@ -10,8 +10,6 @@ import {Admin} from './admin';
 })
 export class AppComponent
 {
-  title = 'Chrono Wiz';
-
   currentAdmin: Admin;
 
   constructor(

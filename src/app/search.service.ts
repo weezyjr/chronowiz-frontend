@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
 import {HandleError, HttpErrorHandlerService} from './http-error-handler.service';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ResponseData} from './response-data';
 import {map} from 'rxjs/operators';
-import {Response} from './response';
+import {Watch} from './watch';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,10 @@ export class SearchService
 
   searchUrl = this.env.backendUrl + 'search/';
 
-  query: string;
-
   private handleError: HandleError;
-  responseData: ResponseData;
-  response: Response;
+
+  private watchSource = new BehaviorSubject(new Watch());
+  currentWatch = this.watchSource.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -37,5 +36,10 @@ export class SearchService
       {
         return data;
       }));
+  }
+
+  changeWatch(watch: Watch)
+  {
+    this.watchSource.next(watch);
   }
 }
