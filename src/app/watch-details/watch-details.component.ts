@@ -46,4 +46,8 @@ export class WatchDetailsComponent implements OnInit
     this.router.navigate(['/']);
   }
 
+  section5rightButtonClicked(): void
+  {
+
+  }
 }

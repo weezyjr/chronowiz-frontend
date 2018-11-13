@@ -1,4 +1,5 @@
 import {ResponseData} from './response-data';
+import {ItemValue} from './item-value';
 
 export class Watch extends ResponseData
 {
@@ -22,9 +23,9 @@ export class Watch extends ResponseData
   public movementSpring?: string;
   public movementTourbillon?: string;
   public movementRotor?: string;
-  public movementAdditionalFeatures?: object[];
+  public movementAdditionalFeatures?: ItemValue[];
 
-  public functions: object[];
+  public functions: ItemValue[];
 
   public caseMaterial: string;
   public caseDiameter: string;
@@ -33,20 +34,20 @@ export class Watch extends ResponseData
   public caseBack: string;
   public waterResistance?: string;
   public caseCrown?: string;
-  public caseAdditionalFeatures?: object[];
+  public caseAdditionalFeatures?: ItemValue[];
 
   public dialColour: string;
   public dialIndex: string;
   public dialFinish?: string;
   public dialHands: string;
-  public dialAdditionalFeatures?: object[];
+  public dialAdditionalFeatures?: ItemValue[];
 
   public band: string;
   public bandMaterial: string;
   public bandClasp: string;
   public bandColour: string;
   public bandClaspMaterial: string;
-  public bandAdditionalFeatures?: object[];
+  public bandAdditionalFeatures?: ItemValue[];
 
   public price: number;
   public priceCurrency: string;
@@ -74,7 +75,7 @@ export class Watch extends ResponseData
 
   public section5Title?: string;
   public section5Paragraph?: string;
-  public section5PhotoUrls?: object[];
+  public section5PhotoUrls?: ItemValue[];
 
   public mainPhotoFile: File;
   public banner1PhotoFile?: File;
@@ -84,7 +85,7 @@ export class Watch extends ResponseData
   public section2PhotoFile?: File;
   public section3PhotoFile?: File;
   public section4PhotoFile?: File;
-  public section5PhotoFiles?: object[];
+  public section5PhotoFiles?: ItemValue[];
 
   constructor(private isTestWatch?: boolean)
   {
