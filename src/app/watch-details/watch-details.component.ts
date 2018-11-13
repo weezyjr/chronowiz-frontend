@@ -18,7 +18,17 @@ export class WatchDetailsComponent implements OnInit
 
   ngOnInit()
   {
-    this.searchService.currentWatch.subscribe(watch => this.watch = watch);
+    this.searchService.currentWatch.subscribe(watch =>
+    {
+      if (watch.mainPhotoUrl) // we test for any mandatory field
+      {
+        this.watch = watch;
+      }
+      else
+      {
+        this.watch = new Watch(true);
+      }
+    });
   }
 
   accountButtonClicked(): void

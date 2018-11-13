@@ -86,11 +86,12 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: 0.3px;
-  text-align: center;
   color: #212121;
+  text-align: center;
   position: absolute;
-  left: 611px;
+  left: 50%;
   top: 169px;
+  transform: translate(-50%, 0);
 }
 
 .watchdetails_allmodelsicon
@@ -127,13 +128,14 @@
   height: 453px;
   object-fit: contain;
   position: absolute;
-  left: 600px;
+  left: 50%;
   top: 282px;
+  transform: translate(-50%, 0);
 }
 
 .watchdetails_shortinfo
 {
-  width: 172px;
+  width: auto;
   height: 17px;
   font-family: Helvetica;
   font-size: 14px;
@@ -145,8 +147,9 @@
   color: #9e9e9e;
   text-align: center;
   position: absolute;
-  left: 634px;
+  left: 50%;
   top: 790px;
+  transform: translate(-50%, 0);
 }
 
 .watchdetails_Rectangle
@@ -207,11 +210,12 @@
 
 .watchdetails_banner1
 {
-  width: 1439px;
+  width: auto;
   height: 427px;
   position: absolute;
-  left: 0px;
+  left: 50%;
   top: 1023px;
+  transform: translate(-50%, 0);
 }
 
 .watchdetails_section1_image
@@ -225,7 +229,7 @@
 
 .watchdetails_section1_ModelFeatures
 {
-  width: 100px;
+  width: auto;
   height: 20px;
   font-family: Didot;
   font-size: 16px;
@@ -242,7 +246,7 @@
 
 .watchdetails_section1_title
 {
-  width: 192px;
+  width: auto;
   height: 38px;
   font-family: Helvetica;
   font-size: 32px;
@@ -286,7 +290,7 @@
 
 .watchdetails_section2_ModelFeatures
 {
-  width: 98.2px;
+  width: auto;
   height: 20px;
   font-family: Didot;
   font-size: 16px;
@@ -303,7 +307,7 @@
 
 .watchdetails_section2_title
 {
-  width: 207.5px;
+  width: auto;
   height: 43px;
   font-family: Helvetica;
   font-size: 36px;
@@ -347,7 +351,7 @@
 
 .watchdetails_section3_ModelFeatures
 {
-  width: 100px;
+  width: auto;
   height: 20px;
   font-family: Didot;
   font-size: 16px;
@@ -407,7 +411,7 @@
 
 .watchdetails_section4_ModelFeatures
 {
-  width: 98.2px;
+  width: auto;
   height: 20px;
   font-family: Didot;
   font-size: 16px;
@@ -477,7 +481,7 @@
 
 .watchdetails_section5_ModelFeatures
 {
-  width: 98.2px;
+  width: auto;
   height: 20px;
   font-family: Didot;
   font-size: 16px;
@@ -494,7 +498,7 @@
 
 .watchdetails_section5_title
 {
-  width: 247px;
+  width: auto;
   height: 43px;
   font-family: Helvetica;
   font-size: 36px;
@@ -504,6 +508,8 @@
   line-height: normal;
   letter-spacing: normal;
   color: #3e0809;
+  white-space: nowrap;
+  overflow: hidden;
   position: absolute;
   left: 1193px;
   top: 3830px;
@@ -540,20 +546,20 @@
 {
   width: 541px;
   height: 3px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 250px;
   top: 4121px;
-  color: #c0c0c0;
 }
 
 .watchdetails_line_black
 {
   width: 172px;
   height: 3px;
+  background-color: #212121;
   position: absolute;
   left: 250px;
   top: 4121px;
-  color: #212121;
 }
 
 .watchdetails_General
@@ -575,11 +581,11 @@
 .watchdetails_General_Line
 {
   width: 298px;
-  height: 3px;
-  color: #c0c0c0;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
-  left: 249px;
-  top: 4190px;
+  left: 250px;
+  top: 4221px;
 }
 
 .watchdetails_modelcase_title
@@ -717,7 +723,7 @@
   top: 4474px;
 }
 
-.watchdetails_bandmaterial_title
+.watchdetails_bandematerial_title
 {
   width: 104px;
   height: 14px;
@@ -733,7 +739,7 @@
   top: 4518px;
 }
 
-.watchdetails_bandmaterial_value
+.watchdetails_bandematerial_value
 {
   width: 89px;
   height: 14px;
@@ -835,8 +841,8 @@
 .watchdetails_certification_line
 {
   width: 300px;
-  height: 3px;
-  color: #c0c0c0;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 252px;
   top: 4811px;
@@ -884,7 +890,7 @@
   top: 4221px;
 }
 
-.watchdetails_movement_title
+.watchdetails_calibre_movement_title
 {
   width: 67px;
   height: 14px;
@@ -901,7 +907,7 @@
   top: 4262px;
 }
 
-.watchdetails_movement_value
+.watchdetails_calibre_movement_value
 {
   width: 189px;
   height: 14px;
@@ -1601,7 +1607,8 @@
 .watchdetails_details_line
 {
   width: 940px;
-  height: 3px;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 250px;
   top: 4911px;
@@ -1663,109 +1670,113 @@
   top: 4986px;
 }
 
-/*.watchdetails_downarrow*/
-/*{*/
-/*width: 10px;*/
-/*height: 5px;*/
-/*object-fit: contain;*/
-/*}*/
+.watchdetails_downarrow
+{
+  width: 10px;
+  height: 5px;
+  object-fit: contain;
+}
 
-/*.watchdetails_Return-to-the-top*/
-/*{*/
-/*width: 91px;*/
-/*height: 28px;*/
-/*object-fit: contain;*/
-/*font-family: Helvetica;*/
-/*font-size: 12px;*/
-/*font-weight: 300;*/
-/*font-style: normal;*/
-/*font-stretch: normal;*/
-/*line-height: normal;*/
-/*letter-spacing: 0.1px;*/
-/*color: #212121;*/
-/*}*/
+.watchdetails_Return-to-the-top
+{
+  width: 91px;
+  height: 28px;
+  object-fit: contain;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #212121;
+}
 
-/*.watchdetails_banner2*/
-/*{*/
-/*width: 1440px;*/
-/*height: 363px;*/
-/*}*/
+.watchdetails_banner2
+{
+  width: auto;
+  height: 363px;
+  position: absolute;
+  left: 50%;
+  top: 5154px;
+  transform: translate(-50%, 0);
+}
 
-/*.watchdetails_Social-media*/
-/*{*/
-/*width: 256px;*/
-/*height: 43px;*/
-/*object-fit: contain;*/
-/*font-family: Helvetica;*/
-/*font-size: 36px;*/
-/*font-weight: 300;*/
-/*font-style: normal;*/
-/*font-stretch: normal;*/
-/*line-height: normal;*/
-/*letter-spacing: 0.3px;*/
-/*text-align: center;*/
-/*color: #212121;*/
-/*}*/
+.watchdetails_Social-media
+{
+  width: 256px;
+  height: 43px;
+  object-fit: contain;
+  font-family: Helvetica;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  text-align: center;
+  color: #212121;
+}
 
-/*.watchdetails_socialmedia_image1*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.watchdetails_socialmedia_image1
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-5*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-5
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-6*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-6
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-7*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-7
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-8*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-8
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-9*/
-/*{*/
-/*width: 227px;*/
-/*height: 227px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-9
+{
+  width: 227px;
+  height: 227px;
+  object-fit: contain;
+}
 
-/*.Group-10*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-10
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.Group-11*/
-/*{*/
-/*width: 220px;*/
-/*height: 220px;*/
-/*object-fit: contain;*/
-/*}*/
+.Group-11
+{
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
 
-/*.watchdetails_Load-more*/
-/*{*/
-/*width: 140px;*/
-/*height: 22px;*/
-/*object-fit: contain;*/
-/*}*/
+.watchdetails_Load-more
+{
+  width: 140px;
+  height: 22px;
+  object-fit: contain;
+}
