@@ -156,6 +156,7 @@
 {
   width: 186px;
   height: 42px;
+  object-fit: contain;
   opacity: 0.84;
   border-radius: 6px;
   position: absolute;
@@ -884,7 +885,8 @@
 .watchdetails_calibre_line
 {
   width: 300px;
-  height: 3px;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 570px;
   top: 4221px;
@@ -1112,7 +1114,8 @@
 .watchdetails_band_line
 {
   width: 300px;
-  height: 3px;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 570px;
   top: 4639px;
@@ -1188,7 +1191,7 @@
 
 .watchdetails_clasptitle_title
 {
-  width: 74px;
+  width: auto;
   height: 14px;
   font-family: Helvetica;
   font-size: 12px;
@@ -1271,13 +1274,14 @@
 .watchdetails_case_Line
 {
   width: 300px;
-  height: 3px;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 890px;
   top: 4221px;
 }
 
-.watchdetails_material_title
+.watchdetails_case_material_title
 {
   width: 57px;
   height: 14px;
@@ -1294,7 +1298,7 @@
   top: 4262px;
 }
 
-.watchdetails_material_value
+.watchdetails_case_material_value
 {
   width: 89px;
   height: 14px;
@@ -1395,7 +1399,7 @@
 
 .watchdetails_bezel_material_value
 {
-  width: 34px;
+  width: 70px;
   height: 14px;
   font-family: Helvetica;
   font-size: 12px;
@@ -1462,7 +1466,8 @@
 .watchdetails_dial_line
 {
   width: 300px;
-  height: 3px;
+  height: 1px;
+  background-color: #c0c0c0;
   position: absolute;
   left: 891px;
   top: 4639px;
@@ -1555,7 +1560,7 @@
 
 .watchdetails_dialindexes_value
 {
-  width: 31px;
+  width: 100px;
   height: 14px;
   font-family: Helvetica;
   font-size: 12px;
@@ -1589,7 +1594,7 @@
 
 .watchdetails_dialhands_value
 {
-  width: 31px;
+  width: 100px;
   height: 14px;
   font-family: Helvetica;
   font-size: 12px;
@@ -1614,7 +1619,7 @@
   top: 4911px;
 }
 
-.watchdetails_Show-price
+.watchdetails_showprice
 {
   width: 98px;
   height: 20px;
@@ -1631,29 +1636,28 @@
   top: 4981px;
 }
 
-.watchdetails_Rectangle-Copy-2
+.watchdetails_showprice_rectangle
 {
   width: 186px;
   height: 42px;
-  object-fit: contain;
-  opacity: 0.84;
-  border-radius: 2px;
+  border-radius: 6px;
+  border-color: #4a4a4a;
   position: absolute;
   left: 720px;
   top: 4972px;
 }
 
-.watchdetails_paper-bag-copy
+.watchdetails_showprice_paperbag
 {
   width: 12px;
   height: 19px;
   object-fit: contain;
   position: absolute;
-  left: 738px;
-  top: 4984px;
+  left: 10px;
+  top: 10px;
 }
 
-.watchdetails_add-to-watch-tray
+.watchdetails_showprice_addtowatchtray
 {
   width: 128px;
   height: 14px;
@@ -1666,8 +1670,8 @@
   letter-spacing: 0.1px;
   color: #212121;
   position: absolute;
-  left: 760px;
-  top: 4986px;
+  left: 35px;
+  top: 13px;
 }
 
 .watchdetails_downarrow
@@ -1675,11 +1679,14 @@
   width: 10px;
   height: 5px;
   object-fit: contain;
+  position: absolute;
+  left: 714px;
+  top: 5054px;
 }
 
 .watchdetails_Return-to-the-top
 {
-  width: 91px;
+  width: auto;
   height: 28px;
   object-fit: contain;
   font-family: Helvetica;
@@ -1690,6 +1697,9 @@
   line-height: normal;
   letter-spacing: 0.1px;
   color: #212121;
+  position: absolute;
+  left: 675px;
+  top: 5064px;
 }
 
 .watchdetails_banner2
@@ -1716,6 +1726,9 @@
   letter-spacing: 0.3px;
   text-align: center;
   color: #212121;
+  position: absolute;
+  left: 594px;
+  top: 5585px;
 }
 
 .watchdetails_socialmedia_image1
@@ -1723,55 +1736,79 @@
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 252px;
+  top: 5698px;
 }
 
-.Group-5
+.watchdetails_socialmedia_image2
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 492px;
+  top: 5698px;
 }
 
-.Group-6
+.watchdetails_socialmedia_image3
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 732px;
+  top: 5698px;
 }
 
-.Group-7
+.watchdetails_socialmedia_image4
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 972px;
+  top: 5698px;
 }
 
-.Group-8
+.watchdetails_socialmedia_image5
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 252px;
+  top: 5938px;
 }
 
-.Group-9
+.watchdetails_socialmedia_image6
 {
   width: 227px;
   height: 227px;
   object-fit: contain;
+  position: absolute;
+  left: 489px;
+  top: 5938px;
 }
 
-.Group-10
+.watchdetails_socialmedia_image7
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 733px;
+  top: 5938px;
 }
 
-.Group-11
+.watchdetails_socialmedia_image8
 {
   width: 220px;
   height: 220px;
   object-fit: contain;
+  position: absolute;
+  left: 972px;
+  top: 5938px;
 }
 
 .watchdetails_Load-more
@@ -1779,4 +1816,7 @@
   width: 140px;
   height: 22px;
   object-fit: contain;
+  position: absolute;
+  left: 652px;
+  top: 6188px;
 }

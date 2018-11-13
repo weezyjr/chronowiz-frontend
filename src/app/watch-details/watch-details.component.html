@@ -51,16 +51,18 @@
          srcset="../../assets/images/watchdetails_paper-bag@2x.png 2x,
              ../../assets/images/watchdetails_paper-bag@3x.png 3x"
          class="watchdetails_paper-bag">
-    <div class="watchdetails_addToWatchTray">ADD TO WATCH TRAY</div>
+    <span class="watchdetails_addToWatchTray">ADD TO WATCH TRAY</span>
   </button>
 
   <div class="watchdetails_plusTechnicalDetails">+ Technical detail</div>
 
   <img src="{{watch.banner1PhotoUrl}}"
-       class="watchdetails_banner1">
+       class="watchdetails_banner1"
+       [hidden]="!watch.banner1PhotoUrl">
 
   <img src="{{watch.section1PhotoUrl}}"
-       class="watchdetails_section1_image">
+       class="watchdetails_section1_image"
+       [hidden]="!watch.section1PhotoUrl">
 
   <div class="watchdetails_section1_ModelFeatures">Model Features</div>
 
@@ -69,7 +71,8 @@
   <div class="watchdetails_section1_paragraph">{{watch.section1Paragraph}}</div>
 
   <img src="{{watch.section2PhotoUrl}}"
-       class="watchdetails_section2_image">
+       class="watchdetails_section2_image"
+       [hidden]="!watch.section2PhotoUrl">
 
   <div class="watchdetails_section2_ModelFeatures">Model Features</div>
 
@@ -78,7 +81,8 @@
   <div class="watchdetails_section2_paragraph">{{watch.section2Paragraph}}</div>
 
   <img src="{{watch.section3PhotoUrl}}"
-       class="watchdetails_section3_image">
+       class="watchdetails_section3_image"
+       [hidden]="!watch.section3PhotoUrl">
 
   <div class="watchdetails_section3_ModelFeatures">Model Features</div>
 
@@ -87,7 +91,8 @@
   <div class="watchdetails_section3_paragraph">{{watch.section3Paragraph}}</div>
 
   <img src="{{watch.section4PhotoUrl}}"
-       class="watchdetails_section4_image">
+       class="watchdetails_section4_image"
+       [hidden]="!watch.section4PhotoUrl">
 
   <div class="watchdetails_section4_ModelFeatures">Model Features</div>
 
@@ -95,11 +100,13 @@
 
   <div class="watchdetails_section4_paragraph">{{watch.section4Paragraph}}</div>
 
-  <img src="{{watch.section5PhotoUrls[0].value}}"
-       class="watchdetails_section5_image1">
+  <img src="{{watch.section5PhotoUrls[0]?.value}}"
+       class="watchdetails_section5_image1"
+       [hidden]="!watch.section5PhotoUrls[0]">
 
-  <img src="{{watch.section5PhotoUrls[1].value}}"
-       class="watchdetails_section5_image2">
+  <img src="{{watch.section5PhotoUrls[1]?.value}}"
+       class="watchdetails_section5_image2"
+       [hidden]="!watch.section5PhotoUrls[1]">
 
   <div class="watchdetails_section5_ModelFeatures">Model Features</div>
 
@@ -153,12 +160,160 @@
 
   <div class="watchdetails_certification_value">{{watch.movementCertificate}}</div>
 
+  <div class="watchdetails_calibre">CALIBRE</div>
 
-  <!-- TODO -->
+  <div class="watchdetails_calibre_line"></div>
+
+  <div class="watchdetails_calibre_movement_title">MOVEMENT</div>
+
+  <div class="watchdetails_calibre_movement_value">{{watch.movementAutomaticOrManual}}</div>
+
+  <div class="watchdetails_calibre_title">CALIBRE</div>
+
+  <div class="watchdetails_calibre_value">{{watch.movementCaliberNumber}}</div>
+
+  <div class="watchdetails_functions_title">FUNCTIONS</div>
+
+  <div class="watchdetails_functions_value">{{watch.functions[0]?.value}}</div>
+
+  <div class="watchdetails_powerreserve_title">POWER RESERVE</div>
+
+  <div class="watchdetails_powerreserve_value">{{watch.movementPowerReserve}}</div>
+
+  <div class="watchdetails_jewels_title">JEWELS</div>
+
+  <div class="watchdetails_jewels_value">{{watch.movementJewels}}</div>
+
+  <div class="watchdetails_frequency_title">FREQUENCY</div>
+
+  <div class="watchdetails_frequency_value">{{watch.movementFrequency}}</div>
+
+  <div class="watchdetails_band_title">BAND</div>
+
+  <div class="watchdetails_band_line"></div>
+
+  <div class="watchdetails_bracelet_title">BRACELET</div>
+
+  <div class="watchdetails_bracelet_value">{{watch.brand}}</div>
+
+  <div class="watchdetails_bandmaterial_title">BAND MATERIAL</div>
+
+  <div class="watchdetails_bandmaterial_value">{{watch.bandMaterial}}</div>
+
+  <div class="watchdetails_clasptitle_title">CLASP TYPE</div>
+
+  <div class="watchdetails_clasptitle_value">{{watch.bandClasp}}</div>
+
+  <div class="watchdetails_claspcolor_title">CLASP COLOR</div>
+
+  <div class="watchdetails_claspcolor_value">{{watch.bandColour}}</div>
+
+  <div class="watchdetails_case_title">CASE</div>
+
+  <div class="watchdetails_case_Line"></div>
+
+  <div class="watchdetails_case_material_title">MATERIAL</div>
+
+  <div class="watchdetails_case_material_value">{{watch.caseMaterial}}</div>
+
+  <div class="watchdetails_diameter_title">DIAMETER</div>
+
+  <div class="watchdetails_diameter_value">{{watch.caseDiameter}}</div>
+
+  <div class="watchdetails_waterproof_title">WATER-PROOF</div>
+
+  <div class="watchdetails_waterproof_value">{{watch.waterResistance}}</div>
+
+  <div class="watchdetails_bezel_material_title">BEZEL MATERIAL</div>
+
+  <div class="watchdetails_bezel_material_value">{{watch.bandMaterial}}</div>
+
+  <div class="watchdetails_crystal_title">CRYSTAL</div>
+
+  <div class="watchdetails_crystal_value">{{watch.caseCrown}}</div>
+
+  <div class="watchdetails_dial_title">DIAL</div>
+
+  <div class="watchdetails_dial_line"></div>
+
+  <div class="watchdetails_dialcolor_title">DIAL COLOR</div>
+
+  <div class="watchdetails_dialcolor_value">{{watch.dialColour}}</div>
+
+  <div class="watchdetails_dialfinish_title">DIAL FINISH</div>
+
+  <div class="watchdetails_dialfinish_value">{{watch.dialFinish}}</div>
+
+  <div class="watchdetails_dialindexes_title">DIAL INDEXES</div>
+
+  <div class="watchdetails_dialindexes_value">{{watch.dialIndex}}</div>
+
+  <div class="watchdetails_dialhands_title">DIAL HANDS</div>
+
+  <div class="watchdetails_dialhands_value">{{watch.dialHands}}</div>
+
+  <div class="watchdetails_showprice">Show price</div>
+
+  <button type="button" class="watchdetails_showprice_rectangle">
+    <img src="../../assets/images/watchdetails_paper-bag.png"
+         srcset="../../assets/images/watchdetails_paper-bag@2x.png 2x,
+             ../../assets/images/watchdetails_paper-bag@3x.png 3x"
+         class="watchdetails_showprice_paperbag">
+    <span class="watchdetails_showprice_addtowatchtray">ADD TO WATCH TRAY</span>
+  </button>
+
+  <input type="image" src="../../assets/images/down-arrow.svg"
+         class="watchdetails_downarrow"
+         (click)="mainIconButtonClicked()">
+
+  <div class="watchdetails_Return-to-the-top">Return to the top</div>
 
   <div class="watchdetails_details_line"></div>
 
   <img src="{{watch.banner2PhotoUrl}}"
-       class="watchdetails_banner2">
+       class="watchdetails_banner2"
+       [hidden]="!watch.banner2PhotoUrl">
+
+  <div class="watchdetails_Social-media">SOCIAL MEDIA</div>
+
+  <img src="../../assets/images/18096315-416386968719834-681989047953915904-n.png"
+       srcset="../../assets/images/18096315-416386968719834-681989047953915904-n@2x.png 2x,
+             ../../assets/images/18096315-416386968719834-681989047953915904-n@3x.png 3x"
+       class="watchdetails_socialmedia_image1">
+
+  <img src="../../assets/images/group-5.png"
+       srcset="../../assets/images/group-5@2x.png 2x,
+             ../../assets/images/group-5@3x.png 3x"
+       class="watchdetails_socialmedia_image2">
+
+  <img src="../../assets/images/group-6.png"
+       srcset="../../assets/images/group-6@2x.png 2x,
+             ../../assets/images/group-6@3x.png 3x"
+       class="watchdetails_socialmedia_image3">
+
+  <img src="../../assets/images/group-7.png"
+       srcset="../../assets/images/group-7@2x.png 2x,
+             ../../assets/images/group-7@3x.png 3x"
+       class="watchdetails_socialmedia_image4">
+
+  <img src="../../assets/images/group-8.png"
+       srcset="../../assets/images/group-8@2x.png 2x,
+             ../../assets/images/group-8@3x.png 3x"
+       class="watchdetails_socialmedia_image5">
+
+  <img src="../../assets/images/group-9.png"
+       srcset="../../assets/images/group-9@2x.png 2x,
+             ../../assets/images/group-9@3x.png 3x"
+       class="watchdetails_socialmedia_image6">
+
+  <img src="../../assets/images/group-10.png"
+       srcset="../../assets/images/group-10@2x.png 2x,
+             ../../assets/images/group-10@3x.png 3x"
+       class="watchdetails_socialmedia_image7">
+
+  <img src="../../assets/images/group-11.png"
+       srcset="../../assets/images/group-11@2x.png 2x,
+             ../../assets/images/group-11@3x.png 3x"
+       class="watchdetails_socialmedia_image8">
 
 </div>
