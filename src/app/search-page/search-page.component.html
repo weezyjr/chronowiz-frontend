@@ -39,7 +39,7 @@
 
   <div class="search_SearchText">SEARCH</div>
 
-  <input type="text" class="search_Rectangle" placeholder="Search" [(ngModel)]="query" name="query">
+  <input type="text" class="search_Rectangle" placeholder="Search" [(ngModel)]="query" name="query" (keydown.enter)="miniSearchButtonClicked()">
 
   <input type="image" src="../../assets/images/search_minisearch.svg"
          class="search_minisearch"

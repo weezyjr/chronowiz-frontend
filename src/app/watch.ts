@@ -4,20 +4,21 @@ import {ItemValue} from './item-value';
 export class Watch extends ResponseData
 {
   public brand: string;
-  public model: string;
+  public collection?: string;
+  public model?: string;
   public referenceNumber: string;
   public gender?: string;
   public limited?: string;
   public awards?: string;
 
-  public movementCaliberName: string;
+  public movementCaliberName?: string;
   public movementAutomaticOrManual?: string;
-  public movementCaliberNumber: string;
-  public movementDiameter: string;
-  public movementHeight: string;
-  public movementJewels: string;
-  public movementFrequency: string;
-  public movementPowerReserve: string;
+  public movementCaliberNumber?: string;
+  public movementDiameter?: string;
+  public movementHeight?: string;
+  public movementJewels?: string;
+  public movementFrequency?: string;
+  public movementPowerReserve?: string;
   public movementCertificate?: string;
   public movementDecoration?: string;
   public movementSpring?: string;
@@ -25,34 +26,34 @@ export class Watch extends ResponseData
   public movementRotor?: string;
   public movementAdditionalFeatures?: ItemValue[];
 
-  public functions: ItemValue[];
+  public functions?: ItemValue[];
 
-  public caseMaterial: string;
-  public caseDiameter: string;
-  public caseHeight: string;
-  public caseFront: string;
-  public caseBack: string;
+  public caseMaterial?: string;
+  public caseDiameter?: string;
+  public caseHeight?: string;
+  public caseFront?: string;
+  public caseBack?: string;
   public waterResistance?: string;
   public caseCrown?: string;
   public caseAdditionalFeatures?: ItemValue[];
 
-  public dialColour: string;
-  public dialIndex: string;
+  public dialColour?: string;
+  public dialIndex?: string;
   public dialFinish?: string;
-  public dialHands: string;
+  public dialHands?: string;
   public dialAdditionalFeatures?: ItemValue[];
 
-  public band: string;
-  public bandMaterial: string;
-  public bandClasp: string;
-  public bandColour: string;
-  public bandClaspMaterial: string;
+  public band?: string;
+  public bandMaterial?: string;
+  public bandClasp?: string;
+  public bandColour?: string;
+  public bandClaspMaterial?: string;
   public bandAdditionalFeatures?: ItemValue[];
 
-  public price: number;
-  public priceCurrency: string;
+  public price?: number;
+  public priceCurrency?: string;
 
-  public mainPhotoUrl: string;
+  public mainPhotoUrl?: string;
 
   public banner1PhotoUrl?: string;
   public banner2PhotoUrl?: string;
@@ -77,7 +78,7 @@ export class Watch extends ResponseData
   public section5Paragraph?: string;
   public section5PhotoUrls?: ItemValue[];
 
-  public mainPhotoFile: File;
+  public mainPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
 
@@ -103,6 +104,7 @@ export class Watch extends ResponseData
     else if (isTestWatch)
     {
       this.brand = 'A. Lange & Sohne';
+      this.collection = 'Day-Date';
       this.model = 'Lange 1 Daymatic';
       this.referenceNumber = '320.032';
       this.gender = 'Men';

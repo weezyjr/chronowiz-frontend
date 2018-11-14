@@ -52,7 +52,7 @@ export class SearchPageComponent implements OnInit
     }
     catch (error)
     {
-      this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+      this._notificationsService.error('Error', 'Failed to make a search request');
     }
   }
 
@@ -96,5 +96,17 @@ export class SearchPageComponent implements OnInit
           }
         }
       });
+  }
+
+  handleKeyPress(event)
+  {
+    const key = event.keyCode || event.which;
+
+    console.log(key);
+
+    if (key === 13)
+    {
+      this.submitSearch();
+    }
   }
 }

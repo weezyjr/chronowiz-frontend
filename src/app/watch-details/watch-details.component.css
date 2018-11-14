@@ -1820,3 +1820,116 @@
   left: 652px;
   top: 6188px;
 }
+
+.watchdetails_footer_Group
+{
+  width: 60px;
+  height: 42.8px;
+  object-fit: contain;
+  position: absolute;
+  left: 247px;
+  top: 6247px;
+}
+
+.watchdetails_footer_Rectangle-3
+{
+  width: 1440px;
+  height: 48px;
+  background-color: #3e0808;
+  position: absolute;
+  left: 0;
+  top: 6318px;
+}
+
+.watchdetails_footer_Contact-us
+{
+  width: 106px;
+  height: 31px;
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  position: absolute;
+  left: 936px;
+  top: 6332px;
+}
+
+.watchdetails_footer_facebook-letter-logo
+{
+  width: 10px;
+  height: 22px;
+  object-fit: contain;
+  position: absolute;
+  left: 1075px;
+  top: 6331px;
+}
+
+.watchdetails_footer_twitter-logo-silhouette
+{
+  width: 20px;
+  height: 17px;
+  object-fit: contain;
+  position: absolute;
+  left: 1114px;
+  top: 6336px;
+}
+
+.watchdetails_footer_insta
+{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  position: absolute;
+  left: 1164px;
+  top: 6332px;
+}
+
+.watchdetails_footer_-Chrono-Wiz-2018-A
+{
+  width: 211px;
+  height: 14px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7a1c1c;
+  position: absolute;
+  left: 613px;
+  top: 6376px;
+}
+
+.watchdetails_footer_Line-4
+{
+  width: 1434.5px;
+  height: 1px;
+  background-color: #924443;
+  position: absolute;
+  left: 1px;
+  top: 6398px;
+}
+
+.watchdetails_footer_Terms-Conditions-
+{
+  width: 940px;
+  height: 20px;
+  font-family: Helvetica;
+  font-size: 17px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #7a1c1c;
+  position: absolute;
+  left: 247px;
+  top: 6419px;
+  padding-bottom: 50px;
+}

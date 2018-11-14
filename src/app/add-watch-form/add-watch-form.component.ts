@@ -326,7 +326,7 @@ export class AddWatchFormComponent implements OnInit
     {
       if (!self.mainPhotoFile)
       {
-        reject();
+        resolve();
       }
 
       // Uploading Main Photo, it should always be there as it is mandatory
