@@ -4,7 +4,7 @@ import {ItemValue} from './item-value';
 export class Watch extends ResponseData
 {
   public brand: string;
-  public collection?: string;
+  public _collection?: string;
   public model?: string;
   public referenceNumber: string;
   public gender?: string;
@@ -104,7 +104,7 @@ export class Watch extends ResponseData
     else if (isTestWatch)
     {
       this.brand = 'A. Lange & Sohne';
-      this.collection = 'Day-Date';
+      this._collection = 'Day-Date';
       this.model = 'Lange 1 Daymatic';
       this.referenceNumber = '320.032';
       this.gender = 'Men';

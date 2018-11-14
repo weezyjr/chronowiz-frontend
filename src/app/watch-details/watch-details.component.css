@@ -59,7 +59,7 @@
 
 .watchdetails_Home
 {
-  width: 300px;
+  width: auto;
   height: 14px;
   font-family: Helvetica;
   font-size: 12px;
@@ -1783,8 +1783,8 @@
 
 .watchdetails_socialmedia_image6
 {
-  width: 227px;
-  height: 227px;
+  width: 220px;
+  height: 220px;
   object-fit: contain;
   position: absolute;
   left: 489px;
@@ -1811,14 +1811,30 @@
   top: 5938px;
 }
 
-.watchdetails_Load-more
+.watchdetails_Load-more_Rectangle
 {
   width: 140px;
   height: 22px;
   object-fit: contain;
   position: absolute;
+  border-color: #7a1c1c;
   left: 652px;
   top: 6188px;
+}
+
+.watchdetails_Load-more_Text
+{
+  width: 131px;
+  height: 14px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #7a1c1c;
 }
 
 .watchdetails_footer_Group

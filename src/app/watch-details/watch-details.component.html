@@ -30,7 +30,7 @@
              ../../assets/images/search_paperbag@3x.png 3x"
          class="watchdetails_paperbag">
 
-  <div class="watchdetails_Home">Home > Brands > {{watch.brand}} > {{watch.referenceNumber}}</div>
+  <div class="watchdetails_Home">Home > Brands > {{watch.brand}} >  {{watch._collection}} > {{watch.referenceNumber}}</div>
 
   <div class="watchdetails_Model">{{watch.model}}</div>
 
@@ -39,7 +39,7 @@
              ../../assets/images/allmodelsicon@3x.png 3x"
        class="watchdetails_allmodelsicon">
 
-  <div class="watchdetails_allcollectionmodels">VIEW ALL {{watch.brand}} MODELS</div>
+  <div class="watchdetails_allcollectionmodels">VIEW ALL {{watch._collection}} MODELS</div>
 
   <img src="{{watch.mainPhotoUrl}}"
        class="watchdetails_mainphoto">
@@ -320,6 +320,10 @@
        srcset="../../assets/images/group@2x.png 2x,
              ../../assets/images/group@3x.png 3x"
        class="watchdetails_footer_Group">
+
+  <button type="button" class="watchdetails_Load-more_Rectangle">
+    <div class="watchdetails_Load-more_Text">LOAD MORE</div>
+  </button>
 
   <div class="watchdetails_footer_Rectangle-3"></div>
 

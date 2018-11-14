@@ -20,7 +20,7 @@ export class WatchDetailsComponent implements OnInit
   {
     this.searchService.currentWatch.subscribe(watch =>
     {
-      if (watch.mainPhotoUrl) // we test for any mandatory field
+      if (watch.referenceNumber) // we test for any mandatory field
       {
         this.watch = watch;
       }
