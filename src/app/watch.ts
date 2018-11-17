@@ -8,6 +8,7 @@ export class Watch extends ResponseData
   public model?: string;
   public referenceNumber: string;
   public gender?: string;
+  public productionYear?: string;
   public limited?: string;
   public awards?: string;
 
@@ -33,6 +34,7 @@ export class Watch extends ResponseData
   public caseHeight?: string;
   public caseFront?: string;
   public caseBack?: string;
+  public caseBezelMaterial?: string;
   public waterResistance?: string;
   public caseCrown?: string;
   public caseAdditionalFeatures?: ItemValue[];
@@ -108,6 +110,7 @@ export class Watch extends ResponseData
       this.model = 'Lange 1 Daymatic';
       this.referenceNumber = '320.032';
       this.gender = 'Men';
+      this.productionYear = '1900';
       this.limited = '1989';
       this.awards = 'Geneva Seal';
 
@@ -133,6 +136,7 @@ export class Watch extends ResponseData
       this.caseHeight = '10.4';
       this.caseFront = 'Saphire Crystal';
       this.caseBack = 'Transparent';
+      this.caseBezelMaterial = 'Bezel Material';
       this.waterResistance = '3';
       this.caseCrown = 'Screw-in Crown';
       this.caseAdditionalFeatures = [{value: ''}];

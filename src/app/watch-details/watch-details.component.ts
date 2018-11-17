@@ -10,10 +10,21 @@ import {Router} from '@angular/router';
 })
 export class WatchDetailsComponent implements OnInit
 {
-  watch: Watch;
 
   constructor(private searchService: SearchService, private router: Router)
   {
+    this.price = 'Show Price';
+  }
+
+  watch: Watch;
+  price: string;
+  functionsList: string;
+
+  scrollTo(className: string): void
+  {
+    const elementList = document.querySelectorAll('.' + className);
+    const element = elementList[0] as HTMLElement;
+    element.scrollIntoView({behavior: 'smooth'});
   }
 
   ngOnInit()
@@ -23,10 +34,14 @@ export class WatchDetailsComponent implements OnInit
       if (watch.referenceNumber) // we test for any mandatory field
       {
         this.watch = watch;
+
+        this.updateFunctionsList();
       }
       else
       {
         this.watch = new Watch(true);
+
+        this.updateFunctionsList();
       }
     });
   }
@@ -49,5 +64,28 @@ export class WatchDetailsComponent implements OnInit
   section5rightButtonClicked(): void
   {
 
+  }
+
+  showPrice(): void
+  {
+    if (this.watch.priceCurrency === 'Other')
+    {
+      this.price = this.watch.price.toLocaleString('en');
+    }
+    else
+    {
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: this.watch.priceCurrency,
+        minimumFractionDigits: 0
+      });
+
+      this.price = formatter.format(this.watch.price) + ' ' + this.watch.priceCurrency;
+    }
+  }
+
+  updateFunctionsList(): void
+  {
+    this.functionsList = this.watch.functions.map(x => x.value).join(', ');
   }
 }

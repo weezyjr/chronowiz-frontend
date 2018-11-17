@@ -1,6 +1,6 @@
 #home-page
 {
-  width: 1440px;
+  width: auto;
   margin: 0 auto;
   position: relative;
   left: 0;
@@ -9,7 +9,7 @@
 
 .main-photo
 {
-  width: 1440px;
+  width: auto;
   height: 1018px;
   object-fit: contain;
   position: relative;

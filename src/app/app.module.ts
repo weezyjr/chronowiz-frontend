@@ -25,7 +25,7 @@ import {WatchDetailsComponent} from './watch-details/watch-details.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app-home-page',
+    redirectTo: 'app-search-page',
     pathMatch: 'full'
   },
   {

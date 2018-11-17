@@ -197,6 +197,9 @@
   width: 120px;
   height: 17px;
   font-family: Helvetica;
+  padding: 0;
+  border: none;
+  background: none;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
@@ -576,7 +579,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 249px;
-  top: 4190px;
+  /*top: 4190px;*/
+  top: 1590px;
 }
 
 .watchdetails_General_Line
@@ -586,7 +590,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 250px;
-  top: 4221px;
+  /*top: 4221px;*/
+  top: 1621px;
 }
 
 .watchdetails_modelcase_title
@@ -603,7 +608,8 @@
   color: #212121;
   position: absolute;
   left: 251px;
-  top: 4262px;
+  /*top: 4262px;*/
+  top: 1662px;
 }
 
 .watchdetails_modelcase_value
@@ -620,7 +626,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4283px;
+  /*top: 4283px;*/
+  top: 1683px;
 }
 
 .watchdetails_reference_title
@@ -637,7 +644,8 @@
   color: #212121;
   position: absolute;
   left: 251px;
-  top: 4327px;
+  /*top: 4327px;*/
+  top: 1727px;
 }
 
 .watchdetails_reference_value
@@ -654,7 +662,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4346px;
+  /*top: 4346px;*/
+  top: 1746px;
 }
 
 .watchdetails_movement_title
@@ -670,7 +679,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 251px;
-  top: 4390px;
+  /*top: 4390px;*/
+  top: 1790px;
 }
 
 .watchdetails_movement_value
@@ -687,7 +697,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4408px;
+  /*top: 4408px;*/
+  top: 1808px;
 }
 
 .watchdetails_casematerial_title
@@ -704,7 +715,8 @@
   color: #212121;
   position: absolute;
   left: 251px;
-  top: 4454px;
+  /*top: 4454px;*/
+  top: 1854px;
 }
 
 .watchdetails_casematerial_value
@@ -721,10 +733,11 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4474px;
+  /*top: 4474px;*/
+  top: 1874px;
 }
 
-.watchdetails_bandematerial_title
+.watchdetails_general_bandmaterial_title
 {
   width: 104px;
   height: 14px;
@@ -737,10 +750,11 @@
   letter-spacing: normal;
   position: absolute;
   left: 251px;
-  top: 4518px;
+  /*top: 4518px;*/
+  top: 1918px;
 }
 
-.watchdetails_bandematerial_value
+.watchdetails_general_bandmaterial_value
 {
   width: 89px;
   height: 14px;
@@ -754,7 +768,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4538px;
+  /*top: 4538px;*/
+  top: 1938px;
 }
 
 .watchdetails_productionyear_title
@@ -770,7 +785,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 251px;
-  top: 4592px;
+  /*top: 4592px;*/
+  top: 1992px;
 }
 
 .watchdetails_productionyear_value
@@ -787,7 +803,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4612px;
+  /*top: 4612px;*/
+  top: 2012px;
 }
 
 .watchdetails_gender_title
@@ -803,7 +820,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 251px;
-  top: 4656px;
+  /*top: 4656px;*/
+  top: 2056px;
 }
 
 .watchdetails_gender_value
@@ -820,7 +838,8 @@
   color: #818181;
   position: absolute;
   left: 251px;
-  top: 4676px;
+  /*top: 4676px;*/
+  top: 2076px;
 }
 
 .watchdetails_certification_title
@@ -836,7 +855,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 251px;
-  top: 4780px;
+  /*top: 4780px;*/
+  top: 2180px
 }
 
 .watchdetails_certification_line
@@ -846,7 +866,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 252px;
-  top: 4811px;
+  /*top: 4811px;*/
+  top: 2211px;
 }
 
 .watchdetails_certification_value
@@ -863,7 +884,8 @@
   color: #818181;
   position: absolute;
   left: 253px;
-  top: 4853px;
+  /*top: 4853px;*/
+  top: 2253px;
 }
 
 .watchdetails_calibre
@@ -879,7 +901,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 569px;
-  top: 4190px;
+  /*top: 4190px;*/
+  top: 1590px;
 }
 
 .watchdetails_calibre_line
@@ -889,7 +912,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 570px;
-  top: 4221px;
+  /*top: 4221px;*/
+  top: 1621px;
 }
 
 .watchdetails_calibre_movement_title
@@ -906,7 +930,8 @@
   color: #212121;
   position: absolute;
   left: 571px;
-  top: 4262px;
+  /*top: 4262px;*/
+  top: 1662px;
 }
 
 .watchdetails_calibre_movement_value
@@ -923,7 +948,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4283px;
+  /*top: 4283px;*/
+  top: 1683px;
 }
 
 .watchdetails_calibre_title
@@ -940,7 +966,8 @@
   color: #212121;
   position: absolute;
   left: 571px;
-  top: 4317px;
+  /*top: 4317px;*/
+  top: 1717px;
 }
 
 .watchdetails_calibre_value
@@ -955,10 +982,10 @@
   line-height: normal;
   letter-spacing: 0.1px;
   color: #818181;
-
   position: absolute;
   left: 571px;
-  top: 4334px;
+  /*top: 4334px;*/
+  top: 1734px;
 }
 
 .watchdetails_functions_title
@@ -973,10 +1000,10 @@
   line-height: normal;
   letter-spacing: -0.3px;
   color: #212121;
-
   position: absolute;
   left: 571px;
-  top: 4368px;
+  /*top: 4368px;*/
+  top: 1768px;
 }
 
 .watchdetails_functions_value
@@ -993,7 +1020,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4388px;
+  /*top: 4388px;*/
+  top: 1788px;
 }
 
 .watchdetails_powerreserve_title
@@ -1009,7 +1037,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 571px;
-  top: 4446px;
+  /*top: 4446px;*/
+  top: 1846px;
 }
 
 .watchdetails_powerreserve_value
@@ -1026,7 +1055,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4466px;
+  /*top: 4466px;*/
+  top: 1866px;
 }
 
 .watchdetails_jewels_title
@@ -1042,7 +1072,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 571px;
-  top: 4500px;
+  /*top: 4500px;*/
+  top: 1900px;
 }
 
 .watchdetails_jewels_value
@@ -1059,7 +1090,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4520px;
+  /*top: 4520px;*/
+  top: 1920px;
 }
 
 .watchdetails_frequency_title
@@ -1075,7 +1107,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 571px;
-  top: 4554px;
+  /*top: 4554px;*/
+  top: 1954px;
 }
 
 .watchdetails_frequency_value
@@ -1092,7 +1125,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4574px;
+  /*top: 4574px;*/
+  top: 1974px;
 }
 
 .watchdetails_band_title
@@ -1108,7 +1142,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 569px;
-  top: 4608px;
+  /*top: 4608px;*/
+  top: 2008px;
 }
 
 .watchdetails_band_line
@@ -1118,7 +1153,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 570px;
-  top: 4639px;
+  /*top: 4639px;*/
+  top: 2039px;
 }
 
 .watchdetails_bracelet_title
@@ -1135,7 +1171,8 @@
   color: #212121;
   position: absolute;
   left: 571px;
-  top: 4680px;
+  /*top: 4680px;*/
+  top: 2080px;
 }
 
 .watchdetails_bracelet_value
@@ -1152,7 +1189,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4701px;
+  /*top: 4701px;*/
+  top: 2101px;
 }
 
 .watchdetails_bandmaterial_title
@@ -1169,7 +1207,8 @@
   color: #212121;
   position: absolute;
   left: 571px;
-  top: 4735px;
+  /*top: 4735px;*/
+  top: 2135px;
 }
 
 .watchdetails_bandmaterial_value
@@ -1186,7 +1225,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4756px;
+  /*top: 4756px;*/
+  top: 2156px;
 }
 
 .watchdetails_clasptitle_title
@@ -1202,7 +1242,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 571px;
-  top: 4785px;
+  /*top: 4785px;*/
+  top: 2185px;
 }
 
 .watchdetails_clasptitle_value
@@ -1219,7 +1260,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4808px;
+  /*top: 4808px;*/
+  top: 2208px;
 }
 
 .watchdetails_claspcolor_title
@@ -1235,7 +1277,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 571px;
-  top: 4843px;
+  /*top: 4843px;*/
+  top: 2243px;
 }
 
 .watchdetails_claspcolor_value
@@ -1252,7 +1295,8 @@
   color: #818181;
   position: absolute;
   left: 571px;
-  top: 4867px;
+  /*top: 4867px;*/
+  top: 2267px;
 }
 
 .watchdetails_case_title
@@ -1268,7 +1312,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4190px;
+  /*top: 4190px;*/
+  top: 1590px;
 }
 
 .watchdetails_case_Line
@@ -1278,7 +1323,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 890px;
-  top: 4221px;
+  /*top: 4221px;*/
+  top: 1621px;
 }
 
 .watchdetails_case_material_title
@@ -1295,7 +1341,8 @@
   color: #212121;
   position: absolute;
   left: 890px;
-  top: 4262px;
+  /*top: 4262px;*/
+  top: 1662px;
 }
 
 .watchdetails_case_material_value
@@ -1312,7 +1359,8 @@
   color: #818181;
   position: absolute;
   left: 890px;
-  top: 4283px;
+  /*top: 4283px;*/
+  top: 1683px;
 }
 
 .watchdetails_diameter_title
@@ -1328,7 +1376,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4317px;
+  /*top: 4317px;*/
+  top: 1717px;
 }
 
 .watchdetails_diameter_value
@@ -1345,7 +1394,8 @@
   color: #818181;
   position: absolute;
   left: 890px;
-  top: 4339px;
+  /*top: 4339px;*/
+  top: 1739px;
 }
 
 .watchdetails_waterproof_title
@@ -1361,7 +1411,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4368px;
+  /*top: 4368px;*/
+  top: 1768px;
 }
 
 .watchdetails_waterproof_value
@@ -1378,7 +1429,8 @@
   color: #818181;
   position: absolute;
   left: 890px;
-  top: 4388px;
+  /*top: 4388px;*/
+  top: 1788px;
 }
 
 .watchdetails_bezel_material_title
@@ -1394,7 +1446,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4427px;
+  /*top: 4427px;*/
+  top: 1827px;
 }
 
 .watchdetails_bezel_material_value
@@ -1411,7 +1464,8 @@
   color: #818181;
   position: absolute;
   left: 890px;
-  top: 4447px;
+  /*top: 4447px;*/
+  top: 1847px;
 }
 
 .watchdetails_crystal_title
@@ -1427,7 +1481,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4481px;
+  /*top: 4481px;*/
+  top: 1881px;
 }
 
 .watchdetails_crystal_value
@@ -1444,7 +1499,8 @@
   color: #818181;
   position: absolute;
   left: 890px;
-  top: 4501px;
+  /*top: 4501px;*/
+  top: 1901px;
 }
 
 .watchdetails_dial_title
@@ -1460,7 +1516,8 @@
   letter-spacing: normal;
   position: absolute;
   left: 890px;
-  top: 4608px;
+  /*top: 4608px;*/
+  top: 2008px;
 }
 
 .watchdetails_dial_line
@@ -1470,7 +1527,8 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 891px;
-  top: 4639px;
+  /*top: 4639px;*/
+  top: 2039px;
 }
 
 .watchdetails_dialcolor_title
@@ -1487,7 +1545,8 @@
   color: #212121;
   position: absolute;
   left: 892px;
-  top: 4680px;
+  /*top: 4680px;*/
+  top: 2080px;
 }
 
 .watchdetails_dialcolor_value
@@ -1504,7 +1563,8 @@
   color: #818181;
   position: absolute;
   left: 892px;
-  top: 4701px;
+  /*top: 4701px;*/
+  top: 2101px;
 }
 
 .watchdetails_dialfinish_title
@@ -1521,7 +1581,8 @@
   color: #212121;
   position: absolute;
   left: 892px;
-  top: 4735px;
+  /*top: 4735px;*/
+  top: 2135px;
 }
 
 .watchdetails_dialfinish_value
@@ -1538,7 +1599,8 @@
   color: #818181;
   position: absolute;
   left: 892px;
-  top: 4756px;
+  /*top: 4756px;*/
+  top: 2156px;
 }
 
 .watchdetails_dialindexes_title
@@ -1555,7 +1617,8 @@
   color: #212121;
   position: absolute;
   left: 892px;
-  top: 4785px;
+  /*top: 4785px;*/
+  top: 2185px;
 }
 
 .watchdetails_dialindexes_value
@@ -1572,7 +1635,8 @@
   color: #818181;
   position: absolute;
   left: 892px;
-  top: 4806px;
+  /*top: 4806px;*/
+  top: 2206px;
 }
 
 .watchdetails_dialhands_title
@@ -1589,7 +1653,8 @@
   color: #212121;
   position: absolute;
   left: 892px;
-  top: 4842px;
+  /*top: 4842px;*/
+  top: 2242px;
 }
 
 .watchdetails_dialhands_value
@@ -1606,7 +1671,8 @@
   color: #818181;
   position: absolute;
   left: 892px;
-  top: 4863px;
+  /*top: 4863px;*/
+  top: 2263px;
 }
 
 .watchdetails_details_line
@@ -1616,13 +1682,17 @@
   background-color: #c0c0c0;
   position: absolute;
   left: 250px;
-  top: 4911px;
+  /*top: 4911px;*/
+  top: 2311px;
 }
 
 .watchdetails_showprice
 {
   width: 98px;
   height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
   font-family: Helvetica;
   font-size: 16px;
   font-weight: normal;
@@ -1633,10 +1703,11 @@
   color: #212121;
   position: absolute;
   left: 579px;
-  top: 4981px;
+  /*top: 4981px;*/
+  top: 2381px;
 }
 
-.watchdetails_showprice_rectangle
+.watchdetails_addtowatchtray_rectangle
 {
   width: 186px;
   height: 42px;
@@ -1644,10 +1715,11 @@
   border-color: #4a4a4a;
   position: absolute;
   left: 720px;
-  top: 4972px;
+  /*top: 4972px;*/
+  top: 2372px;
 }
 
-.watchdetails_showprice_paperbag
+.watchdetails_addtowatchtray_paperbag
 {
   width: 12px;
   height: 19px;
@@ -1657,7 +1729,7 @@
   top: 10px;
 }
 
-.watchdetails_showprice_addtowatchtray
+.watchdetails_addtowatchtray_text
 {
   width: 128px;
   height: 14px;
@@ -1681,7 +1753,8 @@
   object-fit: contain;
   position: absolute;
   left: 714px;
-  top: 5054px;
+  /*top: 5054px;*/
+  top: 2454px;
 }
 
 .watchdetails_Return-to-the-top
@@ -1699,7 +1772,8 @@
   color: #212121;
   position: absolute;
   left: 675px;
-  top: 5064px;
+  /*top: 5064px;*/
+  top: 2464px;
 }
 
 .watchdetails_banner2
@@ -1708,7 +1782,8 @@
   height: 363px;
   position: absolute;
   left: 50%;
-  top: 5154px;
+  /*top: 5154px;*/
+  top: 2554px;
   transform: translate(-50%, 0);
 }
 
@@ -1844,7 +1919,8 @@
   object-fit: contain;
   position: absolute;
   left: 247px;
-  top: 6247px;
+  /*top: 6247px;*/
+  top: 2947px;
 }
 
 .watchdetails_footer_Rectangle-3
@@ -1854,7 +1930,8 @@
   background-color: #3e0808;
   position: absolute;
   left: 0;
-  top: 6318px;
+  /*top: 6318px;*/
+  top: 3018px;
 }
 
 .watchdetails_footer_Contact-us
@@ -1871,7 +1948,8 @@
   color: #ffffff;
   position: absolute;
   left: 936px;
-  top: 6332px;
+  /*top: 6332px;*/
+  top: 3032px;
 }
 
 .watchdetails_footer_facebook-letter-logo
@@ -1881,7 +1959,8 @@
   object-fit: contain;
   position: absolute;
   left: 1075px;
-  top: 6331px;
+  /*top: 6331px;*/
+  top: 3031px;
 }
 
 .watchdetails_footer_twitter-logo-silhouette
@@ -1891,7 +1970,8 @@
   object-fit: contain;
   position: absolute;
   left: 1114px;
-  top: 6336px;
+  /*top: 6336px;*/
+  top: 3036px;
 }
 
 .watchdetails_footer_insta
@@ -1901,7 +1981,8 @@
   object-fit: contain;
   position: absolute;
   left: 1164px;
-  top: 6332px;
+  /*top: 6332px;*/
+  top: 3032px;
 }
 
 .watchdetails_footer_-Chrono-Wiz-2018-A
@@ -1918,7 +1999,8 @@
   color: #7a1c1c;
   position: absolute;
   left: 613px;
-  top: 6376px;
+  /*top: 6376px;*/
+  top: 3076px;
 }
 
 .watchdetails_footer_Line-4
@@ -1928,7 +2010,8 @@
   background-color: #924443;
   position: absolute;
   left: 1px;
-  top: 6398px;
+  /*top: 6398px;*/
+  top: 3098px;
 }
 
 .watchdetails_footer_Terms-Conditions-
@@ -1946,6 +2029,7 @@
   color: #7a1c1c;
   position: absolute;
   left: 247px;
-  top: 6419px;
+  /*top: 6419px;*/
+  top: 3119px;
   padding-bottom: 50px;
 }
