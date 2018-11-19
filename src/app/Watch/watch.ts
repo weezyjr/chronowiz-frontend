@@ -1,11 +1,13 @@
 import {ItemValue} from '../item-value';
+import {Brand} from '../Brand/brand';
+import {Collection} from '../Collection/collection';
 
 export class Watch
 {
   public _id?: string;
 
-  public brandObject: string;
-  public collectionObject?: string;
+  public brandObject: Brand;
+  public collectionObject?: Collection;
   public model?: string;
   public referenceNumber: string;
   public gender?: string;
@@ -90,9 +92,9 @@ export class Watch
   public section5PhotoUrls?: ItemValue[];
   public section5PhotoFiles?: ItemValue[];
 
-  constructor(private isTestWatch?: boolean)
+  constructor(private isTest?: boolean)
   {
-    if (!isTestWatch)
+    if (!isTest)
     {
       this.movementAdditionalFeatures = [{value: ''}];
       this.functions = [{value: ''}];
@@ -101,11 +103,11 @@ export class Watch
       this.bandAdditionalFeatures = [{value: ''}];
       this.section5PhotoFiles = [{value: ''}];
     }
-    else if (isTestWatch)
+    else if (isTest)
     {
       this._id = 'SomeId';
-      this.brandObject = 'BrandObjectIdHere';
-      this.collectionObject = 'CollectionObjectIdHere';
+      this.brandObject = new Brand(isTest);
+      this.collectionObject = new Collection(isTest);
       this.model = 'Lange 1 Daymatic';
       this.referenceNumber = '320.032';
       this.gender = 'Men';
