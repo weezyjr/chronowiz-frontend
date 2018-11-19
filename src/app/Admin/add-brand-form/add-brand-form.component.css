@@ -1,0 +1,17 @@
+.divider
+{
+  width: 100px;
+  height: auto;
+  display: inline-block;
+}
+
+.units
+{
+  padding-top: 8px;
+  text-align: left;
+}
+
+.forms_floating_button
+{
+  float: right;
+}

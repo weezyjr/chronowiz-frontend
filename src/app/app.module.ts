@@ -5,22 +5,23 @@ import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angula
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AddWatchFormComponent} from './add-watch-form/add-watch-form.component';
 import {RouterModule, Routes} from '@angular/router';
-import {AddCaliberFormComponent} from './add-caliber-form/add-caliber-form.component';
-import {HttpErrorHandlerService} from './http-error-handler.service';
-import {WatchesService} from './watches.service';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {JwtInterceptor} from './jwt.interceptor';
-import {ErrorInterceptor} from './error.interceptor';
-import {AuthGuard} from './auth.guard';
-import {LoginComponent} from './login/login.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {SearchPageComponent} from './search-page/search-page.component';
-import {SearchService} from './search.service';
-import {WatchDetailsComponent} from './watch-details/watch-details.component';
+import {SearchPageComponent} from './Search/search-page/search-page.component';
+import {WatchDetailsComponent} from './Watch/watch-details/watch-details.component';
+import {LoginComponent} from './Admin/login/login.component';
+import {AuthGuard} from './Auth/auth.guard';
+import {AddWatchFormComponent} from './Admin/add-watch-form/add-watch-form.component';
+import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.component';
+import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collection-form.component';
+import {HttpErrorHandlerService} from './API/http-error-handler.service';
+import {WatchesService} from './Watch/watches.service';
+import {SearchService} from './Search/search.service';
+import {JwtInterceptor} from './API/jwt.interceptor';
+import {ErrorInterceptor} from './API/error.interceptor';
 
 const routes: Routes = [
   {
@@ -31,6 +32,18 @@ const routes: Routes = [
   {
     path: 'app-home-page',
     component: HomePageComponent
+  },
+  {
+    path: 'app-search-page',
+    component: SearchPageComponent
+  },
+  {
+    path: 'app-watch-details',
+    component: WatchDetailsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'admin',
@@ -44,16 +57,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'app-add-brand-form',
+    component: AddBrandFormComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'app-search-page',
-    component: SearchPageComponent
-  },
-  {
-    path: 'app-watch-details',
-    component: WatchDetailsComponent
+    path: 'app-add-collection-form',
+    component: AddCollectionFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
@@ -65,11 +76,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     AddWatchFormComponent,
-    AddCaliberFormComponent,
     LoginComponent,
     HomePageComponent,
     SearchPageComponent,
-    WatchDetailsComponent
+    WatchDetailsComponent,
+    AddBrandFormComponent,
+    AddCollectionFormComponent
   ],
   imports: [
     BrowserModule,

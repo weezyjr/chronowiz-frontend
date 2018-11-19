@@ -1,0 +1,43 @@
+<simple-notifications></simple-notifications>
+<div class="container">
+  <div>
+    <h1>Add Collection</h1>
+
+    <button type="button" class="forms_floating_button" (click)="openWatchForm()">Watch Form</button>
+    <button type="button" class="forms_floating_button" (click)="openCollectionForm()">Collection Form</button>
+    <button type="button" class="forms_floating_button" (click)="openBrandForm()">Brand Form</button>
+    <button type="button" class="forms_floating_button" (click)="openHomePage()">Home</button>
+
+    <form #collectionForm="ngForm">
+
+      <br/>
+      <h3>Collection Details</h3>
+      <br/>
+
+      <div class="form-group">
+        <label for="brandObject">Brand</label>
+        <select type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject" name="brandObject" #brandObject="ngModel">
+          <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+        </select>
+        <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Collection Name</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="collection.name" name="name" #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
+      </div>
+
+      <br/>
+      <div style="text-align: center">
+        <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!collectionForm.form.valid">Submit</button>
+        <div class="divider"></div>
+        <button type="button" class="btn btn-lg btn-danger" (click)="newWatch(); collectionForm.reset()">Clear</button>
+        <div class="divider"></div>
+        <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
+      </div>
+      <br/><br/><br/><br/><br/>
+
+    </form>
+  </div>
+</div>
