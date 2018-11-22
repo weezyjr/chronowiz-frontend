@@ -203,7 +203,7 @@
         <label for="headerPhotoFileInput">Header photo</label>
         <div class="form-group">
           <div class="col-xs-11">
-            <input type="file" class="form-control" (change)="onHeaderPhotoChanged($event)" #headerPhotoElementRef id="headerPhotoFileInput" required [(ngModel)]="brand.headerPhotoFile" name="headerPhotoFile" #headerPhotoFile="ngModel">
+            <input type="file" class="form-control" (change)="onHeaderPhotoChanged($event)" #headerPhotoElementRef id="headerPhotoFileInput" [(ngModel)]="brand.headerPhotoFile" name="headerPhotoFile" #headerPhotoFile="ngModel">
           </div>
           <div class="col-xs-1">
             <button class="btn btn-default" (click)="clearHeaderPhoto()">Clear</button>

@@ -7,7 +7,7 @@ export class Brand
   public name: string;
 
   public logoPhotoUrl: string;
-  public headerPhotoUrl: string;
+  public headerPhotoUrl?: string;
   public banner1PhotoUrl: string;
   public banner2PhotoUrl: string;
 

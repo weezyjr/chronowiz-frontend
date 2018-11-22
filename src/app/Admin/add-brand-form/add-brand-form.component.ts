@@ -245,7 +245,7 @@ export class AddBrandFormComponent implements OnInit
     {
       if (!self.headerPhotoFile)
       {
-        reject();
+        resolve();
       }
 
       const mainPhotoUploadParams =
