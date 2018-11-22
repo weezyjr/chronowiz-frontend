@@ -1,6 +1,6 @@
 #home-page
 {
-  width: auto;
+  width: 1440px;
   margin: 0 auto;
   position: relative;
   left: 0;
@@ -9,7 +9,7 @@
 
 .main-photo
 {
-  width: auto;
+  width: 1440px;
   height: 1018px;
   object-fit: contain;
   position: relative;
@@ -444,7 +444,7 @@
 
 .FireShot_Capture_104_Official_Rolex
 {
-  width: 1440px;
+  width: 1080px;
   height: 704px;
   object-fit: contain;
   position: absolute;

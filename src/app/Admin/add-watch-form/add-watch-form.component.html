@@ -25,6 +25,7 @@
       <div class="form-group">
         <label for="collectionObject">Collection</label>
         <select type="text" class="form-control" id="collectionObject" [(ngModel)]="watch.collectionObject" name="collectionObject" #collectionObject="ngModel">
+          <option value=""></option>
           <option *ngFor="let collection of collections" [value]="collection._id">{{collection.name}}</option>
         </select>
       </div>
