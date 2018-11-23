@@ -26,7 +26,7 @@ import {ErrorInterceptor} from './API/error.interceptor';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app-search-page',
+    redirectTo: 'app-home-page',
     pathMatch: 'full'
   },
   {
