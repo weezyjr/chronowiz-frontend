@@ -71,6 +71,11 @@
         </select>
       </div>
 
+      <div class="form-group">
+        <label for="perpetual">Perpetual</label>
+        <input type="text" class="form-control" id="perpetual" [(ngModel)]="watch.perpetual" name="perpetual" #perpetual="ngModel">
+      </div>
+
       <br/>
       <h3>Movement Section</h3>
       <br/>
@@ -278,9 +283,9 @@
       </div>
 
       <div class="form-group">
-      <label for="caseBezelMaterial">Case Bezel Material</label>
-      <input type="text" class="form-control" id="caseBezelMaterial" [(ngModel)]="watch.caseBezelMaterial" name="caseBezelMaterial" #caseBezelMaterial="ngModel">
-    </div>
+        <label for="caseBezelMaterial">Case Bezel Material</label>
+        <input type="text" class="form-control" id="caseBezelMaterial" [(ngModel)]="watch.caseBezelMaterial" name="caseBezelMaterial" #caseBezelMaterial="ngModel">
+      </div>
 
       <div class="form-horizontal">
         <label for="waterResistance">Water Resistance</label>

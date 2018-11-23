@@ -14,6 +14,7 @@ export class Watch
   public productionYear?: string;
   public limited?: string;
   public awards?: string;
+  public perpetual?: string;
 
   public movementCaliberName?: string;
   public movementAutomaticOrManual?: string;
@@ -114,6 +115,7 @@ export class Watch
       this.productionYear = '1900';
       this.limited = '1989';
       this.awards = 'Geneva Seal';
+      this.perpetual = 'Perpetual';
 
       this.movementCaliberName = 'Lange';
       this.movementAutomaticOrManual = 'Automatic';
