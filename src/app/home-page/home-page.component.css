@@ -2,17 +2,18 @@
 {
   width: 1440px;
   margin: 0 auto;
-  position: relative;
+  position: absolute;
   left: 0;
   top: 0;
 }
 
 .main-photo
 {
-  width: 1440px;
+  width: auto;
+  margin: 0 auto;
   height: 1018px;
   object-fit: contain;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
 }
