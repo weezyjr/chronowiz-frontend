@@ -32,8 +32,8 @@ export class Brand
 
       this.logoPhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/brands/320.032/mainPhoto_1541580825877.jpg';
       this.headerPhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/brands/320.032/mainPhoto_1541580825877.jpg';
-      this.banner1PhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/brands/referenceNumber/banner1.png';
-      this.banner2PhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/brands/referenceNumber/banner2.png';
+      this.banner1PhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/banner1.png';
+      this.banner2PhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/banner2.png';
 
       this.collectionObjects = [new Collection(isTest)];
     }
