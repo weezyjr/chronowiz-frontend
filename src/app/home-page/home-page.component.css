@@ -1,7 +1,10 @@
 #home-page
 {
   width: 1440px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
   position: absolute;
   left: 0;
   top: 0;
@@ -120,152 +123,21 @@
   left: 126px;
 }
 
-.Audemars-piguet-logo
+.homepage_logos_grid
 {
-  width: 140px;
-  height: 56px;
-  object-fit: contain;
+  display: grid;
+  grid-template-columns: 140px 140px 140px 140px;
+  grid-gap: 100px;
   position: absolute;
-  top: 1278px;
   left: 288px;
+  top: 1250px;
 }
 
-.download
+.homepage_logos_image
 {
-  width: 140px;
-  height: 27px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
-  position: absolute;
-  top: 1292px;
-  left: 527px;
-}
-
-.Baume__and__Mercier-logo-F4B5E1399B-seeklogocom
-{
-  width: 140px;
-  height: 72px;
-  object-fit: contain;
-  position: absolute;
-  left: 774px;
-  top: 1270px;
-}
-
-.bedat-and-co-logo
-{
-  width: 140px;
-  height: 30.8px;
-  object-fit: contain;
-  position: absolute;
-  left: 1009px;
-  top: 1290px;
-}
-
-.bellross
-{
-  width: 182px;
-  height: 91px;
-  position: absolute;
-  left: 267px;
-  top: 1385px;
-}
-
-.Blancpain-logo
-{
-  width: 153px;
-  height: 47px;
-  position: absolute;
-  left: 524px;
-  top: 1407px;
-}
-
-.ufgkytf
-{
-  width: 152px;
-  height: 152px;
-  position: absolute;
-  left: 760px;
-  top: 1354px;
-}
-
-.px-Breitlizng_logosvg
-{
-  width: 146px;
-  height: 59px;
-  position: absolute;
-  left: 1007px;
-  top: 1401px;
-}
-
-.bremont
-{
-  width: 139px;
-  height: 48px;
-  position: absolute;
-  left: 282px;
-  top: 1544px;
-}
-
-.Unknowrrrn
-{
-  width: 142px;
-  height: 16px;
-  position: absolute;
-  left: 518px;
-  top: 1560px;
-}
-
-.cartier-logo
-{
-  width: 154px;
-  height: 53px;
-  position: absolute;
-  left: 753px;
-  top: 1542px;
-}
-
-.o30
-{
-  width: 145px;
-  height: 145px;
-  position: absolute;
-  left: 1000px;
-  top: 1496px;
-}
-
-.Unknownbvgh
-{
-  width: 144px;
-  height: 56.3px;
-  position: absolute;
-  left: 286px;
-  top: 1664px;
-}
-
-.download-2
-{
-  width: 212px;
-  height: 64.6px;
-  position: absolute;
-  left: 491px;
-  top: 1646px;
-}
-
-.Girard-Perregaux-logo-logotype
-{
-  width: 151px;
-  height: 40.8px;
-  position: absolute;
-  left: 762px;
-  top: 1658px;
-}
-
-.Glashutte
-{
-  width: 169px;
-  height: 76px;
-  position: absolute;
-  left: 997px;
-  top: 1640px;
 }
 
 .Rectangle-8
