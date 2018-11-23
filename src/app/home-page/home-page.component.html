@@ -3,7 +3,7 @@
   <!--<img src="../../assets/images/main-photo.png"-->
   <!--class="main-photo">-->
 
-  <video class="main-photo" autoplay loop controls muted>
+  <video class="main-photo" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
     <source src="https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/home/featured_selection_festive_2018_video_0001_1920x1080.mp4" type="video/mp4">
   </video>
 
