@@ -1,0 +1,11 @@
+<svg id="paper-bag" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 28">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #212121;
+      }
+    </style>
+  </defs>
+  <path id="Shape" class="cls-1" d="M16.54,24H.459A.461.461,0,0,1,0,23.539V.462A.461.461,0,0,1,.459,0H16.54A.461.461,0,0,1,17,.462V23.539A.461.461,0,0,1,16.54,24ZM.919.923V23.077H16.081V.923Z" transform="translate(0 4)"/>
+  <path id="Shape-2" data-name="Shape" class="cls-1" d="M4,0A4,4,0,0,0,0,4V7.556a.444.444,0,0,0,.889,0V4A3.111,3.111,0,0,1,7.111,4V7.556a.444.444,0,0,0,.889,0V4A4,4,0,0,0,4,0Z" transform="translate(5)"/>
+</svg>

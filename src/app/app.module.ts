@@ -22,55 +22,15 @@ import {WatchesService} from './Watch/watches.service';
 import {SearchService} from './Search/search.service';
 import {JwtInterceptor} from './API/jwt.interceptor';
 import {ErrorInterceptor} from './API/error.interceptor';
-
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'app-home-page',
-    pathMatch: 'full'
-  },
-  {
-    path: 'app-home-page',
-    component: HomePageComponent
-  },
-  {
-    path: 'app-search-page',
-    component: SearchPageComponent
-  },
-  {
-    path: 'app-watch-details',
-    component: WatchDetailsComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'admin',
-    redirectTo: 'app-add-watch-form',
-    pathMatch: 'full',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'app-add-watch-form',
-    component: AddWatchFormComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'app-add-brand-form',
-    component: AddBrandFormComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'app-add-collection-form',
-    component: AddCollectionFormComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: '**',
-    redirectTo: ''
-  }
-];
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {BrandComponent} from '../pages/brand/brand.component';
+import {ItemCardComponent} from './components/item-card/item-card.component';
+import {CardCarouselComponent} from './components/card-carousel/card-carousel.component';
+import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
+import {HomeComponent} from '../pages/home/home.component';
+import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
+import {HeroComponent} from './components/hero/hero.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +41,17 @@ const routes: Routes = [
     SearchPageComponent,
     WatchDetailsComponent,
     AddBrandFormComponent,
-    AddCollectionFormComponent
+    AddCollectionFormComponent,
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    BrandComponent,
+    ItemCardComponent,
+    CardCarouselComponent,
+    BreadcrumbComponent,
+    HomeComponent,
+    FooterHeroComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,
@@ -100,8 +70,7 @@ const routes: Routes = [
       {
         timeOut: 30000
       }
-    ),
-    RouterModule.forRoot(routes)
+    )
   ],
   exports: [RouterModule],
   providers: [

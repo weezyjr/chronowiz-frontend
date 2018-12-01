@@ -1,0 +1,29 @@
+<app-header [transparent]="true"></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<app-hero [background_sm_left]="true" [cover]="brand?.coverSrc"></app-hero>
+
+<div class="container">
+
+  <header class="title text-center">
+    <h1>{{brand?.name}}</h1>
+    <h5>The Collections</h5>
+  </header>
+
+  <div class="tabs">
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#" class="active"> All </a></li>
+      <li class="list-inline-item"><a href="#"> Men </a></li>
+      <li class="list-inline-item"><a href="#"> Women </a></li>
+    </ul>
+  </div>
+
+  <app-card-carousel *ngFor="let watchList of brand?.list " [name]="watchList?.name" [list]="watchList?.list"></app-card-carousel>
+
+  <div class="text-center mx-auto show-more">
+    <button class="btn primary-btn" (click)="showMore()" [disabled]="isShowMoreEmpty">Show More</button>
+  </div>
+</div>
+
+<app-footer-hero></app-footer-hero>
+
+<app-footer></app-footer>

@@ -1,0 +1,35 @@
+<header class="header" [ngClass]="{'transparent':transparent}">
+  <div class="container">
+    <div class="logo">
+      <a class="nav-link" href="#"><img [src]="logoSrc" alt=""></a>
+    </div>
+    <nav class="navbar text-center" role="navigation">
+      <ul class="list-inline w-100 text-center">
+        <div class="float-left">
+          <li class="list-inline-item"><a href="#"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
+          <li class="list-inline-item d_none"><a href="#"> <img class="icon" [src]="searchIconSrc" alt="">
+            </a></li>
+        </div>
+        <div class="float-right">
+          <li class="list-inline-item">
+            <a (click)="openUserMenu()">
+              <img class="icon" [src]="userIconSrc" alt="">
+             </a>
+             <div class="drop-down-menu" [ngClass]="{'d-none': menuClosed}">
+                <div class="arrow-up"></div>
+                <div class="drop-down-content">
+                    <ul>
+                      <li> <a href="#"> My Account </a> </li>
+                      <li> <a href="#"> Logout </a> </li>
+                    </ul>
+                </div>
+              </div>
+            </li>
+          <li class="list-inline-item search-icon"><a href="#"> <img class="icon" [src]="searchIconSrc" alt="">
+            </a></li>
+          <li class="list-inline-item"><a href="#"> <img class="icon" [src]="paperBagIconSrc" alt=""> </a></li>
+        </div>
+      </ul>
+    </nav>
+  </div>
+</header>

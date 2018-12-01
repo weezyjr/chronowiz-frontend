@@ -1,0 +1,23 @@
+.breads
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 100px;
+  text-align: left;
+  ul
+    margin: 0;
+  a
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 12px;
+    letter-spacing: 0.1px;
+    color: #212121;
+  li:not(:last-child)::after
+    content: ">";
+
+@media only screen and (max-width: 800px)
+  .breads
+    display: none;
+

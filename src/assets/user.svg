@@ -1,0 +1,18 @@
+<svg id="User" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(0,0,0,0);
+      }
+
+      .cls-2 {
+        fill: #212121;
+      }
+    </style>
+  </defs>
+  <rect id="User_background" data-name="User background" class="cls-1" width="24" height="24"/>
+  <g id="User-2" data-name="User" transform="translate(0 0)">
+    <path id="Combined_Shape" data-name="Combined Shape" class="cls-2" d="M12,12.667a27.952,27.952,0,0,1-8.543-.974C1.131,10.9,0,9.627,0,7.795c0-1.9,1.281-3.855,3.515-5.359A15.315,15.315,0,0,1,12,0a15.315,15.315,0,0,1,8.485,2.436C22.719,3.939,24,5.892,24,7.795c0,1.655-1.163,2.916-3.457,3.748A26.024,26.024,0,0,1,12,12.667ZM12,.974A14.906,14.906,0,0,0,4.222,3.035C2.174,4.307,1,5.96,1,7.57c0,1.551,1.036,2.629,3.168,3.3A27.645,27.645,0,0,0,12,11.692a25.709,25.709,0,0,0,7.831-.951C21.934,10.037,23,8.97,23,7.57c0-1.61-1.174-3.263-3.222-4.535A14.906,14.906,0,0,0,12,.974Z" transform="translate(0 11.333)"/>
+    <path id="Combined_Shape-2" data-name="Combined Shape" class="cls-2" d="M5,10a5,5,0,1,1,5-5A5.006,5.006,0,0,1,5,10ZM5,1A4,4,0,1,0,9,5,4,4,0,0,0,5,1Z" transform="translate(7.333)"/>
+  </g>
+</svg>
