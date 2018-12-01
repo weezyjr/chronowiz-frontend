@@ -30,6 +30,7 @@ import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component'
 import {HomeComponent} from '../pages/home/home.component';
 import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
 import {HeroComponent} from './components/hero/hero.component';
+import {HomePageComponent} from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {HeroComponent} from './components/hero/hero.component';
     BreadcrumbComponent,
     HomeComponent,
     FooterHeroComponent,
-    HeroComponent
+    HeroComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
