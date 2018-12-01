@@ -9,7 +9,6 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HomePageComponent} from './home-page/home-page.component';
 import {SearchPageComponent} from './Search/search-page/search-page.component';
 import {WatchDetailsComponent} from './Watch/watch-details/watch-details.component';
 import {LoginComponent} from './Admin/login/login.component';
@@ -37,7 +36,6 @@ import {HeroComponent} from './components/hero/hero.component';
     AppComponent,
     AddWatchFormComponent,
     LoginComponent,
-    HomePageComponent,
     SearchPageComponent,
     WatchDetailsComponent,
     AddBrandFormComponent,
