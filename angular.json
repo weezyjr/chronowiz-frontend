@@ -90,7 +90,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.sass"
             ],
             "scripts": [],
             "assets": [
@@ -145,5 +145,10 @@
       }
     }
   },
-  "defaultProject": "chronowiz-web"
+  "defaultProject": "chronowiz-web",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "sass"
+    }
+  }
 }
