@@ -1,0 +1,42 @@
+<app-header [transparent]="false"></app-header>
+<video class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
+  <source src="https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/home/featured_selection_festive_2018_video_0001_1920x1080.mp4"
+    type="video/mp4">
+</video>
+
+<div class="container">
+  <section>
+    <h1>Brands</h1>
+    <div class="search text-center mx-auto">
+      <input class="form-input search" (input)="filterResults()" [(ngModel)]="query" type="text" placeholder="Search">
+      <img class="icon" [src]="SEARCH_ICON_PATH" alt="">
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div *ngFor='let brand of brands| slice: 0:brandsLimit' class="col-md-3 col-sm-4 col-6 py-4 text-center d-flex align-items-center">
+        <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name" class="img-responsive brand-img">
+      </div>
+    </div>
+    <div class="text-center btn-margin">
+      <button class="btn primary-btn" (click)="showMoreBrands()" [disabled]="isShowMoreBrandsEmpty">Show More</button>
+    </div>
+  </section>
+
+  <section class="text-center">
+    <h1 class="social-title">Social Media</h1>
+    <div class="row">
+      <div *ngFor="let media of socialMedia | slice: 0:socialLimit" class="col-md-3 p-2 col-4 text-center">
+        <img [src]="media?.img" class="img-responsive">
+      </div>
+    </div>
+    <div class="text-center btn-margin">
+      <button class="btn secondry-btn" (click)="showMoreSocialMedia()" [disabled]="isShowMoreSocialMediaEmpty">Load
+        More</button>
+    </div>
+  </section>
+
+  <app-footer-hero></app-footer-hero>
+</div>
+<app-footer></app-footer>

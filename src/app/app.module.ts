@@ -23,14 +23,13 @@ import {JwtInterceptor} from './API/jwt.interceptor';
 import {ErrorInterceptor} from './API/error.interceptor';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
-import {BrandComponent} from '../pages/brand/brand.component';
+import {BrandComponent} from './pages/brand/brand.component';
 import {ItemCardComponent} from './components/item-card/item-card.component';
 import {CardCarouselComponent} from './components/card-carousel/card-carousel.component';
 import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
-import {HomeComponent} from '../pages/home/home.component';
+import {HomeComponent} from './pages/home/home.component';
 import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
 import {HeroComponent} from './components/hero/hero.component';
-import {HomePageComponent} from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import {HomePageComponent} from './home-page/home-page.component';
     BreadcrumbComponent,
     HomeComponent,
     FooterHeroComponent,
-    HeroComponent,
-    HomePageComponent
+    HeroComponent
   ],
   imports: [
     BrowserModule,

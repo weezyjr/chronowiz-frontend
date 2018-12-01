@@ -9,7 +9,11 @@ export class ItemCardComponent implements OnInit {
 
   constructor() { }
 
-  @Input() watch: Object;
+  @Input() watch: any = {
+    imgSrc : 'http://placehold.it/500',
+    name: '<name>',
+    desc: '<descrption>'
+  };
 
   ngOnInit() {
   }

@@ -7,8 +7,8 @@ import {AuthGuard} from './Auth/auth.guard';
 import {AddWatchFormComponent} from './Admin/add-watch-form/add-watch-form.component';
 import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.component';
 import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collection-form.component';
-import {HomeComponent} from 'src/pages/home/home.component';
-import {BrandComponent} from '../pages/brand/brand.component';
+import {HomeComponent} from './pages/home/home.component';
+import {BrandComponent} from './pages/brand/brand.component';
 
 const routes: Routes = [
   {
@@ -56,10 +56,6 @@ const routes: Routes = [
     path: 'app-add-collection-form',
     component: AddCollectionFormComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: HomeComponent
   },
   {
     path: '**',
