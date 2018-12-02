@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit
     private _notificationsService: NotificationsService
   )
   {
-    // redirect to home if already logged in
+    // redirect to admin if already logged in
     if (this.authenticationService.currentUserValue)
     {
-      this.router.navigate(['/']);
+      this.router.navigate(['/admin']);
     }
   }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
   }
 
   // convenience getter for easy access to form fields
