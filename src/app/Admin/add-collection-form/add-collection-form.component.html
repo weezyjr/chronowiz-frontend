@@ -1,22 +1,33 @@
 <simple-notifications></simple-notifications>
-<div class="container">
-  <div>
+<div class="container-fluid mx-auto login d-flex align-items-center">
+  <div class="add-collection">
     <h1>Add Collection</h1>
 
-    <button type="button" class="forms_floating_button" (click)="openWatchForm()">Watch Form</button>
-    <button type="button" class="forms_floating_button" (click)="openCollectionForm()">Collection Form</button>
-    <button type="button" class="forms_floating_button" (click)="openBrandForm()">Brand Form</button>
-    <button type="button" class="forms_floating_button" (click)="openHomePage()">Home</button>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openWatchForm()">Watch Form</button>
+      </div>
+      <div class="col">
+        <button type="button" disabled class="btn btn-success" (click)="openCollectionForm()">Collection Form</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openBrandForm()">Brand Form</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openHomePage()">Home</button>
+      </div>
+    </div>
 
     <form #collectionForm="ngForm">
 
-      <br/>
+      <br />
       <h3>Collection Details</h3>
-      <br/>
+      <br />
 
       <div class="form-group">
         <label for="brandObject">Brand</label>
-        <select type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject" name="brandObject" #brandObject="ngModel">
+        <select type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject" name="brandObject"
+          #brandObject="ngModel">
           <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
         </select>
         <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
@@ -28,16 +39,19 @@
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
       </div>
 
-      <br/>
+      <br />
       <div style="text-align: center">
-        <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!collectionForm.form.valid">Submit</button>
-        <div class="divider"></div>
-        <button type="button" class="btn btn-lg btn-danger" (click)="newCollection(); collectionForm.reset()">Clear</button>
-        <div class="divider"></div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!collectionForm.form.valid">Submit</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-lg btn-danger" (click)="newCollection(); collectionForm.reset()">Clear</button>
+          </div>
+        </div>
+        <br />
         <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
       </div>
-      <br/><br/><br/><br/><br/>
-
     </form>
   </div>
 </div>

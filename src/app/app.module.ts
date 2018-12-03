@@ -33,6 +33,7 @@ import {HeroComponent} from './components/hero/hero.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { GenderPipe } from './Filters/gender.pipe';
 import { CollectionPipe } from './Filters/collection.pipe';
+import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CollectionPipe } from './Filters/collection.pipe';
     HeroComponent,
     CollectionsComponent,
     GenderPipe,
-    CollectionPipe
+    CollectionPipe,
+    CollapsibleComponent
   ],
   imports: [
     BrowserModule,

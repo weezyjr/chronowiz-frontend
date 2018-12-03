@@ -1,12 +1,22 @@
 <simple-notifications></simple-notifications>
-<div class="container">
-  <div>
+<div class="container-fluid mx-auto login d-flex align-items-center">
+  <div class="add-brand">
     <h1>Add Brand</h1>
 
-    <button type="button" class="forms_floating_button" (click)="openWatchForm()">Watch Form</button>
-    <button type="button" class="forms_floating_button" (click)="openCollectionForm()">Collection Form</button>
-    <button type="button" class="forms_floating_button" (click)="openBrandForm()">Brand Form</button>
-    <button type="button" class="forms_floating_button" (click)="openHomePage()">Home</button>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openWatchForm()">Watch Form</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openCollectionForm()">Collection Form</button>
+      </div>
+      <div class="col">
+        <button type="button" disabled class="btn btn-success" (click)="openBrandForm()">Brand Form</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary" (click)="openHomePage()">Home</button>
+      </div>
+    </div>
 
     <form #brandForm="ngForm">
 
@@ -240,13 +250,17 @@
 
       <br/>
       <div style="text-align: center">
-        <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!brandForm.form.valid">Submit</button>
-        <div class="divider"></div>
-        <button type="button" class="btn btn-lg btn-danger" (click)="newBrand(); brandForm.reset()">Clear</button>
-        <div class="divider"></div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!brandForm.form.valid">Submit</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-lg btn-danger" (click)="newBrand(); brandForm.reset()">Clear</button>
+          </div>
+        </div>
+        <br />
         <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
       </div>
-      <br/><br/><br/><br/><br/>
 
     </form>
   </div>
