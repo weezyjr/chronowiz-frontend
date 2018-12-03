@@ -43,7 +43,7 @@ export class BrandsService
 
   readBrandById(id: String): Observable<ResponseData>
   {
-    return this.http.get<ResponseData>(this.brandsUrl + ':/' + id, httpOptions)
+    return this.http.get<ResponseData>(this.brandsUrl + '/' + id, httpOptions)
       .pipe(map(data =>
       {
         return data;

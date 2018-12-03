@@ -1,0 +1,40 @@
+<app-header [bg_white]="true"></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="container collections">
+  <div class="collections-title text-center">
+    <h1> The Day-date </h1>
+    <h2> Rolex </h2>
+  </div>
+  <div class="collection-desc">
+    <p class="muted">
+      In 1956, the Rolex Day-Date made its debut. Available only in 18 ct gold or platinum, it was the first wristwatch
+      to
+      display the date and day of the week spelt out in full in a window on the dial. With the President bracelet,
+      originally created specially for it, the Day-Date continues to be the watch par
+      excellence of influential people.
+    </p>
+  </div>
+
+  <div class="filter">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-2 filter-row" *ngFor="let filter of filters">
+        <h6>{{ filter.title }}</h6>
+        <label class="radio" *ngFor="let option of filter?.options; let i = index">
+          {{option}}
+          <input type="radio" [checked]="i === 0" [name]="filter?.name">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <section>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+    </div>
+  </section>
+  <app-footer-hero></app-footer-hero>
+</div>
+<app-footer></app-footer>

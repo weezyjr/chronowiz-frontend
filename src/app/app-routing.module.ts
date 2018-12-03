@@ -9,6 +9,7 @@ import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.compo
 import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collection-form.component';
 import {HomeComponent} from './pages/home/home.component';
 import {BrandComponent} from './pages/brand/brand.component';
+import { CollectionsComponent } from './pages/collections/collections.component';
 
 const routes: Routes = [
   {
@@ -21,8 +22,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'app-brand-page',
+    path: 'app-brand-page/:id',
     component: BrandComponent
+  },
+  {
+    path: 'app-collections-page/:id',
+    component: CollectionsComponent
   },
   {
     path: 'app-search-page',

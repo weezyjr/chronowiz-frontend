@@ -81,6 +81,36 @@ h1
   text-transform: uppercase;
   color: $dark;
 
+h2, h5
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 18px;
+  letter-spacing: 0.51px;
+  text-transform: uppercase;
+  color: #7A1C1C;
+
+h6
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 12px;
+  color: #000000;
+  text-transform: uppercase;
+
+p
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 22px;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0.4px;
+
+.muted
+  color: $darker-gray;
 
 section
   border-bottom: 1px solid $primary;
@@ -99,31 +129,13 @@ section
 .title
   margin-bottom: 30px;
   margin-top: 64px;
-  h1
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-    font-size: 36px;
-    text-align: center;
-    letter-spacing: 0.310909px;
-    text-transform: uppercase;
-    color: #212121;
-  h5
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    line-height: normal;
-    font-size: 18px;
-    letter-spacing: 0.514286px;
-    text-transform: uppercase;
-    color: #7A1C1C;
 
 .tabs
   ul
     margin: 0;
     padding-bottom: 4px;
-  li a
+  li
+    cursor: pointer;
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;
@@ -138,3 +150,41 @@ section
   .active
     color: #7A1C1C !important;
     font-weight: bold !important;
+
+/* The container */
+.radio
+  font-family: Roboto;
+  display: block;
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 11px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+/* Hide the browser's default radio button */
+.radio input
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+
+/* Create a custom radio button */
+.checkmark
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #dadada;
+  border-radius: 50%;
+
+/* On mouse-over, add a grey background color */
+.radio:hover input ~ .checkmark
+  background-color: #ccc;
+
+/* When the radio button is checked, add a blue background */
+.radio input:checked ~ .checkmark
+  background-color: #3E0809;

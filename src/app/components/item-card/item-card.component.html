@@ -1,5 +1,5 @@
 <div class="card">
-  <img [src]="watch?.imgSrc" alt="">
-  <h3>{{watch?.name}}</h3>
-  <p>{{watch?.desc}}</p>
+  <img *ngIf="watch" [src]="watch?.mainPhotoUrl" alt="">
+  <h3>{{watch?.model}}</h3>
+  <p>{{watch?.band}}, {{watch?.caseDiameter}}mm, {{watch?.caseMaterial}}</p>
 </div>

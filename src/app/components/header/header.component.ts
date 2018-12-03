@@ -10,6 +10,9 @@ export class HeaderComponent implements OnInit {
   @Input()
   transparent: Boolean = true;
 
+  @Input()
+  bg_white: Boolean = false;
+
   menuClosed: Boolean = true;
 
   logoSrc: String;

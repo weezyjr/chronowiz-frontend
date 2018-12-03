@@ -27,7 +27,8 @@ export class HomeComponent implements OnInit {
     },
     {
       img: this.SOCIAL_MEDIA_PATH + 'group-5@2x.png',
-    }, {
+    },
+    {
       img: this.SOCIAL_MEDIA_PATH + 'group-6@2x.png',
     },
     {

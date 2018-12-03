@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{'transparent':transparent}">
+<header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
   <div class="container">
     <div class="logo">
       <a class="nav-link" href="#"><img [src]="logoSrc" alt=""></a>
@@ -7,7 +7,7 @@
       <ul class="list-inline w-100 text-center">
         <div class="float-left">
           <li class="list-inline-item"><a href="#"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
-          <li class="list-inline-item d_none"><a href="#"> <img class="icon" [src]="searchIconSrc" alt="">
+          <li class="list-inline-item d_none"><a routerLink="app-search-page"> <img class="icon" [src]="searchIconSrc" alt="">
             </a></li>
         </div>
         <div class="float-right">
@@ -25,7 +25,7 @@
                 </div>
               </div>
             </li>
-          <li class="list-inline-item search-icon"><a href="#"> <img class="icon" [src]="searchIconSrc" alt="">
+          <li class="list-inline-item search-icon"><a routerLink="app-search-page"> <img class="icon" [src]="searchIconSrc" alt="">
             </a></li>
           <li class="list-inline-item"><a href="#"> <img class="icon" [src]="paperBagIconSrc" alt=""> </a></li>
         </div>

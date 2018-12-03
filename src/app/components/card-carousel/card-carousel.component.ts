@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Watch } from 'src/app/Watch/watch';
 
 @Component({
   selector: 'app-card-carousel',
@@ -8,10 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CardCarouselComponent implements OnInit {
 
   @Input()
-  public list: Array<Object>;
+  public watchList: Watch[] = [];
 
   @Input()
   public name: String;
+
+  @Input()
+  public gender: String;
 
   public currentOffset = 0;
   public paginationFactor = 300;
@@ -29,7 +33,8 @@ export class CardCarouselComponent implements OnInit {
 
   get transitionStyle() { return { 'transform': 'translateX' + '(' + this.currentOffset + 'px' + ')' }; }
   get atEndOfList() {
-    return this.currentOffset <= (this.paginationFactor * -1) * (this.list.length - this.carouselSize);
+    /** removed watchList.length */
+    return this.currentOffset <= (this.paginationFactor * -1) * (this.watchList.length - this.carouselSize);
   }
   get atHeadOfList() {
     return this.currentOffset === 0;

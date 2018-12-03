@@ -30,6 +30,8 @@ import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component'
 import {HomeComponent} from './pages/home/home.component';
 import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
 import {HeroComponent} from './components/hero/hero.component';
+import { CollectionsComponent } from './pages/collections/collections.component';
+import { FilterPipe } from './Filters/gender.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {HeroComponent} from './components/hero/hero.component';
     BreadcrumbComponent,
     HomeComponent,
     FooterHeroComponent,
-    HeroComponent
+    HeroComponent,
+    CollectionsComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

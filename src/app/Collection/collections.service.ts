@@ -43,7 +43,7 @@ export class CollectionsService
 
   readCollectionById(id: String): Observable<ResponseData>
   {
-    return this.http.get<ResponseData>(this.collectionsUrl + ':/' + id, httpOptions)
+    return this.http.get<ResponseData>(this.collectionsUrl + '/' + id, httpOptions)
       .pipe(map(data =>
       {
         return data;

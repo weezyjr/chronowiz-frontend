@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Watch } from 'src/app/Watch/watch';
 
 @Component({
   selector: 'app-item-card',
@@ -9,11 +10,7 @@ export class ItemCardComponent implements OnInit {
 
   constructor() { }
 
-  @Input() watch: any = {
-    imgSrc : 'http://placehold.it/500',
-    name: '<name>',
-    desc: '<descrption>'
-  };
+  @Input() watch: Watch = new Watch(true);
 
   ngOnInit() {
   }

@@ -5,7 +5,7 @@
       <div class="card-carousel">
         <div class="card-carousel--overflow-container">
           <div class="card-carousel-cards row flex-nowrap" [ngStyle]="transitionStyle">
-            <div class="col-md-3 col-sm-4 col-6 card-carousel--card" *ngFor="let watch of list">
+            <div class="col-md-3 col-sm-4 col-6 card-carousel--card" *ngFor="let watch of watchList | gender: gender">
               <app-item-card [watch]="watch"></app-item-card>
             </div>
           </div>

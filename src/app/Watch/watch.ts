@@ -1,13 +1,10 @@
-import {ItemValue} from '../item-value';
-import {Brand} from '../Brand/brand';
-import {Collection} from '../Collection/collection';
+import { ItemValue } from '../item-value';
 
-export class Watch
-{
+export class Watch {
   public _id?: string;
 
-  public brandObject: Brand;
-  public collectionObject?: Collection;
+  public brandObject: String;
+  public collectionObject?: String;
   public model?: string;
   public referenceNumber: string;
   public gender?: string;
@@ -93,25 +90,27 @@ export class Watch
   public section5PhotoUrls?: ItemValue[];
   public section5PhotoFiles?: ItemValue[];
 
-  constructor(private isTest?: boolean)
-  {
-    if (!isTest)
-    {
-      this.movementAdditionalFeatures = [{value: ''}];
-      this.functions = [{value: ''}];
-      this.caseAdditionalFeatures = [{value: ''}];
-      this.dialAdditionalFeatures = [{value: ''}];
-      this.bandAdditionalFeatures = [{value: ''}];
-      this.section5PhotoFiles = [{value: ''}];
+  constructor(private isTest?: boolean, private isFemale?: boolean) {
+    if (!isTest) {
+      this.movementAdditionalFeatures = [{ value: '' }];
+      this.functions = [{ value: '' }];
+      this.caseAdditionalFeatures = [{ value: '' }];
+      this.dialAdditionalFeatures = [{ value: '' }];
+      this.bandAdditionalFeatures = [{ value: '' }];
+      this.section5PhotoFiles = [{ value: '' }];
     }
-    else if (isTest)
-    {
+    else if (isTest) {
       this._id = 'SomeId';
-      this.brandObject = new Brand(isTest);
-      this.collectionObject = new Collection(isTest);
+      this.brandObject = '5bf1b61d90039c2e2a89ffbf';
+      this.collectionObject = '777';
       this.model = 'Lange 1 Daymatic';
       this.referenceNumber = '320.032';
-      this.gender = 'Men';
+      if (isFemale) {
+        this.gender = 'Women';
+      }
+      else {
+        this.gender = 'Men';
+      }
       this.productionYear = '1900';
       this.limited = '1989';
       this.awards = 'Geneva Seal';
@@ -130,9 +129,9 @@ export class Watch
       this.movementSpring = 'movementSpring';
       this.movementTourbillon = 'One Minute Tourbillon';
       this.movementRotor = 'movementRotor';
-      this.movementAdditionalFeatures = [{value: 'hand-engraved balance cock'}, {value: '7 screw-mounted gold chatons'}, {value: 'central rotor with platinum weight'}];
+      this.movementAdditionalFeatures = [{ value: 'hand-engraved balance cock' }, { value: '7 screw-mounted gold chatons' }, { value: 'central rotor with platinum weight' }];
 
-      this.functions = [{value: 'hours'}, {value: 'minutes'}, {value: 'subsidiary seconds'}, {value: 'large date'}, {value: 'weekday (retrograde)'}];
+      this.functions = [{ value: 'hours' }, { value: 'minutes' }, { value: 'subsidiary seconds' }, { value: 'large date' }, { value: 'weekday (retrograde)' }];
 
       this.caseMaterial = 'Pink Gold';
       this.caseDiameter = '39.5';
@@ -142,20 +141,20 @@ export class Watch
       this.caseBezelMaterial = 'Bezel Material';
       this.waterResistance = '3';
       this.caseCrown = 'Screw-in Crown';
-      this.caseAdditionalFeatures = [{value: ''}];
+      this.caseAdditionalFeatures = [{ value: '' }];
 
       this.dialColour = 'White';
       this.dialIndex = 'Roman Numeral';
       this.dialFinish = 'dialFinish';
       this.dialHands = 'DAUPHINE HANDS';
-      this.dialAdditionalFeatures = [{value: ''}];
+      this.dialAdditionalFeatures = [{ value: '' }];
 
       this.band = 'Leather';
       this.bandMaterial = 'Reptile Skin';
       this.bandClasp = 'Buckle';
       this.bandColour = 'Brown';
       this.bandClaspMaterial = 'Pink Gold';
-      this.bandAdditionalFeatures = [{value: ''}];
+      this.bandAdditionalFeatures = [{ value: '' }];
 
       this.price = 43200;
       this.priceCurrency = 'USD';
@@ -194,9 +193,9 @@ export class Watch
       this.section5Title = 'MONDAY, LUNDI';
       this.section5Paragraph = 'Initially presented in 1956, the Day-Date was a world first. The first watch to indicate the day of the week' +
         'spelt out in full. Worn by many world leaders, the Day-Date is available with a bespoke day display in a wide choice of languages.';
-      this.section5PhotoFiles = [{value: ''}];
-      this.section5PhotoUrls = [{value: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/section5photo1.png'},
-        {value: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/section5photo2.png'}];
+      this.section5PhotoFiles = [{ value: '' }];
+      this.section5PhotoUrls = [{ value: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/section5photo1.png' },
+      { value: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/watches/referenceNumber/section5photo2.png' }];
     }
   }
 }

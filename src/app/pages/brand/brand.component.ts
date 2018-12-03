@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseData } from 'src/app/API/response-data';
+import { ResponseObject } from 'src/app/API/responseObject';
+import { NotificationsService } from 'angular2-notifications';
+import { Collection } from 'src/app/Collection/collection';
+import { BrandsService } from 'src/app/Brand/brands.service';
+import { Brand } from 'src/app/Brand/brand';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-brand',
@@ -7,104 +14,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandComponent implements OnInit {
 
-  /** Dummy Data **/
-  public brandWatchsList: Array<Object> = [
-    {
-      name: 'The Day-date ', list: [
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' }
-      ]
-    },
-    {
-      name: 'The Day-date ', list: [
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' }
-      ]
-    },
-    {
-      name: 'The Day-date ', list: [
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' }
-      ]
-    },
-    {
-      name: 'The Day-date ', list: [
-        { name: ' DAY-DATE 42 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' }
-      ]
-    },
-    {
-      name: 'The Day-date ', list: [
-        { name: ' DAY-DATE 42 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' },
-        { name: ' DAY-DATE 40 ', desc: 'Oyster, 40 mm, yellow gold.', imgSrc: '../../../assets/brand/watch1.png', gender: 'men' }
-      ]
-    }
-  ];
-  /** Dummy Data **/
-
+  responseData: ResponseData;
+  response: ResponseObject;
+  collectionLimit = 4;
+  currentGender = 'All';
+  genders = ['All', 'Men', 'Women'];
   // brand object
   public brand: any;
-  // to store the rest of the list
-  public showMoreList = [];
+  public brandObject: Brand;
+  public collections: Collection[];
+  public collectionTest: Collection[] = [new Collection(true), new Collection(true), new Collection(true), new Collection(true), new Collection(true), new Collection(true)];
 
   // breadcrumps links
   public breads = [{
-    name: 'Home', url: '#',
+    name: 'Home', url: '/app-home-page',
   }, {
-    name: 'Brand', url: '#'
-  }, {
-    name: 'Rolex', url: '#'
+    name: 'Brand', url: '/app-home-page'
   }];
 
-  constructor() {
-
-    // replace this object with the one from the server
-    this.brand = {
-      name: 'Rolex',
-      list: this.brandWatchsList,
-      coverSrc: '../../../assets/brand/rolex.png',
-      desc: 'PERFORMANCE AND PRESTIGE'
-    };
-
-    /*
-    split the list of watchs to 2 arrays [0->2] elements to be rendered
-    [2->end] to be hidden in showMore Array
-    */
-    if (this.brand.list.length >= 3) {
-      this.showMoreList = this.brand.list.splice(3);
-    }
+  constructor(private activeRoute: ActivatedRoute, private brandsService: BrandsService, private _notificationsService: NotificationsService) {
   }
 
+  filterGender(gender) {
+    this.currentGender = gender;
+  }
 
   // render the show more list
   showMore() {
-    for (const list of this.showMoreList) {
-      this.brand.list.push(list);
-    }
-    this.showMoreList = [];
+    this.collectionLimit = Infinity;
   }
 
   // check if the show more list is empty
   get isShowMoreEmpty() {
-    return this.showMoreList.length === 0;
+    return this.collectionLimit === Infinity;
   }
 
   ngOnInit() {
-  }
+    const brandId = this.activeRoute.snapshot.params.id;
+    this.brandsService.readBrandById(brandId)
+      .subscribe(data => {
+        console.log(data);
 
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+        } else {
+          this.brandObject = <Brand>this.response.payload;
+          this.collections = this.brandObject['collectionObjects'];
+          this.breads.push({ name: this.brandObject.name, url: '#' });
+        }
+      });
+  }
 }
