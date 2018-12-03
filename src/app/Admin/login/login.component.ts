@@ -6,7 +6,7 @@ import {ResponseData} from '../../API/response-data';
 import {AuthenticationService} from '../../Auth/authentication.service';
 import {ResponseObject} from '../../API/responseObject';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({templateUrl: 'login.component.html', styleUrls: ['./login.component.sass']})
 export class LoginComponent implements OnInit
 {
   loginForm: FormGroup;

@@ -30,7 +30,7 @@
              ../../assets/images/search_paperbag@3x.png 3x"
          class="watchdetails_paperbag">
 
-  <div class="watchdetails_Home">Home > Brands > {{watch.brandObject?.name}} > {{watch.collectionObject?.name}} > {{watch.referenceNumber}}</div>
+  <div class="watchdetails_Home">Home > Brands > </div>
 
   <div class="watchdetails_Model">{{watch.model}}</div>
 
@@ -39,13 +39,13 @@
              ../../../assets/images/allmodelsicon@3x.png 3x"
        class="watchdetails_allmodelsicon">
 
-  <div class="watchdetails_allcollectionmodels">VIEW ALL {{watch.collectionObject?.name}} MODELS</div>
+  <div class="watchdetails_allcollectionmodels">VIEW ALL MODELS</div>
 
   <img src="{{watch.mainPhotoUrl}}"
        class="watchdetails_mainphoto"
        [hidden]="!watch.mainPhotoUrl">
 
-  <div class="watchdetails_shortinfo">{{watch.model}}, {{watch.caseDiameter}} mm, {{watch.caseMaterial}}, {{watch.perpetual}}</div>
+  <div class="watchdetails_shortinfo">{{watch?.model}}, {{watch?.caseDiameter}} mm, {{watch?.caseMaterial}}, {{watch?.perpetual}}</div>
 
   <button type="button" class="watchdetails_Rectangle">
     <img src="../../../assets/images/watchdetails_paper-bag.png"
@@ -56,10 +56,11 @@
   </button>
 
   <button (click)="scrollTo('watchdetails_band_title')" class="watchdetails_plusTechnicalDetails"> + Technical detail</button>
-
+<!--
   <img src="{{watch.brandObject?.banner1PhotoUrl}}"
        class="watchdetails_banner1"
        [hidden]="!watch.brandObject?.banner1PhotoUrl">
+-->
 
   <!--<img src="{{watch.section1PhotoUrl}}"-->
   <!--class="watchdetails_section1_image"-->
@@ -271,9 +272,10 @@
 
   <div class="watchdetails_details_line"></div>
 
+    <!--
   <img src="{{watch.brandObject?.banner2PhotoUrl}}"
        class="watchdetails_banner2"
-       [hidden]="!watch.brandObject?.banner2PhotoUrl">
+       [hidden]="!watch.brandObject?.banner2PhotoUrl">-->
 
   <!--<div class="watchdetails_Social-media">SOCIAL MEDIA</div>-->
 

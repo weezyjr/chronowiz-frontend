@@ -31,7 +31,7 @@ export class ConfigService
 @Component({
   selector: 'app-add-collection-form',
   templateUrl: './add-collection-form.component.html',
-  styleUrls: ['./add-collection-form.component.css']
+  styleUrls: ['./add-collection-form.component.sass']
 })
 export class AddCollectionFormComponent implements OnInit
 {

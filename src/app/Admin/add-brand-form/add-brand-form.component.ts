@@ -28,7 +28,7 @@ export class ConfigService
 @Component({
   selector: 'app-add-brand-form',
   templateUrl: './add-brand-form.component.html',
-  styleUrls: ['./add-brand-form.component.css']
+  styleUrls: ['./add-brand-form.component.sass']
 })
 export class AddBrandFormComponent implements OnInit
 {

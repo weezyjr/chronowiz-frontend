@@ -31,7 +31,7 @@ export class ConfigService
 @Component({
   selector: 'app-add-watch-form',
   templateUrl: './add-watch-form.component.html',
-  styleUrls: ['./add-watch-form.component.css']
+  styleUrls: ['./add-watch-form.component.sass']
 })
 export class AddWatchFormComponent implements OnInit
 {
