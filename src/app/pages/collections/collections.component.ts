@@ -15,7 +15,8 @@ export class CollectionsComponent implements OnInit {
 
   responseData: ResponseData;
   response: ResponseObject;
-  collcetion: Collection;
+  collcetion: Collection = new Collection(true);
+  watchsLimit = 12;
 
   breads = [{
     name: 'Home', url: '/app-home-page',
@@ -37,6 +38,17 @@ export class CollectionsComponent implements OnInit {
   ];
 
   constructor(private activeRoute: ActivatedRoute, private collectionsService: CollectionsService, private _notificationsService: NotificationsService) { }
+
+    // render the show more list
+    showMore() {
+      this.watchsLimit = Infinity;
+    }
+
+    // check if the show more list is empty
+    get isShowMoreEmpty() {
+      return this.watchsLimit === Infinity;
+    }
+
 
   ngOnInit() {
     const collectionID = this.activeRoute.snapshot.params.id;

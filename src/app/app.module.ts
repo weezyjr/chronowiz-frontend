@@ -31,7 +31,8 @@ import {HomeComponent} from './pages/home/home.component';
 import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
 import {HeroComponent} from './components/hero/hero.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
-import { FilterPipe } from './Filters/gender.pipe';
+import { GenderPipe } from './Filters/gender.pipe';
+import { CollectionPipe } from './Filters/collection.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { FilterPipe } from './Filters/gender.pipe';
     FooterHeroComponent,
     HeroComponent,
     CollectionsComponent,
-    FilterPipe
+    GenderPipe,
+    CollectionPipe
   ],
   imports: [
     BrowserModule,

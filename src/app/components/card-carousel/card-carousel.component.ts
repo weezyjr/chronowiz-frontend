@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Watch } from 'src/app/Watch/watch';
+import { Collection } from 'src/app/Collection/collection';
 
 @Component({
   selector: 'app-card-carousel',
@@ -9,10 +10,7 @@ import { Watch } from 'src/app/Watch/watch';
 export class CardCarouselComponent implements OnInit {
 
   @Input()
-  public watchList: Watch[] = [];
-
-  @Input()
-  public name: String;
+  public collection: Collection = new Collection(true);
 
   @Input()
   public gender: String;
@@ -34,7 +32,7 @@ export class CardCarouselComponent implements OnInit {
   get transitionStyle() { return { 'transform': 'translateX' + '(' + this.currentOffset + 'px' + ')' }; }
   get atEndOfList() {
     /** removed watchList.length */
-    return this.currentOffset <= (this.paginationFactor * -1) * (this.watchList.length - this.carouselSize);
+    return this.currentOffset <= (this.paginationFactor * -1) * (this.collection.watchObjects.length - this.carouselSize);
   }
   get atHeadOfList() {
     return this.currentOffset === 0;
