@@ -1,7 +1,7 @@
 <div class="breads">
     <ul class="list-inline w-100 px-2">
       <div class="container">
-        <li class="list-inline-item" *ngFor="let bread of breads"><a [routerLink]="[bread?.url]"> {{bread.name}} </a></li>
+        <li class="list-inline-item" *ngFor="let bread of breads; let last = last"><a [class.disable]="last" [routerLink]="[bread?.url]"> {{bread.name}} </a></li>
       </div>
     </ul>
 </div>

@@ -18,9 +18,9 @@ export class CollapsibleComponent implements OnInit {
 
   toggleContent() {
     this.active = !this.active;
-}
+  }
 
-ngOnInit() {
-}
+  ngOnInit() {
+  }
 
 }

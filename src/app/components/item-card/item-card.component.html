@@ -1,5 +1,9 @@
 <div class="card">
-  <img *ngIf="watch" [src]="watch?.mainPhotoUrl" alt="">
+  <img [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/600x900'" [alt]="watch?.model">
   <h3>{{watch?.model}}</h3>
-  <p>{{watch?.model}}, {{watch?.caseDiameter}} mm, {{watch?.caseMaterial}}, {{watch?.perpetual}}</p>
+  <p><span *ngIf="watch?.model">{{watch?.model}},</span>
+    <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
+    <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
+    <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+  </p>
 </div>

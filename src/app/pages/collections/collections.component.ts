@@ -22,10 +22,6 @@ export class CollectionsComponent implements OnInit {
     name: 'Home', url: '/app-home-page',
   }, {
     name: 'Brand', url: '/app-home-page'
-  }, {
-    name: 'Rolex', url: '#'
-  }, {
-    name: 'Rolex', url: '#'
   }];
 
   currentFilters = {
@@ -47,7 +43,7 @@ export class CollectionsComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, private collectionsService: CollectionsService, private _notificationsService: NotificationsService) { }
 
-  filterWatchs(){
+  filterWatchs() {
     console.log(this.currentFilters);
   }
 
@@ -76,6 +72,12 @@ export class CollectionsComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         } else {
           this.collcetion = <Collection>this.response.payload;
+          this.breads.push({ name: this.collcetion.brandObject.name, url: `/app-brand-page/${this.collcetion.brandObject._id}` });
+          this.breads.push({
+            name:
+              (this.collcetion.name !== 'UNDEFINED') &&
+                (this.collcetion.name) ? this.collcetion.name : 'Collection', url: ''
+          });
         }
       });
   }

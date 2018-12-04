@@ -1,0 +1,5 @@
+<button *ngIf="!active" class="collapsible" (click)="toggleContent()">{{text}}</button>
+<div class="content" [ngClass]="{'show': active}">
+  <ng-content></ng-content>
+  <button *ngIf="active" class="collapsible active" (click)="toggleContent()">{{text}}</button>
+</div>

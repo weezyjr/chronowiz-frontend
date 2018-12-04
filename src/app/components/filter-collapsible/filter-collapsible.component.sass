@@ -1,0 +1,52 @@
+.collapsible
+  background-color: #fff
+  color: #212121
+  cursor: pointer
+  padding: 13px 40px
+  width: 100%
+  border: none
+  text-align: center
+  outline: none
+  font-family: Roboto
+  font-style: normal
+  font-weight: normal
+  line-height: normal
+  font-size: 12px
+  text-transform: uppercase
+  position: relative
+  margin: 7px auto;
+
+.content
+  margin: auto
+  overflow: hidden
+  max-height: 0
+  transition: max-height 0.2s ease-out
+
+.collapsible:not(.active):after
+  content: ''
+  color: black
+  float: right
+  width: 0
+  height: 0
+  border-left: 4px solid transparent
+  border-right: 4px solid transparent
+  border-top: 7px solid black
+  margin: 4px
+  position: absolute
+  top: 12px
+
+.active:after
+  content: ''
+  color: black
+  float: right
+  width: 0
+  height: 0
+  border-left: 4px solid transparent
+  border-right: 4px solid transparent
+  border-bottom: 7px solid black
+  margin: 4px
+  position: absolute
+  bottom: 14px
+
+.show
+  max-height: initial !important;

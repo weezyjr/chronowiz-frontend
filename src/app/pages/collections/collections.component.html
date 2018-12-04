@@ -2,7 +2,8 @@
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <div class="container collections">
   <div class="collections-title text-center">
-    <h1> {{collcetion?.name}} </h1>
+    <h1 *ngIf="collcetion?.name === 'UNDEFINED'"> Collection </h1>
+    <h1 *ngIf="collcetion?.name !== 'UNDEFINED'"> {{collcetion?.name}} </h1>
     <h2> Rolex </h2>
   </div>
   <div class="collection-desc">
@@ -20,26 +21,30 @@
       <div class="p-5">
         <label class="radio" *ngFor="let option of filter?.options; let i = index">
           {{option}}
-          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()" [(ngModel)]="currentFilters[filter?.name]">
+          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()"
+            [(ngModel)]="currentFilters[filter?.name]">
           <span class="checkmark"></span>
         </label>
       </div>
     </app-collapsible>
   </section>
 
-  <section *ngIf="!isMobile">
-    <div class="row filter">
-      <div class="col-md-1"></div>
-      <div class="col-md-2 col-sm-4 col-6 filter-row" *ngFor="let filter of filters">
-        <h6>{{ filter.title }}</h6>
-        <label class="radio" *ngFor="let option of filter?.options; let i = index">
-          {{option}}
-          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()" [(ngModel)]="currentFilters[filter?.name]">
-          <span class="checkmark"></span>
-        </label>
+  <section class="p-0">
+    <app-filter-collapsible *ngIf="!isMobile">
+      <div class="row filter pt-4">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 col-sm-4 col-6 filter-row" *ngFor="let filter of filters">
+          <h6>{{ filter.title }}</h6>
+          <label class="radio" *ngFor="let option of filter?.options; let i = index">
+            {{option}}
+            <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()"
+              [(ngModel)]="currentFilters[filter?.name]">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="col-md-1"></div>
       </div>
-      <div class="col-md-1"></div>
-    </div>
+    </app-filter-collapsible>
   </section>
 
   <div class="watchs">
