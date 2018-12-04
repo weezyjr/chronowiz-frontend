@@ -23,7 +23,6 @@ export class BrandComponent implements OnInit {
   public brand: any;
   public brandObject: Brand;
   public collections: Collection[];
-  public collectionTest: Collection[] = [new Collection(true), new Collection(true), new Collection(true), new Collection(true), new Collection(true), new Collection(true)];
 
   // breadcrumps links
   public breads = [{

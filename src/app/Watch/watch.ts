@@ -149,7 +149,7 @@ export class Watch {
       this.dialHands = 'DAUPHINE HANDS';
       this.dialAdditionalFeatures = [{ value: '' }];
 
-      this.band = 'Leather';
+      this.band = 'Leather Strap';
       this.bandMaterial = 'Reptile Skin';
       this.bandClasp = 'Buckle';
       this.bandColour = 'Brown';

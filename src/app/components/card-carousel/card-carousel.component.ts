@@ -18,7 +18,7 @@ export class CardCarouselComponent implements OnInit {
   public currentOffset = 0;
   public paginationFactor = 300;
 
-  get currentWindowsWidth() { return window.innerWidth; }
+  get currentWindowsWidth() { return document.documentElement.clientWidth; }
   get carouselSize() {
     if (this.currentWindowsWidth < 576) {
       return 2;

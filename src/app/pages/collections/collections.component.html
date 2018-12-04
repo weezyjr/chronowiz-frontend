@@ -15,35 +15,43 @@
     </p>
   </div>
 
-  <app-collapsible text="Size">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ex ipsa fuga deleniti quasi quae error magni hic
-      non sit, inventore nobis excepturi vel accusamus blanditiis voluptatem assumenda, eaque pariatur!</p>
-  </app-collapsible>
+  <section class="filter" *ngIf="isMobile">
+    <app-collapsible [text]="filter?.title" *ngFor="let filter of filters">
+      <div class="p-5">
+        <label class="radio" *ngFor="let option of filter?.options; let i = index">
+          {{option}}
+          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()" [(ngModel)]="currentFilters[filter?.name]">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </app-collapsible>
+  </section>
 
-  <div class="filter">
-    <div class="row">
+  <section *ngIf="!isMobile">
+    <div class="row filter">
       <div class="col-md-1"></div>
-      <div class="col-md-2 filter-row" *ngFor="let filter of filters">
+      <div class="col-md-2 col-sm-4 col-6 filter-row" *ngFor="let filter of filters">
         <h6>{{ filter.title }}</h6>
         <label class="radio" *ngFor="let option of filter?.options; let i = index">
           {{option}}
-          <input type="radio" [checked]="i === 0" [name]="filter?.name">
+          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" (change)="filterWatchs()" [(ngModel)]="currentFilters[filter?.name]">
           <span class="checkmark"></span>
         </label>
       </div>
       <div class="col-md-1"></div>
     </div>
-  </div>
-  <section>
+  </section>
+
+  <div class="watchs">
     <div class="row">
-      <div class="col-md-3" *ngFor="let watch of collcetion?.watchObjects| slice: 0:watchsLimit">
+      <div class="col-md-3" *ngFor="let watch of collcetion?.watchObjects| slice: 0:watchsLimit | collection: currentFilters">
         <app-item-card [watch]="watch"></app-item-card>
       </div>
     </div>
     <div class="text-center mx-auto show-more">
       <button class="btn primary-btn" (click)="showMore()" [disabled]="isShowMoreEmpty">Show More</button>
     </div>
-  </section>
+  </div>
   <app-footer-hero></app-footer-hero>
 </div>
 <app-footer></app-footer>

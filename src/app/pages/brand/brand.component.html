@@ -15,7 +15,7 @@
     </ul>
   </div>
 
-  <app-card-carousel *ngFor="let collection of collectionTest | slice: 0:collectionLimit" [collection]="collection" [gender]="currentGender"></app-card-carousel>
+  <app-card-carousel *ngFor="let collection of collections | slice: 0:collectionLimit" [collection]="collection" [gender]="currentGender"></app-card-carousel>
 
   <div class="text-center mx-auto show-more">
     <button class="btn primary-btn" (click)="showMore()" [disabled]="isShowMoreEmpty">Show More</button>

@@ -15,7 +15,7 @@ export class CollectionsComponent implements OnInit {
 
   responseData: ResponseData;
   response: ResponseObject;
-  collcetion: Collection = new Collection(true);
+  collcetion: Collection;
   watchsLimit = 12;
 
   breads = [{
@@ -28,10 +28,18 @@ export class CollectionsComponent implements OnInit {
     name: 'Rolex', url: '#'
   }];
 
+  currentFilters = {
+    size: 'Any size',
+    material: 'Any material',
+    bezel: 'Any bezel',
+    braclet: 'Any braclet',
+    marker: 'Any hour markers'
+  };
+
   /*filters*/
   filters = [
     { name: 'size', title: 'Choose a size', options: ['Any size', 'Mid-size', 'Large size'] },
-    { name: 'material', title: 'Choose A material', options: ['Any Material', 'Yello Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
+    { name: 'material', title: 'Choose A material', options: ['Any material', 'Yello Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
     { name: 'bezel', title: 'Choose a bezel', options: ['Any bezel', 'Smooth bezel', 'Fluted bezel', 'Gem-set bezel'] },
     { name: 'braclet', title: 'Choose a braclet', options: ['Any braclet', 'Leather Strap', 'Oyster', 'President', 'Gem-Set Braslet'] },
     { name: 'marker', title: 'Choose an hour marker style', options: ['Any hour markers', 'Arabic Numerals', 'Roman Numerals', 'Classic Hour Markers', 'Gem-Set Hour Markers'] }
@@ -39,16 +47,21 @@ export class CollectionsComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, private collectionsService: CollectionsService, private _notificationsService: NotificationsService) { }
 
-    // render the show more list
-    showMore() {
-      this.watchsLimit = Infinity;
-    }
+  filterWatchs(){
+    console.log(this.currentFilters);
+  }
 
-    // check if the show more list is empty
-    get isShowMoreEmpty() {
-      return this.watchsLimit === Infinity;
-    }
+  // render the show more list
+  showMore() {
+    this.watchsLimit = Infinity;
+  }
 
+  // check if the show more list is empty
+  get isShowMoreEmpty() {
+    return this.watchsLimit === Infinity;
+  }
+
+  get isMobile() { return document.documentElement.clientWidth < 720; }
 
   ngOnInit() {
     const collectionID = this.activeRoute.snapshot.params.id;
