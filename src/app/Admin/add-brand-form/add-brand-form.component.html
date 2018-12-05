@@ -26,7 +26,8 @@
 
       <div class="form-group">
         <label for="name">Brand name</label>
-        <select type="text" class="form-control" id="name" required [(ngModel)]="brand.name" name="name" #name="ngModel">
+        <select type="text" class="form-control" id="name" (change)="getBrandData()" required [(ngModel)]="brand.name"
+          name="name" #name="ngModel">
           <option value=""></option>
           <option value="A.Lange & Sohne">A.Lange & Sohne</option>
           <option value="Alexander Shorokhoff">Alexander Shorokhoff</option>
@@ -199,13 +200,13 @@
       <div>
         <label for="logoPhotoFileInput">Brand Logo</label>
         <div class="row">
-          <div class="col-10">
+          <div class="col-sm-10 col-8">
             <div class="form-group">
               <input type="file" class="form-control" (change)="onLogoPhotoChanged($event)" #logoPhotoElementRef id="logoPhotoFileInput"
                 required [(ngModel)]="brand.logoPhotoFile" name="logoPhotoFile" #logoPhotoFile="ngModel">
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-sm-2 col-4">
             <button class="btn btn-danger" (click)="clearLogoPhoto()">Clear</button>
           </div>
           <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -216,13 +217,13 @@
       <div>
         <label for="headerPhotoFileInput">Header photo</label>
         <div class="row">
-          <div class="col-10">
+          <div class="col-sm-10 col-8">
             <div class="form-group">
               <input type="file" class="form-control" (change)="onHeaderPhotoChanged($event)" #headerPhotoElementRef id="headerPhotoFileInput"
                 [(ngModel)]="brand.headerPhotoFile" name="headerPhotoFile" #headerPhotoFile="ngModel">
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-sm-2 col-4">
             <button class="btn btn-danger" (click)="clearHeaderPhoto()">Clear</button>
           </div>
         </div>
@@ -233,14 +234,14 @@
       <div>
         <label for="banner1PhotoFileInput">Banner 1 Photo</label>
         <div class="row">
-          <div class="col-10">
+          <div class="col-sm-10 col-8">
             <div class="form-group">
               <input type="file" class="form-control" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef
                 id="banner1PhotoFileInput" required [(ngModel)]="brand.banner1PhotoFile" name="banner1PhotoFile"
                 #banner1PhotoFile="ngModel">
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-sm-2 col-4">
             <button class="btn btn-danger" (click)="clearBanner1Photo()">Clear</button>
           </div>
         </div>
@@ -251,14 +252,14 @@
       <div>
         <label for="banner2PhotoFile">Banner 2 Photo</label>
         <div class="row">
-          <div class="col-10">
+          <div class="col-sm-10 col-8">
             <div class="form-group">
               <input type="file" class="form-control" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef
                 id="banner2PhotoFile" required [(ngModel)]="brand.banner2PhotoFile" name="banner2PhotoFile"
                 #banner2PhotoFile="ngModel">
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-sm-2 col-4">
             <button class="btn btn-danger" (click)="clearBanner2Photo()">Clear</button>
           </div>
           <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -268,18 +269,29 @@
 
       <br />
       <div style="text-align: center">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!brandForm.form.valid">Submit</button>
+        <div class="row m-1">
+          <div class="col-6">
+            <button type="submit" class="btn btn-lg btn-primary" (click)="onSubmit()" [disabled]="!brandForm.form.valid">Create
+              New</button>
           </div>
-          <div class="col">
-            <button type="button" class="btn btn-lg btn-danger" (click)="newBrand(); brandForm.reset()">Clear</button>
+          <div class="col-6">
+            <button class="btn btn-lg btn-success" (click)="onUpdate()">Update</button>
           </div>
         </div>
-        <br />
-        <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
+        <div class="row m-1">
+          <div class="col-6">
+            <button class="btn btn-lg btn-danger">Delete</button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-lg btn-warning" (click)="newBrand(); brandForm.reset()">Clear</button>
+          </div>
+        </div>
+        <div class="row m-1">
+          <div class="col">
+            <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
+          </div>
+        </div>
       </div>
-
-    </form>
-  </div>
+  </form>
+</div>
 </div>
