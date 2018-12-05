@@ -49,8 +49,8 @@ export class BrandComponent implements OnInit {
   }
 
   ngOnInit() {
-    const brandId = this.activeRoute.snapshot.params.id;
-    this.brandsService.readBrandById(brandId)
+    const BrandName = this.activeRoute.snapshot.params.name;
+    this.brandsService.readBrandByName(BrandName)
       .subscribe(data => {
         console.log(data);
 

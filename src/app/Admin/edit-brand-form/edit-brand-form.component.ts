@@ -24,23 +24,23 @@ export class ConfigService {
 }
 
 @Component({
-  selector: 'app-add-brand-form',
-  templateUrl: './add-brand-form.component.html',
-  styleUrls: ['./add-brand-form.component.sass']
+  selector: 'app-edit-brand-form',
+  templateUrl: './edit-brand-form.component.html',
+  styleUrls: ['./edit-brand-form.component.sass']
 })
-export class AddBrandFormComponent implements OnInit {
+export class EditBrandFormComponent implements OnInit {
   env = environment;
-
-  isTestBrand = false;
 
   logoPhotoFile: File;
   headerPhotoFile: File;
   banner1PhotoFile: File;
   banner2PhotoFile: File;
 
+  brandObjects: Brand[];
+  currentBrand: Brand;
   loading: Boolean = false;
 
-  brand: Brand = new Brand(this.isTestBrand);
+  brand: Brand = new Brand();
   responseData: ResponseData;
   response: ResponseObject;
 
@@ -80,23 +80,85 @@ export class AddBrandFormComponent implements OnInit {
     this.router.navigate(['app-edit-brand-form']);
   }
 
-  ngOnInit() {
-    this.newBrand();
+  onSelectBrand(): void {
+    this.currentBrand = this.brandObjects.find(brand => this.brand.name === brand.name);
   }
 
-  async onSubmit() {
+  ngOnInit() {
+    this.brandsService.readAllBrands()
+      .subscribe(data => {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+        } else {
+          this.brandObjects = <Brand[]>this.response.payload;
+        }
+      });
+  }
+
+  async onUpdate() {
     try {
       this.loading = true;
-      await this.uploadLogoPhotoToS3();
-      await this.uploadHeaderPhotoToS3();
-      await this.uploadBanner1PhotoToS3();
-      await this.uploadBanner2PhotoToS3();
+      if (this.logoPhotoFile) {
+        await this.uploadLogoPhotoToS3();
+        console.log('logo uploaded');
+      }
+      if (this.headerPhotoFile) {
+        await this.uploadHeaderPhotoToS3();
+        console.log('header uploaded');
+      }
+      if (this.banner1PhotoFile) {
+        await this.uploadBanner1PhotoToS3();
+        console.log('banner 1 uploaded', this.brand.banner1PhotoUrl);
+      }
+      if (this.banner2PhotoFile) {
+        await this.uploadBanner2PhotoToS3();
+        console.log('banner 2 uploaded', this.brand.banner2PhotoUrl);
+      }
 
-      this.submitBrand();
+      await this.updateBrand();
     }
     catch (error) {
-      this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+      this._notificationsService.error('Error', 'Failed to Update');
     }
+  }
+
+  updateBrand() {
+    const newBrandObject: any = {};
+    if (this.brand.logoPhotoUrl) {
+      newBrandObject.logoPhotoUrl = this.brand.logoPhotoUrl;
+    }
+    if (this.brand.headerPhotoUrl) {
+      newBrandObject.headerPhotoUrl = this.brand.headerPhotoUrl;
+    }
+    if (this.brand.banner1PhotoUrl) {
+      newBrandObject.banner1PhotoUrl = this.brand.banner1PhotoUrl;
+    }
+    if (this.brand.banner2PhotoUrl) {
+      newBrandObject.banner2PhotoUrl = this.brand.banner2PhotoUrl;
+    }
+    console.log('New Brand Object', newBrandObject);
+    const brandId = this.currentBrand._id;
+
+    this.brandsService.updateBrand(newBrandObject, brandId).subscribe(data => {
+      console.log(data);
+
+      this.responseData = data;
+      this.response = this.responseData.response;
+
+      if (this.response.type.match('ERROR')) {
+        this._notificationsService.error('Error', this.response.message.en);
+        this.loading = false;
+      }
+      else {
+        this._notificationsService.success('Success', this.response.message.en);
+        this.loading = false;
+      }
+    });
   }
 
   onLogoPhotoChanged(event) {
@@ -154,102 +216,6 @@ export class AddBrandFormComponent implements OnInit {
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
-  }
-
-  getBrandData() {
-    const brandId = '5c06c6cbcbddba0011eeeb41';
-    this.brandsService.readBrandById(brandId)
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          const brandObject = <Brand>this.response.payload;
-        }
-      });
-  }
-
-  async onUpdate() {
-    try {
-      if (this.logoPhotoFile) {
-        await this.uploadLogoPhotoToS3();
-      }
-      if (this.headerPhotoFile) {
-        await this.uploadHeaderPhotoToS3();
-      }
-      if (this.banner1PhotoFile) {
-        await this.uploadBanner1PhotoToS3();
-      }
-      if (this.banner2PhotoFile) {
-        await this.uploadBanner2PhotoToS3();
-      }
-
-      this.updateBrand();
-    }
-    catch (error) {
-      this._notificationsService.error('Error', 'Failed to Update');
-    }
-  }
-
-  updateBrand() {
-    const brandObject: any = {};
-    if (this.brand.logoPhotoUrl) {
-      brandObject.logoPhotoUrl = this.brand.logoPhotoUrl;
-    }
-    if (this.brand.headerPhotoUrl) {
-      brandObject.headerPhotoUrl = this.brand.headerPhotoUrl;
-    }
-    if (this.brand.banner1PhotoUrl) {
-      brandObject.banner1PhotoUrl = this.brand.banner1PhotoUrl;
-    }
-    if (this.brand.banner2PhotoUrl) {
-      brandObject.banner2PhotoUrl = this.brand.banner2PhotoUrl;
-    }
-    console.log(brandObject);
-    const brandId = '5c06c6cbcbddba0011eeeb41';
-
-    this.brandsService.updateBrand(brandObject, brandId).subscribe(data => {
-      console.log(data);
-
-      this.responseData = data;
-      this.response = this.responseData.response;
-
-      if (this.response.type.match('ERROR')) {
-        this._notificationsService.error('Error', this.response.message.en);
-      }
-      else {
-        this._notificationsService.success('Success', this.response.message.en);
-      }
-    });
-  }
-
-  newBrand() {
-    this.brand = new Brand(this.isTestBrand);
-  }
-
-  submitBrand(): void {
-    console.log(this.brand);
-
-    this.brandsService.createBrand(this.brand)
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-          this.loading = false;
-        }
-        else {
-          this._notificationsService.success('Success', this.response.message.en);
-          this.loading = false;
-        }
-      });
   }
 
   uploadLogoPhotoToS3(): Promise<void> {
@@ -388,4 +354,5 @@ export class AddBrandFormComponent implements OnInit {
     }
     );
   }
+
 }

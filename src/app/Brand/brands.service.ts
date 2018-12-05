@@ -44,6 +44,13 @@ export class BrandsService {
       }));
   }
 
+  readBrandByName(name: String): Observable<ResponseData> {
+    return this.http.get<ResponseData>(this.brandsUrl + '/' + name, httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   readAllBrands(): Observable<ResponseData> {
     return this.http.get<ResponseData>(this.brandsUrl, httpOptions)
       .pipe(map(data => {
@@ -57,16 +64,4 @@ export class BrandsService {
         return data;
       }));
   }
-
-  /** PUT: update the brandObject on the server. Returns the updated brandObject upon success. */
-  // updateBrand(brandObject: Brand): Observable<ResponseData>
-  // {
-  //   httpOptions.headers =
-  //     httpOptions.headers.set('Authorization', 'my-new-auth-token');
-  //
-  //   return this.http.put<ResponseData>(this.brandsUrl, brandObject, httpOptions)
-  //     .pipe(
-  //       catchError(this.handleError('updateBrand', brandObject))
-  //     );
-  // }
 }

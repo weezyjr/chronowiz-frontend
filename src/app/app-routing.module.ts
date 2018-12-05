@@ -10,6 +10,7 @@ import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collec
 import {HomeComponent} from './pages/home/home.component';
 import {BrandComponent} from './pages/brand/brand.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
+import { EditBrandFormComponent } from './Admin/edit-brand-form/edit-brand-form.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'app-brand-page/:id',
+    path: 'app-brand-page/:name',
     component: BrandComponent
   },
   {
@@ -60,6 +61,11 @@ const routes: Routes = [
   {
     path: 'app-add-collection-form',
     component: AddCollectionFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'app-edit-brand-form',
+    component: EditBrandFormComponent,
     canActivate: [AuthGuard]
   },
   {

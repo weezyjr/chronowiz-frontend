@@ -1,20 +1,31 @@
 <simple-notifications></simple-notifications>
-<div class="container-fluid mx-auto login d-flex align-items-center">
-  <div class="add-brand container">
-    <h1>Add Brand</h1>
+<div class="container-fluid form-container mx-auto login d-flex align-items-center">
+  <div class="form-page container">
+    <br />
+    <h1>Brand</h1>
+    <br />
 
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openWatchForm()">Watch Form</button>
+        <button type="button" class="btn btn-lg btn btn-lg-primary" (click)="openWatchForm()">Watch Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openCollectionForm()">Collection Form</button>
+        <button type="button" class="btn btn-lg btn btn-lg-primary" (click)="openCollectionForm()">Collection Form</button>
       </div>
       <div class="col">
-        <button type="button" disabled class="btn btn-success" (click)="openBrandForm()">Brand Form</button>
+        <button type="button" disabled class="btn btn-lg btn btn-lg-success" (click)="openBrandForm()">Brand Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openHomePage()">Home</button>
+        <button type="button" class="btn btn-lg btn btn-lg-primary" (click)="openHomePage()">Home</button>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <button type="button" disabled class="btn btn-lg btn btn-lg-success" (click)="openAddBrandPage()">Add New Brand</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-lg btn btn-lg-primary" (click)="openEditBrandPage()">Edit Existing Brand</button>
       </div>
     </div>
 
@@ -26,8 +37,7 @@
 
       <div class="form-group">
         <label for="name">Brand name</label>
-        <select type="text" class="form-control" id="name" (change)="getBrandData()" required [(ngModel)]="brand.name"
-          name="name" #name="ngModel">
+        <select type="text" class="form-control" id="name" required [(ngModel)]="brand.name" name="name" #name="ngModel">
           <option value=""></option>
           <option value="A.Lange & Sohne">A.Lange & Sohne</option>
           <option value="Alexander Shorokhoff">Alexander Shorokhoff</option>
@@ -192,7 +202,6 @@
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Brand name is required</div>
       </div>
 
-
       <br />
       <h3>Brand Media Section</h3>
       <br />
@@ -207,7 +216,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-danger" (click)="clearLogoPhoto()">Clear</button>
+            <button class="btn btn-lg btn btn-lg-danger" (click)="clearLogoPhoto()">Clear</button>
           </div>
           <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
             required</div>
@@ -224,7 +233,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-danger" (click)="clearHeaderPhoto()">Clear</button>
+            <button class="btn btn-lg btn btn-lg-danger" (click)="clearHeaderPhoto()">Clear</button>
           </div>
         </div>
         <div [hidden]="headerPhotoFile.valid || headerPhotoFile.pristine" class="alert alert-danger">Header Photo is
@@ -242,7 +251,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-danger" (click)="clearBanner1Photo()">Clear</button>
+            <button class="btn btn-lg btn btn-lg-danger" (click)="clearBanner1Photo()">Clear</button>
           </div>
         </div>
         <div [hidden]="banner1PhotoFile.valid || banner1PhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -260,7 +269,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-danger" (click)="clearBanner2Photo()">Clear</button>
+            <button class="btn btn-lg btn btn-lg-danger" (click)="clearBanner2Photo()">Clear</button>
           </div>
           <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
             required</div>
@@ -271,27 +280,18 @@
       <div style="text-align: center">
         <div class="row m-1">
           <div class="col-6">
-            <button type="submit" class="btn btn-lg btn-primary" (click)="onSubmit()" [disabled]="!brandForm.form.valid">Create
-              New</button>
+            <button type="submit" class="btn btn-lg btn btn-lg-lg btn btn-lg-primary" (click)="onSubmit()" [disabled]="!brandForm.form.valid || loading">{{ loading? 'loading..' : 'Create New Brand' }}</button>
           </div>
           <div class="col-6">
-            <button class="btn btn-lg btn-success" (click)="onUpdate()">Update</button>
-          </div>
-        </div>
-        <div class="row m-1">
-          <div class="col-6">
-            <button class="btn btn-lg btn-danger">Delete</button>
-          </div>
-          <div class="col-6">
-            <button type="button" class="btn btn-lg btn-warning" (click)="newBrand(); brandForm.reset()">Clear</button>
+            <button type="button" class="btn btn-lg btn btn-lg-lg btn btn-lg-warning" (click)="newBrand(); brandForm.reset()">Clear</button>
           </div>
         </div>
         <div class="row m-1">
           <div class="col">
-            <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
+            <button type="button" class="btn btn-lg btn btn-lg-lg btn btn-lg-info" (click)="logout()">Logout</button>
           </div>
         </div>
       </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>
