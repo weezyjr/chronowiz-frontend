@@ -1,7 +1,7 @@
 <simple-notifications></simple-notifications>
 <div class="container-fluid form-container mx-auto login d-flex align-items-center">
   <div class="form-page container">
-    <header class="p-2">
+    <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
       <nav class="row">
         <div class="col text-center mx-auto">
           <a [routerLink]="['/app-home-page']">
@@ -11,7 +11,7 @@
           </a>
         </div>
       </nav>
-      <div style="cursor: pointer;" class="float-right" (click)="logout()">
+      <div style="position: absolute; cursor: pointer; top: 29px; right: 15px;" class="float-right" (click)="logout()">
         <img src="../../../assets/logout.svg" style="max-height: 32px;" class="img-responsive" alt="logout">
       </div>
     </header>
@@ -63,16 +63,17 @@
         <label for="name">Brand name</label>
         <select type="text" class="form-control" id="name" (change)="onSelectBrand()" required [(ngModel)]="brand.name"
           name="name" #name="ngModel">
+          <option value=""></option>
           <option [value]="brand.name" *ngFor="let brand of brandsList"> {{brand.name}} </option>
         </select>
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Brand name is required</div>
       </div>
 
       <br />
-      <h3>Brand Media Section</h3>
+      <h3  *ngIf="mode != 'delete'" >Brand Media Section</h3>
       <br />
 
-      <div class="form-field py-2">
+      <div class="form-field py-2" *ngIf="mode != 'delete'" >
         <label for="logoPhotoFileInput">Brand Logo</label>
         <div *ngIf="currentBrand?.logoPhotoUrl" class="preview">
           <h6> Current header Photo </h6>
@@ -93,7 +94,7 @@
           required</div>
       </div>
 
-      <div class="form-field py-2">
+      <div class="form-field py-2" *ngIf="mode != 'delete'" >
         <div *ngIf="currentBrand?.headerPhotoUrl" class="preview">
           <h6> Current header Photo </h6>
           <img [src]="currentBrand?.headerPhotoUrl" [alt]="currentBrand?.name + ' header'" class="img-responsive">
@@ -112,7 +113,7 @@
         </div>
       </div>
 
-      <div class="form-field py-2">
+      <div class="form-field py-2" *ngIf="mode != 'delete'" >
         <label for="banner1PhotoFileInput">Banner 1 Photo</label>
         <div *ngIf="currentBrand?.banner1PhotoUrl" class="preview">
           <h6> Current banner 1 Photo </h6>
@@ -134,7 +135,7 @@
           required</div>
       </div>
 
-      <div class="form-field py-2">
+      <div class="form-field py-2" *ngIf="mode != 'delete'" >
         <label for="banner2PhotoFile">Banner 2 Photo</label>
         <div *ngIf="currentBrand?.banner2PhotoUrl" class="preview">
           <h6> Current banner 2 Photo </h6>

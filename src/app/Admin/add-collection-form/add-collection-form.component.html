@@ -1,21 +1,56 @@
 <simple-notifications></simple-notifications>
-<div class="container-fluid mx-auto login d-flex align-items-center">
-  <div class="add-collection container">
-    <h1>Add Collection</h1>
+<div class="container-fluid form-container mx-auto login d-flex align-items-center">
+  <div class="form-page container">
+    <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
+      <nav class="row">
+        <div class="col text-center mx-auto">
+          <a [routerLink]="['/app-home-page']">
+            <picture>
+              <img src="../../../assets/logo.svg" style="max-height: 75px;" class="img-responsive" alt="chronowiz">
+            </picture>
+          </a>
+        </div>
+      </nav>
+      <div style="position: absolute; cursor: pointer; top: 29px; right: 15px;" class="float-right" (click)="logout()">
+        <img src="../../../assets/logout.svg" style="max-height: 32px;" class="img-responsive" alt="logout">
+      </div>
+    </header>
+
+    <div class="my-5">
+      <h1> Collections </h1>
+    </div>
 
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openWatchForm()">Watch Form</button>
+        <button type="button" class="btn btn-lg" (click)="openWatchForm()">Watch Form</button>
       </div>
       <div class="col">
-        <button type="button" disabled class="btn btn-success" (click)="openCollectionForm()">Collection Form</button>
+        <button type="button" disabled class="btn btn-lg btn-primary" (click)="openCollectionForm()">Collection Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openBrandForm()">Brand Form</button>
+        <button type="button" class="btn btn-lg" (click)="openBrandForm()">Brand Form</button>
       </div>
-      <div class="col">
-        <button type="button" class="btn btn-primary" (click)="openHomePage()">Home</button>
-      </div>
+    </div>
+
+    <div>
+      <br />
+      <h3>Mode</h3>
+      <br />
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset();" name="mode" value="create"
+          [(ngModel)]="mode">
+        Create
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); " name="mode" value="update"
+          [(ngModel)]="mode">
+        Update
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); " name="mode" value="delete"
+          [(ngModel)]="mode">
+        Delete
+      </label>
     </div>
 
     <form #collectionForm="ngForm">
@@ -26,14 +61,25 @@
 
       <div class="form-group">
         <label for="brandObject">Brand</label>
-        <select type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject" name="brandObject"
+        <select type="text" class="form-control" id="brandObject" (change)="getCollections()"  required [(ngModel)]="collection.brandObject" name="brandObject"
           #brandObject="ngModel">
+          <option value=""></option>
           <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
         </select>
         <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
       </div>
 
-      <div class="form-group">
+      <div *ngIf="mode != 'create'" class="form-group">
+        <label for="brandObject">Collection</label>
+        <select type="text" class="form-control" id="collectionObjects" required [(ngModel)]="currentCollectionId" name="collectionObjects"
+          #collectionObjects="ngModel">
+          <option value=""></option>
+          <option *ngFor="let collection of currentBrand?.collectionObjects" [value]="collection._id">{{collection.name}}</option>
+        </select>
+        <div [hidden]="collectionObjects.valid || collectionObjects.pristine" class="alert alert-danger">collection name is required</div>
+      </div>
+
+      <div *ngIf="mode != 'delete'" class="form-group">
         <label for="name">Collection Name</label>
         <input type="text" class="form-control" id="name" required [(ngModel)]="collection.name" name="name" #name="ngModel">
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
@@ -41,16 +87,15 @@
 
       <br />
       <div style="text-align: center">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn btn-lg btn-success" (click)="onSubmit()" [disabled]="!collectionForm.form.valid">Submit</button>
+        <div class="row m-1">
+          <div class="col-6">
+            <button type="submit" class="btn btn-lg btn-primary" (click)="onSubmit();" [disabled]="!collectionForm.form.valid || loading">
+              {{loading? 'loading..' : 'Submit' }}</button>
           </div>
-          <div class="col">
-            <button type="button" class="btn btn-lg btn-danger" (click)="newCollection(); collectionForm.reset()">Clear</button>
+          <div class="col-6">
+            <button type="button" class="btn btn-lg" (click)="newCollection(); collectionForm.reset(); ">Clear</button>
           </div>
         </div>
-        <br />
-        <button type="button" class="btn btn-lg btn-info" (click)="logout()">Logout</button>
       </div>
     </form>
   </div>

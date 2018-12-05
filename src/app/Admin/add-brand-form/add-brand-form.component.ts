@@ -44,7 +44,6 @@ export class AddBrandFormComponent implements OnInit {
   brandObjects: Brand[];
 
   staticBrandNames: Array<Object> = [
-    { name: '' },
     { name: 'A.Lange & Sohne' },
     { name: 'Alexander Shorokhoff' },
     { name: 'Alpina' },

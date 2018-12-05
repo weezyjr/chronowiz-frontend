@@ -50,6 +50,22 @@ export class CollectionsService
       }));
   }
 
+  deleteCollectionById(id: String): Observable<ResponseData>
+  {
+    return this.http.delete<ResponseData>(this.collectionsUrl + '/' + id, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+  updateCollectionById(collectionObject: any, id: String): Observable<ResponseData> {
+    return this.http.put<ResponseData>(this.collectionsUrl + '/' + id, { 'payload': collectionObject }, httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   readAllCollections(): Observable<ResponseData>
   {
     return this.http.get<ResponseData>(this.collectionsUrl, httpOptions)
