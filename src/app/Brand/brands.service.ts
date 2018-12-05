@@ -44,6 +44,13 @@ export class BrandsService {
       }));
   }
 
+  deleteBrandById(id: String): Observable<ResponseData> {
+    return this.http.delete<ResponseData>(this.brandsUrl + '/' + id, httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
   readBrandByName(name: String): Observable<ResponseData> {
     return this.http.get<ResponseData>(this.brandsUrl + '/' + name, httpOptions)
       .pipe(map(data => {

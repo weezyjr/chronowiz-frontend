@@ -35,7 +35,6 @@ import { GenderPipe } from './Filters/gender.pipe';
 import { CollectionPipe } from './Filters/collection.pipe';
 import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
-import { EditBrandFormComponent } from './Admin/edit-brand-form/edit-brand-form.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +59,7 @@ import { EditBrandFormComponent } from './Admin/edit-brand-form/edit-brand-form.
     GenderPipe,
     CollectionPipe,
     CollapsibleComponent,
-    FilterCollapsibleComponent,
-    EditBrandFormComponent
+    FilterCollapsibleComponent
   ],
   imports: [
     BrowserModule,

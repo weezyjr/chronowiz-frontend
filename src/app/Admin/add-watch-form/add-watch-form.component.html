@@ -19,6 +19,23 @@
     </div>
     <form #watchForm="ngForm">
 
+      <div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" name="submitType" value="create" checked [(ngModel)]="submitType" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline1">Create</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" name="submitType" value="edit" [(ngModel)]="submitType" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline1">Edit</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" name="submitType" class="custom-control-input">
+          <label class="custom-control-label" value="delete" [(ngModel)]="submitType" for="customRadioInline1">Delete</label>
+        </div>
+      </div>
+
       <br />
       <h3>Watch Details</h3>
       <br />

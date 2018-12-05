@@ -46,6 +46,7 @@ export class AddWatchFormComponent implements OnInit
   section3PhotoFile: File;
   section4PhotoFile: File;
   section5PhotoFiles: File;
+  submitType: String = 'create';
 
   watch: Watch = new Watch();
   responseData: ResponseData;

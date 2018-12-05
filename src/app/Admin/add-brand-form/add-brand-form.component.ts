@@ -39,6 +39,175 @@ export class AddBrandFormComponent implements OnInit {
   banner2PhotoFile: File;
 
   loading: Boolean = false;
+  mode: String = 'create';
+  currentBrand: Brand;
+  brandObjects: Brand[];
+
+  staticBrandNames: Array<Object> = [
+    { name: '' },
+    { name: 'A.Lange & Sohne' },
+    { name: 'Alexander Shorokhoff' },
+    { name: 'Alpina' },
+    { name: 'Antoine Martin' },
+    { name: 'Apple' },
+    { name: 'Aquadive' },
+    { name: 'Aristo' },
+    { name: 'Armand Nicolet' },
+    { name: 'Armin Strom' },
+    { name: 'Arnold & Son' },
+    { name: 'Artya' },
+    { name: 'Ateliers de Monaco' },
+    { name: 'Audemars Piguet ' },
+    { name: 'Azimuth' },
+    { name: 'Backes & Strauss' },
+    { name: 'Ball' },
+    { name: 'Balmain' },
+    { name: 'Barthelay' },
+    { name: 'Baume & Mercier' },
+    { name: 'Baume' },
+    { name: 'Bedat & Co' },
+    { name: 'Bell & Ross' },
+    { name: 'Blancpain' },
+    { name: 'Bomberg' },
+    { name: 'Bovet' },
+    { name: 'Breguet' },
+    { name: 'Breitling' },
+    { name: 'Bremont' },
+    { name: 'BRM' },
+    { name: 'Bulgari' },
+    { name: 'Bulova' },
+    { name: 'Burberry' },
+    { name: 'Cabestan' },
+    { name: 'Carl F. Bucherer' },
+    { name: 'Cartier' },
+    { name: 'Chanel' },
+    { name: 'Chaumet' },
+    { name: 'Chopard' },
+    { name: 'Christiaan Van Der Klaauw' },
+    { name: `Christies's` },
+    { name: 'Christophe Claret' },
+    { name: 'Chronoswiss' },
+    { name: 'Citizen' },
+    { name: 'Clerc' },
+    { name: 'Concord' },
+    { name: 'Corum' },
+    { name: 'Cuervo y sobrinos' },
+    { name: 'Cvstos' },
+    { name: 'Cyrus' },
+    { name: 'Czapek' },
+    { name: 'Daniel Roth' },
+    { name: 'Daniel Wellington' },
+    { name: 'Davidoff' },
+    { name: 'Davosa' },
+    { name: 'De Bethune' },
+    { name: 'De Grisogono' },
+    { name: 'DeLaCour' },
+    { name: 'DeLaneau' },
+    { name: 'Dewitt' },
+    { name: 'Dior' },
+    { name: 'Dolce & Gabbana' },
+    { name: 'Doxa' },
+    { name: 'Ebel' },
+    { name: 'Eberhard' },
+    { name: 'Ernst benz' },
+    { name: 'Eterna' },
+    { name: 'F.P. Journe' },
+    { name: 'Faberge' },
+    { name: 'Festina' },
+    { name: 'Flik Flak' },
+    { name: 'Fortis' },
+    { name: 'FP Journe' },
+    { name: 'Franc Vila' },
+    { name: 'Franck Muller' },
+    { name: 'Frederique Constant' },
+    { name: 'Garmin' },
+    { name: 'Gerald Genta' },
+    { name: 'Girard Perregaux' },
+    { name: 'Glashutte' },
+    { name: 'Glycine' },
+    { name: 'Graff' },
+    { name: 'Graham' },
+    { name: 'Greubel Forsey' },
+    { name: 'H. Moser & Cie.' },
+    { name: 'Habring' },
+    { name: 'Hamilton' },
+    { name: 'Harry Winston' },
+    { name: 'Hautlence' },
+    { name: 'Hermes' },
+    { name: 'Hublot' },
+    { name: 'Hysek' },
+    { name: 'HYT' },
+    { name: 'Ice Watch' },
+    { name: 'IWC' },
+    { name: 'Jacob & Co' },
+    { name: 'Jager LeCoultre ' },
+    { name: 'Jaquet Droz' },
+    { name: 'Junghans' },
+    { name: 'Korloff' },
+    { name: 'Laurent Ferrier' },
+    { name: 'Linde Werdelin' },
+    { name: 'Longines' },
+    { name: 'Louis Moinet' },
+    { name: 'Louis Vuitton' },
+    { name: 'Luminox' },
+    { name: 'Maitres du Temps' },
+    { name: 'Manufacture Royale' },
+    { name: 'Maurice Lacroix' },
+    { name: 'MB&F' },
+    { name: 'MeisterSinger' },
+    { name: 'Montegrappa' },
+    { name: 'Montres Montblanc SA' },
+    { name: 'Movado ' },
+    { name: 'Nomos' },
+    { name: 'Officine Panerai' },
+    { name: 'Omega' },
+    { name: 'Oris' },
+    { name: 'Panerai' },
+    { name: 'Parmigiani Fleurier ' },
+    { name: 'Patek Philippe' },
+    { name: 'Paul Picot' },
+    { name: 'Perrelet' },
+    { name: 'Peter Speake-Marin' },
+    { name: 'Philip Stein' },
+    { name: 'Philippe Dufour' },
+    { name: 'Piaget' },
+    { name: 'Pierre DeRoche' },
+    { name: 'Porsche Design' },
+    { name: 'Qlocktwo' },
+    { name: 'Quinting' },
+    { name: 'Rado' },
+    { name: 'Ralph Lauren' },
+    { name: 'Raymond Weil' },
+    { name: 'Ressence' },
+    { name: 'RGM' },
+    { name: 'Richard Mille' },
+    { name: 'Ritmo Mundo' },
+    { name: 'Roger Dubuis' },
+    { name: 'Rolex' },
+    { name: 'Romain Jerome' },
+    { name: 'SevenFriday ' },
+    { name: 'Shaumburg Watch' },
+    { name: 'Sinn' },
+    { name: `Sotheby's` },
+    { name: 'Speake-Marin' },
+    { name: 'Swatch Group ' },
+    { name: 'TagHeuer' },
+    { name: 'Tiffany & Co.' },
+    { name: 'Tissot' },
+    { name: 'Tudor' },
+    { name: 'Tutima' },
+    { name: 'U-Boat' },
+    { name: 'Ulysse Nardin' },
+    { name: 'Universal Geveva' },
+    { name: 'Urwerk' },
+    { name: 'Vacheron Constantin' },
+    { name: 'Van Cleef & Arpels' },
+    { name: 'Zenith ' },
+    { name: 'Other' }];
+
+  get brandsList(): Array<any> {
+    return this.mode === 'create' ? this.staticBrandNames : this.brandObjects;
+  }
 
   brand: Brand = new Brand(this.isTestBrand);
   responseData: ResponseData;
@@ -84,15 +253,52 @@ export class AddBrandFormComponent implements OnInit {
     this.newBrand();
   }
 
+  getBrands() {
+    this.brandsService.readAllBrands()
+      .subscribe(data => {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+        } else {
+          this.brandObjects = <Brand[]>this.response.payload;
+        }
+      });
+  }
+
   async onSubmit() {
     try {
       this.loading = true;
-      await this.uploadLogoPhotoToS3();
-      await this.uploadHeaderPhotoToS3();
-      await this.uploadBanner1PhotoToS3();
-      await this.uploadBanner2PhotoToS3();
+      if (this.logoPhotoFile) {
+        await this.uploadLogoPhotoToS3();
+      }
+      if (this.headerPhotoFile) {
+        await this.uploadHeaderPhotoToS3();
+      }
+      if (this.banner1PhotoFile) {
+        await this.uploadBanner1PhotoToS3();
+      }
+      if (this.banner2PhotoFile) {
+        await this.uploadBanner2PhotoToS3();
+      }
 
-      this.submitBrand();
+      if (this.mode === 'create') {
+        await this.createBrand();
+      } else if (this.mode === 'update') {
+        await this.updateBrand();
+      } else if (this.mode === 'delete') {
+        await this.deleteBrand();
+      } else {
+        throw new Error('Unspecified mode');
+      }
+
+      this.clearLogoPhoto();
+      this.clearHeaderPhoto();
+      this.clearBanner1Photo();
+      this.clearBanner2Photo();
     }
     catch (error) {
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
@@ -101,6 +307,12 @@ export class AddBrandFormComponent implements OnInit {
 
   onLogoPhotoChanged(event) {
     this.logoPhotoFile = event.target.files[0];
+  }
+
+  onSelectBrand(): void {
+    if (this.mode !== 'create') {
+      this.currentBrand = this.brandObjects.find(brand => this.brand.name === brand.name);
+    }
   }
 
   clearLogoPhoto() {
@@ -156,63 +368,24 @@ export class AddBrandFormComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  getBrandData() {
-    const brandId = '5c06c6cbcbddba0011eeeb41';
-    this.brandsService.readBrandById(brandId)
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          const brandObject = <Brand>this.response.payload;
-        }
-      });
-  }
-
-  async onUpdate() {
-    try {
-      if (this.logoPhotoFile) {
-        await this.uploadLogoPhotoToS3();
-      }
-      if (this.headerPhotoFile) {
-        await this.uploadHeaderPhotoToS3();
-      }
-      if (this.banner1PhotoFile) {
-        await this.uploadBanner1PhotoToS3();
-      }
-      if (this.banner2PhotoFile) {
-        await this.uploadBanner2PhotoToS3();
-      }
-
-      this.updateBrand();
-    }
-    catch (error) {
-      this._notificationsService.error('Error', 'Failed to Update');
-    }
-  }
-
   updateBrand() {
-    const brandObject: any = {};
+    const newBrandObject: any = {};
     if (this.brand.logoPhotoUrl) {
-      brandObject.logoPhotoUrl = this.brand.logoPhotoUrl;
+      newBrandObject.logoPhotoUrl = this.brand.logoPhotoUrl;
     }
     if (this.brand.headerPhotoUrl) {
-      brandObject.headerPhotoUrl = this.brand.headerPhotoUrl;
+      newBrandObject.headerPhotoUrl = this.brand.headerPhotoUrl;
     }
     if (this.brand.banner1PhotoUrl) {
-      brandObject.banner1PhotoUrl = this.brand.banner1PhotoUrl;
+      newBrandObject.banner1PhotoUrl = this.brand.banner1PhotoUrl;
     }
     if (this.brand.banner2PhotoUrl) {
-      brandObject.banner2PhotoUrl = this.brand.banner2PhotoUrl;
+      newBrandObject.banner2PhotoUrl = this.brand.banner2PhotoUrl;
     }
-    console.log(brandObject);
-    const brandId = '5c06c6cbcbddba0011eeeb41';
+    console.log('New Brand Object', newBrandObject);
+    const brandId = this.currentBrand._id;
 
-    this.brandsService.updateBrand(brandObject, brandId).subscribe(data => {
+    this.brandsService.updateBrand(newBrandObject, brandId).subscribe(data => {
       console.log(data);
 
       this.responseData = data;
@@ -220,9 +393,11 @@ export class AddBrandFormComponent implements OnInit {
 
       if (this.response.type.match('ERROR')) {
         this._notificationsService.error('Error', this.response.message.en);
+        this.loading = false;
       }
       else {
         this._notificationsService.success('Success', this.response.message.en);
+        this.loading = false;
       }
     });
   }
@@ -231,7 +406,7 @@ export class AddBrandFormComponent implements OnInit {
     this.brand = new Brand(this.isTestBrand);
   }
 
-  submitBrand(): void {
+  createBrand(): void {
     console.log(this.brand);
 
     this.brandsService.createBrand(this.brand)
@@ -250,6 +425,59 @@ export class AddBrandFormComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  deleteBrand(): void {
+    const brandId = this.currentBrand._id;
+    this.brandsService.deleteBrandById(brandId)
+      .subscribe(data => {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+          this.loading = false;
+        }
+        else {
+          this._notificationsService.success('Success', this.response.message.en);
+          this.loading = false;
+        }
+      });
+  }
+
+  uploadPhotoToS3(name: String): Promise<void> {
+    const self = this;
+
+    return new Promise(function (resolve, reject) {
+      if (!self.logoPhotoFile) {
+        reject();
+      }
+
+      const photoUploadParams =
+      {
+        Bucket: self.env.s3MediaBucket,
+        Key: 'brands/' + self.brand.name + `/${name}_` + new Date().getTime() + '.' + self.logoPhotoFile.name.split('.').pop(),
+        Body: self.logoPhotoFile,
+        ACL: 'public-read',
+        ContentType: self.logoPhotoFile.type
+      };
+
+      s3Bucket.upload(photoUploadParams, function (err, s3Data) {
+        if (err) {
+          console.log(err);
+          self._notificationsService.error('Error', err);
+          reject();
+        }
+        else {
+          console.log(s3Data);
+          self._notificationsService.success('Success', self.logoPhotoFile.name + ' uploaded successfully');
+          self.brand[name + 'Url'] = encodeURI(self.env.S3MediaBucketUrl + photoUploadParams.Key);
+          resolve();
+        }
+      });
+    });
   }
 
   uploadLogoPhotoToS3(): Promise<void> {
