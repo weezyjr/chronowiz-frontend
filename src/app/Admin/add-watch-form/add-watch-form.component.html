@@ -17,18 +17,18 @@
     </header>
 
     <div class="my-5">
-      <h1> Collections </h1>
+      <h1> Watch </h1>
     </div>
 
     <div class="row">
       <div class="col">
-        <button type="button" class="btn secondry-btn btn-lg" (click)="openWatchForm()">Watch Form</button>
+        <button type="button" class="btn primary-btn btn-lg" (click)="openWatchForm()">Watch Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn primary-btn btn-lg" (click)="openCollectionForm()">Collection Form</button>
+        <button type="button" class="btn secondry-btn btn-lg" (click)="openCollectionForm()">Collection Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn primary-btn btn-lg" (click)="openBrandForm()">Brand Form</button>
+        <button type="button" class="btn secondry-btn btn-lg" (click)="openBrandForm()">Brand Form</button>
       </div>
     </div>
 
@@ -54,62 +54,64 @@
     </div>
     <form #watchForm="ngForm">
 
-      <br />
-      <h3>Selection</h3>
-      <br />
-
-      <div>
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label for="brandObject">Brand</label>
-              <select (change)="onBrandSelected($event.target.value)" type="text" class="form-control" id="brandObject"
-                [required]="mode == 'create'" [(ngModel)]="watch.brandObject" name="brandObject" #brandObject="ngModel">
-                <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
-      </div>
-
-      <div class="form-group">
-        <label for="collectionObject">Collection</label>
-        <select type="text" (change)="onCollectionSelected($event.target.value)" class="form-control" id="collectionObject"
-          [(ngModel)]="watch.collectionObject" name="collectionObject" #collectionObject="ngModel">
-          <option value=""></option>
-          <option *ngFor="let collection of collections" [value]="collection._id">{{collection.name}}</option>
-        </select>
-      </div>
-
-      <div *ngIf="mode != 'create'" class="form-group">
-        <label for="watchObject">Watch</label>
-        <select type="text" class="form-control" id="watchObject" [(ngModel)]="selectedWatch.referenceNumber" (change)="onWatchSelected($event.target.value)"
-          name="watchObject" #watchObject="ngModel">
-          <option value=""></option>
-          <option *ngFor="let watch of selectedCollection?.watchObjects" [value]="watch?.referenceNumber">{{watch?.model}}</option>
-        </select>
-      </div>
-
-
       <div *ngIf="mode != 'create'">
         <br />
-        <h3>Selection By Reference Number</h3>
+        <h3>Selection</h3>
         <br />
-      </div>
 
-      <div class="row" *ngIf="mode != 'create'">
-        <div class="col-8">
-          <div class="form-group">
-            <input type="text" class="form-control" id="referenceNumberSelection" [(ngModel)]="selectedWatch.referenceNumber"
-              name="referenceNumberSelection" #referenceNumberSelection="ngModel">
+
+        <div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="brandObject">Brand</label>
+                <select (change)="onBrandSelected($event.target.value)" type="text" class="form-control" id="brandObject"
+                  [required]="mode == 'create'" [(ngModel)]="watch.brandObject" name="brandObject" #brandObject="ngModel">
+                  <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
+        </div>
+
+        <div class="form-group">
+          <label for="collectionObject">Collection</label>
+          <select type="text" (change)="onCollectionSelected($event.target.value)" class="form-control" id="collectionObject"
+            [(ngModel)]="watch.collectionObject" name="collectionObject" #collectionObject="ngModel">
+            <option value=""></option>
+            <option *ngFor="let collection of collections" [value]="collection._id">{{collection.name}}</option>
+          </select>
+        </div>
+
+        <div *ngIf="mode != 'create'" class="form-group">
+          <label for="watchObject">Watch</label>
+          <select type="text" class="form-control" id="watchObject" [(ngModel)]="selectedWatch.referenceNumber"
+            (change)="onWatchSelected($event.target.value)" name="watchObject" #watchObject="ngModel">
+            <option value=""></option>
+            <option *ngFor="let watch of selectedCollection?.watchObjects" [value]="watch?.referenceNumber">{{watch?.referenceNumber}}</option>
+          </select>
+        </div>
+
+
+        <div *ngIf="mode != 'create'">
+          <br />
+          <h3>Selection By Reference Number</h3>
+          <br />
+        </div>
+
+        <div class="row" *ngIf="mode != 'create'">
+          <div class="col-8">
+            <div class="form-group">
+              <input type="text" class="form-control" id="referenceNumberSelection" [(ngModel)]="selectedWatch.referenceNumber"
+                name="referenceNumberSelection" #referenceNumberSelection="ngModel">
+            </div>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-lg primary-btn" (click)="onWatchSelected(selectedWatch.referenceNumber)">Select</button>
           </div>
         </div>
-        <div class="col-4">
-          <button class="btn btn-lg primary-btn" (click)="onWatchSelected(selectedWatch.referenceNumber)">Select</button>
-        </div>
       </div>
-
 
       <div *ngIf="mode != 'delete'">
 
@@ -132,8 +134,31 @@
           <select type="text" class="form-control" id="collectionObject" [(ngModel)]="newCollection._id" name="collectionObject"
             #collectionObject="ngModel">
             <option value=""></option>
-            <option *ngFor="let collection of newCollections"
-              [value]="collection._id">{{collection.name}}</option>
+            <option *ngFor="let collection of newCollections" [value]="collection._id">{{collection.name}}</option>
+          </select>
+        </div>
+
+        <div *ngIf="mode == 'create'">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="brandObject">Brand</label>
+                <select (change)="onBrandSelected($event.target.value)" type="text" class="form-control" id="brandObject"
+                  [required]="mode == 'create'" [(ngModel)]="watch.brandObject" name="brandObject" #brandObject="ngModel">
+                  <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
+        </div>
+
+        <div *ngIf="mode == 'create'" class="form-group">
+          <label for="collectionObject">Collection</label>
+          <select type="text" (change)="onCollectionSelected($event.target.value)" class="form-control" id="collectionObject"
+            [(ngModel)]="watch.collectionObject" name="collectionObject" #collectionObject="ngModel">
+            <option value=""></option>
+            <option *ngFor="let collection of collections" [value]="collection._id">{{collection.name}}</option>
           </select>
         </div>
 
