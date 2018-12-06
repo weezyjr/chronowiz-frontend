@@ -43,7 +43,23 @@ export class WatchesService
 
   readWatch(_id: string): Observable<ResponseData>
   {
-    return this.http.get<ResponseData>(this.watchesUrl + ':' + _id, httpOptions)
+    return this.http.get<ResponseData>(this.watchesUrl + '/' + _id, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+  updateWatch(watchObject: any, id: String): Observable<ResponseData> {
+    return this.http.put<ResponseData>(this.watchesUrl + '/' + id, { 'payload': watchObject }, httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  deleteWatch(_id: string): Observable<ResponseData>
+  {
+    return this.http.delete<ResponseData>(this.watchesUrl + '/' + _id, httpOptions)
       .pipe(map(data =>
       {
         return data;

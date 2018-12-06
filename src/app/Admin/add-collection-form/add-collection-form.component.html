@@ -1,5 +1,5 @@
 <simple-notifications></simple-notifications>
-<div class="container-fluid form-container mx-auto login d-flex align-items-center">
+<div class="container-fluid form-container mx-auto">
   <div class="form-page container">
     <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
       <nav class="row">
@@ -107,7 +107,7 @@
               {{loading? 'loading..' : 'Submit' }}</button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg" (click)="newCollection(); collectionForm.reset(); ">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)="newCollection(); collectionForm.reset(); ">Clear</button>
           </div>
         </div>
       </div>

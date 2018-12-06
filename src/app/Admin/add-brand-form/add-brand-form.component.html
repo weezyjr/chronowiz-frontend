@@ -1,5 +1,5 @@
 <simple-notifications></simple-notifications>
-<div class="container-fluid form-container mx-auto login d-flex align-items-center">
+<div class="container-fluid form-container mx-auto">
   <div class="form-page container">
     <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
       <nav class="row">
@@ -87,7 +87,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-lg " (click)="clearLogoPhoto()">Clear</button>
+            <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
           </div>
         </div>
         <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -108,7 +108,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-lg " (click)="clearHeaderPhoto()">Clear</button>
+            <button class="btn btn-lg secondry-btn" (click)="clearHeaderPhoto()">Clear</button>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-lg " (click)="clearBanner1Photo()">Clear</button>
+            <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
           </div>
         </div>
         <div [hidden]="banner1PhotoFile.valid || banner1PhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -150,7 +150,7 @@
             </div>
           </div>
           <div class="col-sm-2 col-4">
-            <button class="btn btn-lg " (click)="clearBanner2Photo()">Clear</button>
+            <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
           </div>
         </div>
         <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
@@ -165,7 +165,7 @@
               {{loading? 'loading..' : 'Submit' }}</button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg" (click)="newBrand(); brandForm.reset(); ">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)="newBrand(); brandForm.reset(); ">Clear</button>
           </div>
         </div>
       </div>
