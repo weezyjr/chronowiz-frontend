@@ -41,8 +41,9 @@ export class AddCollectionFormComponent implements OnInit {
   response: ResponseObject;
   loading: Boolean = false;
   mode: String = 'create';
-  currentCollectionId: String;
-  currentBrand: Brand;
+  currentCollection: Collection = new Collection();
+  newBrand: Brand = new Brand();
+  currentBrand: Brand = new Brand();
   brands: Brand[];
 
   constructor(private collectionsService: CollectionsService,
@@ -107,6 +108,10 @@ export class AddCollectionFormComponent implements OnInit {
     }
   }
 
+  saveCurrentCollectionName() {
+    this.currentCollection.name = this.currentBrand.collectionObjects.find((collection) => collection._id === this.currentCollection._id).name;
+  }
+
   async onSubmit() {
     try {
       this.loading = true;
@@ -132,6 +137,9 @@ export class AddCollectionFormComponent implements OnInit {
 
   newCollection() {
     this.collection = new Collection(this.isTestCollection);
+    this.currentBrand = new Brand();
+    this.newBrand = new Brand();
+    this.currentCollection = new Collection();
   }
 
   submitCollection(): void {
@@ -157,8 +165,9 @@ export class AddCollectionFormComponent implements OnInit {
 
 
   updateCollection(): void {
-    const collectionId = this.currentCollectionId;
+    const collectionId = this.currentCollection._id;
     const collectionObject = {
+      brand: this.newBrand._id,
       name: this.collection.name
     };
 
@@ -182,7 +191,7 @@ export class AddCollectionFormComponent implements OnInit {
 
 
   deleteCollection(): void {
-    const collectionId = this.currentCollectionId;
+    const collectionId = this.currentCollection._id;
 
     this.collectionsService.deleteCollectionById(collectionId)
       .subscribe(data => {

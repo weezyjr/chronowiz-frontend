@@ -22,13 +22,13 @@
 
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-lg" (click)="openWatchForm()">Watch Form</button>
+        <button type="button" class="btn primary-btn btn-lg" (click)="openWatchForm()">Watch Form</button>
       </div>
       <div class="col">
-        <button type="button" class="btn btn-lg" (click)="openCollectionForm()">Collection Form</button>
+        <button type="button" class="btn primary-btn btn-lg" (click)="openCollectionForm()">Collection Form</button>
       </div>
       <div class="col">
-        <button type="button" disabled class="btn btn-lg btn-primary" (click)="openBrandForm()">Brand Form</button>
+        <button type="button" class="btn secondry-btn btn-lg" (click)="openBrandForm()">Brand Form</button>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
 
     <form #brandForm="ngForm">
       <br />
-      <h3>Brand Details</h3>
+      <h3>Selection</h3>
       <br />
 
       <div class="form-group">
@@ -161,7 +161,7 @@
       <div style="text-align: center">
         <div class="row m-1">
           <div class="col-6">
-            <button type="submit" class="btn btn-lg btn-primary" (click)="onSubmit();" [disabled]="!brandForm.form.valid || loading">
+            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="!brandForm.form.valid || loading">
               {{loading? 'loading..' : 'Submit' }}</button>
           </div>
           <div class="col-6">
