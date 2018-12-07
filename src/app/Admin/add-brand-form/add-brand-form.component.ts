@@ -31,8 +31,6 @@ export class ConfigService {
 export class AddBrandFormComponent implements OnInit {
   env = environment;
 
-  isTestBrand = false;
-
   logoPhotoFile: File;
   headerPhotoFile: File;
   banner1PhotoFile: File;
@@ -208,7 +206,7 @@ export class AddBrandFormComponent implements OnInit {
     return this.mode === 'create' ? this.staticBrandNames : this.brandObjects;
   }
 
-  brand: Brand = new Brand(this.isTestBrand);
+  brand: Brand = new Brand();
   responseData: ResponseData;
   response: ResponseObject;
 
@@ -402,7 +400,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   newBrand() {
-    this.brand = new Brand(this.isTestBrand);
+    this.brand = new Brand();
   }
 
   createBrand(): void {

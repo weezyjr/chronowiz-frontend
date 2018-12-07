@@ -38,6 +38,25 @@ export class AddWatchFormComponent implements OnInit
 {
   env = environment;
 
+  mode: String = 'create';
+
+  brands: Brand[];
+
+  // Selection
+  selectedBrand: Brand = new Brand();
+  selectionCollections: Collection[];
+  selectedCollection: Collection = new Collection();
+  selectionWatchReferenceNumber: string;
+
+  // Watch details
+  watchCollections: Collection[];
+
+  watch: Watch = new Watch();
+
+  responseData: ResponseData;
+  response: ResponseObject;
+  loading: Boolean = false;
+
   mainPhotoFile: File;
   banner1PhotoFile: File;
   banner2PhotoFile: File;
@@ -47,25 +66,6 @@ export class AddWatchFormComponent implements OnInit
   section3PhotoFile: File;
   section4PhotoFile: File;
   section5PhotoFiles: File;
-
-
-  collection: Collection = new Collection();
-  responseData: ResponseData;
-  response: ResponseObject;
-  loading: Boolean = false;
-  mode: String = 'create';
-  newBrand: Brand = new Brand();
-  newCollection: Collection = new Collection();
-  newCollections: Collection[];
-  brands: Brand[];
-
-  watch: Watch = new Watch();
-  selectedBrand: Brand = new Brand();
-  selectedWatch: Watch = new Watch();
-  selectedRefNo;
-
-  collections: Collection[];
-  selectedCollection: Collection = new Collection();
 
   @ViewChild('mainPhotoElementRef') mainPhotoElementRef: ElementRef;
   @ViewChild('banner1PhotoElementRef') banner1PhotoElementRef: ElementRef;
@@ -101,7 +101,8 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this.brands = <Brand[]>this.response.payload;
         }
@@ -113,11 +114,8 @@ export class AddWatchFormComponent implements OnInit
     this.watch = new Watch();
   }
 
-  onBrandSelected(selectedBrandId)
+  onSelectionBrandSelected(selectedBrandId)
   {
-    console.log(selectedBrandId);
-    console.log(this.brands);
-
     this.brandsService.readBrandById(selectedBrandId)
       .subscribe(data =>
       {
@@ -129,42 +127,17 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this.selectedBrand = <Brand>this.response.payload;
-          this.collections = this.selectedBrand.collectionObjects;
+          this.selectionCollections = this.selectedBrand.collectionObjects;
         }
       });
   }
 
-  onNewBrandSelected(selectedBrandId)
+  onSelectionCollectionSelected(selectedCollectionId)
   {
-    console.log(selectedBrandId);
-    console.log(this.brands);
-
-    this.brandsService.readBrandById(selectedBrandId)
-      .subscribe(data =>
-      {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR'))
-        {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else
-        {
-          this.newBrand = <Brand>this.response.payload;
-          this.newCollections = this.newBrand.collectionObjects;
-        }
-      });
-  }
-
-  onCollectionSelected(selectedCollectionId)
-  {
-    console.log(selectedCollectionId);
-
     this.collectionService.readCollectionById(selectedCollectionId)
       .subscribe(data =>
       {
@@ -176,16 +149,17 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this.selectedCollection = <Collection>this.response.payload;
         }
       });
   }
 
-  onWatchSelected(selectedWatchRef)
+  onSelectionWatchSelected(selectedWatchRef)
   {
-    console.log(selectedWatchRef);
+    // TODO shouldn't do another request unless we do a search
 
     this.watchesService.readWatch(selectedWatchRef)
       .subscribe(data =>
@@ -198,23 +172,67 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
-          this.selectedWatch = <Watch>this.response.payload;
-          if (this.selectedWatch.brandObject)
-          {
-            this.onNewBrandSelected(this.selectedWatch.brandObject['_id']);
-          }
-          if (this.selectedWatch.collectionObject)
-          {
-            this.newCollection._id = this.selectedWatch.collectionObject['_id'];
-          }
-          
-          console.log(this.selectedWatch);
+          this.watch = <Watch>this.response.payload;
+          this.onWatchBrandSelected(this.watch.brandObject._id);
         }
       });
   }
 
+  onWatchBrandSelected(selectedBrandId)
+  {
+    if (!selectedBrandId)
+    {
+      return;
+    }
+
+    this.brandsService.readBrandById(selectedBrandId)
+      .subscribe(data =>
+      {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR'))
+        {
+          this._notificationsService.error('Error', this.response.message.en);
+        }
+        else
+        {
+          this.watch.brandObject = <Brand>this.response.payload;
+          this.watchCollections = this.watch.brandObject.collectionObjects;
+        }
+      });
+  }
+
+  onWatchCollectionSelected(selectedCollectionId)
+  {
+    if (!selectedCollectionId)
+    {
+      return;
+    }
+
+    this.collectionService.readCollectionById(selectedCollectionId)
+      .subscribe(data =>
+      {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR'))
+        {
+          this._notificationsService.error('Error', this.response.message.en);
+        }
+        else
+        {
+          this.watch.collectionObject = <Collection>this.response.payload;
+        }
+      });
+  }
 
   async onSubmit()
   {
@@ -236,19 +254,23 @@ export class AddWatchFormComponent implements OnInit
       if (this.mode === 'create')
       {
         await this.submitWatch();
-      } else if (this.mode === 'update')
+      }
+      else if (this.mode === 'update')
       {
         await this.updateWatch();
-      } else if (this.mode === 'delete')
+      }
+      else if (this.mode === 'delete')
       {
         await this.deleteWatch();
-      } else
+      }
+      else
       {
         throw new Error('Unspecified mode');
       }
       this.loading = false;
 
-    } catch (error)
+    }
+    catch (error)
     {
       console.log('error', error);
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
@@ -451,20 +473,17 @@ export class AddWatchFormComponent implements OnInit
 
   submitWatch(): void
   {
-    console.log(this.watch);
-
     this.watchesService.createWatch(this.watch)
       .subscribe(data =>
       {
-        console.log(data);
-
         this.responseData = data;
         this.response = this.responseData.response;
 
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this._notificationsService.success('Success', this.response.message.en);
         }
@@ -474,16 +493,6 @@ export class AddWatchFormComponent implements OnInit
   updateWatch(): void
   {
     const updatedWatchObject = {};
-
-    if (this.selectedWatch.brandObject && this.selectedWatch.brandObject['_id'] !== this.newBrand._id)
-    {
-      updatedWatchObject['brandObject'] = this.newBrand._id;
-    }
-
-    if (this.selectedWatch.collectionObject && this.selectedWatch.collectionObject['_id'] !== this.newCollection._id)
-    {
-      updatedWatchObject['collectionObject'] = this.newCollection._id;
-    }
 
     for (const key in this.watch)
     {
@@ -538,16 +547,20 @@ export class AddWatchFormComponent implements OnInit
             }
           }
           updatedWatchObject[key] = this.watch[key];
-        } else
+        }
+        else
         {
           updatedWatchObject[key] = this.watch[key];
         }
       }
     }
 
-    console.log('hey', updatedWatchObject);
+    updatedWatchObject['brandObject'] = this.watch.brandObject._id;
+    updatedWatchObject['collectionObject'] = this.watch.collectionObject._id;
 
-    this.watchesService.updateWatch(updatedWatchObject, this.selectedWatch._id)
+    console.log(updatedWatchObject);
+
+    this.watchesService.updateWatch(updatedWatchObject, this.watch._id)
       .subscribe(data =>
       {
         console.log(data);
@@ -558,21 +571,17 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this._notificationsService.success('Success', this.response.message.en);
         }
       });
   }
 
-  newSelectedWatch()
-  {
-    this.selectedWatch = new Watch();
-  }
-
   deleteWatch(): void
   {
-    this.watchesService.deleteWatch(this.selectedWatch._id)
+    this.watchesService.deleteWatch(this.watch._id)
       .subscribe(data =>
       {
         console.log(data);
@@ -583,7 +592,8 @@ export class AddWatchFormComponent implements OnInit
         if (this.response.type.match('ERROR'))
         {
           this._notificationsService.error('Error', this.response.message.en);
-        } else
+        }
+        else
         {
           this._notificationsService.success('Success', this.response.message.en);
         }
@@ -618,7 +628,8 @@ export class AddWatchFormComponent implements OnInit
           console.log(err);
           self._notificationsService.error('Error', err);
           reject();
-        } else
+        }
+        else
         {
           console.log(s3Data);
           self._notificationsService.success('Success', self.mainPhotoFile.name + ' uploaded successfully');
@@ -657,7 +668,8 @@ export class AddWatchFormComponent implements OnInit
           console.log(err);
           self._notificationsService.error('Error', err);
           reject();
-        } else
+        }
+        else
         {
           console.log(s3Data);
           self._notificationsService.success('Success', self.banner1PhotoFile.name + ' uploaded successfully');
@@ -698,7 +710,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.banner2PhotoFile.name + ' uploaded successfully');
@@ -740,7 +753,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.section1PhotoFile.name + ' uploaded successfully');
@@ -782,7 +796,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.section2PhotoFile.name + ' uploaded successfully');
@@ -824,7 +839,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.section3PhotoFile.name + ' uploaded successfully');
@@ -866,7 +882,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.section4PhotoFile.name + ' uploaded successfully');
@@ -908,7 +925,8 @@ export class AddWatchFormComponent implements OnInit
             console.log(err);
             self._notificationsService.error('Error', err);
             reject();
-          } else
+          }
+          else
           {
             console.log(s3Data);
             self._notificationsService.success('Success', self.section5PhotoFiles.name + ' uploaded successfully');

@@ -10,7 +10,7 @@ import { Collection } from 'src/app/Collection/collection';
 export class CardCarouselComponent implements OnInit {
 
   @Input()
-  public collection: Collection = new Collection(true);
+  public collection: Collection = new Collection();
 
   @Input()
   public gender: String;

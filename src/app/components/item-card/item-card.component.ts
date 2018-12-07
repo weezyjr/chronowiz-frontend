@@ -10,7 +10,7 @@ export class ItemCardComponent implements OnInit {
 
   constructor() { }
 
-  @Input() watch: Watch = new Watch(true);
+  @Input() watch: Watch = new Watch();
 
   ngOnInit() {
   }

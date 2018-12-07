@@ -39,7 +39,7 @@ export class WatchDetailsComponent implements OnInit
       }
       else
       {
-        this.watch = new Watch(true);
+        this.watch = new Watch();
 
         this.updateFunctionsList();
       }
