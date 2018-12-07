@@ -394,11 +394,11 @@ export class AddWatchFormComponent implements OnInit {
   updateWatch(): void {
     const updatedWatchObject = {};
 
-    if (this.selectedWatch.brandObject['_id'] !== this.newBrand._id) {
+    if (this.selectedWatch.brandObject && this.selectedWatch.brandObject['_id'] !== this.newBrand._id) {
       updatedWatchObject['brandObject'] = this.newBrand._id;
     }
 
-    if (this.selectedWatch.collectionObject['_id'] !== this.newCollection._id) {
+    if (this.selectedWatch.collectionObject && this.selectedWatch.collectionObject['_id'] !== this.newCollection._id) {
       updatedWatchObject['collectionObject'] = this.newCollection._id;
     }
 
