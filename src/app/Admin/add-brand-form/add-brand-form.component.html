@@ -38,131 +38,154 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset();" name="mode" value="create"
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); newBrand();" name="mode" value="create"
           [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="getBrands(); brandForm.reset(); " name="mode" value="update"
-          [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="getBrands(); brandForm.reset(); newBrand();" name="mode"
+          value="update" [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="getBrands(); brandForm.reset(); " name="mode" value="delete"
-          [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="getBrands(); brandForm.reset(); newBrand();" name="mode"
+          value="delete" [(ngModel)]="mode">
         Delete
       </label>
     </div>
 
     <form #brandForm="ngForm">
-      <br />
-      <h3>Selection</h3>
-      <br />
-
-      <div class="form-group">
-        <label for="name">Brand name</label>
-        <select type="text" class="form-control" id="name" (change)="onSelectBrand()" required [(ngModel)]="brand.name"
-          name="name" #name="ngModel">
-          <option value=""></option>
-          <option [value]="brand.name" *ngFor="let brand of brandsList"> {{brand.name}} </option>
-        </select>
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Brand name is required</div>
-      </div>
-
-      <br />
-      <h3  *ngIf="mode != 'delete'" >Brand Media Section</h3>
-      <br />
-
-      <div class="form-field py-2" *ngIf="mode != 'delete'" >
-        <label for="logoPhotoFileInput">Brand Logo</label>
-        <div *ngIf="currentBrand?.logoPhotoUrl" class="preview">
-          <h6> Current header Photo </h6>
-          <img [src]="currentBrand?.logoPhotoUrl" [alt]="currentBrand?.name + ' logo'" class="img-responsive">
-        </div>
-        <div class="row">
-          <div class="col-sm-10 col-8">
-            <div class="form-group">
-              <input type="file" class="form-control" (change)="onLogoPhotoChanged($event)" #logoPhotoElementRef id="logoPhotoFileInput"
-                [(ngModel)]="brand.logoPhotoFile" [required]="mode === 'create'" name="logoPhotoFile" #logoPhotoFile="ngModel">
+      <div *ngIf="mode != 'create'">
+        <br />
+        <h3>Select Brand</h3>
+        <br />
+        <div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="selectionBrand">Brand</label>
+                <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control" id="selectionBrand"
+                  name="selectionBrand">
+                  <option value=""></option>
+                  <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col-sm-2 col-4">
-            <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
-          </div>
         </div>
-        <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
-          required</div>
       </div>
 
-      <div class="form-field py-2" *ngIf="mode != 'delete'" >
-        <div *ngIf="currentBrand?.headerPhotoUrl" class="preview">
-          <h6> Current header Photo </h6>
-          <img [src]="currentBrand?.headerPhotoUrl" [alt]="currentBrand?.name + ' header'" class="img-responsive">
+      <div class="form-group" *ngIf="(mode == 'create') || (brand._id)">
+        <br />
+        <h3>Brand Details</h3>
+        <br />
+
+        <div class="form-group">
+          <label for="name">Brand name</label>
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="name" required [(ngModel)]="brand.name"
+            name="name" #name="ngModel">
+            <option value=""></option>
+            <option [value]="brand?.name" *ngFor="let brand of staticBrandNames"> {{brand.name}} </option>
+          </select>
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Brand name is required</div>
         </div>
-        <label for="headerPhotoFileInput">Header photo</label>
-        <div class="row">
-          <div class="col-sm-10 col-8">
-            <div class="form-group">
-              <input type="file" class="form-control" (change)="onHeaderPhotoChanged($event)" #headerPhotoElementRef id="headerPhotoFileInput"
-                [(ngModel)]="brand.headerPhotoFile" name="headerPhotoFile" #headerPhotoFile="ngModel">
+
+        <br />
+        <h3>Brand Media Section</h3>
+        <br />
+
+        <div class="form-field py-2">
+          <label for="logoPhotoFileInput">Brand Logo</label>
+          <div *ngIf="brand?.logoPhotoUrl" class="preview">
+            <h6> Current header Photo </h6>
+            <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
+          </div>
+          <div class="row">
+            <div class="col-sm-10 col-8">
+              <div class="form-group">
+                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onLogoPhotoChanged($event)"
+                  id="logoPhotoFileInput" required name="logoPhotoFile" #logoPhotoFile="ngModel" [(ngModel)]="brand.logoPhotoFile">
+              </div>
+            </div>
+            <div class="col-sm-2 col-4">
+              <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
             </div>
           </div>
-          <div class="col-sm-2 col-4">
-            <button class="btn btn-lg secondry-btn" (click)="clearHeaderPhoto()">Clear</button>
-          </div>
+          <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
+            required</div>
         </div>
-      </div>
 
-      <div class="form-field py-2" *ngIf="mode != 'delete'" >
-        <label for="banner1PhotoFileInput">Banner 1 Photo</label>
-        <div *ngIf="currentBrand?.banner1PhotoUrl" class="preview">
-          <h6> Current banner 1 Photo </h6>
-          <img [src]="currentBrand?.banner1PhotoUrl" [alt]="currentBrand?.name + ' banner1'" class="img-responsive">
-        </div>
-        <div class="row">
-          <div class="col-sm-10 col-8">
-            <div class="form-group">
-              <input type="file" class="form-control" [required]="mode === 'create'" (change)="onBanner1PhotoChanged($event)"
-                #banner1PhotoElementRef id="banner1PhotoFileInput" [(ngModel)]="brand.banner1PhotoFile" name="banner1PhotoFile"
-                #banner1PhotoFile="ngModel">
+        <div class="form-field py-2">
+          <div *ngIf="brand?.headerPhotoUrl" class="preview">
+            <h6> Current header Photo </h6>
+            <img [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'" class="img-responsive">
+          </div>
+          <label for="headerPhotoFileInput">Header photo</label>
+          <div class="row">
+            <div class="col-sm-10 col-8">
+              <div class="form-group">
+                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onHeaderPhotoChanged($event)"
+                  id="headerPhotoFileInput" name="headerPhotoFile"
+                  #headerPhotoFile="ngModel" [(ngModel)]="brand.headerPhotoFile"
+                  >
+              </div>
+            </div>
+            <div class="col-sm-2 col-4">
+              <button class="btn btn-lg secondry-btn" (click)="clearHeaderPhoto()">Clear</button>
             </div>
           </div>
-          <div class="col-sm-2 col-4">
-            <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
-          </div>
         </div>
-        <div [hidden]="banner1PhotoFile.valid || banner1PhotoFile.pristine" class="alert alert-danger">Logo Photo is
-          required</div>
-      </div>
 
-      <div class="form-field py-2" *ngIf="mode != 'delete'" >
-        <label for="banner2PhotoFile">Banner 2 Photo</label>
-        <div *ngIf="currentBrand?.banner2PhotoUrl" class="preview">
-          <h6> Current banner 2 Photo </h6>
-          <img [src]="currentBrand?.banner2PhotoUrl" [alt]="currentBrand?.name + ' banner2'" class="img-responsive">
-        </div>
-        <div class="row">
-          <div class="col-sm-10 col-8">
-            <div class="form-group">
-              <input type="file" class="form-control" [required]="mode === 'create'" (change)="onBanner2PhotoChanged($event)"
-                #banner2PhotoElementRef id="banner2PhotoFile" [(ngModel)]="brand.banner2PhotoFile" name="banner2PhotoFile"
-                #banner2PhotoFile="ngModel">
+        <div class="form-field py-2">
+          <label for="banner1PhotoFileInput">Banner 1 Photo</label>
+          <div *ngIf="brand?.banner1PhotoUrl" class="preview">
+            <h6> Current banner 1 Photo </h6>
+            <img [src]="brand?.banner1PhotoUrl" [alt]="brand?.name + ' banner1'" class="img-responsive">
+          </div>
+          <div class="row">
+            <div class="col-sm-10 col-8">
+              <div class="form-group">
+                <input [disabled]="mode == 'delete'" type="file" class="form-control" required (change)="onBanner1PhotoChanged($event)"
+                  id="banner1PhotoFileInput" name="banner1PhotoFile"
+                  #banner1PhotoFile="ngModel" [(ngModel)]="brand.banner1PhotoFile" >
+              </div>
+            </div>
+            <div class="col-sm-2 col-4">
+              <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
-          <div class="col-sm-2 col-4">
-            <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
-          </div>
+          <div [hidden]="banner1PhotoFile.valid || banner1PhotoFile.pristine" class="alert alert-danger">Logo Photo is
+            required</div>
         </div>
-        <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
-          required</div>
-      </div>
 
+        <div class="form-field py-2">
+          <label for="banner2PhotoFile">Banner 2 Photo</label>
+          <div *ngIf="brand?.banner2PhotoUrl" class="preview">
+            <h6> Current banner 2 Photo </h6>
+            <img [src]="brand?.banner2PhotoUrl" [alt]="brand?.name + ' banner2'" class="img-responsive">
+          </div>
+          <div class="row">
+            <div class="col-sm-10 col-8">
+              <div class="form-group">
+                <input [disabled]="mode == 'delete'" type="file" class="form-control" required (change)="onBanner2PhotoChanged($event)"
+                  id="banner2PhotoFile" name="banner2PhotoFile"
+                  #banner2PhotoFile="ngModel" [(ngModel)]="brand.banner2PhotoFile">
+              </div>
+            </div>
+            <div class="col-sm-2 col-4">
+              <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
+            </div>
+          </div>
+          <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
+            required</div>
+        </div>
+      </div>
       <br />
-      <div style="text-align: center">
+      <div style="text-align: center" *ngIf="(mode == 'create') || (brand._id)">
         <div class="row m-1">
           <div class="col-6">
-            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="!brandForm.form.valid || loading">
-              {{loading? 'loading..' : 'Submit' }}</button>
+            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="(!brandForm.form.valid || loading)  && (mode != 'delete')">
+              {{loading? 'loading..' : mode }}</button>
           </div>
           <div class="col-6">
             <button type="button" class="btn btn-lg secondry-btn" (click)="newBrand(); brandForm.reset(); ">Clear</button>

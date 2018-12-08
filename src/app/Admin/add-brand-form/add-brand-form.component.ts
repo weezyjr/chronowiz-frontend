@@ -31,15 +31,14 @@ export class ConfigService {
 export class AddBrandFormComponent implements OnInit {
   env = environment;
 
-  logoPhotoFile: File;
-  headerPhotoFile: File;
-  banner1PhotoFile: File;
-  banner2PhotoFile: File;
+  logoPhotoFile: any;
+  headerPhotoFile: any;
+  banner1PhotoFile: any;
+  banner2PhotoFile: any;
 
   loading: Boolean = false;
   mode: String = 'create';
-  currentBrand: Brand;
-  brandObjects: Brand[];
+  brands: Brand[];
 
   staticBrandNames: Array<Object> = [
     { name: 'A.Lange & Sohne' },
@@ -203,7 +202,7 @@ export class AddBrandFormComponent implements OnInit {
     { name: 'Other' }];
 
   get brandsList(): Array<any> {
-    return this.mode === 'create' ? this.staticBrandNames : this.brandObjects;
+    return this.mode === 'create' ? this.staticBrandNames : this.brands;
   }
 
   brand: Brand = new Brand();
@@ -250,8 +249,8 @@ export class AddBrandFormComponent implements OnInit {
     this.newBrand();
   }
 
-  getBrands() {
-    this.brandsService.readAllBrands()
+  onSelectionBrandSelected(selectedBrandId) {
+    this.brandsService.readBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -260,8 +259,9 @@ export class AddBrandFormComponent implements OnInit {
 
         if (this.response.type.match('ERROR')) {
           this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          this.brandObjects = <Brand[]>this.response.payload;
+        }
+        else {
+          this.brand = <Brand>this.response.payload;
         }
       });
   }
@@ -269,18 +269,11 @@ export class AddBrandFormComponent implements OnInit {
   async onSubmit() {
     try {
       this.loading = true;
-      if (this.logoPhotoFile) {
-        await this.uploadLogoPhotoToS3();
-      }
-      if (this.headerPhotoFile) {
-        await this.uploadHeaderPhotoToS3();
-      }
-      if (this.banner1PhotoFile) {
-        await this.uploadBanner1PhotoToS3();
-      }
-      if (this.banner2PhotoFile) {
-        await this.uploadBanner2PhotoToS3();
-      }
+
+      await this.uploadLogoPhotoToS3();
+      await this.uploadHeaderPhotoToS3();
+      await this.uploadBanner1PhotoToS3();
+      await this.uploadBanner2PhotoToS3();
 
       if (this.mode === 'create') {
         await this.createBrand();
@@ -291,13 +284,21 @@ export class AddBrandFormComponent implements OnInit {
       } else {
         throw new Error('Unspecified mode');
       }
-
-      this.clearLogoPhoto();
-      this.clearHeaderPhoto();
-      this.clearBanner1Photo();
-      this.clearBanner2Photo();
+      /*
+            // reset after submit
+            if (this.banner1PhotoFile) {
+              this.clearBanner1Photo();
+            }
+            if (this.banner2PhotoFile) {
+              this.clearBanner2Photo();
+            }
+            if (this.logoPhotoFile) {
+              this.clearLogoPhoto();
+            }
+            this.newBrand();*/
     }
     catch (error) {
+      console.log(error);
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
     }
   }
@@ -306,10 +307,21 @@ export class AddBrandFormComponent implements OnInit {
     this.logoPhotoFile = event.target.files[0];
   }
 
-  onSelectBrand(): void {
-    if (this.mode !== 'create') {
-      this.currentBrand = this.brandObjects.find(brand => this.brand.name === brand.name);
-    }
+  getBrands() {
+    this.brandsService.readAllBrands()
+      .subscribe(data => {
+        console.log(data);
+
+        this.responseData = data;
+        this.response = this.responseData.response;
+
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+        }
+        else {
+          this.brands = <Brand[]>this.response.payload;
+        }
+      });
   }
 
   clearLogoPhoto() {
@@ -366,23 +378,18 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   updateBrand() {
-    const newBrandObject: any = {};
-    if (this.brand.logoPhotoUrl) {
-      newBrandObject.logoPhotoUrl = this.brand.logoPhotoUrl;
+    const updatedBrandObject = {};
+    for (const key in this.brand) {
+      if (this.brand[key]) {
+        updatedBrandObject[key] = this.brand[key];
+      }
     }
-    if (this.brand.headerPhotoUrl) {
-      newBrandObject.headerPhotoUrl = this.brand.headerPhotoUrl;
-    }
-    if (this.brand.banner1PhotoUrl) {
-      newBrandObject.banner1PhotoUrl = this.brand.banner1PhotoUrl;
-    }
-    if (this.brand.banner2PhotoUrl) {
-      newBrandObject.banner2PhotoUrl = this.brand.banner2PhotoUrl;
-    }
-    console.log('New Brand Object', newBrandObject);
-    const brandId = this.currentBrand._id;
 
-    this.brandsService.updateBrand(newBrandObject, brandId).subscribe(data => {
+    console.log('update is here');
+
+    console.log('New Brand Object', updatedBrandObject);
+
+    this.brandsService.updateBrand(updatedBrandObject, this.brand._id).subscribe(data => {
       console.log(data);
 
       this.responseData = data;
@@ -404,7 +411,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   createBrand(): void {
-    console.log(this.brand);
+    console.log('created brand', this.brand);
 
     this.brandsService.createBrand(this.brand)
       .subscribe(data => {
@@ -425,8 +432,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   deleteBrand(): void {
-    const brandId = this.currentBrand._id;
-    this.brandsService.deleteBrandById(brandId)
+    this.brandsService.deleteBrandById(this.brand._id)
       .subscribe(data => {
         console.log(data);
 
@@ -449,7 +455,12 @@ export class AddBrandFormComponent implements OnInit {
 
     return new Promise(function (resolve, reject) {
       if (!self.logoPhotoFile) {
-        reject();
+        if (self.mode === 'create') {
+          reject();
+        }
+        else {
+          resolve();
+        }
       }
 
       const photoUploadParams =
@@ -482,7 +493,12 @@ export class AddBrandFormComponent implements OnInit {
 
     return new Promise(function (resolve, reject) {
       if (!self.logoPhotoFile) {
-        reject();
+        if (self.mode === 'create') {
+          reject();
+        }
+        else {
+          resolve();
+        }
       }
 
       const logoPhotoUploadParams =
@@ -549,7 +565,12 @@ export class AddBrandFormComponent implements OnInit {
     return new Promise(function (resolve, reject) {
       // Uploading Banner 1 Photo
       if (!self.banner1PhotoFile) {
-        reject();
+        if (self.mode === 'create') {
+          reject();
+        }
+        else {
+          resolve();
+        }
       }
 
       const banner1PhotoUploadParams =
@@ -585,7 +606,12 @@ export class AddBrandFormComponent implements OnInit {
 
       // Uploading Banner 2 Photo
       if (!self.banner2PhotoFile) {
-        reject();
+        if (self.mode === 'create') {
+          reject();
+        }
+        else {
+          resolve();
+        }
       }
 
       const banner2PhotoUploadParams =

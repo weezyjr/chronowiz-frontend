@@ -89,7 +89,10 @@ export class AddWatchFormComponent implements OnInit
   ngOnInit()
   {
     this.newWatch();
+    this.getBrands();
+  }
 
+  getBrands(){
     this.brandsService.readAllBrands()
       .subscribe(data =>
       {
@@ -112,6 +115,11 @@ export class AddWatchFormComponent implements OnInit
   newWatch()
   {
     this.watch = new Watch();
+    this.selectedBrand = new Brand();
+    this.selectedCollection = new Collection;
+    this.selectionCollections = [];
+    this.brands = [];
+    this.getBrands();
   }
 
   onSelectionBrandSelected(selectedBrandId)
@@ -267,13 +275,41 @@ export class AddWatchFormComponent implements OnInit
       {
         throw new Error('Unspecified mode');
       }
+/*
+      // reset after submit
+      if (this.banner1PhotoFile) {
+        this.clearBanner1Photo();
+      }
+      if (this.banner2PhotoFile) {
+        this.clearBanner2Photo();
+      }
+      if (this.mainPhotoFile) {
+        this.clearMainPhoto();
+      }
+      if (this.section1PhotoFile) {
+        this.clearSection1Photo();
+      }
+      if (this.section2PhotoFile) {
+        this.clearSection2Photo();
+      }
+      if (this.section3PhotoFile) {
+        this.clearSection3Photo();
+      }
+      if (this.section4PhotoFile) {
+        this.clearSection4Photo();
+      }
+      if (this.section5PhotoFiles) {
+        this.clearSection5Photos();
+      }
+      this.newWatch();
+*/
       this.loading = false;
-
     }
     catch (error)
     {
       console.log('error', error);
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+      this.loading = false;
     }
   }
 
@@ -554,9 +590,6 @@ export class AddWatchFormComponent implements OnInit
         }
       }
     }
-
-    updatedWatchObject['brandObject'] = this.watch.brandObject._id;
-    updatedWatchObject['collectionObject'] = this.watch.collectionObject._id;
 
     console.log(updatedWatchObject);
 

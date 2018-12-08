@@ -37,17 +37,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset();" name="mode" value="create"
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="create"
           [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); " name="mode" value="update"
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="update"
           [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); " name="mode" value="delete"
+        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="delete"
           [(ngModel)]="mode">
         Delete
       </label>
@@ -55,56 +55,63 @@
 
     <form #collectionForm="ngForm">
 
-      <br />
-      <h3>Selection</h3>
-      <br />
-      <div class="form-group">
-        <label for="brandObject">Brand</label>
-        <select type="text" class="form-control" id="brandObject" (change)="getCollections()" required [(ngModel)]="collection.brandObject"
-          name="brandObject" #brandObject="ngModel">
-          <option value=""></option>
-          <option *ngFor="let brand of brands" [value]="brand?._id">{{brand?.name}}</option>
-        </select>
-        <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
+      <div *ngIf="mode != 'create'">
+        <br />
+        <h3>Select Collection</h3>
+        <br />
+        <div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="selectionBrand">Brand</label>
+                <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control" id="selectionBrand"
+                  name="selectionBrand">
+                  <option value=""></option>
+                  <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectionCollection">Collection</label>
+          <select type="text" (change)="onSelectionCollectionSelected($event.target.value)" class="form-control" id="selectionCollection"
+            name="selectionCollection">
+            <option value=""></option>
+            <option *ngFor="let selectionCollection of selectionCollections" [value]="selectionCollection?._id">{{selectionCollection?.name}}</option>
+          </select>
+        </div>
       </div>
 
-      <div *ngIf="mode != 'create'" class="form-group">
-        <label for="brandObject">Collection</label>
-        <select type="text" class="form-control" (change)="saveCurrentCollectionName()" id="collectionObjects" required
-          [(ngModel)]="currentCollection._id" name="collectionObjects" #collectionObjects="ngModel">
-          <option value=""></option>
-          <option *ngFor="let collection of currentBrand?.collectionObjects" [value]="collection?._id">{{collection.name}}</option>
-        </select>
-        <div [hidden]="collectionObjects.valid || collectionObjects.pristine" class="alert alert-danger">collection
-          name is required</div>
+      <div class="form-group" *ngIf="(mode == 'create') || (collection.brandObject)">
+        <br />
+        <h3>Collection Details</h3>
+        <br />
+        <div class="form-group">
+          <label for="brandObject">Brand</label>
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject"
+            name="brandObject" #brandObject="ngModel">
+            <option value=""></option>
+            <option *ngFor="let brand of brands" [value]="brand?._id">{{brand?.name}}</option>
+          </select>
+          <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Collection Name</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="name" required
+            [(ngModel)]="collection.name" name="name" #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
+        </div>
+
       </div>
-
       <br />
-      <h3>Collection Details</h3>
-      <br />
-
-      <div *ngIf="mode == 'update'" class="form-group">
-        <label for="newBrand">New Brand</label>
-        <select type="text" class="form-control" id="newBrand" [(ngModel)]="newBrand._id" name="newBrand" #newBrand="ngModel">
-          <option value=""></option>
-          <option *ngFor="let brand of brands" [selected]="brand?._id == currentBrand?._id" [value]="brand?._id">{{brand.name}}</option>
-        </select>
-        <div [hidden]="newBrand.valid || newBrand.pristine" class="alert alert-danger">Brand is required</div>
-      </div>
-
-      <div *ngIf="mode != 'delete'" class="form-group">
-        <label for="name">Collection Name</label>
-        <input type="text" class="form-control" id="name" [placeholder]="currentCollection?.name ? currentCollection?.name: ''"
-          [required]="mode === 'create'" [(ngModel)]="collection.name" name="name" #name="ngModel">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
-      </div>
-
-      <br />
-      <div style="text-align: center">
+      <div style="text-align: center"  *ngIf="(mode == 'create') || (collection.brandObject)">
         <div class="row m-1">
           <div class="col-6">
-            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="!collectionForm.form.valid || loading">
-              {{loading? 'loading..' : 'Submit' }}</button>
+            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="(!collectionForm.form.valid || loading) && (mode != 'delete')">
+              {{loading? 'loading..' : mode }}</button>
           </div>
           <div class="col-6">
             <button type="button" class="btn btn-lg secondry-btn" (click)="newCollection(); collectionForm.reset(); ">Clear</button>

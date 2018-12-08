@@ -12,12 +12,10 @@ export class Brand
   public banner2PhotoUrl: string;
 
   public collectionObjects?: Collection[];
-
   public logoPhotoFile?: File;
   public headerPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
-
   constructor()
   {
     this.collectionObjects = [new Collection()];
