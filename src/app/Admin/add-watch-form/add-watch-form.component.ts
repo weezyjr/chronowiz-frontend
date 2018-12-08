@@ -253,7 +253,7 @@ export class AddWatchFormComponent implements OnInit
 
       if (this.mode === 'create')
       {
-        await this.submitWatch();
+        await this.createWatch();
       }
       else if (this.mode === 'update')
       {
@@ -471,7 +471,7 @@ export class AddWatchFormComponent implements OnInit
     this.watch.section5PhotoFiles.pop();
   }
 
-  submitWatch(): void
+  createWatch(): void
   {
     this.watchesService.createWatch(this.watch)
       .subscribe(data =>
