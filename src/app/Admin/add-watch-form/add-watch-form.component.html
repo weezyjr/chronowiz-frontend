@@ -4,7 +4,7 @@
     <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
       <nav class="row">
         <div class="col text-center mx-auto">
-          <a [routerLink]="['/app-home-page']">
+          <a [routerLink]="['/home']">
             <picture>
               <img src="../../../assets/logo.svg" style="max-height: 75px;" class="img-responsive" alt="chronowiz">
             </picture>
@@ -116,7 +116,12 @@
         <div class="form-group">
           <label for="watchBrand">Watch Brand</label>
           <select [disabled]="mode == 'delete'" type="text" (change)="onWatchBrandSelected($event.target.value)"
-                  class="form-control" id="watchBrand" required [(ngModel)]="watch.brandObject._id" name="watchBrand" #watchBrand="ngModel">
+                  class="form-control" id="watchBrand"
+                  required
+                  [ngModel]="watch?.brandObject?._id"
+                  (ngModelChange)="watch.brandObject._id = $event"
+                  name="watchBrand"
+                  #watchBrand="ngModel">
             <option value=""></option>
             <option *ngFor="let brand of brands" [value]="brand?._id">{{brand?.name}}</option>
           </select>
@@ -126,7 +131,10 @@
         <div class="form-group">
           <label for="watchCollection">Watch Collection</label>
           <select [disabled]="mode == 'delete'" type="text" (change)="onWatchCollectionSelected($event.target.value)"
-                  class="form-control" id="watchCollection" [(ngModel)]="watch.collectionObject._id" name="watchCollection" #watchCollection="ngModel">
+                  class="form-control" id="watchCollection"
+                  [ngModel]="watch?.collectionObject?._id"
+                  (ngModelChange)="watch.collectionObject._id = $event"
+                  name="watchCollection" #watchCollection="ngModel">
             <option value=""></option>
             <option *ngFor="let collection of watchCollections" [value]="collection?._id">{{collection?.name}}</option>
           </select>

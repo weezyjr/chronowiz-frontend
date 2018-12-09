@@ -16,7 +16,7 @@
   <section>
     <div class="row">
       <div *ngFor='let brand of brands| slice: 0:brandsLimit' class="col-md-3 col-sm-4 col-6 py-4 text-center d-flex align-items-center">
-        <a [routerLink]="['/app-brand-page/',brand?.name]" class="mx-auto">
+        <a [routerLink]="['/brand/',brand?.name]" class="mx-auto">
           <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name" class="img-responsive brand-img">
         </a>
       </div>

@@ -19,9 +19,9 @@ export class CollectionsComponent implements OnInit {
   watchsLimit = 12;
 
   breads = [{
-    name: 'Home', url: '/app-home-page',
+    name: 'Home', url: '/home',
   }, {
-    name: 'Brand', url: '/app-home-page'
+    name: 'Brand', url: '/home'
   }];
 
   currentFilters = {
@@ -72,7 +72,7 @@ export class CollectionsComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         } else {
           this.collcetion = <Collection>this.response.payload;
-          this.breads.push({ name: this.collcetion.brandObject.name, url: `/app-brand-page/${this.collcetion.brandObject._id}` });
+          this.breads.push({ name: this.collcetion.brandObject.name, url: `/brand/${this.collcetion.brandObject._id}` });
           this.breads.push({
             name:
               (this.collcetion.name !== 'UNDEFINED') &&

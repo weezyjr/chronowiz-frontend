@@ -26,9 +26,9 @@ export class BrandComponent implements OnInit {
 
   // breadcrumps links
   public breads = [{
-    name: 'Home', url: '/app-home-page',
+    name: 'Home', url: '/home',
   }, {
-    name: 'Brand', url: '/app-home-page'
+    name: 'Brand', url: '/home'
   }];
 
   constructor(private activeRoute: ActivatedRoute, private brandsService: BrandsService, private _notificationsService: NotificationsService) {

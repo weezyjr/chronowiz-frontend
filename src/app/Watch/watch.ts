@@ -1,10 +1,11 @@
 import {ItemValue} from '../item-value';
+import { Brand } from '../Brand/brand';
 
 export class Watch
 {
   public _id?: string;
 
-  public brandObject: any;
+  public brandObject?: any;
   public collectionObject?: any;
   public model?: string;
   public referenceNumber: string;
@@ -93,7 +94,7 @@ export class Watch
 
   constructor()
   {
-    this.brandObject = '';
+    this.brandObject = new Brand();
     this.collectionObject = '';
     this.movementAdditionalFeatures = [{value: ''}];
     this.functions = [{value: ''}];

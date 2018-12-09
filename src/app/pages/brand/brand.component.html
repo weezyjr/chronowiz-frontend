@@ -1,6 +1,6 @@
 <app-header [transparent]="true"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
-<app-hero *ngIf="brandObject" [cover]="brandObject?.banner1PhotoUrl"></app-hero>
+<app-hero *ngIf="brandObject" [cover]="brandObject?.banner1PhotoUrl ? brandObject?.banner1PhotoUrl: 'http://placehold.it/1600x900'"></app-hero>
 
 <div class="container">
 

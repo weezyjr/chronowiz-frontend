@@ -1,5 +1,5 @@
 <div class="card-list">
-  <a [routerLink]="['/app-collections-page/', collection?._id]">
+  <a [routerLink]="['./', collection?._id]">
     <h2 *ngIf="collection?.name != 'UNDEFINED'"> {{collection?.name}}</h2>
     <h2 *ngIf="collection?.name == 'UNDEFINED'"> Collection </h2>
   </a>

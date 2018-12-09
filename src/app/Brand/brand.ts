@@ -1,7 +1,6 @@
-import {Collection} from '../Collection/collection';
+import { Collection } from '../Collection/collection';
 
-export class Brand
-{
+export class Brand {
   public _id?: string;
 
   public name: string;
@@ -16,8 +15,9 @@ export class Brand
   public headerPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
-  constructor()
-  {
+  constructor() {
+    this._id = '';
+    this.name = '';
     this.collectionObjects = [new Collection()];
   }
 }

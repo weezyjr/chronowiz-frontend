@@ -15,6 +15,7 @@ export class CardCarouselComponent implements OnInit {
   @Input()
   public gender: String;
 
+
   public currentOffset = 0;
   public paginationFactor = 300;
 

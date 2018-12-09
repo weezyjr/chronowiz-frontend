@@ -35,6 +35,7 @@ import { GenderPipe } from './Filters/gender.pipe';
 import { CollectionPipe } from './Filters/collection.pipe';
 import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
+import { WatchComponent } from './pages/watch/watch.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { FilterCollapsibleComponent } from './components/filter-collapsible/filt
     GenderPipe,
     CollectionPipe,
     CollapsibleComponent,
-    FilterCollapsibleComponent
+    FilterCollapsibleComponent,
+    WatchComponent
   ],
   imports: [
     BrowserModule,

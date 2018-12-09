@@ -1,7 +1,7 @@
 <header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
   <div class="container">
     <div class="logo">
-      <a class="nav-link" href="#"><img [src]="logoSrc" alt=""></a>
+      <a class="nav-link" [routerLink]="['/home']"><img [src]="logoSrc" alt=""></a>
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">

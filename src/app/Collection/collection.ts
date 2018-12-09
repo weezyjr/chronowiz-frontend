@@ -1,7 +1,6 @@
-import {Watch} from '../Watch/watch';
+import { Watch } from '../Watch/watch';
 
-export class Collection
-{
+export class Collection {
   public _id?: string;
 
   public brandObject?: any;
@@ -9,7 +8,7 @@ export class Collection
   public isUndefined: boolean;
   public watchObjects?: Watch[];
 
-  constructor()
-  {
+  constructor() {
+    this._id = '';
   }
 }
