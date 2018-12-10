@@ -41,6 +41,10 @@ const routes: Routes = [
     component: CollectionsComponent
   },
   {
+    path: 'watch/:ref',
+    component: WatchComponent
+  },
+  {
     path: 'app-search-page',
     component: SearchPageComponent
   },

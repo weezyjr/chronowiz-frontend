@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Watch} from '../watch';
 import {Router} from '@angular/router';
 import {SearchService} from '../../Search/search.service';
+import { WatchesService } from '../watches.service';
 
 @Component({
   selector: 'app-watch-details',
@@ -11,7 +12,7 @@ import {SearchService} from '../../Search/search.service';
 export class WatchDetailsComponent implements OnInit
 {
 
-  constructor(private searchService: SearchService, private router: Router)
+  constructor(private searchService: SearchService, private router: Router, private watchesService: WatchesService)
   {
     this.price = 'Show Price';
   }
@@ -29,6 +30,19 @@ export class WatchDetailsComponent implements OnInit
 
   ngOnInit()
   {
+    this.watchesService.readWatch('320.032')
+    .subscribe(data => {
+      console.log(data);
+
+      const responseData = data;
+      const response = responseData.response;
+
+      if (!response.type.match('ERROR')) {
+        this.watch = <Watch>response.payload;
+        console.log(this.watch);
+      }
+    });
+/*
     this.searchService.currentWatch.subscribe(watch =>
     {
       if (watch.referenceNumber) // we test for any mandatory field
@@ -43,7 +57,7 @@ export class WatchDetailsComponent implements OnInit
 
         this.updateFunctionsList();
       }
-    });
+    });*/
   }
 
   accountButtonClicked(): void

@@ -1,5 +1,6 @@
 import {ItemValue} from '../item-value';
 import { Brand } from '../Brand/brand';
+import { Collection } from '../Collection/collection';
 
 export class Watch
 {
@@ -95,7 +96,7 @@ export class Watch
   constructor()
   {
     this.brandObject = new Brand();
-    this.collectionObject = '';
+    this.collectionObject = new Collection();
     this.movementAdditionalFeatures = [{value: ''}];
     this.functions = [{value: ''}];
     this.caseAdditionalFeatures = [{value: ''}];

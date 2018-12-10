@@ -5,26 +5,29 @@
   background-size: cover !important;
   background-position: center !important;
 
-.large
+.background-lg
   height: 570px;
-
-.background-top
-  background-position-y: -150px !important;
+.background-md
+  max-height: 420px;
+.background-sm
+  max-height: 360px;
 
 @media only screen and (min-width: 576px) and (max-width: 768px)
   .hero
-    height: 400px !important;
-  .background-top
-    background-position-y: center !important;
+    max-height: 400px !important;
+  .background-md
+    max-height: 300px !important;
+  .background-sm
+    max-height: 250px !important;
 
 @media only screen and (max-width: 576px)
   .hero
-    height: 340px !important;
-  .background-top
-    background-position-y: center !important;
-  .background-sm-left
-    background-position-x: -88px !important;
+    max-height: 340px !important;
+  .background-md
+    max-height: 180px !important;
+  .background-sm
+    max-height: 164px !important;
 
 @media only screen and (min-width: 1600px) and (min-height: 900px)
-  .hero
+  .background-lg
     height: 700px !important;

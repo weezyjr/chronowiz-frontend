@@ -8,16 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeroComponent implements OnInit {
 
   @Input()
-  cover = '../../../assets/brand/rolex.png';
+  cover = 'http://placehold.it/1600x900';
 
   @Input()
-  background_sm_left = false;
+  background_sm = false;
 
   @Input()
-  top = false;
+  background_md = false;
 
   @Input()
-  large = false;
+  background_lg = false;
 
   constructor() { }
 

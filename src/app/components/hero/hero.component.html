@@ -1,1 +1,2 @@
-<div class="hero" [ngClass]="{'background-top': top, 'background-sm-left': background_sm_left, 'large': large}" [ngStyle]="{'background': 'url(' + cover + ')'}"></div>
+<div *ngIf="cover" class="hero" [ngClass]="{'background-sm': background_sm, 'background-md': background_md, 'background-lg': background_lg}"
+  [ngStyle]="{'background': 'url(' + cover + ')'}"></div>

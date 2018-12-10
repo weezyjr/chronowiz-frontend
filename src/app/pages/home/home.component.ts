@@ -14,44 +14,17 @@ export class HomeComponent implements OnInit {
 
   SEARCH_ICON_PATH = '../../../assets/search.svg';
   LOGO_PATH = '../../../assets/home/logos/';
-  SOCIAL_MEDIA_PATH = '../../../assets/images/';
 
   brands: Brand[];
 
   responseData: ResponseData;
   response: ResponseObject;
 
-  socialMedia = [
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-4-copy@2x.png',
-    },
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-5@2x.png',
-    },
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-6@2x.png',
-    },
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-7@2x.png',
-    },
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-8@2x.png',
-    },
-    {
-      img: this.SOCIAL_MEDIA_PATH + 'group-9@2x.png',
-    }, {
-      img: this.SOCIAL_MEDIA_PATH + 'group-10@2x.png',
-    }, {
-      img: this.SOCIAL_MEDIA_PATH + 'group-11@2x.png',
-    }
-  ];
-
   public query: String;
 
   brandBackup: Brand[];
 
   brandsLimit = 8;
-  socialLimit = 8;
 
   constructor(private brandsService: BrandsService, private _notificationsService: NotificationsService) {
   }
@@ -78,16 +51,6 @@ export class HomeComponent implements OnInit {
   // check if the show more brands list is empty
   get isShowMoreBrandsEmpty() {
     return this.brandsLimit === Infinity;
-  }
-
-  // render the show more Social Media list
-  showMoreSocialMedia() {
-    this.socialLimit = Infinity;
-  }
-
-  // check if the show more Social Media list is empty
-  get isShowMoreSocialMediaEmpty() {
-    return this.socialLimit === Infinity;
   }
 
   ngOnInit() {

@@ -18,17 +18,19 @@ export class WatchComponent implements OnInit {
   responseData: ResponseData;
   response: ResponseObject;
 
-    // breadcrumps links
-    public breads = [{
-      name: 'Home', url: '/home',
-    }, {
-      name: 'Brand', url: '/home'
-    }];
+  // breadcrumps links
+  public breads = [{
+    name: 'Home', url: '/home',
+  }, {
+    name: 'Brand', url: '/home'
+  }];
 
-  constructor(private activeRoute: ActivatedRoute, private watchesService: WatchesService, private _notificationsService: NotificationsService) { }
+  constructor(private activeRoute: ActivatedRoute, private watchesService: WatchesService, private _notificationsService: NotificationsService) {
+  }
 
   ngOnInit() {
     const ref = this.activeRoute.snapshot.params.ref;
+    console.log(ref);
     this.watchesService.readWatch(ref)
       .subscribe(data => {
         console.log(data);
@@ -40,9 +42,36 @@ export class WatchComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         } else {
           this.watch = <Watch>this.response.payload;
+          if (this.watch.collectionObject.name === 'UNDEFINED') {
+            this.watch.collectionObject.name = 'collection';
+          }
+
+          if (this.watch.brandObject.name && this.watch.brandObject.name !== 'UNDEFINED') {
+            this.breads.push({ name: this.watch.brandObject.name, url: `/brand/${this.watch.brandObject.name}` });
+          } else {
+            this.breads.push({ name: 'brand', url: `/` });
+          }
+
+          if (this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED') {
+            this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.collectionObject._id}` });
+          } else {
+            this.breads.push({ name: 'collection', url: `/` });
+          }
+
+          this.breads.push({ name: this.watch.referenceNumber, url: '/' });
           console.log(this.watch);
         }
       });
+  }
+
+
+  get ollectionUrl(): String {
+    return `/brand/${this.watch.brandObject.name}/`;
+  }
+
+  scrollTo(id: string): void {
+    const element = document.getElementById(id);
+    element.scrollIntoView({ behavior: 'smooth' });
   }
 
 }

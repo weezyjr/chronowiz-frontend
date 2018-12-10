@@ -36,6 +36,9 @@ import { CollectionPipe } from './Filters/collection.pipe';
 import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
 import { WatchComponent } from './pages/watch/watch.component';
+import { SocialMediaSectionComponent } from './components/social-media-section/social-media-section.component';
+import { AttributeTableComponent } from './components/attribute-table/attribute-table.component';
+import { WatchSectionComponent } from './components/watch-section/watch-section.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { WatchComponent } from './pages/watch/watch.component';
     CollectionPipe,
     CollapsibleComponent,
     FilterCollapsibleComponent,
-    WatchComponent
+    WatchComponent,
+    SocialMediaSectionComponent,
+    AttributeTableComponent,
+    WatchSectionComponent
   ],
   imports: [
     BrowserModule,
