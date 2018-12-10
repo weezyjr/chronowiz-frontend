@@ -17,100 +17,101 @@ export class AttributeTableComponent implements OnInit {
     return [{
       name: 'GENERAL',
       attributes: [{
-        'MODEL CASE': `${this.watch.model}, ${this.watch.caseDiameter} mm, ${this.watch.caseMaterial}, ${this.watch.perpetual}`
+        'MODEL CASE': `${this.watch.model ? this.watch.model + ',' : ''} ${this.watch.caseDiameter ? this.watch.caseDiameter + ' mm,' : ''}` +
+          `${this.watch.caseMaterial ? this.watch.caseMaterial : ','} ${this.watch.perpetual ? this.watch.perpetual : ''}`
       },
       {
-        'REFERENCE': `${this.watch.referenceNumber}`
+        'REFERENCE': `${this.watch.referenceNumber ? this.watch.referenceNumber : ''}`
       },
       {
-        'MOVEMENT': `${this.watch.movementAutomaticOrManual}`
+        'MOVEMENT': `${this.watch.movementAutomaticOrManual ? this.watch.movementAutomaticOrManual : ''}`
       },
       {
-        'CASE MATERIAL': `${this.watch.caseMaterial}`
+        'CASE MATERIAL': `${this.watch.caseMaterial ? this.watch.caseMaterial : ''}`
       },
       {
-        'BAND MATERIAL': `${this.watch.bandMaterial}`
+        'BAND MATERIAL': `${this.watch.bandMaterial ? this.watch.bandMaterial : ''}`
       },
       {
-        'PRODUCTION YEAR': `${this.watch.productionYear}`
+        'PRODUCTION YEAR': `${this.watch.productionYear ? this.watch.productionYear : ''}`
       },
       {
-        'GENDER': `${this.watch.gender}`
+        'GENDER': `${this.watch.gender ? this.watch.gender : ''}`
       }
       ]
     }, {
       name: 'CALIBRE',
       attributes: [{
-        'MOVEMENT': `${this.watch.movementCaliberName}`
+        'MOVEMENT': `${this.watch.movementCaliberName ? this.watch.movementCaliberName : ''}`
       },
       {
-        'CALIBRE': `${this.watch.movementCaliberNumber}`
+        'CALIBRE': `${this.watch.movementCaliberNumber ? this.watch.movementCaliberNumber : ''}`
       },
       {
         'FUNCTIONS': `${this.watch.functions.map(fun => fun.value).join(', ')}`
       },
       {
-        'POWER RESERVE': `${this.watch.movementPowerReserve} h`
+        'POWER RESERVE': `${this.watch.movementPowerReserve ? this.watch.movementPowerReserve + ' h' : ''}`
       },
       {
-        'JEWELS': `${this.watch.movementJewels}`
+        'JEWELS': `${this.watch.movementJewels ? this.watch.movementJewels : ''}`
       },
       {
-        'FREQUENCY': `${this.watch.movementFrequency} vph`
+        'FREQUENCY': `${this.watch.movementFrequency ? this.watch.movementFrequency : ''} vph`
       }
       ]
     }, {
       name: 'CASE',
       attributes: [
         {
-          'MATERIAL': `${this.watch.caseMaterial}`
+          'MATERIAL': `${this.watch.caseMaterial ? this.watch.caseMaterial : ''}`
         },
         {
-          'DIAMETER': `${this.watch.caseDiameter} mm`
+          'DIAMETER': `${this.watch.caseDiameter ? this.watch.caseDiameter + ' mm' : ''}`
         },
         {
-          'WATER-PROOF': `${this.watch.waterResistance} atm`
+          'WATER-PROOF': `${this.watch.waterResistance ? this.watch.waterResistance + ' atm' : ''}`
         },
         {
-          'BEZEL MATERIAL': `${this.watch.caseBezelMaterial}`
+          'BEZEL MATERIAL': `${this.watch.caseBezelMaterial ? this.watch.caseBezelMaterial : ''}`
         },
         {
-          'CRYSTAL': `${this.watch.caseFront}`
+          'CRYSTAL': `${this.watch.caseFront ? this.watch.caseFront : ''}`
         }
       ]
     }, {
       name: 'CERTIFICATION',
       attributes: [{
-        '': `${this.watch.movementCertificate},${this.watch.awards}`
+        '': `${this.watch.movementCertificate ? this.watch.movementCertificate + ',' : ''} ${this.watch.awards ? this.watch.awards : ''}`
       }]
     }, {
       name: 'BAND',
       attributes: [{
-        'BRACELET': `${this.watch.band}`
+        'BRACELET': `${this.watch.band ? this.watch.band : ''}`
       },
       {
-        'BAND MATERIAL': `${this.watch.bandMaterial}`
+        'BAND MATERIAL': `${this.watch.bandMaterial ? this.watch.bandMaterial : ''}`
       },
       {
-        'CLASP TYPE': `${this.watch.bandClasp}`
+        'CLASP TYPE': `${this.watch.bandClasp ? this.watch.bandClasp : ''}`
       },
       {
-        'CLASP COLOR': `${this.watch.bandColour}`
+        'CLASP COLOR': `${this.watch.bandColour ? this.watch.bandColour : ''}`
       }
       ]
     }, {
       name: 'DIAL',
       attributes: [{
-        'DIAL COLOR': `${this.watch.dialColour}`
+        'DIAL COLOR': `${this.watch.dialColour ? this.watch.dialColour : ''}`
       },
       {
-        'DIAL FINISH': `${this.watch.dialFinish}`
+        'DIAL FINISH': `${this.watch.dialFinish ? this.watch.dialFinish : ''}`
       },
       {
-        'DIAL INDEXES': `${this.watch.dialIndex}`
+        'DIAL INDEXES': `${this.watch.dialIndex ? this.watch.dialIndex : ''}`
       },
       {
-        'DIAL HANDS': `${this.watch.dialHands}`
+        'DIAL HANDS': `${this.watch.dialHands ? this.watch.dialHands : ''}`
       },
       ]
     }];

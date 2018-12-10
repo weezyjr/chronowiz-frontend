@@ -3,7 +3,7 @@
 
 <div class="text-center" id="top">
   <h1>{{watch?.model}}</h1>
-  <a [routerLink]="[collectionUrl,{id: watch?.collectionObject?._id}]" class="view-all-btn text-center" *ngIf="watch?.collectionObject?.name && watch?.collectionObject?.name!='UNDEFINED'">
+  <a class="view-all-btn text-center" *ngIf="watch?.collectionObject?.name && watch?.collectionObject?.name!='UNDEFINED'">
     <i class="fa"><img src="../../../assets/app-icon.svg" width="9" alt=""></i>
     View all {{watch?.collectionObject?.name}} models
   </a>
@@ -12,8 +12,8 @@
   </div>
   <div class="watch-short-details">
     <p>
-      <span *ngIf="watch?.perpetual">{{watch?.perpetual}},</span>
-      <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
+      <span *ngIf="watch?.perpetual">{{watch?.perpetual}}, </span>
+      <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm, </span>
       <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}</span>
     </p>
   </div>
@@ -24,12 +24,13 @@
   </div>
 </div>
 
-<app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
+<!--
+  <app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
+-->
 
 <div class="container pb-5">
 
-  <app-watch-section
-  [watch]="watch"></app-watch-section>
+  <app-watch-section [watch]="watch"></app-watch-section>
   <app-attribute-table id="technicals" [watch]="watch"></app-attribute-table>
 
   <div class="return-to-top text-center mx-auto w-100" (click)="scrollTo('top')">
@@ -40,8 +41,9 @@
   </div>
 </div>
 
+<!--
 <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
-
+-->
 <div class="container">
   <app-social-media-section></app-social-media-section>
 </div>
