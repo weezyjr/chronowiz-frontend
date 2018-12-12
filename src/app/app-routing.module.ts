@@ -11,6 +11,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { BrandComponent } from './pages/brand/brand.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { WatchComponent } from './pages/watch/watch.component';
+import { RetailerGuard } from './Auth/retailerAuth.guard';
+import { RetailerLoginComponent } from './Retailer/login/login.component';
+import { AddRetialerFormComponent } from './Admin/add-retialer-form/add-retialer-form.component';
+import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
+import { InStockComponent } from './Retailer/in-stock/in-stock.component';
 
 const routes: Routes = [
   {
@@ -75,6 +80,31 @@ const routes: Routes = [
   {
     path: 'app-add-collection-form',
     component: AddCollectionFormComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'retailer',
+    redirectTo: 'retailer/add-to-stock',
+    pathMatch: 'full',
+    canActivate: [RetailerGuard]
+  },
+  {
+    path: 'retailer/login',
+    component: RetailerLoginComponent
+  },
+  {
+    path: 'retailer/add-to-stock',
+    component: AddToStockComponent,
+    canActivate: [RetailerGuard]
+  },
+  {
+    path: 'retailer/in-stock',
+    component: InStockComponent,
+    canActivate: [RetailerGuard]
+  },
+  {
+    path: 'app-add-retailer-form',
+    component: AddRetialerFormComponent,
     canActivate: [AuthGuard]
   },
   {

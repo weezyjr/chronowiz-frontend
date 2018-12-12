@@ -10,6 +10,8 @@ import { ResponseObject } from '../../API/responseObject';
 import { CollectionsService } from '../../Collection/collections.service';
 import { Brand } from '../../Brand/brand';
 import { BrandsService } from '../../Brand/brands.service';
+import { Link } from 'src/app/Link';
+import { AdminService } from '../admin.service';
 
 const s3Bucket = new S3(
   {
@@ -41,31 +43,20 @@ export class AddCollectionFormComponent implements OnInit {
   mode: String = 'create';
   brands: Brand[];
 
+  navRoutes: Link[] = [
+    new Link('Watch Form', 'app-add-watch-form'),
+    new Link('Collection Form', 'app-add-collection-form', true),
+    new Link('Brand Form', 'app-add-brand-form'),
+    new Link('Retailer Form', 'app-add-retailer-form')
+  ];
+
+
   // Selection
   selectedBrand: Brand = new Brand();
   selectionCollections: Collection[];
 
-  constructor(private collectionsService: CollectionsService,
-    private brandsService: BrandsService,
-    private _notificationsService: NotificationsService,
-    private router: Router,
-    private authenticationService: AuthenticationService) {
-  }
-
-  openHomePage(): void {
-    this.router.navigate(['/']);
-  }
-
-  openBrandForm(): void {
-    this.router.navigate(['app-add-brand-form']);
-  }
-
-  openCollectionForm(): void {
-    this.router.navigate(['app-add-collection-form']);
-  }
-
-  openWatchForm(): void {
-    this.router.navigate(['app-add-watch-form']);
+  constructor(private adminService: AdminService,
+    private _notificationsService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -74,7 +65,7 @@ export class AddCollectionFormComponent implements OnInit {
   }
 
   getBrands(){
-    this.brandsService.readAllBrands()
+    this.adminService.readAllBrands()
       .subscribe(data =>
       {
         console.log(data);
@@ -94,7 +85,7 @@ export class AddCollectionFormComponent implements OnInit {
   }
 
   onSelectionBrandSelected(selectedBrandId) {
-    this.brandsService.readBrandById(selectedBrandId)
+    this.adminService.readBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -112,7 +103,7 @@ export class AddCollectionFormComponent implements OnInit {
   }
 
   onSelectionCollectionSelected(selectedCollectionId) {
-    this.collectionsService.readCollectionById(selectedCollectionId)
+    this.adminService.readCollectionById(selectedCollectionId)
       .subscribe(data => {
         console.log(data);
 
@@ -145,11 +136,6 @@ export class AddCollectionFormComponent implements OnInit {
     }
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }
-
   newCollection() {
     this.collection = new Collection();
     this.selectedBrand = new Brand();
@@ -161,7 +147,7 @@ export class AddCollectionFormComponent implements OnInit {
   submitCollection(): void {
     console.log(this.collection);
 
-    this.collectionsService.createCollection(this.collection)
+    this.adminService.createCollection(this.collection)
       .subscribe(data => {
         console.log(data);
 
@@ -190,7 +176,7 @@ export class AddCollectionFormComponent implements OnInit {
 
     console.log('updatedCollection', updatedCollectionObject);
 
-    this.collectionsService.updateCollectionById(updatedCollectionObject, this.collection._id)
+    this.adminService.updateCollectionById(updatedCollectionObject, this.collection._id)
       .subscribe(data => {
         console.log(data);
 
@@ -210,7 +196,7 @@ export class AddCollectionFormComponent implements OnInit {
 
   deleteCollection(): void {
 
-    this.collectionsService.deleteCollectionById(this.collection._id)
+    this.adminService.deleteCollectionById(this.collection._id)
       .subscribe(data => {
         console.log(data);
 

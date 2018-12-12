@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SearchPageComponent} from './Search/search-page/search-page.component';
 import {WatchDetailsComponent} from './Watch/watch-details/watch-details.component';
 import {LoginComponent} from './Admin/login/login.component';
-import {AuthGuard} from './Auth/auth.guard';
+
 import {AddWatchFormComponent} from './Admin/add-watch-form/add-watch-form.component';
 import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.component';
 import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collection-form.component';
@@ -20,6 +20,7 @@ import {HttpErrorHandlerService} from './API/http-error-handler.service';
 import {WatchesService} from './Watch/watches.service';
 import {SearchService} from './Search/search.service';
 import {JwtInterceptor} from './API/jwt.interceptor';
+
 import {ErrorInterceptor} from './API/error.interceptor';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
@@ -39,12 +40,20 @@ import { WatchComponent } from './pages/watch/watch.component';
 import { SocialMediaSectionComponent } from './components/social-media-section/social-media-section.component';
 import { AttributeTableComponent } from './components/attribute-table/attribute-table.component';
 import { WatchSectionComponent } from './components/watch-section/watch-section.component';
+import { RetailerLoginComponent } from './Retailer/login/login.component';
+import { AddRetialerFormComponent } from './Admin/add-retialer-form/add-retialer-form.component';
+import { FormHeaderComponent } from './components/forms/form-header/form-header.component';
+import { TabsComponent } from './components/forms/tabs/tabs.component';
+import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
+import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
+import { InStockComponent } from './Retailer/in-stock/in-stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddWatchFormComponent,
     LoginComponent,
+    RetailerLoginComponent,
     SearchPageComponent,
     WatchDetailsComponent,
     AddBrandFormComponent,
@@ -67,7 +76,13 @@ import { WatchSectionComponent } from './components/watch-section/watch-section.
     WatchComponent,
     SocialMediaSectionComponent,
     AttributeTableComponent,
-    WatchSectionComponent
+    WatchSectionComponent,
+    AddRetialerFormComponent,
+    FormHeaderComponent,
+    TabsComponent,
+    AddToStockComponent,
+    ToggleBtnComponent,
+    InStockComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +108,7 @@ import { WatchSectionComponent } from './components/watch-section/watch-section.
     HttpErrorHandlerService,
     WatchesService,
     SearchService,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+   /* {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

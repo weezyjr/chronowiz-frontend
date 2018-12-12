@@ -1,0 +1,32 @@
+<simple-notifications></simple-notifications>
+<div class="container-fluid form-container mx-auto">
+  <div class="form-page container">
+    <app-form-header userType="retailer"></app-form-header>
+    <br />
+    <h1>In Stock</h1>
+    <br/>
+    <app-form-tabs [links]="navRoutes"></app-form-tabs>
+    <div>
+      <br />
+      <h3> In Stock Watchs </h3>
+      <br />
+      <div class="row">
+        <div class="col-6 mx-auto text-center" *ngFor="let watch of watchs">
+          <div>
+            <app-item-card *ngIf="watch" [watch]="watch"></app-item-card>
+          </div>
+          <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
+          <p> Price: {{watch?.price}} </p>
+          <div class="row">
+            <div class="col-12">
+              <button class="btn primary-btn" [routerLink]="['/watch/',{ref: watch?.ref}]"> View Watch </button>
+            </div>
+            <div class="col-12 my-2">
+              <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

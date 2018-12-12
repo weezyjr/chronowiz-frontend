@@ -9,8 +9,7 @@ import { ResponseData } from '../API/response-data';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -20,7 +19,7 @@ const httpOptions = {
 export class BrandsService {
   env = environment;
 
-  brandsUrl = this.env.backendUrl + 'admin/brands/';
+  brandsUrl = this.env.backendUrl + 'user/brands/';
 
   private handleError: HandleError;
 

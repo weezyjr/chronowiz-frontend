@@ -9,8 +9,7 @@ import {Collection} from './collection';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -21,7 +20,7 @@ export class CollectionsService
 {
   env = environment;
 
-  collectionsUrl = this.env.backendUrl + 'admin/collections/';
+  collectionsUrl = this.env.backendUrl + 'user/collections/';
 
   private handleError: HandleError;
 

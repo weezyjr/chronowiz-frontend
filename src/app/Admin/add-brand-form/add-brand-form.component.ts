@@ -8,6 +8,8 @@ import { ResponseData } from '../../API/response-data';
 import { BrandsService } from '../../Brand/brands.service';
 import { AuthenticationService } from '../../Auth/authentication.service';
 import { ResponseObject } from '../../API/responseObject';
+import { Link } from 'src/app/Link';
+import { AdminService } from '../admin.service';
 
 const s3Bucket = new S3(
   {
@@ -209,40 +211,21 @@ export class AddBrandFormComponent implements OnInit {
   responseData: ResponseData;
   response: ResponseObject;
 
+  navRoutes: Link[] = [
+    new Link('Watch Form', 'app-add-watch-form'),
+    new Link('Collection Form', 'app-add-collection-form'),
+    new Link('Brand Form', 'app-add-brand-form', true),
+    new Link('Retailer Form', 'app-add-retailer-form')
+  ];
+
   @ViewChild('logoPhotoElementRef') logoPhotoElementRef: ElementRef;
   @ViewChild('headerPhotoElementRef') headerPhotoElementRef: ElementRef;
   @ViewChild('banner1PhotoElementRef') banner1PhotoElementRef: ElementRef;
   @ViewChild('banner2PhotoElementRef') banner2PhotoElementRef: ElementRef;
 
-  constructor(private brandsService: BrandsService,
-    private _notificationsService: NotificationsService,
-    private router: Router,
-    private authenticationService: AuthenticationService) {
+  constructor(private adminService: AdminService,
+    private _notificationsService: NotificationsService) {
 
-  }
-
-  openHomePage(): void {
-    this.router.navigate(['/']);
-  }
-
-  openBrandForm(): void {
-    this.router.navigate(['app-add-brand-form']);
-  }
-
-  openCollectionForm(): void {
-    this.router.navigate(['app-add-collection-form']);
-  }
-
-  openWatchForm(): void {
-    this.router.navigate(['app-add-watch-form']);
-  }
-
-  openAddBrandPage(): void {
-    this.router.navigate(['app-add-brand-form']);
-  }
-
-  openEditBrandPage(): void {
-    this.router.navigate(['app-edit-brand-form']);
   }
 
   ngOnInit() {
@@ -250,7 +233,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   onSelectionBrandSelected(selectedBrandId) {
-    this.brandsService.readBrandById(selectedBrandId)
+    this.adminService.readBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -308,7 +291,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   getBrands() {
-    this.brandsService.readAllBrands()
+    this.adminService.readAllBrands()
       .subscribe(data => {
         console.log(data);
 
@@ -372,11 +355,6 @@ export class AddBrandFormComponent implements OnInit {
     this.brand.banner2PhotoUrl = '';
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }
-
   updateBrand() {
     const updatedBrandObject = {};
     for (const key in this.brand) {
@@ -389,7 +367,7 @@ export class AddBrandFormComponent implements OnInit {
 
     console.log('New Brand Object', updatedBrandObject);
 
-    this.brandsService.updateBrand(updatedBrandObject, this.brand._id).subscribe(data => {
+    this.adminService.updateBrand(updatedBrandObject, this.brand._id).subscribe(data => {
       console.log(data);
 
       this.responseData = data;
@@ -413,7 +391,7 @@ export class AddBrandFormComponent implements OnInit {
   createBrand(): void {
     console.log('created brand', this.brand);
 
-    this.brandsService.createBrand(this.brand)
+    this.adminService.createBrand(this.brand)
       .subscribe(data => {
         console.log(data);
 
@@ -432,7 +410,7 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   deleteBrand(): void {
-    this.brandsService.deleteBrandById(this.brand._id)
+    this.adminService.deleteBrandById(this.brand._id)
       .subscribe(data => {
         console.log(data);
 

@@ -1,37 +1,13 @@
 <simple-notifications></simple-notifications>
 <div class="container-fluid form-container mx-auto">
   <div class="form-page container">
-    <header class="p-2" style="position: relative; border-bottom: 1px solid #7A1C1C;">
-      <nav class="row">
-        <div class="col text-center mx-auto">
-          <a [routerLink]="['/home']">
-            <picture>
-              <img src="../../../assets/logo.svg" style="max-height: 75px;" class="img-responsive" alt="chronowiz">
-            </picture>
-          </a>
-        </div>
-      </nav>
-      <div style="position: absolute; cursor: pointer; top: 29px; right: 15px;" class="float-right" (click)="logout()">
-        <img src="../../../assets/logout.svg" style="max-height: 32px;" class="img-responsive" alt="logout">
-      </div>
-    </header>
+    <app-form-header userType="admin"></app-form-header>
 
     <div class="my-5">
       <h1> Brand </h1>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <button type="button" class="btn secondry-btn btn-lg" (click)="openWatchForm()">Watch Form</button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn secondry-btn btn-lg" (click)="openCollectionForm()">Collection Form</button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn primary-btn btn-lg" (click)="openBrandForm()">Brand Form</button>
-      </div>
-    </div>
-
+    <app-form-tabs [links]="navRoutes"></app-form-tabs>
 
     <div>
       <br />

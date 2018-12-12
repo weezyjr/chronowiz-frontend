@@ -1,0 +1,14 @@
+<header class="p-2 form-header">
+  <nav class="row">
+    <div class="col text-center mx-auto">
+      <a [routerLink]="['/home']">
+        <picture>
+          <img [src]="LOGO" class="img-responsive logo" alt="chronowiz">
+        </picture>
+      </a>
+    </div>
+  </nav>
+  <div class="float-right logout" (click)="logout()">
+    <img [src]="LOGOUT_ICON" class="img-responsive" alt="logout">
+  </div>
+</header>

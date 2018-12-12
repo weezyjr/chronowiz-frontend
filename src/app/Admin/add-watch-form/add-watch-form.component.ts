@@ -12,6 +12,8 @@ import { BrandsService } from '../../Brand/brands.service';
 import { Brand } from '../../Brand/brand';
 import { Collection } from '../../Collection/collection';
 import { CollectionsService } from 'src/app/Collection/collections.service';
+import { Link } from 'src/app/Link';
+import { AdminService } from '../admin.service';
 
 const s3Bucket = new S3(
   {
@@ -38,6 +40,13 @@ export class AddWatchFormComponent implements OnInit {
   mode: String = 'create';
 
   brands: Brand[];
+
+  navRoutes: Link[] = [
+    new Link('Watch Form', 'app-add-watch-form', true),
+    new Link('Collection Form', 'app-add-collection-form'),
+    new Link('Brand Form', 'app-add-brand-form'),
+    new Link('Retailer Form', 'app-add-retailer-form')
+  ];
 
   // Selection
   selectedBrand: Brand = new Brand();
@@ -74,12 +83,8 @@ export class AddWatchFormComponent implements OnInit {
   @ViewChild('section4PhotoElementRef') section4PhotoElementRef: ElementRef;
   @ViewChild('section5PhotosElementRef') section5PhotosElementRef: ElementRef;
 
-  constructor(private watchesService: WatchesService,
-    private brandsService: BrandsService,
-    private collectionService: CollectionsService,
-    private _notificationsService: NotificationsService,
-    private router: Router,
-    private authenticationService: AuthenticationService) {
+  constructor(private adminService: AdminService,
+    private _notificationsService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -88,7 +93,7 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   getBrands() {
-    this.brandsService.readAllBrands()
+    this.adminService.readAllBrands()
       .subscribe(data => {
         console.log(data);
 
@@ -114,7 +119,7 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   onSelectionBrandSelected(selectedBrandId) {
-    this.brandsService.readBrandById(selectedBrandId)
+    this.adminService.readBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -132,7 +137,7 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   onSelectionCollectionSelected(selectedCollectionId) {
-    this.collectionService.readCollectionById(selectedCollectionId)
+    this.adminService.readCollectionById(selectedCollectionId)
       .subscribe(data => {
         console.log(data);
 
@@ -186,7 +191,7 @@ export class AddWatchFormComponent implements OnInit {
   onSelectionWatchSelected(selectedWatchRef) {
     // TODO shouldn't do another request unless we do a search
 
-    this.watchesService.readWatch(selectedWatchRef)
+    this.adminService.readWatch(selectedWatchRef)
       .subscribe(data => {
         console.log(data);
 
@@ -216,7 +221,7 @@ export class AddWatchFormComponent implements OnInit {
       return;
     }
 
-    this.brandsService.readBrandById(selectedBrandId)
+    this.adminService.readBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -238,7 +243,7 @@ export class AddWatchFormComponent implements OnInit {
       return;
     }
 
-    this.collectionService.readCollectionById(selectedCollectionId)
+    this.adminService.readCollectionById(selectedCollectionId)
       .subscribe(data => {
         console.log(data);
 
@@ -316,11 +321,6 @@ export class AddWatchFormComponent implements OnInit {
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
       this.loading = false;
     }
-  }
-
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
   }
 
   onMainPhotoChanged(event) {
@@ -476,7 +476,7 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   createWatch(): void {
-    this.watchesService.createWatch(this.watch)
+    this.adminService.createWatch(this.watch)
       .subscribe(data => {
         this.responseData = data;
         this.response = this.responseData.response;
@@ -491,55 +491,55 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   updateWatch(): void {
-    const updatedWatchObject = {};
+    /*  const updatedWatchObject = {};
 
-    for (const key in this.watch) {
-      if (this.watch[key]) {
-        if (Object.prototype.toString.call(this.watch[key]) === '[object Array]') {
-          if (this.watch[key].length === 0) {
-            continue;
-          }
-          if (this.watch['bandAdditionalFeatures'].length === 1) {
-            if (!this.watch['bandAdditionalFeatures'][0]['value']) {
+      for (const key in this.watch) {
+        if (this.watch[key]) {
+          if (Object.prototype.toString.call(this.watch[key]) === '[object Array]') {
+            if (this.watch[key].length === 0) {
               continue;
             }
-          }
-          if (this.watch['caseAdditionalFeatures'].length === 1) {
-            if (!this.watch['caseAdditionalFeatures'][0]['value']) {
-              continue;
+            if (this.watch['bandAdditionalFeatures'].length === 1) {
+              if (!this.watch['bandAdditionalFeatures'][0]['value']) {
+                continue;
+              }
             }
-          }
-          if (this.watch['dialAdditionalFeatures'].length === 1) {
-            if (!this.watch['dialAdditionalFeatures'][0]['value']) {
-              continue;
+            if (this.watch['caseAdditionalFeatures'].length === 1) {
+              if (!this.watch['caseAdditionalFeatures'][0]['value']) {
+                continue;
+              }
             }
-          }
-          if (this.watch['functions'].length === 1) {
-            if (!this.watch['functions'][0]['value']) {
-              continue;
+            if (this.watch['dialAdditionalFeatures'].length === 1) {
+              if (!this.watch['dialAdditionalFeatures'][0]['value']) {
+                continue;
+              }
             }
-          }
-          if (this.watch['movementAdditionalFeatures'].length === 1) {
-            if (!this.watch['movementAdditionalFeatures'][0]['value']) {
-              continue;
+            if (this.watch['functions'].length === 1) {
+              if (!this.watch['functions'][0]['value']) {
+                continue;
+              }
             }
-          }
-          if (this.watch['section5PhotoFiles'].length === 1) {
-            if (!this.watch['section5PhotoFiles'][0]['value']) {
-              continue;
+            if (this.watch['movementAdditionalFeatures'].length === 1) {
+              if (!this.watch['movementAdditionalFeatures'][0]['value']) {
+                continue;
+              }
             }
+            if (this.watch['section5PhotoFiles'].length === 1) {
+              if (!this.watch['section5PhotoFiles'][0]['value']) {
+                continue;
+              }
+            }
+            updatedWatchObject[key] = this.watch[key];
           }
-          updatedWatchObject[key] = this.watch[key];
+          else {
+            updatedWatchObject[key] = this.watch[key];
+          }
         }
-        else {
-          updatedWatchObject[key] = this.watch[key];
-        }
-      }
-    }
+      }*/
 
-    console.log(updatedWatchObject);
+    console.log(this.watch);
 
-    this.watchesService.updateWatch(updatedWatchObject, this.watch._id)
+    this.adminService.updateWatch(this.watch, this.watch._id)
       .subscribe(data => {
         console.log(data);
 
@@ -556,7 +556,7 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   deleteWatch(): void {
-    this.watchesService.deleteWatch(this.watch._id)
+    this.adminService.deleteWatch(this.watch._id)
       .subscribe(data => {
         console.log(data);
 
@@ -860,21 +860,5 @@ export class AddWatchFormComponent implements OnInit {
       });
     }
     );
-  }
-
-  openHomePage(): void {
-    this.router.navigate(['/']);
-  }
-
-  openBrandForm(): void {
-    this.router.navigate(['app-add-brand-form']);
-  }
-
-  openCollectionForm(): void {
-    this.router.navigate(['app-add-collection-form']);
-  }
-
-  openWatchForm(): void {
-    this.router.navigate(['app-add-watch-form']);
   }
 }

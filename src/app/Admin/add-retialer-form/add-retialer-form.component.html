@@ -1,0 +1,150 @@
+<div class="container-fluid form-container mx-auto">
+  <div class="form-page container">
+    <app-form-header userType="admin"></app-form-header>
+
+    <div class="my-5">
+      <h1> Retailer </h1>
+    </div>
+
+    <app-form-tabs [links]="navRoutes"></app-form-tabs>
+
+    <div>
+      <br />
+      <h3>Mode</h3>
+      <br />
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="newRetailer();" name="mode" value="create" [(ngModel)]="mode">
+        Create
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="newRetailer();" name="mode" value="update" [(ngModel)]="mode">
+        Update
+      </label>
+      <label class="form-check-inline">
+        <input class="form-check-input" type="radio" (change)="newRetailer();" name="mode" value="delete" [(ngModel)]="mode">
+        Delete
+      </label>
+    </div>
+
+    <div *ngIf="(mode != 'create')">
+      <br />
+      <h3>Select Retailer By Email</h3>
+      <br />
+
+      <div class="row">
+        <div class="col-8">
+          <div class="form-group">
+            <input type="text" class="form-control" id="retailerID" [(ngModel)]="selectedEmail" name="retailerID">
+          </div>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-lg primary-btn" (click)="onRetailerSelection()">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <form #retailerForm="ngForm" *ngIf="(mode == 'create') || (retailer.email)">
+      <div>
+        <br />
+        <h3>Retailer Account</h3>
+        <br />
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input [disabled]="mode == 'delete'" type="email" class="form-control" id="email" [required]="mode != 'delete'" [(ngModel)]="retailer.email"
+            name="email" #email="ngModel">
+          <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Retailer Email is required</div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input [disabled]="mode == 'delete'" type="password" class="form-control" id="password" [required]="mode != 'delete'" [(ngModel)]="retailer.password"
+            name="password" #password="ngModel" pattern="^.*(?=.{8,})((?=.*[!@#$%^&//*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
+          <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+            <ul>
+              <li>The password must contain at least 1 lowercase alphabetical character</li>
+              <li>The password must contain at least 1 uppercase alphabetical character</li>
+              <li>The password must contain at least 1 numeric character</li>
+              <li>The password must contain at least one special character</li>
+              <li>The password must be 8 characters or longer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="firstname" [(ngModel)]="retailer.firstname"
+            name="firstname" #firstname="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="lastname" [(ngModel)]="retailer.lastname"
+            name="lastname" #lastname="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="companyName" [(ngModel)]="retailer.companyName"
+            name="companyName" #companyName="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="address" [(ngModel)]="retailer.address"
+            name="address" #address="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="city" [(ngModel)]="retailer.city"
+            name="city" #city="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="country" [(ngModel)]="retailer.country"
+            name="country" #country="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="poBox">PO box</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="poBox" [(ngModel)]="retailer.poBox"
+            name="poBox" #poBox="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="phone" [(ngModel)]="retailer.phoneNumber"
+            name="phone" #phone="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="mobile" [(ngModel)]="retailer.mobileNumber"
+            name="mobile" #mobile="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="fax">Fax</label>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="fax" [(ngModel)]="retailer.fax"
+            name="fax" #fax="ngModel">
+        </div>
+
+      </div>
+      <br />
+      <div style="text-align: center" *ngIf="(mode == 'create') || (retailer._id)">
+        <div class="row m-1">
+          <div class="col-6">
+            <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="(!retailerForm.form.valid || loading)  && (mode != 'delete')">
+              {{loading? 'loading..' : mode }}</button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-lg secondry-btn" (click)="retailerForm.reset(); newRetailer();">Clear</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

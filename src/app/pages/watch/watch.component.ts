@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WatchesService } from 'src/app/Watch/watches.service';
 import { NotificationsService } from 'angular2-notifications';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { Watch } from 'src/app/Watch/watch';
@@ -25,7 +25,7 @@ export class WatchComponent implements OnInit {
     name: 'Brand', url: '/home'
   }];
 
-  constructor(private activeRoute: ActivatedRoute, private watchesService: WatchesService, private _notificationsService: NotificationsService) {
+  constructor(private activeRoute: ActivatedRoute, private router: Router, private watchesService: WatchesService, private _notificationsService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -64,6 +64,9 @@ export class WatchComponent implements OnInit {
       });
   }
 
+  goToCollection() {
+    this.router.navigate([`/${this.watch.brandObject.name}/collection`, { id: this.watch.collectionObject._id }]);
+  }
 
   get ollectionUrl(): String {
     return `/brand/${this.watch.brandObject.name}/`;

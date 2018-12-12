@@ -9,8 +9,7 @@ import {ResponseData} from '../API/response-data';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': 'my-auth-token'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -21,7 +20,7 @@ export class WatchesService
 {
   env = environment;
 
-  watchesUrl = this.env.backendUrl + 'admin/watches/';
+  watchesUrl = this.env.backendUrl + 'user/watches/';
 
   private handleError: HandleError;
 
