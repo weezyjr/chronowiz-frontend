@@ -18,9 +18,9 @@
           <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
           <p> Price: {{watch?.price}} </p>
           <div class="row">
-            <div class="col-12">
+            <!--<div class="col-12">
               <button class="btn primary-btn" [routerLink]="['/watch/',{ref: watch?.ref}]"> View Watch </button>
-            </div>
+            </div>-->
             <div class="col-12 my-2">
               <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
             </div>

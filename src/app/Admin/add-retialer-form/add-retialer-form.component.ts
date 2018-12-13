@@ -72,7 +72,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.warn(this.response);
+          console.log(this.response);
         }
       });
   }
@@ -90,7 +90,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.warn(this.response);
+          console.log(this.response);
         }
       });
   }
@@ -108,7 +108,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.warn(this.response);
+          console.log(this.response);
         }
       });
   }

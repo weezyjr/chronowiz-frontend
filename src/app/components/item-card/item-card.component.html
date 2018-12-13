@@ -1,6 +1,6 @@
 <div class="card">
   <a [routerLink]="[url,watch?.referenceNumber]">
-    <img [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/600x900'" [alt]="watch?.model">
+    <img [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/900x900'" [alt]="watch?.model">
     <h3>{{watch?.model}}</h3>
     <p><span *ngIf="watch?.model">{{watch?.model}},</span>
       <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
