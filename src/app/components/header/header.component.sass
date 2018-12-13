@@ -16,6 +16,9 @@ $darker-gray: #9e9e9e;
 .fix-height
   padding-top: 150px;
 
+.chronowiz-logo
+  min-height: 30px;
+
 .header
   position: absolute;
   left: 0%;
@@ -25,27 +28,33 @@ $darker-gray: #9e9e9e;
   mix-blend-mode: normal;
   z-index: 100;
   .logo
-    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     text-align: center;
-    left: 0;
+    left: 50%;
     top: 0;
-    z-index: 101;
+    z-index: 700;
+    transform: translateX(-50%);
     img
       margin: 0 auto;
-      width: 100px;
+      max-height: 100px;
       padding-top: 15px;
+      padding-bottom: 15px;
   .icon
     margin: 10px;
     width: 24px;
     height: 24px;
     z-index: 500;
+    margin-top: 45px;
   .menu
     width: 17px;
-    margin: 10px 10px 10px -10px;
+    margin: 13px 10px 10px -20px;
 
   .navbar
-    margin-top: 45px;
+    //margin-top: 45px;
     z-index: 500;
   .d_none
     display: none;
@@ -89,23 +98,45 @@ $darker-gray: #9e9e9e;
       color: $dark;
       text-decoration-line: none;
 
-
   ul
     margin: 0;
     height: 100%;
     z-index: 500;
 
+@media only screen and (min-width: 480px) and (max-width: 800px)
+  .logo
+    img
+      max-width: 100px !important;
+
 @media only screen and (max-width: 800px)
   .header
     max-height: 80px;
     .logo
+      max-height: 80px !important;
       img
-        width: 60px !important;
+        max-width: 200px;
+        max-height: 80px !important;
     .d_none
       display: inline;
   .search-icon
     display: none;
-  .navbar
-    margin-top: 15px !important;
+  .float-right
+    margin-top: 20px;
+  .chronowiz-logo
+    padding: 0px !important;
+    min-height: 20px;
+    img
+      max-height: 20px;
+
   .icon
+    margin-top: 15px !important;
     margin-right: 0 !important;
+    margin-top: 10px !important;
+
+@media only screen and (max-width: 380px)
+  .logo
+    img
+      max-width: 80px !important;
+  .chronowiz-logo
+    img
+      min-height: 17px !important;

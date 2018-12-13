@@ -1,4 +1,4 @@
-<app-header [transparent]="true"></app-header>
+<app-header [transparent]="true" [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <app-hero *ngIf="brandObject" [cover]="brandObject?.banner1PhotoUrl ? brandObject?.banner1PhotoUrl: 'http://placehold.it/1600x900'"></app-hero>
 
@@ -18,9 +18,12 @@
   <app-card-carousel *ngFor="let collection of collections | slice: 0:collectionLimit" [collection]="collection" [gender]="currentGender"></app-card-carousel>
 
   <div class="text-center mx-auto show-more">
-    <button class="btn primary-btn" (click)="showMore()" [disabled]="isShowMoreEmpty">Show More</button>
+    <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
   </div>
 </div>
+<br/>
+<br/>
+<br/>
 
 <!--
   <app-footer-hero></app-footer-hero>

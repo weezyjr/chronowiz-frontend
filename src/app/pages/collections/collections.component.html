@@ -1,10 +1,10 @@
-<app-header [bg_white]="true"></app-header>
+<app-header [bg_white]="true" [_brandName]="collcetion?.brandObject?.name" [_brandLogo]="collcetion?.brandObject?.logoPhotoUrl"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <div class="container">
   <div class="collections-title text-center">
     <h1 *ngIf="collcetion?.name === 'UNDEFINED'"> Collection </h1>
     <h1 *ngIf="collcetion?.name !== 'UNDEFINED'"> {{collcetion?.name}} </h1>
-    <h2> Rolex </h2>
+    <h2> {{collcetion?.brandObject?.name}} </h2>
   </div>
   <div class="collection-desc">
     <p class="muted">
@@ -54,9 +54,14 @@
       </div>
     </div>
     <div class="text-center mx-auto show-more">
-      <button class="btn primary-btn" (click)="showMore()" [disabled]="isShowMoreEmpty">Show More</button>
+      <button class="btn primary-btn" (click)="toggleShowMore()" >Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
     </div>
   </div>
-  <app-footer-hero></app-footer-hero>
+  <br/>
+  <br/>
+  <br/>
+ <!--
+   <app-footer-hero></app-footer-hero>
+ -->
 </div>
 <app-footer></app-footer>

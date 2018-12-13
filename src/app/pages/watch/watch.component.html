@@ -1,9 +1,9 @@
-<app-header [bg_white]="true"></app-header>
+<app-header [bg_white]="true" [_brandName]="watch?.brandObject?.name" [_brandLogo]="watch?.brandObject?.logoPhotoUrl"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 
 <div class="text-center" id="top">
   <h1>{{watch?.model}}</h1>
-  <a (click)="goToCollection()" class="view-all-btn text-center" *ngIf="watch?.collectionObject?.name && watch?.collectionObject?.name!='UNDEFINED'">
+  <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="watch?.collectionObject?.name && watch?.collectionObject?.name!='UNDEFINED'">
     <i class="fa"><img src="../../../assets/app-icon.svg" width="9" alt=""></i>
     View all {{watch?.collectionObject?.name}} models
   </a>

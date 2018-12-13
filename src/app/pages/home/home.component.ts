@@ -43,13 +43,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // render the show more brands list
-  showMoreBrands() {
-    this.brandsLimit = Infinity;
+  toggleShowMore() {
+    if (this.isShowMoreOn) {
+      this.brandsLimit = 8;
+    }
+    else {
+      this.brandsLimit = Infinity;
+    }
   }
 
-  // check if the show more brands list is empty
-  get isShowMoreBrandsEmpty() {
+  // check if the show more list is empty
+  get isShowMoreOn() {
     return this.brandsLimit === Infinity;
   }
 

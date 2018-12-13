@@ -53,7 +53,7 @@ export class WatchComponent implements OnInit {
           }
 
           if (this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED') {
-            this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.collectionObject._id}` });
+            this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.brandObject.name}/${this.watch.collectionObject._id}` });
           } else {
             this.breads.push({ name: 'collection', url: `/` });
           }
@@ -64,12 +64,8 @@ export class WatchComponent implements OnInit {
       });
   }
 
-  goToCollection() {
-    this.router.navigate([`/${this.watch.brandObject.name}/collection`, { id: this.watch.collectionObject._id }]);
-  }
-
-  get ollectionUrl(): String {
-    return `/brand/${this.watch.brandObject.name}/`;
+  get collectionRoute(): Array<String> {
+    return [`/brand/${this.watch.brandObject.name}/${this.watch.collectionObject._id}`];
   }
 
   scrollTo(id: string): void {

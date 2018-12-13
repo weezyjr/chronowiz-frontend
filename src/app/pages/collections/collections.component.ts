@@ -48,12 +48,17 @@ export class CollectionsComponent implements OnInit {
   }
 
   // render the show more list
-  showMore() {
-    this.watchsLimit = Infinity;
+  toggleShowMore() {
+    if (this.isShowMoreOn) {
+      this.watchsLimit = 12;
+    }
+    else {
+      this.watchsLimit = Infinity;
+    }
   }
 
   // check if the show more list is empty
-  get isShowMoreEmpty() {
+  get isShowMoreOn() {
     return this.watchsLimit === Infinity;
   }
 

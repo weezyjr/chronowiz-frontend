@@ -626,10 +626,14 @@
 
         <div>
           <label for="mainPhotoFileInput">Main Photo</label>
+          <div *ngIf="watch?.mainPhotoUrl" class="preview">
+            <h6> Current Main Photo </h6>
+            <img [src]="watch?.mainPhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onMainPhotoChanged($event)" #mainPhotoElementRef id="mainPhotoFileInput"
+                <input [ngClass]="{'valid-img': watch?.mainPhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onMainPhotoChanged($event)" #mainPhotoElementRef id="mainPhotoFileInput"
                        [(ngModel)]="watch.mainPhotoFile" name="mainPhotoFile" #mainPhotoFile="ngModel">
               </div>
             </div>
@@ -641,10 +645,14 @@
 
         <div>
           <label for="banner1PhotoFileInput">Banner 1 Photo</label>
+          <div *ngIf="watch?.banner1PhotoUrl" class="preview">
+            <h6> Current Banner 1 Photo </h6>
+            <img [src]="watch?.banner1PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onBanner1PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.banner1PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onBanner1PhotoChanged($event)"
                        #banner1PhotoElementRef id="banner1PhotoFileInput" [(ngModel)]="watch.banner1PhotoFile" name="banner1PhotoFile"
                        #banner1PhotoFile="ngModel">
               </div>
@@ -657,10 +665,14 @@
 
         <div>
           <label for="banner2PhotoFile">Banner 2 Photo</label>
+          <div *ngIf="watch?.banner2PhotoUrl" class="preview">
+            <h6> Current Banner 2 Photo </h6>
+            <img [src]="watch?.banner2PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onBanner2PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.banner2PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onBanner2PhotoChanged($event)"
                        #banner2PhotoElementRef id="banner2PhotoFile" [(ngModel)]="watch.banner2PhotoFile" name="banner2PhotoFile"
                        #banner2PhotoFile="ngModel">
               </div>
@@ -689,10 +701,14 @@
 
         <div>
           <label for="section1PhotoFileInput">Section 1 Photo</label>
+          <div *ngIf="watch?.section1PhotoUrl" class="preview">
+            <h6> Current Section 1 Photo </h6>
+            <img [src]="watch?.section1PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection1PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.section1PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection1PhotoChanged($event)"
                        #section1PhotoElementRef id="section1PhotoFileInput" [(ngModel)]="watch.section1PhotoFile" name="section1PhotoFile"
                        #section1PhotoFile="ngModel">
               </div>
@@ -721,10 +737,14 @@
 
         <div>
           <label for="section2PhotoFileInput">Section 2 Photo</label>
+          <div *ngIf="watch?.section2PhotoUrl" class="preview">
+            <h6> Current Section 2 Photo </h6>
+            <img [src]="watch?.section2PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection2PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.section2PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection2PhotoChanged($event)"
                        #section2PhotoElementRef id="section2PhotoFileInput" [(ngModel)]="watch.section2PhotoFile" name="section2PhotoFile"
                        #section2PhotoFile="ngModel">
               </div>
@@ -753,10 +773,14 @@
 
         <div>
           <label for="section3PhotoFileInput">Section 3 Photo</label>
+          <div *ngIf="watch?.section3PhotoUrl" class="preview">
+            <h6> Current Section 3 Photo </h6>
+            <img [src]="watch?.section3PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection3PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.section3PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection3PhotoChanged($event)"
                        #section3PhotoElementRef id="section3PhotoFileInput" [(ngModel)]="watch.section3PhotoFile" name="section3PhotoFile"
                        #section3PhotoFile="ngModel">
               </div>
@@ -787,10 +811,14 @@
 
         <div>
           <label for="section4PhotoFileInput">Section 4 Photo</label>
+          <div *ngIf="watch?.section4PhotoUrl" class="preview">
+            <h6> Current Section 4 Photo </h6>
+            <img [src]="watch?.section4PhotoUrl" class="img-responsive">
+          </div>
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection4PhotoChanged($event)"
+                <input [ngClass]="{'valid-img': watch?.section4PhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onSection4PhotoChanged($event)"
                        #section4PhotoElementRef id="section4PhotoFileInput" [(ngModel)]="watch.section4PhotoFile" name="section4PhotoFile"
                        #section4PhotoFile="ngModel">
               </div>

@@ -39,12 +39,17 @@ export class BrandComponent implements OnInit {
   }
 
   // render the show more list
-  showMore() {
-    this.collectionLimit = Infinity;
+  toggleShowMore() {
+    if (this.isShowMoreOn) {
+      this.collectionLimit = 4;
+    }
+    else {
+      this.collectionLimit = Infinity;
+    }
   }
 
   // check if the show more list is empty
-  get isShowMoreEmpty() {
+  get isShowMoreOn() {
     return this.collectionLimit === Infinity;
   }
 

@@ -1,31 +1,37 @@
 <header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
   <div class="container">
     <div class="logo">
-      <a class="nav-link" [routerLink]="['/home']"><img [src]="logoSrc" alt=""></a>
+      <a class="nav-link" [routerLink]="brandName"><img [src]="_brandLogo" alt="logo"></a>
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
         <div class="float-left">
+          <li class="p-2 chronowiz-logo"> <a *ngIf="_brandName" [routerLink]="['/home']">
+              <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
+            </a>
+          </li>
           <li class="list-inline-item"><a href="#"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
-          <li class="list-inline-item d_none"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc" alt="">
+          <li class="list-inline-item d_none"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc"
+                alt="">
             </a></li>
         </div>
         <div class="float-right">
           <li class="list-inline-item">
             <div (click)="openUserMenu()">
               <img class="icon" [src]="userIconSrc" alt="">
-             </div>
-             <div class="drop-down-menu" [ngClass]="{'d-none': menuClosed}">
-                <div class="arrow-up"></div>
-                <div class="drop-down-content">
-                    <ul>
-                      <li> <a href="#"> My Account </a> </li>
-                      <li> <a href="#"> Logout </a> </li>
-                    </ul>
-                </div>
+            </div>
+            <div class="drop-down-menu" [ngClass]="{'d-none': menuClosed}">
+              <div class="arrow-up"></div>
+              <div class="drop-down-content">
+                <ul>
+                  <li> <a href="#"> My Account </a> </li>
+                  <li> <a href="#"> Logout </a> </li>
+                </ul>
               </div>
-            </li>
-          <li class="list-inline-item search-icon"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc" alt="">
+            </div>
+          </li>
+          <li class="list-inline-item search-icon"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc"
+                alt="">
             </a></li>
           <li class="list-inline-item"><a href="#"> <img class="icon" [src]="paperBagIconSrc" alt=""> </a></li>
         </div>

@@ -1,12 +1,12 @@
 .hero
-  height: 520px;
+  height: 450px;
   width: 100%;
   background-repeat: no-repeat !important;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: center !important;
 
 .background-lg
-  height: 570px;
+  max-height: 570px;
 .background-md
   max-height: 420px;
 .background-sm
@@ -14,15 +14,15 @@
 
 @media only screen and (min-width: 576px) and (max-width: 768px)
   .hero
-    max-height: 400px !important;
+    max-height: 350px !important;
   .background-md
-    max-height: 300px !important;
+    max-height: 200px !important;
   .background-sm
-    max-height: 250px !important;
+    max-height: 200px !important;
 
 @media only screen and (max-width: 576px)
   .hero
-    max-height: 340px !important;
+    max-height: 250px !important;
   .background-md
     max-height: 180px !important;
   .background-sm
@@ -30,4 +30,4 @@
 
 @media only screen and (min-width: 1600px) and (min-height: 900px)
   .background-lg
-    height: 700px !important;
+    height: 570px !important;

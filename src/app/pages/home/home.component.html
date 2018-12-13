@@ -24,10 +24,13 @@
         </a>
       </div>
     </div>
-    <div class="text-center btn-margin">
-      <button class="btn primary-btn" (click)="showMoreBrands()" [disabled]="isShowMoreBrandsEmpty">Show More</button>
+    <div class="text-center mx-auto show-more">
+      <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
     </div>
   </section>
+  <br/>
+  <br/>
+  <br/>
 
  <!--
    <app-social-media-section></app-social-media-section>

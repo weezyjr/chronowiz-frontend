@@ -73,13 +73,13 @@
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Brand Logo</label>
           <div *ngIf="brand?.logoPhotoUrl" class="preview">
-            <h6> Current header Photo </h6>
+            <h6> Current Logo Photo </h6>
             <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
           </div>
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onLogoPhotoChanged($event)"
+                <input  [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onLogoPhotoChanged($event)"
                   id="logoPhotoFileInput" required name="logoPhotoFile" #logoPhotoFile="ngModel" [(ngModel)]="brand.logoPhotoFile">
               </div>
             </div>
@@ -100,7 +100,7 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onHeaderPhotoChanged($event)"
+                <input [ngClass]="{'valid-img': brand?.headerPhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onHeaderPhotoChanged($event)"
                   id="headerPhotoFileInput" name="headerPhotoFile"
                   #headerPhotoFile="ngModel" [(ngModel)]="brand.headerPhotoFile"
                   >

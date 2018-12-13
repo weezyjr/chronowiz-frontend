@@ -122,13 +122,6 @@ section
 .img-responsive
   max-width: 100%;
 
-@media only screen and (max-width: 435px)
-  .search
-    .icon
-      display: none;
-  .form-input
-    min-width: auto;
-
 .title
   margin-bottom: 30px;
   margin-top: 64px;
@@ -226,3 +219,17 @@ section
 .preview
   .img-responsive
     max-height: 200px;
+
+.valid-img
+  border-left: 5px solid #42A948;
+
+@media only screen and (max-width: 435px)
+  .search
+    .icon
+      display: none;
+  .form-input
+    min-width: auto;
+
+@media only screen and (max-width: 576px)
+  .title
+    margin-top: 10px;
