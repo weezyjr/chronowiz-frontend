@@ -1,12 +1,9 @@
 import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 import { NotificationsService } from 'angular2-notifications';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Brand } from '../../Brand/brand';
 import { ResponseData } from '../../API/response-data';
-import { BrandsService } from '../../Brand/brands.service';
-import { AuthenticationService } from '../../Auth/authentication.service';
 import { ResponseObject } from '../../API/responseObject';
 import { Link } from 'src/app/Link';
 import { AdminService } from '../admin.service';

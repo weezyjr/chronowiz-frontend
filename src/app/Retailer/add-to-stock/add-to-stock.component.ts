@@ -2,12 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Link } from 'src/app/Link';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
-import { WatchesService } from 'src/app/Watch/watches.service';
-import { BrandsService } from 'src/app/Brand/brands.service';
-import { CollectionsService } from 'src/app/Collection/collections.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { Brand } from 'src/app/Brand/brand';
 import { Collection } from 'src/app/Collection/collection';
 import { Watch } from 'src/app/Watch/watch';
@@ -31,6 +27,7 @@ export class AddToStockComponent implements OnInit {
   selectionCollections: Collection[];
   selectedCollection: Collection = new Collection();
   selectionWatchReferenceNumber: string;
+  status = false;
 
   navRoutes: Link[] = [
     new Link('Add to Stock', 'retailer/add-to-stock', true),
@@ -106,6 +103,9 @@ export class AddToStockComponent implements OnInit {
   onSelectionWatchSelected(selectedWatchRef) {
     // TODO shouldn't do another request unless we do a search
 
+    this.status = false;
+    console.log('searched' , this.status);
+
     this.retailerService.getWatchById(selectedWatchRef)
       .subscribe(data => {
         console.log(data);
@@ -125,6 +125,7 @@ export class AddToStockComponent implements OnInit {
 
   async addToStock(status) {
     if (status) {
+      this.status = true;
       await this.retailerService.addWatchToStock(this.watch._id)
         .subscribe(data => {
           console.log(data);
@@ -140,6 +141,7 @@ export class AddToStockComponent implements OnInit {
         });
     }
     else {
+      this.status = false;
       await this.retailerService.removeWatchFromStock(this.watch._id)
         .subscribe(data => {
           console.log(data);

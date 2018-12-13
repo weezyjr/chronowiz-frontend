@@ -76,7 +76,7 @@
               <button class="btn primary-btn" (click)="goToWatch()"> View Watch </button>
             </div>-->
             <div class="col-12 my-2">
-              <app-toggle-btn (toggle)="addToStock($event)"></app-toggle-btn>
+              <app-toggle-btn [status]="status" (toggle)="addToStock($event)"></app-toggle-btn>
             </div>
           </div>
         </div>

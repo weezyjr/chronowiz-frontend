@@ -1,3 +1,4 @@
+<simple-notifications></simple-notifications>
 <div class="container-fluid form-container mx-auto">
   <div class="form-page container">
     <app-form-header userType="admin"></app-form-header>
@@ -51,7 +52,7 @@
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input [disabled]="mode == 'delete'" type="email" class="form-control" id="email" [required]="mode != 'delete'" [(ngModel)]="retailer.email"
+          <input [disabled]="mode == 'delete'" type="email" class="form-control" id="email" required [(ngModel)]="retailer.email"
             name="email" #email="ngModel">
           <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Retailer Email is required</div>
         </div>
@@ -59,7 +60,7 @@
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input [disabled]="mode == 'delete'" type="password" class="form-control" id="password" [required]="mode != 'delete'" [(ngModel)]="retailer.password"
+          <input [disabled]="mode == 'delete'" type="password" class="form-control" id="password" required [(ngModel)]="retailer.password"
             name="password" #password="ngModel" pattern="^.*(?=.{8,})((?=.*[!@#$%^&//*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
           <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
             <ul>
@@ -74,13 +75,13 @@
 
         <div class="form-group">
           <label for="firstname">First Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="firstname" [(ngModel)]="retailer.firstname"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="firstname" [(ngModel)]="retailer.firstName"
             name="firstname" #firstname="ngModel">
         </div>
 
         <div class="form-group">
           <label for="lastname">Last Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="lastname" [(ngModel)]="retailer.lastname"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="lastname" [(ngModel)]="retailer.lastName"
             name="lastname" #lastname="ngModel">
         </div>
 

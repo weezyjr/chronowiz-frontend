@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Retailer } from 'src/app/Retailer/retailer';
 import { Link } from 'src/app/Link';
-import { RetailerService } from 'src/app/Retailer/retailer.service';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { NotificationsService } from 'angular2-notifications';
@@ -29,6 +28,12 @@ export class AddRetialerFormComponent implements OnInit {
     new Link('Retailer Form', 'app-add-retailer-form', true)
   ];
 
+  constructor(private adminService: AdminService, private _notificationsService: NotificationsService) {
+  }
+
+  ngOnInit() {
+  }
+
   newRetailer() {
     this.retailer = new Retailer();
   }
@@ -46,6 +51,7 @@ export class AddRetialerFormComponent implements OnInit {
       } else {
         throw new Error('Unspecified mode');
       }
+      this.loading = false;
     }
     catch (error) {
       console.log(error);
@@ -66,7 +72,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.log(this.response);
+          console.warn(this.response);
         }
       });
   }
@@ -84,7 +90,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.log(this.response);
+          console.warn(this.response);
         }
       });
   }
@@ -102,7 +108,7 @@ export class AddRetialerFormComponent implements OnInit {
         }
         else {
           this._notificationsService.success('Success', this.response.message.en);
-          console.log(this.response);
+          console.warn(this.response);
         }
       });
   }
@@ -120,16 +126,12 @@ export class AddRetialerFormComponent implements OnInit {
           console.log(this.response);
         }
         else {
-          this._notificationsService.success('Success', this.response.message.en);
           console.log(this.response);
           this.retailer = <Retailer>this.response.payload;
         }
       });
   }
 
-  constructor(private adminService: AdminService, private _notificationsService: NotificationsService) { }
 
-  ngOnInit() {
-  }
 
 }

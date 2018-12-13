@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'app-toggle-btn',
@@ -7,15 +7,24 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ToggleBtnComponent implements OnInit {
 
-  @Input()
-  status: Boolean = false;
+  _status: Boolean = false;
+
+  @Input() set status(value: Boolean) {
+    console.log('Toggle changes' , value);
+    this._status = value;
+  }
+
+  get status(): Boolean{
+    return this._status;
+  }
 
   @Output() toggle = new EventEmitter<any>();
 
-  onClick(){
+  onClick() {
     this.status = !this.status;
     this.toggle.next(this.status);
   }
+
   constructor() { }
 
   ngOnInit() {
