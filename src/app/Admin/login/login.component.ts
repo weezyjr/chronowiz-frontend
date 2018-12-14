@@ -7,7 +7,7 @@ import {AuthenticationService} from '../../Auth/authentication.service';
 import {ResponseObject} from '../../API/responseObject';
 
 @Component({templateUrl: 'login.component.html', styleUrls: ['./login.component.sass']})
-export class LoginComponent implements OnInit
+export class AdminLoginComponent implements OnInit
 {
   loginForm: FormGroup;
   loading = false;
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit
   )
   {
     // redirect to admin if already logged in
-    if (this.authenticationService.currentUserValue)
+    if (this.authenticationService.currentAdminValue)
     {
       this.router.navigate(['/admin/login']);
     }
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.email.value, this.f.password.value)
+    this.authenticationService.adminLogin(this.f.email.value, this.f.password.value)
       .subscribe(
         data =>
         {

@@ -11,7 +11,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SearchPageComponent} from './Search/search-page/search-page.component';
 import {WatchDetailsComponent} from './Watch/watch-details/watch-details.component';
-import {LoginComponent} from './Admin/login/login.component';
+import {AdminLoginComponent} from './Admin/login/login.component';
 
 import {AddWatchFormComponent} from './Admin/add-watch-form/add-watch-form.component';
 import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.component';
@@ -19,7 +19,6 @@ import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collec
 import {HttpErrorHandlerService} from './API/http-error-handler.service';
 import {WatchesService} from './Watch/watches.service';
 import {SearchService} from './Search/search.service';
-import {JwtInterceptor} from './API/jwt.interceptor';
 
 import {ErrorInterceptor} from './API/error.interceptor';
 import {HeaderComponent} from './components/header/header.component';
@@ -49,12 +48,15 @@ import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
 import { WatchesPipe } from './Filters/watches.pipe';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './User/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddWatchFormComponent,
-    LoginComponent,
+    AdminLoginComponent,
     RetailerLoginComponent,
     SearchPageComponent,
     WatchDetailsComponent,
@@ -86,7 +88,10 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
     AddToStockComponent,
     ToggleBtnComponent,
     InStockComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

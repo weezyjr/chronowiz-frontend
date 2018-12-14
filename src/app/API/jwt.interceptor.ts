@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
   {
     // add authorization header with jwt token if available
-    const currentAdmin = this.authenticationService.currentUserValue;
+    const currentAdmin = this.authenticationService.currentAdminValue;
     if (currentAdmin && currentAdmin.jwt)
     {
       console.log(currentAdmin);

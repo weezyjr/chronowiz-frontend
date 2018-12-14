@@ -14,7 +14,19 @@ $darker-gray: #9e9e9e;
 *
   font-family: Roboto;
 
-.form-input
+a
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  color: #7A1C1C;
+
+a:hover
+  text-decoration-line: none;
+  color: #7A1C1C;
+
+.vh-100
+  height: 100vh;
+
+.search-form-input
   border: 1px solid $dark-gray;
   height: 42px;
   max-width: 391px;
@@ -25,11 +37,11 @@ $darker-gray: #9e9e9e;
   line-height: normal;
   font-size: 14px;
   letter-spacing: 0.120909px;
-  color: $dark-gray;
+  color: $dark;
   padding: 11px 20px 14px;
 
-.form-input:focus
-  color: $dark;
+.search-form-input::placeholder
+  color: $dark-gray;
 
 .search
   position: relative;
@@ -222,6 +234,48 @@ section
 
 .valid-img
   border-left: 5px solid #42A948;
+
+.form
+  margin: 60px auto;
+
+.form-input
+  border: 0.5px solid #909090
+  box-sizing: border-box
+  border-radius: 2px
+  padding: 5px 10px
+  width: 220px
+  height: 32px
+  margin: 5px 10px 5px
+  &::placeholder
+    font-size: 12px
+    letter-spacing: 0.1px
+    color: #9E9E9E
+
+.wide-btn
+  width: 220px;
+  height: 32px;
+  margin: 22px 10px 0px;
+
+.sassy-text
+  font-family: Arapey;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  color: #7A1C1C;
+
+.full-height
+  min-height: calc(100vh - 297px);
+
+.invalid
+  font-size: 80%;
+  color: #9e9e9e;
+  max-width: 220px;
+  text-align: left;
+  margin: auto;
+
+@media only screen and (max-width: 990px)
+  .full-height
+    min-height: calc(100vh - 227px);
 
 @media only screen and (max-width: 435px)
   .search

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './Auth/authentication.service';
 import { Admin } from './Admin/admin';
+import { Retailer } from './Retailer/retailer';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,16 @@ import { Admin } from './Admin/admin';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  // what is this ??!
   currentAdmin: Admin;
+  currentRetailer: Retailer;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentAdmin = x);
+    this.authenticationService.currentAdmin.subscribe(admin => this.currentAdmin = admin);
+    this.authenticationService.currentRetailer.subscribe(retailer => this.currentRetailer = retailer);
   }
 
   onActivate(event) {

@@ -55,7 +55,6 @@ export class HeaderComponent implements OnInit {
       this.menuIconSrc = '../../../assets/menu-white.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
     }
-    console.log(this.transparent);
   }
 
   openUserMenu() {

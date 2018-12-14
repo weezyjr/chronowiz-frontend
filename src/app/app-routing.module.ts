@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SearchPageComponent } from './Search/search-page/search-page.component';
 import { WatchDetailsComponent } from './Watch/watch-details/watch-details.component';
-import { LoginComponent } from './Admin/login/login.component';
-import { AuthGuard } from './Auth/auth.guard';
+import { AdminLoginComponent } from './Admin/login/login.component';
+import { AdminGuard } from './Auth/admin.guard';
 import { AddWatchFormComponent } from './Admin/add-watch-form/add-watch-form.component';
 import { AddBrandFormComponent } from './Admin/add-brand-form/add-brand-form.component';
 import { AddCollectionFormComponent } from './Admin/add-collection-form/add-collection-form.component';
@@ -16,6 +16,10 @@ import { RetailerLoginComponent } from './Retailer/login/login.component';
 import { AddRetialerFormComponent } from './Admin/add-retialer-form/add-retialer-form.component';
 import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ProfileComponent } from './User/profile/profile.component';
+import { UserGuard } from './Auth/user.guard';
 
 const routes: Routes = [
   {
@@ -59,28 +63,28 @@ const routes: Routes = [
   },
   {
     path: 'admin/login',
-    component: LoginComponent
+    component: AdminLoginComponent
   },
   {
     path: 'admin',
     redirectTo: 'app-add-watch-form',
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'app-add-watch-form',
     component: AddWatchFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'app-add-brand-form',
     component: AddBrandFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'app-add-collection-form',
     component: AddCollectionFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
   },
   {
     path: 'retailer',
@@ -105,7 +109,20 @@ const routes: Routes = [
   {
     path: 'app-add-retailer-form',
     component: AddRetialerFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [UserGuard]
   },
   {
     path: '**',

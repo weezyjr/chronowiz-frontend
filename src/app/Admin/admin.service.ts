@@ -40,7 +40,7 @@ export class AdminService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `JWT ${authenticationService.currentUserValue.jwt}`
+        'Authorization': `JWT ${authenticationService.currentAdminValue.jwt}`
       })
     };
   }

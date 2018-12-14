@@ -1,0 +1,40 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<div class="container-fluid mx-auto full-height d-flex align-items-center text-center">
+  <div class="login-form mx-auto">
+
+    <p class="sassy-text"> Please enter your credentials: </p>
+
+    <h1> Login </h1>
+
+    <form class="form" #loginForm="ngForm" (ngSubmit)="loginForm.form.valid? onSubmit() : null">
+      <div class="row">
+
+        <div class="col-12">
+          <input class="form-input" placeholder="Email" [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" type="email" name="email" [ngModel]="user.email" required  #email="ngModel">
+          <div [hidden]="email.valid || email.pristine" class="invalid">
+            Invalid Email
+          </div>
+        </div>
+
+        <div class="col-12">
+          <input required class="form-input" #password="ngModel" placeholder="Password" type="password" name="password"
+            [(ngModel)]="user.password">
+        </div>
+
+        <div class="col-12 text-center p-3">
+          <a href="javascript.void(0)"> Forgot your password ? </a>
+        </div>
+        <div class="col-12">
+          <button class="btn primary-btn wide-btn" type="submit"> confirm </button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+        <div class="col-12">
+          <button class="btn secondry-btn wide-btn"> Register Now </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<app-footer></app-footer>

@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthenticationService} from './authentication.service';
 
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate
+export class AdminGuard implements CanActivate
 {
   constructor(
     private router: Router,
@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
   {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser)
+    const currentAdmin = this.authenticationService.currentAdminValue;
+    if (currentAdmin)
     {
       // authorised so return true
       return true;
