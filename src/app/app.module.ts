@@ -47,6 +47,7 @@ import { TabsComponent } from './components/forms/tabs/tabs.component';
 import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
 import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
+import { WatchesPipe } from './Filters/watches.pipe';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { InStockComponent } from './Retailer/in-stock/in-stock.component';
     CollectionsComponent,
     GenderPipe,
     CollectionPipe,
+    WatchesPipe,
     CollapsibleComponent,
     FilterCollapsibleComponent,
     WatchComponent,

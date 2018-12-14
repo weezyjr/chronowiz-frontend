@@ -4,24 +4,83 @@
     <app-form-header userType="retailer"></app-form-header>
     <br />
     <h1>In Stock</h1>
-    <br/>
+    <br />
     <app-form-tabs [links]="navRoutes"></app-form-tabs>
+    <br />
+    <br />
+    <app-filter-collapsible>
+      <form >
+        <br />
+        <h3>Filter Watches by Brand & Collection</h3>
+        <br />
+        <div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="selectionBrand">Brand</label>
+                <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control"
+                  name="selectionBrand" #selectionBrand >
+                  <option value=""></option>
+                  <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectionCollection">Collection</label>
+          <select type="text" (change)="onSelectionCollectionSelected($event.target.value)" class="form-control" #selectionCollection
+            name="selectionCollection" >
+            <option value=""></option>
+            <option *ngFor="let selectionCollection of selectionCollections" [value]="selectionCollection?._id">{{selectionCollection?.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="selectionWatch">Watch</label>
+          <select type="text" (change)="onSelectionWatchSelected($event.target.value)" class="form-control" #selectionWatch
+            name="selectionWatch">
+            <option value=""></option>
+            <option *ngFor="let selectionWatch of selectedCollection?.watchObjects" [value]="selectionWatch?.referenceNumber">{{selectionWatch?.referenceNumber}}</option>
+          </select>
+        </div>
+        <div>
+          <br />
+          <h3>Filter Watches By Reference Number</h3>
+          <br />
+        </div>
+
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <input type="text" class="form-control" id="watchInputReferenceNumber" [(ngModel)]="selectionWatchReferenceNumber"
+                name="watchInputReferenceNumber" #watchInputReferenceNumber="ngModel">
+            </div>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-lg primary-btn" (click)="resetFilters(); selectionBrand.value=''; selectionCollection.value=''; selectionWatch.value=''; onSelectionWatchSelected(selectionWatchReferenceNumber);">Search</button>
+          </div>
+        </div>
+      </form>
+    </app-filter-collapsible>
     <div>
       <br />
       <h3> In Stock Watches </h3>
       <br />
       <div class="row">
-        <div class="col-6 mx-auto text-center" *ngFor="let watch of watchs">
+        <div class="col-6 mx-auto text-center" *ngFor="let watch of watchs | watches: filters.brandID : filters.collectionID : filters.watchRef">
           <div>
             <app-item-card *ngIf="watch" [watch]="watch"></app-item-card>
           </div>
           <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
-          <p> Price: {{watch?.price}} </p>
+          <p> Price: {{watch?.price | currency: watch?.priceCurrency }} </p>
           <div class="row">
-            <!--<div class="col-12">
-              <button class="btn primary-btn" [routerLink]="['/watch/',{ref: watch?.ref}]"> View Watch </button>
-            </div>-->
+            <div class="col-12">
+              <button class="btn primary-btn" (click)="viewWatch(watch?.referenceNumber)"> View Watch </button>
+            </div>
             <div class="col-12 my-2">
+              <h6> In Stock </h6>
               <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
             </div>
           </div>

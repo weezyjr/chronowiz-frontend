@@ -70,12 +70,13 @@
             <app-item-card *ngIf="watch" [watch]="watch"></app-item-card>
           </div>
           <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
-          <p> Price: {{watch?.price}} </p>
+          <p> Price: {{watch?.price | currency: watch?.priceCurrency  }} </p>
           <div class="row">
-      <!--      <div class="col-12">
-              <button class="btn primary-btn" (click)="goToWatch()"> View Watch </button>
-            </div>-->
+            <div class="col-12">
+              <button class="btn primary-btn" (click)="viewWatch(watch?.referenceNumber)"> View Watch </button>
+            </div>
             <div class="col-12 my-2">
+              <h6>In Stock</h6>
               <app-toggle-btn [status]="status" (toggle)="addToStock($event)"></app-toggle-btn>
             </div>
           </div>

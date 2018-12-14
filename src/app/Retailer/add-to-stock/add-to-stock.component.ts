@@ -44,8 +44,9 @@ export class AddToStockComponent implements OnInit {
     this.getBrands();
   }
 
-  goToWatch() {
-    this.router.navigate(['../watch', { ref: this.watch.referenceNumber }]);
+  viewWatch(ref: String) {
+    console.log(ref);
+    this.router.navigate(['/watch', ref]);
   }
 
   getBrands() {
@@ -104,7 +105,7 @@ export class AddToStockComponent implements OnInit {
     // TODO shouldn't do another request unless we do a search
 
     this.status = false;
-    console.log('searched' , this.status);
+    console.log('searched', this.status);
 
     this.retailerService.getWatchById(selectedWatchRef)
       .subscribe(data => {
