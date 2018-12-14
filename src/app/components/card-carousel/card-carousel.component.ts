@@ -20,6 +20,7 @@ export class CardCarouselComponent implements OnInit {
   public paginationFactor = 300;
 
   get currentWindowsWidth() { return document.documentElement.clientWidth; }
+
   get carouselSize() {
     if (this.currentWindowsWidth < 576) {
       return 2;

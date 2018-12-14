@@ -5,12 +5,12 @@
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
-        <div class="float-left">
-          <li class="p-2 chronowiz-logo"> <a *ngIf="_brandName" [routerLink]="['/home']">
+        <div class="float-left text-left">
+          <li class="chronowiz-logo"> <a *ngIf="_brandName" [routerLink]="['/home']">
               <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
             </a>
           </li>
-          <li class="list-inline-item"><a href="#"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
+          <li class="list-inline-item"><a href="javascript:void(0)" (click)="openNav()"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
           <li class="list-inline-item d_none"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc"
                 alt="">
             </a></li>
@@ -40,3 +40,4 @@
   </div>
 </header>
 <div *ngIf="bg_white" class="fix-height"></div>
+<app-side-menu></app-side-menu>

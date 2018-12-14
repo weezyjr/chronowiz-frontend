@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit
     // redirect to admin if already logged in
     if (this.authenticationService.currentUserValue)
     {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/admin/login']);
     }
   }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin/login';
   }
 
   // convenience getter for easy access to form fields

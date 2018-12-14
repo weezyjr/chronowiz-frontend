@@ -18,6 +18,8 @@ $darker-gray: #9e9e9e;
 
 .chronowiz-logo
   min-height: 30px;
+  img
+    max-height: 13px;
 
 .header
   position: absolute;
@@ -51,7 +53,7 @@ $darker-gray: #9e9e9e;
     margin-top: 45px;
   .menu
     width: 17px;
-    margin: 13px 10px 10px -20px;
+    margin: 13px 10px 10px 0px;
 
   .navbar
     //margin-top: 45px;
@@ -103,12 +105,12 @@ $darker-gray: #9e9e9e;
     height: 100%;
     z-index: 500;
 
-@media only screen and (min-width: 480px) and (max-width: 800px)
+@media only screen and (min-width: 480px) and (max-width: 990px)
   .logo
     img
       max-width: 100px !important;
 
-@media only screen and (max-width: 800px)
+@media only screen and (max-width: 990px)
   .header
     max-height: 80px;
     .logo
@@ -125,8 +127,6 @@ $darker-gray: #9e9e9e;
   .chronowiz-logo
     padding: 0px !important;
     min-height: 20px;
-    img
-      max-height: 20px;
 
   .icon
     margin-top: 15px !important;
@@ -137,6 +137,3 @@ $darker-gray: #9e9e9e;
   .logo
     img
       max-width: 80px !important;
-  .chronowiz-logo
-    img
-      min-height: 17px !important;

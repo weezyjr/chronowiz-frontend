@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CollectionsService } from 'src/app/Collection/collections.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ResponseData } from 'src/app/API/response-data';
@@ -65,7 +65,10 @@ export class CollectionsComponent implements OnInit {
   get isMobile() { return document.documentElement.clientWidth < 720; }
 
   ngOnInit() {
-    const collectionID = this.activeRoute.snapshot.params.id;
+
+    let collectionID: string | String;
+    this.activeRoute.paramMap.subscribe((params: ParamMap) => {
+    collectionID = params.get('id');
     this.collectionsService.readCollectionById(collectionID)
       .subscribe(data => {
         console.log(data);
@@ -85,6 +88,6 @@ export class CollectionsComponent implements OnInit {
           });
         }
       });
+    });
   }
-
 }

@@ -48,6 +48,7 @@ import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.compon
 import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
 import { WatchesPipe } from './Filters/watches.pipe';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { WatchesPipe } from './Filters/watches.pipe';
     TabsComponent,
     AddToStockComponent,
     ToggleBtnComponent,
-    InStockComponent
+    InStockComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,

@@ -58,7 +58,7 @@ const routes: Routes = [
     component: WatchDetailsComponent
   },
   {
-    path: 'login',
+    path: 'admin/login',
     component: LoginComponent
   },
   {

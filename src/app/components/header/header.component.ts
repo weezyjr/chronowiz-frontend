@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     if (!this._brandName) {
       return ['/home'];
     } else {
-      return ['/brand' , this._brandName];
+      return ['/brand', this._brandName];
     }
   }
 
@@ -64,6 +64,10 @@ export class HeaderComponent implements OnInit {
     } else {
       this.menuClosed = true;
     }
+  }
+
+  openNav() {
+    document.getElementById('mySidenav').style.width = '300px';
   }
 
 }

@@ -100,12 +100,14 @@ export class AuthenticationService {
     if (userType === 'admin') {
       localStorage.removeItem('currentUser');
       this.currentUserSubject.next(null);
-      this.router.navigateByUrl('/admin');
+      this.router.navigateByUrl('/admin/login');
+      console.log('current user logout');
     }
     else if (userType === 'retailer') {
       localStorage.removeItem('currentRetailer');
       this.currentRetailerSubject.next(null);
-      this.router.navigateByUrl('/retailer');
+      this.router.navigateByUrl('/retailer/login');
+      console.log('current retailer logout');
     }
   }
 
@@ -113,5 +115,7 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentRetailer');
     this.currentRetailerSubject.next(null);
+    this.router.navigateByUrl('/retailer/login');
+    console.log('current retailer logout');
   }
 }

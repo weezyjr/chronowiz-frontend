@@ -5,7 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Collection } from 'src/app/Collection/collection';
 import { BrandsService } from 'src/app/Brand/brands.service';
 import { Brand } from 'src/app/Brand/brand';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-brand',
@@ -31,7 +31,7 @@ export class BrandComponent implements OnInit {
     name: 'Brand', url: '/home'
   }];
 
-  constructor(private activeRoute: ActivatedRoute, private brandsService: BrandsService, private _notificationsService: NotificationsService) {
+  constructor(private activatedRoute: ActivatedRoute, private brandsService: BrandsService, private _notificationsService: NotificationsService) {
   }
 
   filterGender(gender) {
@@ -54,21 +54,24 @@ export class BrandComponent implements OnInit {
   }
 
   ngOnInit() {
-    const BrandName = this.activeRoute.snapshot.params.name;
-    this.brandsService.readBrandByName(BrandName)
-      .subscribe(data => {
-        console.log(data);
+    let brandName: string | String;
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      brandName = params.get('name');
+      this.brandsService.readBrandByName(brandName)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          this.brandObject = <Brand>this.response.payload;
-          this.collections = this.brandObject['collectionObjects'];
-          this.breads.push({ name: this.brandObject.name, url: '#' });
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          } else {
+            this.brandObject = <Brand>this.response.payload;
+            this.collections = this.brandObject['collectionObjects'];
+            this.breads.push({ name: this.brandObject.name, url: '#' });
+          }
+        });
+    });
   }
 }

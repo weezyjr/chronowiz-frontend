@@ -1,0 +1,70 @@
+.sidenav
+  height: 100%
+  width: 0
+  position: fixed
+  z-index: 999
+  top: 0
+  left: 0
+  background-color: #3e0b08
+  overflow-x: hidden
+  transition: 0.5s
+  padding-top: 60px
+  a
+    position: relative
+    text-transform: uppercase
+    font-weight: 300
+    padding: 8px 8px 8px 32px
+    text-decoration: none
+    font-size: 25px
+    color: #f1f1f1
+    display: block
+    transition: 0.3s
+    &:hover
+      color: #fff
+  .closebtn
+    position: absolute
+    top: 0
+    right: 25px
+    font-size: 36px
+    margin-left: 50px
+  ul
+    padding: 0 10px;
+
+.brand-link
+  li
+    display: block;
+  a
+    font-size: 18px;
+    cursor: pointer;
+
+.collapsible:not(.active):after
+  content: ''
+  color: white
+  float: right
+  width: 0
+  height: 0
+  border-left: 5px solid transparent
+  border-right: 5px solid transparent
+  border-top: 11px solid white
+  margin: 8px
+  position: absolute
+  top: 12px
+
+.active:after
+  content: ''
+  color: white
+  float: right
+  width: 0
+  height: 0
+  border-left: 5px solid transparent
+  border-right: 5px solid transparent
+  border-bottom: 11px solid white
+  margin: 8px
+  position: absolute
+  bottom: 14px
+
+@media screen and (max-height: 450px)
+  .sidenav
+    padding-top: 15px
+    a
+      font-size: 18px
