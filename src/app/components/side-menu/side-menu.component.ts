@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Brand } from 'src/app/Brand/brand';
 import { BrandsService } from 'src/app/Brand/brands.service';
 import { ResponseData } from 'src/app/API/response-data';
@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class SideMenuComponent implements OnInit {
 
+  @Input()
+  black = false;
+
   brands: Brand[];
   responseData: ResponseData;
   response: ResponseObject;
@@ -23,10 +26,6 @@ export class SideMenuComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-  }
-
-  closeNav() {
-    document.getElementById('mySidenav').style.width = '0';
   }
 
   async showBrands() {

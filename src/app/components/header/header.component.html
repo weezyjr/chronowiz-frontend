@@ -10,7 +10,7 @@
               <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
             </a>
           </li>
-          <li class="list-inline-item"><a href="javascript:void(0)" (click)="openNav()"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
+          <li class="list-inline-item"><a href="javascript:void(0)" (click)="toggleNav()"> <img class="menu" [src]="navMenuOpened? menuCloseSrc : menuIconSrc" alt=""> </a></li>
           <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
                 alt="">
             </a></li>
@@ -20,7 +20,7 @@
             <div (click)="openUserMenu()">
               <img class="icon" [src]="userIconSrc" alt="">
             </div>
-            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': bg_white}">
+            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': bg_white || transparent}">
               <div class="arrow-up"></div>
               <div class="drop-down-content">
                 <ul>
@@ -40,4 +40,4 @@
   </div>
 </header>
 <div *ngIf="bg_white" class="fix-height"></div>
-<app-side-menu></app-side-menu>
+<app-side-menu [black]="bg_white == true || transparent == true"></app-side-menu>

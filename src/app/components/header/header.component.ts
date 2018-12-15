@@ -42,7 +42,9 @@ export class HeaderComponent implements OnInit {
   userIconSrc: String;
   searchIconSrc: String;
   menuIconSrc: String;
+  menuCloseSrc: String;
   paperBagIconSrc: String;
+  navMenuOpened: Boolean;
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {
 
@@ -56,6 +58,7 @@ export class HeaderComponent implements OnInit {
       this.userIconSrc = '../../../assets/user.svg';
       this.searchIconSrc = '../../../assets/search.svg';
       this.menuIconSrc = '../../../assets/menu.svg';
+      this.menuCloseSrc = '../../../assets/menucloseblack.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag.svg';
     } else {
       if (!this._brandLogo) {
@@ -64,6 +67,7 @@ export class HeaderComponent implements OnInit {
       this.userIconSrc = '../../../assets/user-white.svg';
       this.searchIconSrc = '../../../assets/search-white.svg';
       this.menuIconSrc = '../../../assets/menu-white.svg';
+      this.menuCloseSrc = '../../../assets/menuclose.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
     }
 
@@ -86,8 +90,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  openNav() {
-    document.getElementById('mySidenav').style.width = '300px';
+  toggleNav() {
+    if (!this.navMenuOpened) {
+      document.getElementById('mySidenav').style.width = '100%';
+      this.navMenuOpened = true;
+    }
+    else{
+      document.getElementById('mySidenav').style.width = '0px';
+      this.navMenuOpened = false;
+    }
   }
-
 }

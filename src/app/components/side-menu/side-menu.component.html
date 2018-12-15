@@ -1,11 +1,12 @@
 <div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-  <a href="#">About Us</a>
-  <a href="#">Contact Us</a>
-  <a  href="javascript:void(0)" (click)="showBrands()" [ngClass]="{'active': active}" class="collapsible">Brands</a>
-  <ul>
-    <li *ngFor="let brand of brands" class="brand-link">
-      <a (click)="openBrand(brand?.name)" > - {{brand?.name}} </a>
-    </li>
-  </ul>
+  <div class="container">
+    <a [ngClass]="{'black':black}" href="#">About Us</a>
+    <a [ngClass]="{'black':black}" href="javascript:void(0)" (click)="showBrands()">Brands</a>
+    <ul>
+      <li *ngFor="let brand of brands" class="brand-link">
+        <a [ngClass]="{'black':black}" (click)="openBrand(brand?.name)"> - {{brand?.name}} </a>
+      </li>
+    </ul>
+    <a [ngClass]="{'black':black}" href="#">Contact Us</a>
+  </div>
 </div>
