@@ -38,6 +38,10 @@ export class AdminLoginComponent implements OnInit
       password: ['', Validators.required]
     });
 
+    if (this.authenticationService.currentAdminValue) {
+      this.router.navigateByUrl('/admin');
+    }
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin/login';
   }

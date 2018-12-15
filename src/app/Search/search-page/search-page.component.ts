@@ -86,7 +86,7 @@ export class SearchPageComponent implements OnInit
               'Success',
               'Watch with reference number: ' + this.watches[0].referenceNumber + ' has been found successfully');
 
-            this.searchService.changeWatch(this.watches[0]);
+         //   this.searchService.changeWatch(this.watches[0]);
 
             this.router.navigate(['/app-watch-details']);
           }

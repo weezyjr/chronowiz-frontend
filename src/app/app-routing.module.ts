@@ -20,6 +20,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './User/profile/profile.component';
 import { UserGuard } from './Auth/user.guard';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
     }]
   },
   {
-    path: 'collections/:id',
+    path: 'collection/:id',
     component: CollectionsComponent
   },
   {
@@ -54,8 +55,8 @@ const routes: Routes = [
     component: WatchComponent
   },
   {
-    path: 'app-search-page',
-    component: SearchPageComponent
+    path: 'search',
+    component: SearchComponent
   },
   {
     path: 'app-watch-details',

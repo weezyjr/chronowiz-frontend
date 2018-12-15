@@ -29,8 +29,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigateByUrl('/profile');
+    }
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/register';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
   onSubmit() {

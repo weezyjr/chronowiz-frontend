@@ -1,7 +1,7 @@
 <header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
   <div class="container">
     <div class="logo">
-      <a class="nav-link" [routerLink]="brandName"><img [src]="_brandLogo" alt="logo"></a>
+      <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo" alt="logo"></a>
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
@@ -11,7 +11,7 @@
             </a>
           </li>
           <li class="list-inline-item"><a href="javascript:void(0)" (click)="openNav()"> <img class="menu" [src]="menuIconSrc" alt=""> </a></li>
-          <li class="list-inline-item d_none"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc"
+          <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
                 alt="">
             </a></li>
         </div>
@@ -20,12 +20,12 @@
             <div (click)="openUserMenu()">
               <img class="icon" [src]="userIconSrc" alt="">
             </div>
-            <div class="drop-down-menu" [ngClass]="{'d-none': menuClosed}">
+            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': bg_white}">
               <div class="arrow-up"></div>
               <div class="drop-down-content">
                 <ul>
-                  <li> <a href="#"> My Account </a> </li>
-                  <li> <a href="#"> Logout </a> </li>
+                  <li> <a [routerLink]="['/profile']"> My Account </a> </li>
+                  <li> <a (click)="logout()"> Logout </a> </li>
                 </ul>
               </div>
             </div>

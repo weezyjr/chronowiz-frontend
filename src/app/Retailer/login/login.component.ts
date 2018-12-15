@@ -36,6 +36,11 @@ export class RetailerLoginComponent implements OnInit {
 
   ngOnInit()
   {
+
+    if (this.authenticationService.currentRetailerValue) {
+      this.router.navigateByUrl('/retailer');
+    }
+
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

@@ -1,0 +1,28 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<div class="container-fluid mx-auto full-height text-center">
+  <div class="register-form mx-auto mb-3">
+
+    <p class="sassy-text"> Watches and articles </p>
+
+    <h1> Search </h1>
+
+    <form #searchForm="ngForm" class="search-bar mx-auto my-3" (ngSubmit)="search()">
+      <div class="search text-center m-auto">
+        <input class="search-form-input search m-auto" name="searchQuery" [(ngModel)]="query" type="text" placeholder="Search">
+        <img class="icon" src="../../../assets/search.svg" alt="search-icon">
+      </div>
+
+      <ul class="search-results m-auto" *ngIf="brands?.length > 0 || collections?.length > 0 || watches?.length > 0">
+        <li class="results-title">brands: </li>
+        <li class="results-item" *ngFor="let brand of brands | slice: 0:3"> <a [routerLink]="['/brand',brand?.name]"> {{brand?.name}} </a> </li>
+        <li class="results-title">collections: </li>
+        <li class="results-item" *ngFor="let collection of collections | slice: 0:3"> <a [routerLink]="['/collection',collections?._id]"> {{collections?.name}} </a> </li>
+        <li class="results-title">watches: </li>
+        <li class="results-item" *ngFor="let watch of watches | slice: 0:3"> <a [routerLink]="['/watch',watch?.referenceNumber]"> {{watch?.referenceNumber}} </a> </li>
+      </ul>
+    </form>
+
+  </div>
+</div>
+<app-footer></app-footer>

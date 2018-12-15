@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +21,15 @@ export class HeaderComponent implements OnInit {
   @Input()
   _brandName: String;
 
+  get logged(): Boolean {
+    if (this.authenticationService.currentUserValue) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   get brandName(): Array<String> {
     if (!this._brandName) {
       return ['/home'];
@@ -33,7 +44,7 @@ export class HeaderComponent implements OnInit {
   menuIconSrc: String;
   paperBagIconSrc: String;
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
 
   }
 
@@ -55,13 +66,23 @@ export class HeaderComponent implements OnInit {
       this.menuIconSrc = '../../../assets/menu-white.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
     }
+
+  }
+
+  logout() {
+    this.authenticationService.logout('user');
   }
 
   openUserMenu() {
-    if (this.menuClosed) {
-      this.menuClosed = false;
-    } else {
-      this.menuClosed = true;
+    if (this.logged) {
+      if (this.menuClosed) {
+        this.menuClosed = false;
+      } else {
+        this.menuClosed = true;
+      }
+    }
+    else {
+      this.router.navigateByUrl('/login');
     }
   }
 

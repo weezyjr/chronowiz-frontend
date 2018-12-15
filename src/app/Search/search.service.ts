@@ -14,12 +14,12 @@ export class SearchService
 {
   env = environment;
 
-  searchUrl = this.env.backendUrl + 'search/';
+  searchUrl = this.env.backendUrl + 'user/search';
 
   private handleError: HandleError;
-
+/*
   private watchSource = new BehaviorSubject(new Watch());
-  currentWatch = this.watchSource.asObservable();
+  currentWatch = this.watchSource.asObservable();*/
 
   constructor(
     private http: HttpClient,
@@ -31,15 +31,15 @@ export class SearchService
   /** POST: add a search query */
   search(query: string): Observable<ResponseData>
   {
-    return this.http.post<ResponseData>(this.searchUrl, {'payload': {'query': query}})
+    return this.http.get<ResponseData>(this.searchUrl + '/' + query)
       .pipe(map(data =>
       {
         return data;
       }));
   }
-
+/*
   changeWatch(watch: Watch)
   {
     this.watchSource.next(watch);
-  }
+  }*/
 }

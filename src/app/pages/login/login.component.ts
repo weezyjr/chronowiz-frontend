@@ -29,7 +29,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigateByUrl('/profile');
+    }
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
   onSubmit() {
