@@ -67,7 +67,7 @@ export class WatchDetailsComponent implements OnInit
 
   searchButtonClicked(): void
   {
-    this.router.navigate(['/app-search-page']);
+    this.router.navigate(['/search']);
   }
 
   mainIconButtonClicked(): void
