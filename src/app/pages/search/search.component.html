@@ -18,8 +18,8 @@
         <li class="results-item" *ngFor="let brand of brands | slice: 0:3"> <a [routerLink]="['/brand',brand?.name]">
             {{brand?.name}} </a> </li>
         <li class="results-title"*ngIf="collections?.length > 0">collections: </li>
-        <li class="results-item" *ngFor="let collection of collections | slice: 0:3"> <a [routerLink]="['/collection',collections?._id]">
-            {{collections?.name}} </a> </li>
+        <li class="results-item" *ngFor="let collection of collections | slice: 0:3"> <a [routerLink]="['/collection',collection?._id]">
+            {{collection?.name}} </a> </li>
         <li class="results-title"*ngIf="watches?.length > 0">watches: </li>
         <li class="results-item" *ngFor="let watch of watches | slice: 0:3"> <a [routerLink]="['/watch',watch?.referenceNumber]">
             {{watch?.model}} </a> </li>
