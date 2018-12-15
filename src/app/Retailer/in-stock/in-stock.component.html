@@ -66,22 +66,37 @@
       <br />
       <h3> In Stock Watches </h3>
       <br />
+
       <div class="row">
-        <div class="col-6 mx-auto text-center" *ngFor="let watch of watchs | watches: filters.brandID : filters.collectionID : filters.watchRef">
-          <div>
-            <app-item-card *ngIf="watch" [watch]="watch"></app-item-card>
-          </div>
-          <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
-          <p> Price: {{watch?.price | currency: watch?.priceCurrency }} </p>
-          <div class="row">
-            <div class="col-12">
-              <button class="btn primary-btn" (click)="viewWatch(watch?.referenceNumber)"> View Watch </button>
-            </div>
-            <div class="col-12 my-2">
-              <h6> In Stock </h6>
-              <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
-            </div>
-          </div>
+        <div class="col-12">
+          <table class="watch-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>In Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let watch of watchs | watches: filters.brandID : filters.collectionID : filters.watchRef">
+                <td><img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/900x900'"></td>
+                <td>
+                  <p>
+                    <span class="bold" *ngIf="watch?.model">{{watch?.model}},</span>
+                    <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
+                    <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
+                    <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+                  </p>
+                  <p class="bold">Reference Number: {{watch?.referenceNumber}} </p>
+                </td>
+                <td>
+                  <p> {{watch?.price | currency: watch?.priceCurrency }} </p>
+                </td>
+                <td><app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
