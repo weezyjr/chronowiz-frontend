@@ -28,30 +28,15 @@ export class SideMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  async showBrands() {
-    if (!this.active) {
-      await this.brandsService.readAllBrands()
-        .subscribe(data => {
-          console.log(data);
-
-          this.responseData = data;
-          this.response = this.responseData.response;
-
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
-          } else {
-            this.brands = <Brand[]>this.response.payload;
-          }
-        });
-      this.active = true;
-    }
-    else {
-      this.brands = [];
-      this.active = false;
+  scrollTo(id: string): void {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  openBrand(name: String) {
-    this.router.navigateByUrl('/brand/' + name);
+  async showBrands() {
+    await this.router.navigateByUrl('/home');
+    this.scrollTo('brandList');
   }
 }

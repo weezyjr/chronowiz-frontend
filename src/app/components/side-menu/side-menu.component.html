@@ -2,11 +2,6 @@
   <div class="container">
     <a [ngClass]="{'black':black}" href="javascript:void(0)">About Us</a>
     <a [ngClass]="{'black':black}" href="javascript:void(0)" (click)="showBrands()">Brands</a>
-    <ul>
-      <li *ngFor="let brand of brands" class="brand-link">
-        <a [ngClass]="{'black':black}" (click)="openBrand(brand?.name)"> - {{brand?.name}} </a>
-      </li>
-    </ul>
     <a [ngClass]="{'black':black}" href="javascript:void(0)">Contact Us</a>
   </div>
 </div>
