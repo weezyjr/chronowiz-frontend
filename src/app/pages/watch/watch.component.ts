@@ -31,7 +31,7 @@ export class WatchComponent implements OnInit {
   ngOnInit() {
     let ref: string;
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-      ref = params.get('id');
+      ref = params.get('ref');
       this.watchesService.readWatch(ref)
         .subscribe(data => {
           console.log(data);
