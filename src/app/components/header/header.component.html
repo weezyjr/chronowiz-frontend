@@ -6,14 +6,13 @@
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
         <div class="float-left text-left">
-          <li class="chronowiz-logo"> <a *ngIf="_brandName" [routerLink]="['/home']">
-              <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
-            </a>
+          <li class="chronowiz-logo"><a *ngIf="_brandName" [routerLink]="['/home']">
+            <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
+          </a>
           </li>
           <li class="list-inline-item"><a href="javascript:void(0)" (click)="toggleNav()"> <img class="menu" [src]="navMenuOpened? menuCloseSrc : menuIconSrc" alt=""> </a></li>
-          <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
-                alt="">
-            </a></li>
+          <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc" alt="">
+          </a></li>
         </div>
         <div class="float-right">
           <li class="list-inline-item">
@@ -24,15 +23,15 @@
               <div class="arrow-up"></div>
               <div class="drop-down-content">
                 <ul>
-                  <li> <a [routerLink]="['/profile']"> My Account </a> </li>
-                  <li> <a (click)="logout()"> Logout </a> </li>
+                  <li><a [routerLink]="['/profile']"> My Account </a></li>
+                  <li><a (click)="logout()"> Logout </a></li>
                 </ul>
               </div>
             </div>
           </li>
-          <li class="list-inline-item search-icon"><a [routerLink]="['/app-search-page']"> <img class="icon" [src]="searchIconSrc"
-                alt="">
-            </a></li>
+          <li class="list-inline-item search-icon"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
+                                                                                       alt="">
+          </a></li>
           <li class="list-inline-item"><a href="#"> <img class="icon" [src]="paperBagIconSrc" alt=""> </a></li>
         </div>
       </ul>
