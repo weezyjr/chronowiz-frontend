@@ -38,5 +38,10 @@ export class SideMenuComponent implements OnInit {
   async showBrands() {
     await this.router.navigateByUrl('/home');
     this.scrollTo('brandList');
+
+    const showMoreBrandsBtn = document.getElementById('showMoreBrands');
+    if (showMoreBrandsBtn) {
+      showMoreBrandsBtn.click();
+    }
   }
 }
