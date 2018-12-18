@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchPageComponent } from './Search/search-page/search-page.component';
 import { WatchDetailsComponent } from './Watch/watch-details/watch-details.component';
 import { AdminLoginComponent } from './Admin/login/login.component';
 import { AdminGuard } from './Auth/admin.guard';
@@ -21,6 +20,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './User/profile/profile.component';
 import { UserGuard } from './Auth/user.guard';
 import { SearchComponent } from './pages/search/search.component';
+import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   {
@@ -57,6 +57,10 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'search/advanced-search',
+    component: AdvancedSearchComponent
   },
   {
     path: 'app-watch-details',

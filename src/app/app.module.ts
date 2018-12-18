@@ -1,38 +1,37 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {RouterModule, Routes} from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
 
-import {SimpleNotificationsModule} from 'angular2-notifications';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SearchPageComponent} from './Search/search-page/search-page.component';
-import {WatchDetailsComponent} from './Watch/watch-details/watch-details.component';
-import {AdminLoginComponent} from './Admin/login/login.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WatchDetailsComponent } from './Watch/watch-details/watch-details.component';
+import { AdminLoginComponent } from './Admin/login/login.component';
 
-import {AddWatchFormComponent} from './Admin/add-watch-form/add-watch-form.component';
-import {AddBrandFormComponent} from './Admin/add-brand-form/add-brand-form.component';
-import {AddCollectionFormComponent} from './Admin/add-collection-form/add-collection-form.component';
-import {HttpErrorHandlerService} from './API/http-error-handler.service';
-import {WatchesService} from './Watch/watches.service';
-import {SearchService} from './Search/search.service';
+import { AddWatchFormComponent } from './Admin/add-watch-form/add-watch-form.component';
+import { AddBrandFormComponent } from './Admin/add-brand-form/add-brand-form.component';
+import { AddCollectionFormComponent } from './Admin/add-collection-form/add-collection-form.component';
+import { HttpErrorHandlerService } from './API/http-error-handler.service';
+import { WatchesService } from './Watch/watches.service';
+import { SearchService } from './Search/search.service';
 
-import {ErrorInterceptor} from './API/error.interceptor';
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
-import {BrandComponent} from './pages/brand/brand.component';
-import {ItemCardComponent} from './components/item-card/item-card.component';
-import {CardCarouselComponent} from './components/card-carousel/card-carousel.component';
-import {BreadcrumbComponent} from './components/breadcrumb/breadcrumb.component';
-import {HomeComponent} from './pages/home/home.component';
-import {FooterHeroComponent} from './components/footer-hero/footer-hero.component';
-import {HeroComponent} from './components/hero/hero.component';
+import { ErrorInterceptor } from './API/error.interceptor';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { BrandComponent } from './pages/brand/brand.component';
+import { ItemCardComponent } from './components/item-card/item-card.component';
+import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { HomeComponent } from './pages/home/home.component';
+import { FooterHeroComponent } from './components/footer-hero/footer-hero.component';
+import { HeroComponent } from './components/hero/hero.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { GenderPipe } from './Filters/gender.pipe';
-import { CollectionPipe } from './Filters/collection.pipe';
+
 import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
 import { WatchComponent } from './pages/watch/watch.component';
@@ -46,12 +45,17 @@ import { TabsComponent } from './components/forms/tabs/tabs.component';
 import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
 import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
-import { WatchesPipe } from './Filters/watches.pipe';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './User/profile/profile.component';
 import { SearchComponent } from './pages/search/search.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced-search.component';
+import { WatchesPipe } from './Filters/Watches.pipe';
+import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +63,6 @@ import { SearchComponent } from './pages/search/search.component';
     AddWatchFormComponent,
     AdminLoginComponent,
     RetailerLoginComponent,
-    SearchPageComponent,
     WatchDetailsComponent,
     AddBrandFormComponent,
     AddCollectionFormComponent,
@@ -75,8 +78,8 @@ import { SearchComponent } from './pages/search/search.component';
     HeroComponent,
     CollectionsComponent,
     GenderPipe,
-    CollectionPipe,
     WatchesPipe,
+    WatchesRetailerPipe,
     CollapsibleComponent,
     FilterCollapsibleComponent,
     WatchComponent,
@@ -93,9 +96,12 @@ import { SearchComponent } from './pages/search/search.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    CarouselComponent,
+    AdvancedSearchComponent
   ],
   imports: [
+    Ng5SliderModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -119,11 +125,10 @@ import { SearchComponent } from './pages/search/search.component';
     HttpErrorHandlerService,
     WatchesService,
     SearchService,
-   /* {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    /* {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule
-{
+export class AppModule {
 }

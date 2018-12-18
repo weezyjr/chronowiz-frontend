@@ -18,17 +18,21 @@ export class SearchComponent implements OnInit {
   brands: Brand[];
   collections: Collection[];
   watches: Watch[];
+
   query: string;
   responseData: ResponseData;
   response: ResponseObject;
 
-  constructor(private searchService: SearchService, private _notificationsService: NotificationsService) { }
+  constructor(
+    private searchService: SearchService,
+    private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
   }
 
-  search() {
-    if (this.query !== '') {
+  search(event) {
+    if (this.query !== '' || this.query.length !== 0) {
+      console.log(event);
       this.searchService.search(this.query).subscribe(data => {
         console.log(data);
 
@@ -42,6 +46,7 @@ export class SearchComponent implements OnInit {
           this.brands = <Brand[]>RESULTS.brands;
           this.collections = <Collection[]>RESULTS.collections;
           this.watches = <Watch[]>RESULTS.watches;
+          console.log(RESULTS);
         }
       });
     }

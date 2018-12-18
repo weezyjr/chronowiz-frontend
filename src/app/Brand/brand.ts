@@ -15,9 +15,13 @@ export class Brand {
   public headerPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
-  constructor() {
+  constructor(name?: string) {
     this._id = '';
-    this.name = '';
+    if (name) {
+      this.name = name;
+    } else {
+      this.name = '';
+    }
     this.collectionObjects = [new Collection()];
   }
 }

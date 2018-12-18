@@ -24,7 +24,7 @@ export class CollectionsComponent implements OnInit {
     name: 'Brand', url: '/home'
   }];
 
-  currentFilters = {
+  filters = {
     size: 'Any size',
     material: 'Any material',
     bezel: 'Any bezel',
@@ -33,19 +33,15 @@ export class CollectionsComponent implements OnInit {
   };
 
   /*filters*/
-  filters = [
+  filtersRows = [
     { name: 'size', title: 'Choose a size', options: ['Any size', 'Mid-size', 'Large size'] },
-    { name: 'material', title: 'Choose A material', options: ['Any material', 'Yello Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
+    { name: 'material', title: 'Choose A material', options: ['Any material', 'Yellow Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
     { name: 'bezel', title: 'Choose a bezel', options: ['Any bezel', 'Smooth bezel', 'Fluted bezel', 'Gem-set bezel'] },
     { name: 'braclet', title: 'Choose a braclet', options: ['Any braclet', 'Leather Strap', 'Oyster', 'President', 'Gem-Set Braslet'] },
     { name: 'marker', title: 'Choose an hour marker style', options: ['Any hour markers', 'Arabic Numerals', 'Roman Numerals', 'Classic Hour Markers', 'Gem-Set Hour Markers'] }
   ];
 
   constructor(private activeRoute: ActivatedRoute, private collectionsService: CollectionsService, private _notificationsService: NotificationsService) { }
-
-  filterWatchs() {
-    console.log(this.currentFilters);
-  }
 
   // render the show more list
   toggleShowMore() {
@@ -68,26 +64,26 @@ export class CollectionsComponent implements OnInit {
 
     let collectionID: string | String;
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-    collectionID = params.get('id');
-    this.collectionsService.readCollectionById(collectionID)
-      .subscribe(data => {
-        console.log(data);
+      collectionID = params.get('id');
+      this.collectionsService.readCollectionById(collectionID)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          this.collcetion = <Collection>this.response.payload;
-          this.breads.push({ name: this.collcetion.brandObject.name, url: `/brand/${this.collcetion.brandObject._id}` });
-          this.breads.push({
-            name:
-              (this.collcetion.name !== 'UNDEFINED') &&
-                (this.collcetion.name) ? this.collcetion.name : 'Collection', url: ''
-          });
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          } else {
+            this.collcetion = <Collection>this.response.payload;
+            this.breads.push({ name: this.collcetion.brandObject.name, url: `/brand/${this.collcetion.brandObject._id}` });
+            this.breads.push({
+              name:
+                (this.collcetion.name !== 'UNDEFINED') &&
+                  (this.collcetion.name) ? this.collcetion.name : 'Collection', url: ''
+            });
+          }
+        });
     });
   }
 }

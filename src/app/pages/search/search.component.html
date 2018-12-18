@@ -3,29 +3,31 @@
 <div class="container-fluid mx-auto full-height text-center">
   <div class="register-form mx-auto mb-3">
 
-    <p class="sassy-text"> Watches and articles </p>
-
     <h1> Search </h1>
 
-    <form #searchForm="ngForm" class="search-bar mx-auto my-3" (ngSubmit)="search()">
+    <form #searchForm="ngForm" class="search-bar mx-auto my-3">
       <div class="search text-center m-auto">
-        <input class="search-form-input search m-auto" name="searchQuery" [(ngModel)]="query" type="text" placeholder="Search">
+        <input class="search-form-input search m-auto" (input)="search($event)" name="searchQuery" [(ngModel)]="query" type="text"
+          placeholder="Search">
         <img class="icon" src="../../../assets/search.svg" alt="search-icon">
       </div>
 
       <ul class="search-results m-auto" *ngIf="brands?.length > 0 || collections?.length > 0 || watches?.length > 0">
-        <li class="results-title"*ngIf="brands?.length > 0">brands: </li>
+        <li class="results-title" *ngIf="brands?.length > 0">brands: </li>
         <li class="results-item" *ngFor="let brand of brands | slice: 0:3"> <a [routerLink]="['/brand',brand?.name]">
             {{brand?.name}} </a> </li>
-        <li class="results-title"*ngIf="collections?.length > 0">collections: </li>
+        <li class="results-title" *ngIf="collections?.length > 0">collections: </li>
         <li class="results-item" *ngFor="let collection of collections | slice: 0:3"> <a [routerLink]="['/collection',collection?._id]">
             {{collection?.name}} </a> </li>
-        <li class="results-title"*ngIf="watches?.length > 0">watches: </li>
+        <li class="results-title" *ngIf="watches?.length > 0">watches: </li>
         <li class="results-item" *ngFor="let watch of watches | slice: 0:3"> <a [routerLink]="['/watch',watch?.referenceNumber]">
             {{watch?.model}} </a> </li>
+        <li class="results-title" *ngIf="watches?.length > 0"> <a [routerLink]="['/search/advanced-search']"> View all watches </a></li>
       </ul>
+      <div class="col-12 p-3">
+        <button [routerLink]="['/search/advanced-search']"  class="btn secondry-btn wide-btn m-2"> Advanced Search </button>
+      </div>
     </form>
-
   </div>
 </div>
 <app-footer></app-footer>

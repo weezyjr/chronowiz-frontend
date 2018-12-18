@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Watch } from '../Watch/watch';
 
 @Pipe({
-  name: 'watches'
+  name: 'watchesRetailerFilter'
 })
-export class WatchesPipe implements PipeTransform {
+export class WatchesRetailerPipe implements PipeTransform {
   transform(items: Watch[], brandID?: String, collectionID?: String, watchRef?: String): any[] {
     if (!items) {
       return [];

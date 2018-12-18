@@ -79,8 +79,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let watch of watchs | watches: filters.brandID : filters.collectionID : filters.watchRef">
-                <td><img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/900x900'"></td>
+              <tr *ngFor="let watch of watchs | watchesRetailerFilter: filters.brandID : filters.collectionID : filters.watchRef">
+                <td><img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/480x720/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p>
                     <span class="bold" *ngIf="watch?.model">{{watch?.model}},</span>

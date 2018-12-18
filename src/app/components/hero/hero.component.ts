@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeroComponent implements OnInit {
 
   @Input()
-  cover = 'http://placehold.it/1600x900';
+  cover = 'http://placehold.it/1600x900/FFFFFF/FFFFFFF';
 
   @Input()
   background_sm = false;
