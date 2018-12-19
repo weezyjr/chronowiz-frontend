@@ -18,6 +18,33 @@ export class WatchComponent implements OnInit {
   responseData: ResponseData;
   response: ResponseObject;
 
+  get brandName() {
+    try {
+      return (this.watch.brandObject && this.watch.brandObject.name) ? this.watch.brandObject.name : '';
+    }
+    catch (error) {
+      return '';
+    }
+  }
+
+  get brandLogo() {
+    try {
+      return (this.watch.brandObject && this.watch.brandObject.logoPhotoUrl) ? this.watch.brandObject.logoPhotoUrl : '';
+    }
+    catch (error) {
+      return '';
+    }
+  }
+
+  get collectionName() {
+    try {
+      return (this.watch.collectionObject && this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED');
+    }
+    catch (error) {
+      return false;
+    }
+  }
+
   // breadcrumps links
   public breads = [{
     name: 'Home', url: '/home',

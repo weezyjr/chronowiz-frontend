@@ -7,7 +7,7 @@
 
     <form #searchForm="ngForm" class="search-bar mx-auto my-3">
       <div class="search text-center m-auto">
-        <input class="search-form-input search m-auto" (input)="search($event)" name="searchQuery" [(ngModel)]="query" type="text"
+        <input class="search-form-input search m-auto" (input)="search()" name="searchQuery" [(ngModel)]="query" type="text"
           placeholder="Search">
         <img class="icon" src="../../../assets/search.svg" alt="search-icon">
       </div>

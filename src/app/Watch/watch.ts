@@ -30,8 +30,10 @@ export class Watch
   public movementTourbillon?: string;
   public movementRotor?: string;
   public movementAdditionalFeatures?: ItemValue[];
+  public numberOfParts?: Number;
 
   public functions?: ItemValue[];
+  public complications?: ItemValue[];
 
   public caseMaterial?: string;
   public caseDiameter?: string;
@@ -40,12 +42,14 @@ export class Watch
   public caseBack?: string;
   public caseBezelMaterial?: string;
   public waterResistance?: string;
+  public waterProof?: string;
   public caseCrown?: string;
   public caseAdditionalFeatures?: ItemValue[];
 
   public dialColour?: string;
   public dialIndex?: string;
   public dialFinish?: string;
+  public dialType?: string;
   public dialHands?: string;
   public dialAdditionalFeatures?: ItemValue[];
 

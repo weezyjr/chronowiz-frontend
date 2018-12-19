@@ -9,7 +9,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WatchDetailsComponent } from './Watch/watch-details/watch-details.component';
 import { AdminLoginComponent } from './Admin/login/login.component';
 
 import { AddWatchFormComponent } from './Admin/add-watch-form/add-watch-form.component';
@@ -55,6 +54,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced-search.component';
 import { WatchesPipe } from './Filters/Watches.pipe';
 import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
+import { CollectionSectionComponent } from './components/collection-section/collection-section.component';
 
 
 @NgModule({
@@ -63,7 +63,6 @@ import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
     AddWatchFormComponent,
     AdminLoginComponent,
     RetailerLoginComponent,
-    WatchDetailsComponent,
     AddBrandFormComponent,
     AddCollectionFormComponent,
     AppComponent,
@@ -98,7 +97,8 @@ import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
     ProfileComponent,
     SearchComponent,
     CarouselComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    CollectionSectionComponent
   ],
   imports: [
     Ng5SliderModule,

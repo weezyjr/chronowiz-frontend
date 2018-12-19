@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WatchDetailsComponent } from './Watch/watch-details/watch-details.component';
 import { AdminLoginComponent } from './Admin/login/login.component';
 import { AdminGuard } from './Auth/admin.guard';
 import { AddWatchFormComponent } from './Admin/add-watch-form/add-watch-form.component';
@@ -61,10 +60,6 @@ const routes: Routes = [
   {
     path: 'search/advanced-search',
     component: AdvancedSearchComponent
-  },
-  {
-    path: 'app-watch-details',
-    component: WatchDetailsComponent
   },
   {
     path: 'admin/login',

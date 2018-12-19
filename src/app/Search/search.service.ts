@@ -29,7 +29,7 @@ export class SearchService
   }
 
   /** POST: add a search query */
-  search(query: string): Observable<ResponseData>
+  search(query: String): Observable<ResponseData>
   {
     return this.http.get<ResponseData>(this.searchUrl + '/' + query)
       .pipe(map(data =>

@@ -1,14 +1,15 @@
-<app-header [bg_white]="true" [_brandName]="watch?.brandObject?.name" [_brandLogo]="watch?.brandObject?.logoPhotoUrl"></app-header>
+<app-header [bg_white]="true" [_brandName]="brandName" [_brandLogo]="brandLogo"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 
 <div class="text-center" id="top">
   <h1>{{watch?.model}}</h1>
-  <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="watch?.collectionObject?.name && watch?.collectionObject?.name!='UNDEFINED'">
+  <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="collectionName">
     <i class="fa"><img src="../../../assets/app-icon.svg" width="9" alt=""></i>
     View all {{watch?.collectionObject?.name}} models
   </a>
   <div class="mx-auto text-center main-watch-photo">
-    <img [src]="watch?.mainPhotoUrl ? watch?.mainPhotoUrl : 'http://placehold.it/480x720/FFFFFF/FFFFFF'" alt="watch?.model" class="mx-auto img-responsive">
+    <img [src]="watch?.mainPhotoUrl ? watch?.mainPhotoUrl : 'http://placehold.it/480x720/FFFFFF/FFFFFF'" alt="watch?.model"
+      class="mx-auto img-responsive">
   </div>
   <div class="watch-short-details">
     <p>
@@ -25,6 +26,7 @@
 </div>
 
 <app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
+<app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1600x150/FFFFFF/FFFFFF"></app-hero>
 
 <div class="container pb-5">
 
@@ -40,9 +42,10 @@
 </div>
 
 <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
+<app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1600x150/FFFFFF/FFFFFF"></app-hero>
 
 <div class="container">
- <!--
+  <!--
    <app-social-media-section></app-social-media-section>
  -->
 </div>

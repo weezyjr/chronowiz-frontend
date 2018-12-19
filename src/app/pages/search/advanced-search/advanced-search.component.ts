@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/Search/search.service';
 import { Brand } from 'src/app/Brand/brand';
-import { Collection } from 'src/app/Collection/collection';
 import { Watch } from 'src/app/Watch/watch';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
@@ -9,7 +8,13 @@ import { NotificationsService } from 'angular2-notifications';
 import { SearchResults } from 'src/app/Search/SearchResults';
 import { Options } from 'ng5-slider';
 import { BrandsService } from 'src/app/Brand/brands.service';
-import { CollectionsService } from 'src/app/Collection/collections.service';
+import { WatchesService } from 'src/app/Watch/watches.service';
+
+interface BrandCheckBox {
+  _id: string;
+  name: string;
+  checked: Boolean;
+}
 
 @Component({
   selector: 'app-advanced-search',
@@ -18,14 +23,14 @@ import { CollectionsService } from 'src/app/Collection/collections.service';
 })
 export class AdvancedSearchComponent implements OnInit {
 
-  brands: Brand[];
-  collections: Collection[];
   watches: Watch[];
-  query: string;
+  watchesSearchResults: Watch[];
+  query: String = '';
   responseData: ResponseData;
   response: ResponseObject;
   resultWatches: Watch[];
 
+  brands: Array<BrandCheckBox> = [];
   brandsList: Brand[];
   brandsListRows: Array<Brand[]>;
 
@@ -33,14 +38,14 @@ export class AdvancedSearchComponent implements OnInit {
   sortFactor: String = this.sortOptions[0];
 
   watchsLimit = 12;
-  minValue: Number = 0;
-  maxValue: Number = 100;
+  minPrice: Number = 0;
+  maxPrice: Number = 100000;
   options: Options = {
     floor: 0,
-    ceil: 100,
-    step: 10,
+    ceil: 100000,
+    step: 100,
     minRange: 0,
-    maxRange: 100
+    maxRange: 100000
   };
 
   /*filters*/
@@ -84,19 +89,26 @@ export class AdvancedSearchComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         } else {
           this.brandsList = <Brand[]>this.response.payload;
-          this.brandsList.unshift(new Brand('Any Brand'));
-          this.brandsListRows = this.chunk(this.brandsList, 8);
+          for (const brand of this.brandsList) {
+            if (brand.name) {
+              this.brands.push({ _id: brand._id, name: brand.name, checked: false });
+            }
+          }
+          this.brands.unshift({ _id: 'Any brand', name: 'Any brand', checked: true });
+          this.brandsListRows = this.chunk(this.brands, 8);
         }
       });
   }
 
   constructor(
+    private watchesService: WatchesService,
     private brandsService: BrandsService,
     private searchService: SearchService,
     private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.getBrands();
+    this.search();
   }
 
   openSortMenu() {
@@ -104,7 +116,7 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   search() {
-    if (this.query !== '') {
+    if (this.query !== '' || this.query.length !== 0) {
       this.searchService.search(this.query).subscribe(data => {
         console.log(data);
 
@@ -115,22 +127,27 @@ export class AdvancedSearchComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         } else {
           const RESULTS = <SearchResults>this.response.payload;
-          this.brands = <Brand[]>RESULTS.brands;
-          this.collections = <Collection[]>RESULTS.collections;
-          this.watches = <Watch[]>RESULTS.watches;
-          console.log(RESULTS);
+          this.watchesSearchResults = <Watch[]>RESULTS.watches;
+          this.renderWatches();
         }
       });
     }
     else {
-      this.resetResults();
+      this.watchesService.readWatches().subscribe(data => {
+        this.responseData = data;
+        this.response = this.responseData.response;
+        if (this.response.type.match('ERROR')) {
+          this._notificationsService.error('Error', this.response.message.en);
+        } else {
+          this.watchesSearchResults = <Watch[]>this.response.payload;
+          this.renderWatches();
+        }
+      });
     }
   }
 
   resetResults() {
-    this.brands = [];
-    this.collections = [];
-    this.watches = [];
+    this.watchesSearchResults = [];
   }
 
   // render the show more list
@@ -147,4 +164,108 @@ export class AdvancedSearchComponent implements OnInit {
   get isShowMoreOn() {
     return this.watchsLimit === Infinity;
   }
+
+  renderWatches() {
+    this.watches = this.filter(this.watchesSearchResults);
+  }
+
+  filter(watches: Watch[]): Watch[] {
+    if (!watches) {
+      return [];
+    }
+    if ((this.filters.size === 'Any size') &&
+      (this.filters.material === 'Any material') &&
+      (this.filters.bezel === 'Any bezel') &&
+      (this.filters.braclet === 'Any braclet') &&
+      (this.filters.marker === 'Any hour markers') &&
+      (this.minPrice === 0 && this.maxPrice === 100000) &&
+      (this.brands.length === 1 && this.brands[0].checked)) {
+      return watches;
+    }
+    else {
+      return watches.filter(watch => {
+        let sizeFilterMatch = true,
+          materialFilterMatch = true,
+          bezelFilterMatch = true,
+          bracletFilterMatch = true,
+          markerFilterMatch = true,
+          priceFilterMatch = true,
+          brandFilterMatch = true;
+
+        if (this.filters.size !== 'Any size') {
+          if (watch.caseDiameter) {
+            sizeFilterMatch = (watch.caseDiameter.toLowerCase().trim())
+              .localeCompare(this.filters.size.toLowerCase().trim()) === 0;
+          } else {
+            sizeFilterMatch = false;
+          }
+        }
+
+        if (this.filters.material !== 'Any material') {
+          if (watch.caseMaterial) {
+            materialFilterMatch = (watch.caseMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.material.toLowerCase().trim()) === 0;
+          } else {
+            materialFilterMatch = false;
+          }
+        }
+
+        if (this.filters.bezel !== 'Any bezel') {
+          if (watch.caseBezelMaterial) {
+            bezelFilterMatch = (watch.caseBezelMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.bezel.toLowerCase().trim()) === 0;
+          } else {
+            bezelFilterMatch = false;
+          }
+        }
+
+        if (this.filters.braclet !== 'Any braclet') {
+          if (watch.bandMaterial) {
+            bracletFilterMatch = (watch.bandMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.braclet.toLowerCase().trim()) === 0;
+          } else {
+            bracletFilterMatch = false;
+          }
+        }
+
+        if (this.filters.marker !== 'Any hour markers') {
+          if (watch.dialIndex) {
+            markerFilterMatch = (watch.dialIndex.toLowerCase().trim())
+              .localeCompare(this.filters.marker.toLowerCase().trim()) === 0;
+          } else {
+            markerFilterMatch = false;
+          }
+        }
+
+        if (this.minPrice !== 0 || this.maxPrice !== 100000) {
+          if (watch.price) {
+            priceFilterMatch = watch.price >= this.minPrice && watch.price <= this.maxPrice;
+          } else {
+            priceFilterMatch = false;
+          }
+        }
+
+        if (this.brands.length > 1 && !this.brands[0].checked) {
+          for (const brand of this.brands) {
+            if (brand.checked) {
+              brandFilterMatch = watch.brandObject === brand._id;
+              break;
+            }
+            else{
+              brandFilterMatch = false;
+            }
+          }
+        }
+
+        return sizeFilterMatch &&
+          materialFilterMatch &&
+          bezelFilterMatch &&
+          bracletFilterMatch &&
+          markerFilterMatch &&
+          brandFilterMatch &&
+          priceFilterMatch;
+      });
+    }
+  }
+
 }

@@ -439,6 +439,14 @@ export class AddWatchFormComponent implements OnInit {
     this.watch.functions.push({ value: '' });
   }
 
+  addcomplication() {
+    this.watch.complications.push({ value: '' });
+  }
+
+  removeComplication() {
+    this.watch.complications.pop();
+  }
+
   removeFunctions() {
     this.watch.functions.pop();
   }

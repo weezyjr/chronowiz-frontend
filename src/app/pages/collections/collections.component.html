@@ -2,17 +2,13 @@
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <div class="container">
   <div class="collections-title text-center">
-    <h1 *ngIf="collcetion?.name === 'UNDEFINED'"> Collection </h1>
+    <h1 *ngIf="collcetion?.name === 'UNDEFINED'"> Collcetion </h1>
     <h1 *ngIf="collcetion?.name !== 'UNDEFINED'"> {{collcetion?.name}} </h1>
     <h2> {{collcetion?.brandObject?.name}} </h2>
   </div>
   <div class="collection-desc">
     <p class="muted">
-      In 1956, the Rolex Day-Date made its debut. Available only in 18 ct gold or platinum, it was the first wristwatch
-      to
-      display the date and day of the week spelt out in full in a window on the dial. With the President bracelet,
-      originally created specially for it, the Day-Date continues to be the watch par
-      excellence of influential people.
+      {{collcetion?.description}}
     </p>
   </div>
 
@@ -21,7 +17,7 @@
       <div class="p-5">
         <label class="radio" *ngFor="let option of filter?.options; let i = index">
           {{option}}
-          <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
+          <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
           <span class="checkmark"></span>
         </label>
       </div>
@@ -34,7 +30,7 @@
           <h6>{{ filter.title }}</h6>
           <label class="radio" *ngFor="let option of filter?.options; let i = index">
             {{option}}
-            <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
+            <input type="radio" [checked]="i === 0" (change)="renderWatches()"  [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
             <span class="checkmark"></span>
           </label>
         </div>
@@ -45,13 +41,11 @@
 
   <div class="watches-section">
     <div class="row">
-      <div class="col-md-3 my-4" *ngFor="let watch of collcetion?.watchObjects |
-      watches: filters?.size : filters?.material : filters?.bezel : filters?.braclet : filters?.marker
-      | slice: 0:watchsLimit">
+      <div class="col-md-3 my-4" *ngFor="let watch of watches | slice: 0:watchsLimit">
         <app-item-card [watch]="watch"></app-item-card>
       </div>
     </div>
-    <div class="text-center mx-auto show-more">
+    <div class="text-center mx-auto show-more my-5">
       <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
     </div>
   </div>

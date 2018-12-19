@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Collection } from 'src/app/Collection/collection';
+import { Watch } from 'src/app/Watch/watch';
 
 @Component({
   selector: 'app-collections',
@@ -17,6 +18,7 @@ export class CollectionsComponent implements OnInit {
   response: ResponseObject;
   collcetion: Collection;
   watchsLimit = 12;
+  watches: Watch[];
 
   breads = [{
     name: 'Home', url: '/home',
@@ -76,6 +78,7 @@ export class CollectionsComponent implements OnInit {
             this._notificationsService.error('Error', this.response.message.en);
           } else {
             this.collcetion = <Collection>this.response.payload;
+            this.renderWatches();
             this.breads.push({ name: this.collcetion.brandObject.name, url: `/brand/${this.collcetion.brandObject._id}` });
             this.breads.push({
               name:
@@ -85,5 +88,85 @@ export class CollectionsComponent implements OnInit {
           }
         });
     });
+  }
+
+  renderWatches() {
+    this.watches = this.filter(this.collcetion.watchObjects);
+  }
+
+  filter(watches: Watch[]): Watch[] {
+    if (!watches) {
+      return [];
+    }
+    if ((this.filters.size === 'Any size') &&
+      (this.filters.material === 'Any material') &&
+      (this.filters.bezel === 'Any bezel') &&
+      (this.filters.braclet === 'Any braclet') &&
+      (this.filters.marker === 'Any hour markers')) {
+      return watches;
+    }
+    else {
+      return watches.filter(watch => {
+        let sizeFilterMatch = true,
+          materialFilterMatch = true,
+          bezelFilterMatch = true,
+          bracletFilterMatch = true,
+          markerFilterMatch = true;
+
+        const brandNameFilterMatch = true;
+
+        if (this.filters.size !== 'Any size') {
+          if (watch.caseDiameter) {
+            sizeFilterMatch = (watch.caseDiameter.toLowerCase().trim())
+              .localeCompare(this.filters.size.toLowerCase().trim()) === 0;
+          } else {
+            sizeFilterMatch = false;
+          }
+        }
+
+        if (this.filters.material !== 'Any material') {
+          if (watch.caseMaterial) {
+            materialFilterMatch = (watch.caseMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.material.toLowerCase().trim()) === 0;
+          } else {
+            materialFilterMatch = false;
+          }
+        }
+
+        if (this.filters.bezel !== 'Any bezel') {
+          if (watch.caseBezelMaterial) {
+            bezelFilterMatch = (watch.caseBezelMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.bezel.toLowerCase().trim()) === 0;
+          } else {
+            bezelFilterMatch = false;
+          }
+        }
+
+        if (this.filters.braclet !== 'Any braclet') {
+          if (watch.bandMaterial) {
+            bracletFilterMatch = (watch.bandMaterial.toLowerCase().trim())
+              .localeCompare(this.filters.braclet.toLowerCase().trim()) === 0;
+          } else {
+            bracletFilterMatch = false;
+          }
+        }
+
+        if (this.filters.marker !== 'Any hour markers') {
+          if (watch.dialIndex) {
+            markerFilterMatch = (watch.dialIndex.toLowerCase().trim())
+              .localeCompare(this.filters.marker.toLowerCase().trim()) === 0;
+          } else {
+            markerFilterMatch = false;
+          }
+        }
+
+        return sizeFilterMatch &&
+          materialFilterMatch &&
+          bezelFilterMatch &&
+          bracletFilterMatch &&
+          markerFilterMatch &&
+          brandNameFilterMatch;
+      });
+    }
   }
 }

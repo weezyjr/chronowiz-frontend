@@ -381,6 +381,20 @@ export class AddBrandFormComponent implements OnInit {
     });
   }
 
+  isVideo(str: string) {
+    if (str && str !== '' && typeof str === 'string') {
+      return str.endsWith('.mp4') ||
+        str.endsWith('.avi') ||
+        str.endsWith('.flv') ||
+        str.endsWith('webm') ||
+        str.endsWith('.mkv') ||
+        str.endsWith('.wmv') ||
+        str.endsWith('.m4v') ||
+        str.endsWith('.3gp') ||
+        str.endsWith('.ogg');
+    }
+  }
+
   newBrand() {
     this.brand = new Brand();
   }

@@ -94,7 +94,10 @@
         <div class="form-field py-2">
           <div *ngIf="brand?.headerPhotoUrl" class="preview">
             <h6> Current header Photo </h6>
-            <img [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'" class="img-responsive">
+            <img *ngIf="brand?.headerPhotoUrl && !isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'" class="img-responsive">
+            <video *ngIf="brand?.headerPhotoUrl && isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
+              <source [src]="brand?.headerPhotoUrl" type="video/mp4">
+            </video>
           </div>
           <label for="headerPhotoFileInput">Header photo</label>
           <div class="row">

@@ -4,8 +4,9 @@ export class Collection {
   public _id?: string;
 
   public brandObject?: any;
-  public name: string;
-  public isUndefined: boolean;
+  public name?: string;
+  public description?: string;
+  public isUndefined?: boolean;
   public watchObjects?: Watch[];
 
   constructor() {

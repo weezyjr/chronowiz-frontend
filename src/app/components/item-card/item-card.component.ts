@@ -12,6 +12,8 @@ export class ItemCardComponent implements OnInit {
 
   @Input() watch: Watch = new Watch();
 
+  // @Input() isSearchPage: Boolean = false;
+
   get url(): String {
     return `/watch/`;
   }
