@@ -70,7 +70,7 @@ export class AttributeTableComponent implements OnInit {
           'DIAMETER': `${this.watch.caseDiameter ? this.watch.caseDiameter + ' mm' : ''}`
         },
         {
-          'WATER-PROOF': `${this.watch.waterResistance ? this.watch.waterResistance + ' atm' : ''}`
+          'WATER-PROOF': `${this.watch.waterResistance ? this.watch.waterResistance : ''}`
         },
         {
           'BEZEL MATERIAL': `${this.watch.caseBezelMaterial ? this.watch.caseBezelMaterial : ''}`

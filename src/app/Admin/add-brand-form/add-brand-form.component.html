@@ -40,7 +40,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
-                <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control" id="selectionBrand"
+                <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control"
                   name="selectionBrand">
                   <option value=""></option>
                   <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
@@ -58,12 +58,15 @@
 
         <div class="form-group">
           <label for="name">Brand name</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="name" required [(ngModel)]="brand.name"
-            name="name" #name="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" required [ngModel]="brand?.name"
+            (ngModelChange)="brand.name = $event" name="name" #name="ngModel">
             <option value=""></option>
             <option [value]="brand?.name" *ngFor="let brand of staticBrandNames"> {{brand.name}} </option>
           </select>
-          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Brand name is required</div>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="brand.name" name="nameText"
+            #nameText="ngModel">
+          <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
+            name is required</div>
         </div>
 
         <br />
@@ -79,8 +82,8 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input  [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onLogoPhotoChanged($event)"
-                  id="logoPhotoFileInput" required name="logoPhotoFile" #logoPhotoFile="ngModel" [(ngModel)]="brand.logoPhotoFile">
+                <input [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onLogoPhotoChanged($event)"
+                   required name="logoPhotoFile" #logoPhotoFile="ngModel" [(ngModel)]="brand.logoPhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
@@ -94,8 +97,10 @@
         <div class="form-field py-2">
           <div *ngIf="brand?.headerPhotoUrl" class="preview">
             <h6> Current header Photo </h6>
-            <img *ngIf="brand?.headerPhotoUrl && !isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'" class="img-responsive">
-            <video *ngIf="brand?.headerPhotoUrl && isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
+            <img *ngIf="brand?.headerPhotoUrl && !isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'"
+              class="img-responsive">
+            <video *ngIf="brand?.headerPhotoUrl && isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted
+              oncanplay="this.play()" onloadedmetadata="this.muted = true">
               <source [src]="brand?.headerPhotoUrl" type="video/mp4">
             </video>
           </div>
@@ -103,10 +108,9 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [ngClass]="{'valid-img': brand?.headerPhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control" (change)="onHeaderPhotoChanged($event)"
-                  id="headerPhotoFileInput" name="headerPhotoFile"
-                  #headerPhotoFile="ngModel" [(ngModel)]="brand.headerPhotoFile"
-                  >
+                <input [ngClass]="{'valid-img': brand?.headerPhotoFile}" [disabled]="mode == 'delete'" type="file"
+                  class="form-control" (change)="onHeaderPhotoChanged($event)" name="headerPhotoFile"
+                  #headerPhotoFile="ngModel" [(ngModel)]="brand.headerPhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
@@ -125,8 +129,7 @@
             <div class="col-sm-10 col-8">
               <div class="form-group">
                 <input [disabled]="mode == 'delete'" type="file" class="form-control" required (change)="onBanner1PhotoChanged($event)"
-                  id="banner1PhotoFileInput" name="banner1PhotoFile"
-                  #banner1PhotoFile="ngModel" [(ngModel)]="brand.banner1PhotoFile" >
+                  name="banner1PhotoFile" #banner1PhotoFile="ngModel" [(ngModel)]="brand.banner1PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
@@ -147,8 +150,7 @@
             <div class="col-sm-10 col-8">
               <div class="form-group">
                 <input [disabled]="mode == 'delete'" type="file" class="form-control" required (change)="onBanner2PhotoChanged($event)"
-                  id="banner2PhotoFile" name="banner2PhotoFile"
-                  #banner2PhotoFile="ngModel" [(ngModel)]="brand.banner2PhotoFile">
+                 name="banner2PhotoFile" #banner2PhotoFile="ngModel" [(ngModel)]="brand.banner2PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">

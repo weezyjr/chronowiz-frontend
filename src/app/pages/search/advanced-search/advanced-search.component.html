@@ -23,7 +23,7 @@
                 <span>Sort by:</span>
                 <button (click)="openSortMenu()" class="dropbtn">{{sortFactor}}</button>
                 <div id="myDropdown" class="dropdown-content">
-                  <a (click)="sortFactor = sortOption" *ngFor="let sortOption of sortOptions">{{sortOption}}</a>
+                  <a (click)="sortFactor = sortOption; sort()" *ngFor="let sortOption of sortOptions">{{sortOption}}</a>
                 </div>
               </div>
             </div>

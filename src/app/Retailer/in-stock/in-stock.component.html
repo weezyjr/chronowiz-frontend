@@ -76,13 +76,14 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>In Stock</th>
+                <th>Discount %</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let watch of watchs | watchesRetailerFilter: filters.brandID : filters.collectionID : filters.watchRef">
                 <td><img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/480x720/FFFFFF/FFFFFF'"></td>
                 <td>
-                  <p>
+                  <p class="m-0">
                     <span class="bold" *ngIf="watch?.model">{{watch?.model}},</span>
                     <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
                     <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
@@ -93,7 +94,12 @@
                 <td>
                   <p> {{watch?.price | currency: watch?.priceCurrency }} </p>
                 </td>
-                <td><app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn></td>
+                <td>
+                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
+                </td>
+                <td>
+                  <input class="form-input" placeholder="Discount %" min="0" max="100" type="number">
+                </td>
               </tr>
             </tbody>
           </table>

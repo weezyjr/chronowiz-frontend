@@ -5,6 +5,7 @@ import { Collection } from '../Collection/collection';
 export class Watch
 {
   public _id?: string;
+  public updatedAt?: string;
 
   public brandObject?: any;
   public collectionObject?: any;
@@ -103,6 +104,7 @@ export class Watch
     this.collectionObject = new Collection();
     this.movementAdditionalFeatures = [{value: ''}];
     this.functions = [{value: ''}];
+    this.complications = [{value: ''}];
     this.caseAdditionalFeatures = [{value: ''}];
     this.dialAdditionalFeatures = [{value: ''}];
     this.bandAdditionalFeatures = [{value: ''}];

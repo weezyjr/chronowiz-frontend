@@ -55,10 +55,12 @@ import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced
 import { WatchesPipe } from './Filters/Watches.pipe';
 import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
 import { CollectionSectionComponent } from './components/collection-section/collection-section.component';
+import { ConfirmPasswordDirective } from './pages/register/confirmPassword.validator';
 
 
 @NgModule({
   declarations: [
+    ConfirmPasswordDirective,
     AppComponent,
     AddWatchFormComponent,
     AdminLoginComponent,

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { Watch } from 'src/app/Watch/watch';
+import { watch } from 'fs';
 
 @Component({
   selector: 'app-watch',
@@ -70,24 +71,23 @@ export class WatchComponent implements OnInit {
             this._notificationsService.error('Error', this.response.message.en);
           } else {
             this.watch = <Watch>this.response.payload;
-            if (this.watch.collectionObject.name === 'UNDEFINED') {
-              this.watch.collectionObject.name = 'collection';
-            }
 
-            if (this.watch.brandObject.name && this.watch.brandObject.name !== 'UNDEFINED') {
-              this.breads.push({ name: this.watch.brandObject.name, url: `/brand/${this.watch.brandObject.name}` });
-            } else {
-              this.breads.push({ name: 'brand', url: `/` });
-            }
+            if (this.watch.brandObject && this.watch.collectionObject) {
+              if (this.watch.brandObject.name && this.watch.brandObject.name !== 'UNDEFINED') {
+                this.breads.push({ name: this.watch.brandObject.name, url: `/brand/${this.watch.brandObject.name}` });
+              } else {
+                this.breads.push({ name: 'brand', url: `/` });
+              }
 
-            if (this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED') {
-              this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.brandObject.name}/${this.watch.collectionObject._id}` });
-            } else {
-              this.breads.push({ name: 'collection', url: `/` });
-            }
+              if (this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED') {
+                this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.brandObject.name}/${this.watch.collectionObject._id}` });
+              } else {
+                this.breads.push({ name: 'collection', url: `/` });
+              }
 
-            this.breads.push({ name: this.watch.referenceNumber, url: '/' });
-            console.log(this.watch);
+              this.breads.push({ name: this.watch.referenceNumber, url: '/' });
+              console.log(this.watch);
+            }
           }
         });
     });

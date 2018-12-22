@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.sass']
+  styleUrls: ['./register.component.sass'],
 })
 export class RegisterComponent implements OnInit {
 
@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
   responseData: ResponseData;
   response: ResponseObject;
 
-  constructor(private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _notificationsService: NotificationsService) {
+  constructor(
+    private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _notificationsService: NotificationsService) {
     // redirect to admin if already logged in
     if (this.authenticationService.currentAdminValue) {
       this.router.navigate(['/register']);

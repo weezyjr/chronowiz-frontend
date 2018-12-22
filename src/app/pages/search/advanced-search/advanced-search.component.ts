@@ -8,7 +8,6 @@ import { NotificationsService } from 'angular2-notifications';
 import { SearchResults } from 'src/app/Search/SearchResults';
 import { Options } from 'ng5-slider';
 import { BrandsService } from 'src/app/Brand/brands.service';
-import { WatchesService } from 'src/app/Watch/watches.service';
 
 interface BrandCheckBox {
   _id: string;
@@ -39,13 +38,13 @@ export class AdvancedSearchComponent implements OnInit {
 
   watchsLimit = 12;
   minPrice: Number = 0;
-  maxPrice: Number = 100000;
+  maxPrice: Number = 500000;
   options: Options = {
     floor: 0,
-    ceil: 100000,
+    ceil: 500000,
     step: 100,
     minRange: 0,
-    maxRange: 100000
+    maxRange: 500000
   };
 
   /*filters*/
@@ -80,8 +79,6 @@ export class AdvancedSearchComponent implements OnInit {
   getBrands() {
     this.brandsService.readAllBrands()
       .subscribe(data => {
-        console.log(data);
-
         this.responseData = data;
         this.response = this.responseData.response;
 
@@ -101,14 +98,12 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   constructor(
-    private watchesService: WatchesService,
     private brandsService: BrandsService,
     private searchService: SearchService,
     private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.getBrands();
-    this.search();
   }
 
   openSortMenu() {
@@ -118,7 +113,6 @@ export class AdvancedSearchComponent implements OnInit {
   search() {
     if (this.query !== '' || this.query.length !== 0) {
       this.searchService.search(this.query).subscribe(data => {
-        console.log(data);
 
         this.responseData = data;
         this.response = this.responseData.response;
@@ -129,9 +123,10 @@ export class AdvancedSearchComponent implements OnInit {
           const RESULTS = <SearchResults>this.response.payload;
           this.watchesSearchResults = <Watch[]>RESULTS.watches;
           this.renderWatches();
+          this.sort();
         }
       });
-    }
+    }/*
     else {
       this.watchesService.readWatches().subscribe(data => {
         this.responseData = data;
@@ -143,7 +138,7 @@ export class AdvancedSearchComponent implements OnInit {
           this.renderWatches();
         }
       });
-    }
+    }*/
   }
 
   resetResults() {
@@ -169,6 +164,38 @@ export class AdvancedSearchComponent implements OnInit {
     this.watches = this.filter(this.watchesSearchResults);
   }
 
+  sort() {
+    this.watches = this.sortFunction(this.watches, this.sortFactor);
+  }
+
+  sortFunction(watches: Watch[], sortFactor: String): Watch[] {
+    if (!watches) {
+      return [];
+    } else {
+      if (sortFactor === 'Newest') {
+        return watches.sort((watch1, watch2) => {
+          return new Date(watch2.updatedAt).getTime() - new Date(watch1.updatedAt).getTime();
+        });
+      }
+      else if (sortFactor === 'Most Popular') {
+        return watches;
+      }
+      else if (sortFactor === 'Lowest Price') {
+        return watches.sort((watch1, watch2) => {
+          return watch1.price - watch2.price;
+        });
+      }
+      else if (sortFactor === 'Highest Price') {
+        return watches.sort((watch1, watch2) => {
+          return watch2.price - watch1.price;
+        });
+      }
+      else {
+        return watches;
+      }
+    }
+  }
+
   filter(watches: Watch[]): Watch[] {
     if (!watches) {
       return [];
@@ -178,7 +205,7 @@ export class AdvancedSearchComponent implements OnInit {
       (this.filters.bezel === 'Any bezel') &&
       (this.filters.braclet === 'Any braclet') &&
       (this.filters.marker === 'Any hour markers') &&
-      (this.minPrice === 0 && this.maxPrice === 100000) &&
+      (this.minPrice === 0 && this.maxPrice === 500000) &&
       (this.brands.length === 1 && this.brands[0].checked)) {
       return watches;
     }
@@ -251,7 +278,7 @@ export class AdvancedSearchComponent implements OnInit {
               brandFilterMatch = watch.brandObject === brand._id;
               break;
             }
-            else{
+            else {
               brandFilterMatch = false;
             }
           }

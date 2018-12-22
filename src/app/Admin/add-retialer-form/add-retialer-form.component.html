@@ -75,62 +75,84 @@
 
         <div class="form-group">
           <label for="firstname">First Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="firstname" [(ngModel)]="retailer.firstName"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.firstName"
             name="firstname" #firstname="ngModel">
         </div>
 
         <div class="form-group">
           <label for="lastname">Last Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="lastname" [(ngModel)]="retailer.lastName"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.lastName"
             name="lastname" #lastname="ngModel">
         </div>
 
         <div class="form-group">
           <label for="companyName">Company Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="companyName" [(ngModel)]="retailer.companyName"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.companyName"
             name="companyName" #companyName="ngModel">
         </div>
 
         <div class="form-group">
           <label for="address">Address</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="address" [(ngModel)]="retailer.address"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.address"
             name="address" #address="ngModel">
         </div>
 
         <div class="form-group">
           <label for="city">City</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="city" [(ngModel)]="retailer.city"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.city"
             name="city" #city="ngModel">
         </div>
 
         <div class="form-group">
           <label for="country">Country</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="country" [(ngModel)]="retailer.country"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.country"
             name="country" #country="ngModel">
         </div>
 
         <div class="form-group">
           <label for="poBox">PO box</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="poBox" [(ngModel)]="retailer.poBox"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.poBox"
             name="poBox" #poBox="ngModel">
         </div>
 
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="phone" [(ngModel)]="retailer.phoneNumber"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.phoneNumber"
             name="phone" #phone="ngModel">
         </div>
 
         <div class="form-group">
           <label for="mobile">Mobile Number</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="mobile" [(ngModel)]="retailer.mobileNumber"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.mobileNumber"
             name="mobile" #mobile="ngModel">
         </div>
 
         <div class="form-group">
           <label for="fax">Fax</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="fax" [(ngModel)]="retailer.fax"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="retailer.fax"
             name="fax" #fax="ngModel">
+        </div>
+
+        <br />
+        <h3>Discount Limit</h3>
+        <br />
+
+        <div class="form-group">
+          <label for="brand">Brand</label>
+          <input [disabled]="mode == 'delete'" type="number" min="0" max="100" class="form-control"
+            name="brand">
+        </div>
+
+        <div class="form-group">
+          <label for="collection">Collection</label>
+          <input [disabled]="mode == 'delete'" type="number" min="0" max="100" class="form-control"
+            name="collection">
+        </div>
+
+        <div class="form-group">
+          <label for="watch">Watch</label>
+          <input [disabled]="mode == 'delete'" type="number" min="0" max="100" class="form-control"
+            name="watch">
         </div>
 
       </div>

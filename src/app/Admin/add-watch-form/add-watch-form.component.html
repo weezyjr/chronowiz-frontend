@@ -123,7 +123,7 @@
 
         <div class="form-group">
           <label for="referenceNumber">Reference Number</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="referenceNumber" [(ngModel)]="watch.referenceNumber"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.referenceNumber"
             required name="referenceNumber" #referenceNumber="ngModel">
           <div [hidden]="referenceNumber.valid || referenceNumber.pristine" class="alert alert-danger">Reference Number
             is required
@@ -132,41 +132,44 @@
 
         <div class="form-group">
           <label for="gender">Gender</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="gender" [(ngModel)]="watch.gender"
-            name="gender" #gender="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.gender"
+            (ngModelChange)="watch.gender = $event" name="gender" #gender="ngModel">
             <option value=""></option>
             <option value="Men">Men</option>
             <option value="Women">Women</option>
             <option value="Unisex">Unisex</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.gender"
+           name="genderText" #genderText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="productionYear">Production Year</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="productionYear" [(ngModel)]="watch.productionYear"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.productionYear"
             name="productionYear" #productionYear="ngModel">
         </div>
 
         <div class="form-group">
           <label for="limited">Limited</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="limited" [(ngModel)]="watch.limited"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.limited"
             name="limited" #limited="ngModel">
         </div>
 
         <div class="form-group">
           <label for="awards">Awards</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="awards" [(ngModel)]="watch.awards"
-            name="awards" #awards="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.awards"
+            (ngModelChange)="watch.awards = $event" name="awards" #awards="ngModel">
             <option value=""></option>
             <option value="Geneva Seal">Geneva Seal</option>
             <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.awards"
+           name="awardsText" #awardsText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="perpetual">Perpetual</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="perpetual" [(ngModel)]="watch.perpetual"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.perpetual"
             name="perpetual" #perpetual="ngModel">
         </div>
 
@@ -176,26 +179,29 @@
 
         <div class="form-group">
           <label for="movementCaliberName">Movement Caliber Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementCaliberName" [(ngModel)]="watch.movementCaliberName"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.movementCaliberName"
             name="movementCaliberName" #movementCaliberName="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementAutomaticOrManual">Movement Automatic or Manual</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="movementAutomaticOrManual"
-            [(ngModel)]="watch.movementAutomaticOrManual" name="movementAutomaticOrManual" #movementAutomaticOrManual="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control"
+            [ngModel]="watch?.movementAutomaticOrManual" (ngModelChange)="watch.movementAutomaticOrManual = $event"
+            name="movementAutomaticOrManual" #movementAutomaticOrManual="ngModel">
             <option value=""></option>
             <option value="Manually Wound">Manually Wound</option>
             <option value="Automatic">Automatic</option>
             <option value="Self Winding">Self Winding</option>
             <option value="Quartz">Quartz</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"
+            [(ngModel)]="watch.movementAutomaticOrManual" name="movementAutomaticOrManualText"
+            #movementAutomaticOrManualText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementCaliberNumber">Movement Caliber Number</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementCaliberNumber" [(ngModel)]="watch.movementCaliberNumber"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.movementCaliberNumber"
             name="movementCaliberNumber" #movementCaliberNumber="ngModel">
         </div>
 
@@ -204,7 +210,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementDiameter" [(ngModel)]="watch.movementDiameter"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.movementDiameter"
                   name="movementDiameter" #movementDiameter="ngModel">
               </div>
             </div>
@@ -219,7 +225,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementHeight" [(ngModel)]="watch.movementHeight"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.movementHeight"
                   name="movementHeight" #movementHeight="ngModel">
               </div>
             </div>
@@ -231,7 +237,7 @@
 
         <div class="form-group">
           <label for="movementJewels">Movement Jewels</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementJewels" [(ngModel)]="watch.movementJewels"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.movementJewels"
             name="movementJewels" #movementJewels="ngModel">
         </div>
 
@@ -240,7 +246,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementFrequency"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.movementFrequency" name="movementFrequency" #movementFrequency="ngModel">
               </div>
             </div>
@@ -255,7 +261,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementPowerReserve"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.movementPowerReserve" name="movementPowerReserve" #movementPowerReserve="ngModel">
               </div>
             </div>
@@ -267,36 +273,38 @@
 
         <div class="form-group">
           <label for="movementCertificate">Movement Certificate</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="movementCertificate" [(ngModel)]="watch.movementCertificate"
-            name="movementCertificate" #movementCertificate="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control"  [ngModel]="watch?.movementCertificate"
+            (ngModelChange)="watch.movementCertificate = $event" name="movementCertificate" #movementCertificate="ngModel">
             <option value=""></option>
             <option value="COSC">COSC</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"
+            [(ngModel)]="watch.movementCertificate" name="movementCertificateText" #movementCertificateText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementDecoration">Movement Decoration</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="movementDecoration" [(ngModel)]="watch.movementDecoration"
-            name="movementDecoration" #movementDecoration="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.movementDecoration"
+            (ngModelChange)="watch.movementDecoration = $event" name="movementDecoration" #movementDecoration="ngModel">
             <option value=""></option>
             <option value="Côtes de Genève">Côtes de Genève</option>
             <option value="Guilloche">Guilloche</option>
             <option value="Perlage">Perlage</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.movementDecoration"
+           name="movementDecorationText" #movementDecorationText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementSpring">Movement Spring</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementSpring" [(ngModel)]="watch.movementSpring"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.movementSpring"
             name="movementSpring" #movementSpring="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementTourbillon">Movement Tourbillon</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="movementTourbillon" [(ngModel)]="watch.movementTourbillon"
-            name="movementTourbillon" #movementTourbillon="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control"  [ngModel]="watch?.movementTourbillon"
+            (ngModelChange)="watch.movementTourbillon = $event" name="movementTourbillon" #movementTourbillon="ngModel">
             <option value=""></option>
             <option value="Flying Tourbillon">Flying Tourbillon</option>
             <option value="One Minute Tourbillon">One Minute Tourbillon</option>
@@ -310,13 +318,14 @@
               balance spring
             </option>
             <option value="Flying Double Tourbillon">Flying Double Tourbillon</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.movementTourbillon"
+            name="movementTourbillonText" #movementTourbillonText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="movementRotor">Movement Rotor</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementRotor" [(ngModel)]="watch.movementRotor"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.movementRotor"
             name="movementRotor" #movementRotor="ngModel">
         </div>
 
@@ -325,7 +334,7 @@
           <div class="row">
             <div class="col-10" *ngFor="let movementAdditionalFeature of watch.movementAdditionalFeatures; let in = index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="movementAdditionalFeatures"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.movementAdditionalFeatures[in].value" name="movementAdditionalFeatures{{in}}"
                   #movementAdditionalFeatures="ngModel">
               </div>
@@ -341,7 +350,7 @@
 
         <div class="form-group">
           <label for="numberOfParts">Number of Parts</label>
-          <input [disabled]="mode == 'delete'" type="number" class="form-control" id="numberOfParts" [(ngModel)]="watch.numberOfParts"
+          <input [disabled]="mode == 'delete'" type="number" class="form-control" [(ngModel)]="watch.numberOfParts"
             name="numberOfParts" #numberOfParts="ngModel">
         </div>
 
@@ -352,9 +361,9 @@
         <div>
           <label for="complications">Complications</label>
           <div class="row">
-            <div class="col-10" *ngFor="let complication of watch.complications; let in=index">
+            <div class="col-10" *ngFor="let complication of watch?.complications; let in=index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="complications" [(ngModel)]="watch.complications[in].value"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.complications[in].value"
                   name="complications{{in}}" #complications="ngModel">
               </div>
             </div>
@@ -374,9 +383,9 @@
         <div>
           <label for="functions">Functions</label>
           <div class="row">
-            <div class="col-10" *ngFor="let function of watch.functions; let in=index">
+            <div class="col-10" *ngFor="let function of watch?.functions; let in=index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="functions" [(ngModel)]="watch.functions[in].value"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.functions[in].value"
                   name="functions{{in}}" #functions="ngModel">
               </div>
             </div>
@@ -395,7 +404,7 @@
 
         <div class="form-group">
           <label for="caseMaterial">Case Material</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="caseMaterial" [(ngModel)]="watch.caseMaterial"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.caseMaterial"
             name="caseMaterial" #caseMaterial="ngModel">
         </div>
 
@@ -405,7 +414,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="caseDiameter" [(ngModel)]="watch.caseDiameter"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.caseDiameter"
                   name="caseDiameter" #caseDiameter="ngModel">
               </div>
             </div>
@@ -420,7 +429,7 @@
           <div class="row">
             <div class="col-10">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="caseHeight" [(ngModel)]="watch.caseHeight"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.caseHeight"
                   name="caseHeight" #caseHeight="ngModel">
               </div>
             </div>
@@ -432,41 +441,40 @@
 
         <div class="form-group">
           <label for="caseFront">Case Front</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="caseFront" [(ngModel)]="watch.caseFront"
-            name="caseFront" #caseFront="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.caseFront"
+            (ngModelChange)="watch.caseFront = $event" name="caseFront" #caseFront="ngModel">
             <option value=""></option>
             <option value="Saphire Crystal">Saphire Crystal</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.caseFront"
+            name="caseFrontText" #caseFrontText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="caseBack">Case Back</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="caseBack" [(ngModel)]="watch.caseBack"
-            name="caseBack" #caseBack="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.caseBack"
+            (ngModelChange)="watch.caseBack = $event" name="caseBack" #caseBack="ngModel">
             <option value=""></option>
             <option value="Transparent">Transparent</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.caseBack"
+            name="caseBackText" #caseBackText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="caseBezelMaterial">Case Bezel Material</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="caseBezelMaterial" [(ngModel)]="watch.caseBezelMaterial"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.caseBezelMaterial"
             name="caseBezelMaterial" #caseBezelMaterial="ngModel">
         </div>
 
         <div>
           <label for="waterResistance">Water Resistance</label>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="waterResistance" [(ngModel)]="watch.waterResistance"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.waterResistance"
                   name="waterResistance" #waterResistance="ngModel">
               </div>
-            </div>
-            <div class="col-1">
-              <div class="units">atm</div>
             </div>
           </div>
         </div>
@@ -474,9 +482,9 @@
         <div>
           <label for="waterProof">Water Proof</label>
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="waterProof" [(ngModel)]="watch.waterProof"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"  [(ngModel)]="watch.waterProof"
                   name="waterProof" #waterProof="ngModel">
               </div>
             </div>
@@ -485,13 +493,14 @@
 
         <div class="form-group">
           <label for="caseCrown">Case Crown</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="caseCrown" [(ngModel)]="watch.caseCrown"
-            name="caseCrown" #caseCrown="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control"  [ngModel]="watch?.caseCrown"
+            (ngModelChange)="watch.caseCrown = $event" name="caseCrown" #caseCrown="ngModel">
             <option value=""></option>
             <option value="Screw-in Crown">Screw-in Crown</option>
             <option value="screw-locked crown">Screw-locked Crown</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.caseCrown" name="caseCrownText"
+            #caseCrownText="ngModel">
         </div>
 
         <div>
@@ -499,7 +508,7 @@
           <div class="row">
             <div class="col-10" *ngFor="let caseAdditionalFeature of watch.caseAdditionalFeatures; let in = index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="caseAdditionalFeatures"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.caseAdditionalFeatures[in].value" name="caseAdditionalFeatures{{in}}"
                   #caseAdditionalFeatures="ngModel">
               </div>
@@ -519,14 +528,14 @@
 
         <div class="form-group">
           <label for="dialColour">Dial Colour</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="dialColour" [(ngModel)]="watch.dialColour"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.dialColour"
             name="functions" #dialColour="ngModel">
         </div>
 
         <div class="form-group">
           <label for="dialIndex">Dial Index</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="dialIndex" [(ngModel)]="watch.dialIndex"
-            name="dialIndex" #dialIndex="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.dialIndex"
+            (ngModelChange)="watch.dialIndex = $event" name="dialIndex" #dialIndex="ngModel">
             <option value=""></option>
             <option value="Roman numeral">Roman numeral</option>
             <option value="Arabic numeral">Arabic numeral</option>
@@ -534,26 +543,27 @@
             <option value="Indices">Indices</option>
             <option value="Blank Dial">Blank Dial</option>
             <option value="Mixed">Mixed</option>
-            <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.dialIndex" name="dialIndexText"
+            #dialIndexText="ngModel">
         </div>
 
         <div class="form-group">
           <label for="dialFinish">Dial Finish</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="dialFinish" [(ngModel)]="watch.dialFinish"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.dialFinish"
             name="dialFinish" #dialFinish="ngModel">
         </div>
 
         <div class="form-group">
           <label for="dialType">Dial Type</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="dialType" [(ngModel)]="watch.dialType"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.dialType"
             name="dialType" #dialType="ngModel">
         </div>
 
         <div class="form-group">
           <label for="dialHands">Dial Hands</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="dialHands" [(ngModel)]="watch.dialHands"
-            name="dialHands" #dialHands="ngModel">
+          <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.dialHands"
+            (ngModelChange)="watch.dialHands = $event" name="dialHands" #dialHands="ngModel">
             <option value=""></option>
             <option value="ALPHA HANDS">ALPHA HANDS</option>
             <option value="ARROW HANDS">ARROW HANDS</option>
@@ -572,6 +582,8 @@
             <option value="SWORD HANDS">SWORD HANDS</option>
             <option value="Other">Other</option>
           </select>
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.dialHands" name="dialHandsText"
+            #dialHandsText="ngModel">
         </div>
 
         <div>
@@ -579,7 +591,7 @@
           <div class="row">
             <div class="col-10" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in = index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="dialAdditionalFeatures"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.dialAdditionalFeatures[in].value" name="dialAdditionalFeatures{{in}}"
                   #dialAdditionalFeatures="ngModel">
               </div>
@@ -599,31 +611,31 @@
 
         <div class="form-group">
           <label for="band">Band</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="band" [(ngModel)]="watch.band" name="band"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.band" name="band"
             #band="ngModel">
         </div>
 
         <div class="form-group">
           <label for="bandMaterial">Band Material</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="bandMaterial" [(ngModel)]="watch.bandMaterial"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.bandMaterial"
             name="bandMaterial" #bandMaterial="ngModel">
         </div>
 
         <div class="form-group">
           <label for="bandClasp">Band Clasp</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="bandClasp" [(ngModel)]="watch.bandClasp"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.bandClasp"
             name="bandClasp" #bandClasp="ngModel">
         </div>
 
         <div class="form-group">
           <label for="bandColour">Band Colour</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="bandColour" [(ngModel)]="watch.bandColour"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.bandColour"
             name="bandColour" #bandColour="ngModel">
         </div>
 
         <div class="form-group">
           <label for="bandClaspMaterial">Band Clasp Material</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="bandClaspMaterial" [(ngModel)]="watch.bandClaspMaterial"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.bandClaspMaterial"
             name="bandClaspMaterial" #bandClaspMaterial="ngModel">
         </div>
 
@@ -632,7 +644,7 @@
           <div class="row">
             <div class="col-10" *ngFor="let bandAdditionalFeature of watch.bandAdditionalFeatures; let in=index">
               <div class="form-group">
-                <input [disabled]="mode == 'delete'" type="text" class="form-control" id="bandAdditionalFeatures"
+                <input [disabled]="mode == 'delete'" type="text" class="form-control"
                   [(ngModel)]="watch.bandAdditionalFeatures[in].value" name="bandAdditionalFeatures{{in}}"
                   #bandAdditionalFeatures="ngModel">
               </div>
@@ -654,23 +666,24 @@
           <div class="col-6">
             <div class="form-group">
               <label for="price">Price</label>
-              <input [disabled]="mode == 'delete'" type="number" class="form-control" id="price" [(ngModel)]="watch.price"
+              <input [disabled]="mode == 'delete'" type="number" class="form-control" [(ngModel)]="watch.price"
                 name="price" #price="ngModel">
             </div>
           </div>
           <div class="col-6">
             <div class="form-group">
               <label for="priceCurrency">Price Currency</label>
-              <select [disabled]="mode == 'delete'" type="text" class="form-control" id="priceCurrency" [(ngModel)]="watch.priceCurrency"
-                name="priceCurrency" #priceCurrency="ngModel">
+              <select [disabled]="mode == 'delete'" type="text" class="form-control" [ngModel]="watch?.priceCurrency"
+                (ngModelChange)="watch.priceCurrency = $event" name="priceCurrency" #priceCurrency="ngModel">
                 <option value=""></option>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
                 <option value="CHF">CHF</option>
                 <option value="AED">AED</option>
-                <option value="Other">Other</option>
               </select>
+              <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.priceCurrency"
+                name="priceCurrencyText" #priceCurrencyText="ngModel">
             </div>
           </div>
         </div>
@@ -689,7 +702,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.mainPhotoFile}" [disabled]="mode == 'delete'" type="file" class="form-control"
-                  (change)="onMainPhotoChanged($event)" #mainPhotoElementRef id="mainPhotoFileInput" [(ngModel)]="watch.mainPhotoFile"
+                  (change)="onMainPhotoChanged($event)" #mainPhotoElementRef [(ngModel)]="watch.mainPhotoFile"
                   name="mainPhotoFile" #mainPhotoFile="ngModel">
               </div>
             </div>
@@ -709,7 +722,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.banner1PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef id="banner1PhotoFileInput"
+                  class="form-control" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef
                   [(ngModel)]="watch.banner1PhotoFile" name="banner1PhotoFile" #banner1PhotoFile="ngModel">
               </div>
             </div>
@@ -729,7 +742,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.banner2PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef id="banner2PhotoFile"
+                  class="form-control" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef
                   [(ngModel)]="watch.banner2PhotoFile" name="banner2PhotoFile" #banner2PhotoFile="ngModel">
               </div>
             </div>
@@ -745,13 +758,13 @@
 
         <div class="form-group">
           <label for="section1Title">Section 1 Title</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section1Title" [(ngModel)]="watch.section1Title"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section1Title"
             name="section1Title" #section1Title="ngModel">
         </div>
 
         <div class="form-group">
           <label for="section1Paragraph">Section 1 Paragraph</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section1Paragraph" [(ngModel)]="watch.section1Paragraph"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section1Paragraph"
             name="section1Paragraph" #section1Paragraph="ngModel">
         </div>
 
@@ -765,7 +778,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section1PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onSection1PhotoChanged($event)" #section1PhotoElementRef id="section1PhotoFileInput"
+                  class="form-control" (change)="onSection1PhotoChanged($event)" #section1PhotoElementRef
                   [(ngModel)]="watch.section1PhotoFile" name="section1PhotoFile" #section1PhotoFile="ngModel">
               </div>
             </div>
@@ -781,13 +794,13 @@
 
         <div class="form-group">
           <label for="section2Title">Section 2 Title</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section2Title" [(ngModel)]="watch.section2Title"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section2Title"
             name="section2Title" #section2Title="ngModel">
         </div>
 
         <div class="form-group">
           <label for="section2Paragraph">Section 2 Paragraph</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section2Paragraph" [(ngModel)]="watch.section2Paragraph"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section2Paragraph"
             name="section2Paragraph" #section2Paragraph="ngModel">
         </div>
 
@@ -801,7 +814,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section2PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onSection2PhotoChanged($event)" #section2PhotoElementRef id="section2PhotoFileInput"
+                  class="form-control" (change)="onSection2PhotoChanged($event)" #section2PhotoElementRef
                   [(ngModel)]="watch.section2PhotoFile" name="section2PhotoFile" #section2PhotoFile="ngModel">
               </div>
             </div>
@@ -817,13 +830,13 @@
 
         <div class="form-group">
           <label for="section3Title">Section 3 Title</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section3Title" [(ngModel)]="watch.section3Title"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section3Title"
             name="section3Title" #section3Title="ngModel">
         </div>
 
         <div class="form-group">
           <label for="section3Paragraph">Section 3 Paragraph</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section3Paragraph" [(ngModel)]="watch.section3Paragraph"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section3Paragraph"
             name="section3Paragraph" #section3Paragraph="ngModel">
         </div>
 
@@ -837,7 +850,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section3PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onSection3PhotoChanged($event)" #section3PhotoElementRef id="section3PhotoFileInput"
+                  class="form-control" (change)="onSection3PhotoChanged($event)" #section3PhotoElementRef
                   [(ngModel)]="watch.section3PhotoFile" name="section3PhotoFile" #section3PhotoFile="ngModel">
               </div>
             </div>
@@ -855,13 +868,13 @@
 
         <div class="form-group">
           <label for="section4Title">Section 4 Title</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section4Title" [(ngModel)]="watch.section4Title"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section4Title"
             name="section4Title" #section4Title="ngModel">
         </div>
 
         <div class="form-group">
           <label for="section4Paragraph">Section 4 Paragraph</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section4Paragraph" [(ngModel)]="watch.section4Paragraph"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section4Paragraph"
             name="section4Paragraph" #section4Paragraph="ngModel">
         </div>
 
@@ -875,7 +888,7 @@
             <div class="col-10">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section4PhotoFile}" [disabled]="mode == 'delete'" type="file"
-                  class="form-control" (change)="onSection4PhotoChanged($event)" #section4PhotoElementRef id="section4PhotoFileInput"
+                  class="form-control" (change)="onSection4PhotoChanged($event)" #section4PhotoElementRef
                   [(ngModel)]="watch.section4PhotoFile" name="section4PhotoFile" #section4PhotoFile="ngModel">
               </div>
             </div>
@@ -894,13 +907,13 @@
 
         <div class="form-group">
           <label for="section5Title">Section 5 Title</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section5Title" [(ngModel)]="watch.section5Title"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section5Title"
             name="section5Title" #section5Title="ngModel">
         </div>
 
         <div class="form-group">
           <label for="section5Paragraph">Section 5 Paragraph</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="section5Paragraph" [(ngModel)]="watch.section5Paragraph"
+          <input [disabled]="mode == 'delete'" type="text" class="form-control" [(ngModel)]="watch.section5Paragraph"
             name="section5Paragraph" #section5Paragraph="ngModel">
         </div>
       </div>

@@ -499,52 +499,6 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   updateWatch(): void {
-    /*  const updatedWatchObject = {};
-
-      for (const key in this.watch) {
-        if (this.watch[key]) {
-          if (Object.prototype.toString.call(this.watch[key]) === '[object Array]') {
-            if (this.watch[key].length === 0) {
-              continue;
-            }
-            if (this.watch['bandAdditionalFeatures'].length === 1) {
-              if (!this.watch['bandAdditionalFeatures'][0]['value']) {
-                continue;
-              }
-            }
-            if (this.watch['caseAdditionalFeatures'].length === 1) {
-              if (!this.watch['caseAdditionalFeatures'][0]['value']) {
-                continue;
-              }
-            }
-            if (this.watch['dialAdditionalFeatures'].length === 1) {
-              if (!this.watch['dialAdditionalFeatures'][0]['value']) {
-                continue;
-              }
-            }
-            if (this.watch['functions'].length === 1) {
-              if (!this.watch['functions'][0]['value']) {
-                continue;
-              }
-            }
-            if (this.watch['movementAdditionalFeatures'].length === 1) {
-              if (!this.watch['movementAdditionalFeatures'][0]['value']) {
-                continue;
-              }
-            }
-            if (this.watch['section5PhotoFiles'].length === 1) {
-              if (!this.watch['section5PhotoFiles'][0]['value']) {
-                continue;
-              }
-            }
-            updatedWatchObject[key] = this.watch[key];
-          }
-          else {
-            updatedWatchObject[key] = this.watch[key];
-          }
-        }
-      }*/
-
     console.log(this.watch);
 
     this.adminService.updateWatch(this.watch, this.watch._id)
