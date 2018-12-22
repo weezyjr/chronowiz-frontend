@@ -20,6 +20,8 @@ import { ProfileComponent } from './User/profile/profile.component';
 import { UserGuard } from './Auth/user.guard';
 import { SearchComponent } from './pages/search/search.component';
 import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced-search.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 
 const routes: Routes = [
   {
@@ -118,6 +120,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
+  },
+  {
+    path: 'set-new-password',
+    component: SetNewPasswordComponent
   },
   {
     path: 'profile',

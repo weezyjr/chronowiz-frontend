@@ -56,6 +56,8 @@ import { WatchesPipe } from './Filters/Watches.pipe';
 import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
 import { CollectionSectionComponent } from './components/collection-section/collection-section.component';
 import { ConfirmPasswordDirective } from './pages/register/confirmPassword.validator';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 
 
 @NgModule({
@@ -100,7 +102,9 @@ import { ConfirmPasswordDirective } from './pages/register/confirmPassword.valid
     SearchComponent,
     CarouselComponent,
     AdvancedSearchComponent,
-    CollectionSectionComponent
+    CollectionSectionComponent,
+    ResetPasswordComponent,
+    SetNewPasswordComponent
   ],
   imports: [
     Ng5SliderModule,

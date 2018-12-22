@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _notificationsService: NotificationsService) {
     // redirect to admin if already logged in
-    if (this.authenticationService.currentAdminValue) {
-      this.router.navigate(['/login']);
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/profile']);
     }
   }
 
