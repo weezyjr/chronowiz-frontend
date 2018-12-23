@@ -14,17 +14,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="create"
+        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode" value="create"
           [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="update"
+        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode" value="update"
           [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="collectionForm.reset(); newCollection();" name="mode" value="delete"
+        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode" value="delete"
           [(ngModel)]="mode">
         Delete
       </label>
@@ -44,7 +44,7 @@
                 <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control" id="selectionBrand"
                   name="selectionBrand">
                   <option value=""></option>
-                  <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
+                  <option *ngFor="let selectionBrand of selectionBrands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
                 </select>
               </div>
             </div>
@@ -67,24 +67,24 @@
         <br />
         <div class="form-group">
           <label for="brandObject">Brand</label>
-          <select [disabled]="mode == 'delete'" type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject"
+          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" id="brandObject" required [(ngModel)]="collection.brandObject"
             name="brandObject" #brandObject="ngModel">
             <option value=""></option>
-            <option *ngFor="let brand of brands" [value]="brand?._id">{{brand?.name}}</option>
+            <option *ngFor="let brand of selectionBrands" [value]="brand?._id">{{brand?.name}}</option>
           </select>
           <div [hidden]="brandObject.valid || brandObject.pristine" class="alert alert-danger">Brand is required</div>
         </div>
 
         <div class="form-group">
           <label for="name">Collection Name</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="name" required
+          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" id="name" required
             [(ngModel)]="collection.name" name="name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Collection Name is required</div>
         </div>
 
         <div class="form-group">
           <label for="name">Collection Description</label>
-          <input [disabled]="mode == 'delete'" type="text" class="form-control" id="description"
+          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" id="description"
             [(ngModel)]="collection.description" name="description" #name="ngModel">
         </div>
 
@@ -94,10 +94,12 @@
         <div class="row m-1">
           <div class="col-6">
             <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="(!collectionForm.form.valid || loading) && (mode != 'delete')">
-              {{loading? 'loading..' : mode }}</button>
+              {{loading? 'loading..' : mode }}
+              <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg secondry-btn" (click)="newCollection(); collectionForm.reset(); ">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)="resetCollection(); collectionForm.reset(); ">Clear</button>
           </div>
         </div>
       </div>

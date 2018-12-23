@@ -1,7 +1,6 @@
 import { Watch } from '../Watch/watch';
 
-export class Retailer
-{
+export class Retailer {
   _id?: number;
   email: string;
   password: string;
@@ -18,7 +17,11 @@ export class Retailer
   watchObjects?: Watch[];
   jwt?: string;
 
-  constructor(){
+  brandsDiscountLimit?: number;
+  collectionsDiscountLimit?: number;
+  watchesDiscountLimit?: number;
+
+  constructor() {
     this.email = '';
     this.password = '';
   }

@@ -1,9 +1,14 @@
-import {ItemValue} from '../item-value';
 import { Brand } from '../Brand/brand';
 import { Collection } from '../Collection/collection';
 
-export class Watch
-{
+class Value {
+  public value: string;
+  constructor() {
+    this.value = '';
+  }
+}
+
+export class Watch {
   public _id?: string;
   public updatedAt?: string;
 
@@ -30,11 +35,11 @@ export class Watch
   public movementSpring?: string;
   public movementTourbillon?: string;
   public movementRotor?: string;
-  public movementAdditionalFeatures?: ItemValue[];
+  public movementAdditionalFeatures?: Value[];
   public numberOfParts?: Number;
 
-  public functions?: ItemValue[];
-  public complications?: ItemValue[];
+  public functions?: Value[];
+  public complications?: Value[];
 
   public caseMaterial?: string;
   public caseDiameter?: string;
@@ -45,21 +50,21 @@ export class Watch
   public waterResistance?: string;
   public waterProof?: string;
   public caseCrown?: string;
-  public caseAdditionalFeatures?: ItemValue[];
+  public caseAdditionalFeatures?: Value[];
 
   public dialColour?: string;
   public dialIndex?: string;
   public dialFinish?: string;
   public dialType?: string;
   public dialHands?: string;
-  public dialAdditionalFeatures?: ItemValue[];
+  public dialAdditionalFeatures?: Value[];
 
   public band?: string;
   public bandMaterial?: string;
   public bandClasp?: string;
   public bandColour?: string;
   public bandClaspMaterial?: string;
-  public bandAdditionalFeatures?: ItemValue[];
+  public bandAdditionalFeatures?: Value[];
 
   public price?: number;
   public priceCurrency?: string;
@@ -93,21 +98,14 @@ export class Watch
   public section4PhotoUrl?: string;
   public section4PhotoFile?: File;
 
-  public section5Title?: string;
-  public section5Paragraph?: string;
-  public section5PhotoUrls?: ItemValue[];
-  public section5PhotoFiles?: ItemValue[];
-
-  constructor()
-  {
+  constructor() {
     this.brandObject = new Brand();
     this.collectionObject = new Collection();
-    this.movementAdditionalFeatures = [{value: ''}];
-    this.functions = [{value: ''}];
-    this.complications = [{value: ''}];
-    this.caseAdditionalFeatures = [{value: ''}];
-    this.dialAdditionalFeatures = [{value: ''}];
-    this.bandAdditionalFeatures = [{value: ''}];
-    this.section5PhotoFiles = [{value: ''}];
+    this.movementAdditionalFeatures = [new Value];
+    this.functions = [new Value];
+    this.complications = [new Value];
+    this.caseAdditionalFeatures = [new Value];
+    this.dialAdditionalFeatures = [new Value];
+    this.bandAdditionalFeatures = [new Value];
   }
 }

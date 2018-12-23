@@ -1,44 +1,36 @@
-import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
-import * as S3 from 'aws-sdk/clients/s3';
+import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
-import { environment } from '../../../environments/environment';
 import { Brand } from '../../Brand/brand';
-import { ResponseData } from '../../API/response-data';
 import { ResponseObject } from '../../API/responseObject';
 import { Link } from 'src/app/Link';
 import { AdminService } from '../admin.service';
-
-const s3Bucket = new S3(
-  {
-    accessKeyId: 'AKIAJ2EQ46N2P32MRYAQ',
-    secretAccessKey: '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',
-    region: 'eu-west-1'
-  }
-);
-
-@Injectable()
-export class ConfigService {
-  constructor() {
-  }
-}
+import { ResponseData } from 'src/app/API/response-data';
+import { S3Service } from '../S3/s3.service';
 
 @Component({
-  selector: 'app-add-brand-form',
   templateUrl: './add-brand-form.component.html',
   styleUrls: ['./add-brand-form.component.sass']
 })
 export class AddBrandFormComponent implements OnInit {
-  env = environment;
 
-  logoPhotoFile: any;
-  headerPhotoFile: any;
-  banner1PhotoFile: any;
-  banner2PhotoFile: any;
+  brand: Brand = new Brand();
 
+  // Files
+  logoPhotoFile: File;
+  headerPhotoFile: File;
+  banner1PhotoFile: File;
+  banner2PhotoFile: File;
+
+  // Loading flag
   loading: Boolean = false;
-  mode: String = 'create';
-  brands: Brand[];
 
+  // mode flag
+  mode: String = 'create';
+
+  // selection brands retrieved from the server
+  selectionBrands: Brand[];
+
+  // static brand names for creating a new brand
   staticBrandNames: Array<Object> = [
     { name: 'A.Lange & Sohne' },
     { name: 'Alexander Shorokhoff' },
@@ -200,14 +192,7 @@ export class AddBrandFormComponent implements OnInit {
     { name: 'Zenith ' },
     { name: 'Other' }];
 
-  get brandsList(): Array<any> {
-    return this.mode === 'create' ? this.staticBrandNames : this.brands;
-  }
-
-  brand: Brand = new Brand();
-  responseData: ResponseData;
-  response: ResponseObject;
-
+  // naviagtion links
   navRoutes: Link[] = [
     new Link('Watch Form', 'app-add-watch-form'),
     new Link('Collection Form', 'app-add-collection-form'),
@@ -215,46 +200,246 @@ export class AddBrandFormComponent implements OnInit {
     new Link('Retailer Form', 'app-add-retailer-form')
   ];
 
-  @ViewChild('logoPhotoElementRef') logoPhotoElementRef: ElementRef;
-  @ViewChild('headerPhotoElementRef') headerPhotoElementRef: ElementRef;
-  @ViewChild('banner1PhotoElementRef') banner1PhotoElementRef: ElementRef;
-  @ViewChild('banner2PhotoElementRef') banner2PhotoElementRef: ElementRef;
-
   constructor(private adminService: AdminService,
-    private _notificationsService: NotificationsService) {
-
-  }
+    private s3Service: S3Service,
+    private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
-    this.newBrand();
+    this.resetBrand();
+  }
+  /**
+  * Reset Brand
+  */
+
+  resetBrand(): void {
+    this.brand = new Brand();
+    this.logoPhotoFile = null;
+    this.headerPhotoFile = null;
+    this.banner1PhotoFile = null;
+    this.banner2PhotoFile = null;
+    this.getBrands();
   }
 
-  onSelectionBrandSelected(selectedBrandId) {
-    this.adminService.readBrandById(selectedBrandId)
-      .subscribe(data => {
-        console.log(data);
+  /**
+  * Get Brands for Selection
+  */
+  getBrands(): void {
+    this.adminService.readAllBrands()
+      .subscribe((data: ResponseData) => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = data.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
         }
         else {
-          this.brand = <Brand>this.response.payload;
+          this.selectionBrands = <Brand[]>response.payload;
+        }
+      });
+  }
+
+  /**
+   * Retrive Brand Data from the server
+   */
+  onBrandSelection(selectedBrandId: String) {
+    this.adminService.readBrandById(selectedBrandId)
+      .subscribe(data => {
+
+        const response: ResponseObject = data.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this.brand = <Brand>response.payload;
+        }
+      });
+  }
+
+  /*
+  * Uploading Files to S3
+  */
+
+  /**
+   * Generate url path for uploading files
+   * @param propertyName: which property in BrandObject you assign the file to
+   */
+  brandsUrlPathGenerator(propertyName: String): String {
+    return `brands/${this.brand.name}/${propertyName}`;
+  }
+
+  async uploadLogoPhoto() {
+    await this.s3Service.upload(this.logoPhotoFile, this.brandsUrlPathGenerator('logoPhotoUrl'))
+      .then(async (url: string) => {
+        this._notificationsService.success(`Succes ${this.logoPhotoFile.name} uploaded successfully`);
+        this.brand.logoPhotoUrl = url;
+      },
+        async () => {
+          if (this.mode !== 'delete') {
+            // LogoPhoto is required in case of create
+            throw new Error('Missing Files');
+          }
+          this.brand.logoPhotoUrl = '';
+        });
+  }
+
+  async uploadHeaderFile() {
+    await this.s3Service.upload(this.headerPhotoFile, this.brandsUrlPathGenerator('headerPhotoUrl'))
+      .then(async (url: string) => {
+        this._notificationsService.success(`Succes ${this.headerPhotoFile.name} uploaded successfully`);
+        this.brand.headerPhotoUrl = url;
+      },
+        async () => {
+          this.brand.headerPhotoUrl = '';
+        })
+      .catch(() => this.brand.headerPhotoUrl = '');
+  }
+
+  async uploadBanner1Photo() {
+    await this.s3Service.upload(this.banner1PhotoFile, this.brandsUrlPathGenerator('banner1PhotoUrl'))
+      .then(async (url: string) => {
+        this._notificationsService.success(`Succes ${this.banner1PhotoFile.name} uploaded successfully`);
+        this.brand.banner1PhotoUrl = url;
+      },
+        async () => {
+          if (this.mode !== 'delete') {
+            throw new Error('Missing Files');
+          }
+          this.brand.banner1PhotoUrl = '';
+        });
+  }
+
+  async uploadBanner2Photo() {
+    await this.s3Service.upload(this.banner2PhotoFile, this.brandsUrlPathGenerator('banner2PhotoUrl'))
+      .then(async (url: string) => {
+        this._notificationsService.success(`Succes ${this.banner2PhotoFile.name} uploaded successfully`);
+        this.brand.banner2PhotoUrl = url;
+      },
+        async () => {
+          if (this.mode === 'create') {
+            throw new Error('Missing Files');
+          }
+          this.brand.banner2PhotoUrl = '';
+        });
+  }
+
+
+  /**
+   * Clear Files
+   * */
+  clearLogoPhoto(): void {
+    this.brand.logoPhotoFile = null;
+    this.logoPhotoFile = null;
+    this.brand.logoPhotoUrl = '';
+  }
+
+  clearHeaderPhoto(): void {
+    this.brand.headerPhotoFile = null;
+    this.headerPhotoFile = null;
+    this.brand.headerPhotoUrl = '';
+  }
+
+  clearBanner1Photo(): void {
+    this.brand.banner1PhotoFile = null;
+    this.banner1PhotoFile = null;
+    this.brand.banner1PhotoUrl = '';
+  }
+
+  clearBanner2Photo(): void {
+    this.brand.banner2PhotoFile = null;
+    this.banner2PhotoFile = null;
+    this.brand.banner2PhotoUrl = '';
+  }
+
+  /**
+   * Bind Files
+   * */
+
+  onLogoPhotoChange(event: { target: { files: any[]; }; }) {
+    this.logoPhotoFile = event.target.files[0];
+    // reset the url till it upload
+    this.brand.logoPhotoUrl = '';
+  }
+
+  onHeaderPhotoChange(event: { target: { files: any[]; }; }) {
+    this.headerPhotoFile = event.target.files[0];
+    // reset the url till it upload
+    this.brand.headerPhotoUrl = '';
+  }
+
+  onBanner1PhotoChange(event: { target: { files: any[]; }; }) {
+    this.banner1PhotoFile = event.target.files[0];
+    // reset the url till it upload
+    this.brand.banner1PhotoUrl = '';
+  }
+
+  onBanner2PhotoChange(event: { target: { files: any[]; }; }) {
+    this.banner2PhotoFile = event.target.files[0];
+    // reset the url till it upload
+    this.brand.banner2PhotoUrl = '';
+  }
+
+  /**
+   * Create, Update and Delete Brand
+   * */
+
+  createBrand(): void {
+    this.adminService.createBrand(this.brand)
+      .subscribe((data: ResponseData) => {
+
+        const response: ResponseObject = data.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', response.message.en);
+        }
+      });
+  }
+
+  updateBrand() {
+    this.adminService.updateBrand(this.brand, this.brand._id)
+      .subscribe((data: ResponseData) => {
+
+        const response: ResponseObject = data.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', response.message.en);
+        }
+      });
+  }
+
+  deleteBrand(): void {
+    this.adminService.deleteBrandById(this.brand._id)
+      .subscribe((data: ResponseData) => {
+
+        const response: ResponseObject = data.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', response.message.en);
         }
       });
   }
 
   async onSubmit() {
+
+    this.loading = true;
+
     try {
-      this.loading = true;
+      /** wait for files uploading */
+      await this.uploadLogoPhoto();
+      await this.uploadHeaderFile();
+      await this.uploadBanner1Photo();
+      await this.uploadBanner2Photo();
 
-      await this.uploadLogoPhotoToS3();
-      await this.uploadHeaderPhotoToS3();
-      await this.uploadBanner1PhotoToS3();
-      await this.uploadBanner2PhotoToS3();
-
+      /** Submit depnding on the mode type */
       if (this.mode === 'create') {
         await this.createBrand();
       } else if (this.mode === 'update') {
@@ -264,368 +449,12 @@ export class AddBrandFormComponent implements OnInit {
       } else {
         throw new Error('Unspecified mode');
       }
-      /*
-            // reset after submit
-            if (this.banner1PhotoFile) {
-              this.clearBanner1Photo();
-            }
-            if (this.banner2PhotoFile) {
-              this.clearBanner2Photo();
-            }
-            if (this.logoPhotoFile) {
-              this.clearLogoPhoto();
-            }
-            this.newBrand();*/
     }
     catch (error) {
-      console.log(error);
       this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
     }
-  }
-
-  onLogoPhotoChanged(event) {
-    this.logoPhotoFile = event.target.files[0];
-  }
-
-  getBrands() {
-    this.adminService.readAllBrands()
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        }
-        else {
-          this.brands = <Brand[]>this.response.payload;
-        }
-      });
-  }
-
-  clearLogoPhoto() {
-    if (this.logoPhotoElementRef.nativeElement) {
-      this.logoPhotoElementRef.nativeElement.value = null;
+    finally {
+      this.loading = false;
     }
-
-    this.logoPhotoFile = null;
-    this.brand.logoPhotoUrl = '';
-  }
-
-  onHeaderPhotoChanged(event) {
-    this.headerPhotoFile = event.target.files[0];
-  }
-
-  clearHeaderPhoto() {
-    if (this.headerPhotoElementRef.nativeElement) {
-      this.headerPhotoElementRef.nativeElement.value = null;
-    }
-
-    this.headerPhotoFile = null;
-    this.brand.headerPhotoUrl = '';
-  }
-
-  onBanner1PhotoChanged(event) {
-    this.banner1PhotoFile = event.target.files[0];
-  }
-
-  clearBanner1Photo() {
-    if (this.banner1PhotoElementRef.nativeElement) {
-      this.banner1PhotoElementRef.nativeElement.value = '';
-    }
-
-    this.banner1PhotoFile = null;
-    this.brand.banner1PhotoUrl = '';
-  }
-
-  onBanner2PhotoChanged(event) {
-    this.banner2PhotoFile = event.target.files[0];
-  }
-
-  clearBanner2Photo() {
-    if (this.banner2PhotoElementRef.nativeElement) {
-      this.banner2PhotoElementRef.nativeElement.value = '';
-    }
-
-    this.banner2PhotoFile = null;
-    this.brand.banner2PhotoUrl = '';
-  }
-
-  updateBrand() {
-    const updatedBrandObject = {};
-    for (const key in this.brand) {
-      if (this.brand[key]) {
-        updatedBrandObject[key] = this.brand[key];
-      }
-    }
-
-    console.log('update is here');
-
-    console.log('New Brand Object', updatedBrandObject);
-
-    this.adminService.updateBrand(updatedBrandObject, this.brand._id).subscribe(data => {
-      console.log(data);
-
-      this.responseData = data;
-      this.response = this.responseData.response;
-
-      if (this.response.type.match('ERROR')) {
-        this._notificationsService.error('Error', this.response.message.en);
-        this.loading = false;
-      }
-      else {
-        this._notificationsService.success('Success', this.response.message.en);
-        this.loading = false;
-      }
-    });
-  }
-
-  isVideo(str: string) {
-    if (str && str !== '' && typeof str === 'string') {
-      return str.endsWith('.mp4') ||
-        str.endsWith('.avi') ||
-        str.endsWith('.flv') ||
-        str.endsWith('webm') ||
-        str.endsWith('.mkv') ||
-        str.endsWith('.wmv') ||
-        str.endsWith('.m4v') ||
-        str.endsWith('.3gp') ||
-        str.endsWith('.ogg');
-    }
-  }
-
-  newBrand() {
-    this.brand = new Brand();
-  }
-
-  createBrand(): void {
-    console.log('created brand', this.brand);
-
-    this.adminService.createBrand(this.brand)
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-          this.loading = false;
-        }
-        else {
-          this._notificationsService.success('Success', this.response.message.en);
-          this.loading = false;
-        }
-      });
-  }
-
-  deleteBrand(): void {
-    this.adminService.deleteBrandById(this.brand._id)
-      .subscribe(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-          this.loading = false;
-        }
-        else {
-          this._notificationsService.success('Success', this.response.message.en);
-          this.loading = false;
-        }
-      });
-  }
-
-  uploadPhotoToS3(name: String): Promise<void> {
-    const self = this;
-
-    return new Promise(function (resolve, reject) {
-      if (!self.logoPhotoFile) {
-        if (self.mode === 'create') {
-          reject();
-        }
-        else {
-          resolve();
-        }
-      }
-
-      const photoUploadParams =
-      {
-        Bucket: self.env.s3MediaBucket,
-        Key: 'brands/' + self.brand.name + `/${name}_` + new Date().getTime() + '.' + self.logoPhotoFile.name.split('.').pop(),
-        Body: self.logoPhotoFile,
-        ACL: 'public-read',
-        ContentType: self.logoPhotoFile.type
-      };
-
-      s3Bucket.upload(photoUploadParams, function (err, s3Data) {
-        if (err) {
-          console.log(err);
-          self._notificationsService.error('Error', err);
-          reject();
-        }
-        else {
-          console.log(s3Data);
-          self._notificationsService.success('Success', self.logoPhotoFile.name + ' uploaded successfully');
-          self.brand[name + 'Url'] = encodeURI(self.env.S3MediaBucketUrl + photoUploadParams.Key);
-          resolve();
-        }
-      });
-    });
-  }
-
-  uploadLogoPhotoToS3(): Promise<void> {
-    const self = this;
-
-    return new Promise(function (resolve, reject) {
-      if (!self.logoPhotoFile) {
-        if (self.mode === 'create') {
-          reject();
-        }
-        else {
-          resolve();
-        }
-      }
-
-      const logoPhotoUploadParams =
-      {
-        Bucket: self.env.s3MediaBucket,
-        Key: 'brands/' + self.brand.name + '/logoPhoto_' + new Date().getTime() + '.' + self.logoPhotoFile.name.split('.').pop(),
-        Body: self.logoPhotoFile,
-        ACL: 'public-read',
-        ContentType: self.logoPhotoFile.type
-      };
-
-      s3Bucket.upload(logoPhotoUploadParams, function (err, s3Data) {
-        if (err) {
-          console.log(err);
-          self._notificationsService.error('Error', err);
-          reject();
-        }
-        else {
-          console.log(s3Data);
-          self._notificationsService.success('Success', self.logoPhotoFile.name + ' uploaded successfully');
-          self.brand.logoPhotoUrl = encodeURI(self.env.S3MediaBucketUrl + logoPhotoUploadParams.Key);
-          resolve();
-        }
-      });
-    });
-  }
-
-  uploadHeaderPhotoToS3(): Promise<void> {
-    const self = this;
-
-    return new Promise(function (resolve, reject) {
-      if (!self.headerPhotoFile) {
-        resolve();
-      }
-
-      const mainPhotoUploadParams =
-      {
-        Bucket: self.env.s3MediaBucket,
-        Key: 'brands/' + self.brand.name + '/headerPhoto_' + new Date().getTime() + '.' + self.headerPhotoFile.name.split('.').pop(),
-        Body: self.headerPhotoFile,
-        ACL: 'public-read',
-        ContentType: self.headerPhotoFile.type
-      };
-
-      s3Bucket.upload(mainPhotoUploadParams, function (err, s3Data) {
-        if (err) {
-          console.log(err);
-          self._notificationsService.error('Error', err);
-          reject();
-        }
-        else {
-          console.log(s3Data);
-          self._notificationsService.success('Success', self.headerPhotoFile.name + ' uploaded successfully');
-          self.brand.headerPhotoUrl = encodeURI(self.env.S3MediaBucketUrl + mainPhotoUploadParams.Key);
-          resolve();
-        }
-      });
-    });
-  }
-
-  uploadBanner1PhotoToS3(): Promise<void> {
-    const self = this;
-
-    return new Promise(function (resolve, reject) {
-      // Uploading Banner 1 Photo
-      if (!self.banner1PhotoFile) {
-        if (self.mode === 'create') {
-          reject();
-        }
-        else {
-          resolve();
-        }
-      }
-
-      const banner1PhotoUploadParams =
-      {
-        Bucket: self.env.s3MediaBucket,
-        Key: 'brands/' + self.brand.name + '/banner1Photo_' + new Date().getTime() + '.' + self.banner1PhotoFile.name.split('.').pop(),
-        Body: self.banner1PhotoFile,
-        ACL: 'public-read',
-        ContentType: self.banner1PhotoFile.type
-      };
-
-      s3Bucket.upload(banner1PhotoUploadParams, function (err, s3Data) {
-        if (err) {
-          console.log(err);
-          self._notificationsService.error('Error', err);
-          reject();
-        }
-        else {
-          console.log(s3Data);
-          self._notificationsService.success('Success', self.banner1PhotoFile.name + ' uploaded successfully');
-          self.brand.banner1PhotoUrl = encodeURI(self.env.S3MediaBucketUrl + banner1PhotoUploadParams.Key);
-          resolve();
-        }
-      });
-    });
-  }
-
-  uploadBanner2PhotoToS3(): Promise<void> {
-    const self = this;
-
-    return new Promise(function (resolve, reject) {
-      const thisPromise = this;
-
-      // Uploading Banner 2 Photo
-      if (!self.banner2PhotoFile) {
-        if (self.mode === 'create') {
-          reject();
-        }
-        else {
-          resolve();
-        }
-      }
-
-      const banner2PhotoUploadParams =
-      {
-        Bucket: self.env.s3MediaBucket,
-        Key: 'brands/' + self.brand.name + '/banner2Photo_' + new Date().getTime() + '.' + self.banner2PhotoFile.name.split('.').pop(),
-        Body: self.banner2PhotoFile,
-        ACL: 'public-read',
-        ContentType: self.banner2PhotoFile.type
-      };
-
-      s3Bucket.upload(banner2PhotoUploadParams, function (err, s3Data) {
-        if (err) {
-          console.log(err);
-          self._notificationsService.error('Error', err);
-          reject();
-        }
-        else {
-          console.log(s3Data);
-          self._notificationsService.success('Success', self.banner2PhotoFile.name + ' uploaded successfully');
-          self.brand.banner2PhotoUrl = encodeURI(self.env.S3MediaBucketUrl + banner2PhotoUploadParams.Key);
-          resolve();
-        }
-      });
-    }
-    );
   }
 }

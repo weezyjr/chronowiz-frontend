@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angu
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,19 +21,19 @@ import { SearchService } from './Search/search.service';
 import { ErrorInterceptor } from './API/error.interceptor';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { BrandComponent } from './pages/brand/brand.component';
+import { BrandComponent } from './Views/brand/brand.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
 import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './Views/home/home.component';
 import { FooterHeroComponent } from './components/footer-hero/footer-hero.component';
 import { HeroComponent } from './components/hero/hero.component';
-import { CollectionsComponent } from './pages/collections/collections.component';
+import { CollectionsComponent } from './Views/collections/collections.component';
 import { GenderPipe } from './Filters/gender.pipe';
 
 import { CollapsibleComponent } from './components/collapsible/collapsible.component';
 import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
-import { WatchComponent } from './pages/watch/watch.component';
+import { WatchComponent } from './Views/watch/watch.component';
 import { SocialMediaSectionComponent } from './components/social-media-section/social-media-section.component';
 import { AttributeTableComponent } from './components/attribute-table/attribute-table.component';
 import { WatchSectionComponent } from './components/watch-section/watch-section.component';
@@ -45,18 +45,18 @@ import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.compon
 import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
 import { InStockComponent } from './Retailer/in-stock/in-stock.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './Views/register/register.component';
+import { LoginComponent } from './Views/login/login.component';
 import { ProfileComponent } from './User/profile/profile.component';
-import { SearchComponent } from './pages/search/search.component';
+import { SearchComponent } from './Views/search/search.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { AdvancedSearchComponent } from './pages/search/advanced-search/advanced-search.component';
+import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced-search.component';
 import { WatchesPipe } from './Filters/Watches.pipe';
 import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
 import { CollectionSectionComponent } from './components/collection-section/collection-section.component';
-import { ConfirmPasswordDirective } from './pages/register/confirmPassword.validator';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ConfirmPasswordDirective } from './Views/register/confirmPassword.directive';
+import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
 import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 
 
