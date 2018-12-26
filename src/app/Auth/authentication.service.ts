@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { NotificationsService } from 'angular2-notifications';
 import { HandleError, HttpErrorHandlerService } from '../API/http-error-handler.service';
 import { ResponseData } from '../API/response-data';
 import { ResponseObject } from '../API/responseObject';

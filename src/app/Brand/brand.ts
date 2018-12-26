@@ -15,6 +15,9 @@ export class Brand {
   public headerPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
+
+  public maximumDiscount?: number;
+
   constructor(name?: string) {
     this._id = '';
     if (name) {
@@ -23,5 +26,9 @@ export class Brand {
       this.name = '';
     }
     this.collectionObjects = [new Collection()];
+    this.headerPhotoUrl = '';
+    this.banner1PhotoUrl = '';
+    this.banner2PhotoUrl = '';
+    this.logoPhotoUrl = '';
   }
 }

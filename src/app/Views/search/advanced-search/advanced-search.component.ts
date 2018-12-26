@@ -49,7 +49,7 @@ export class AdvancedSearchComponent implements OnInit {
 
   /*filters*/
   filtersRows = [
-    { name: 'size', title: 'Choose a size', options: ['Any size', 'Mid-size', 'Large size'] },
+    { name: 'size', title: 'Choose a size', options: ['Any size', 'Small size', 'Mid size', 'Large size'] },
     { name: 'material', title: 'Choose A material', options: ['Any material', 'Yellow Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
     { name: 'bezel', title: 'Choose a bezel', options: ['Any bezel', 'Smooth bezel', 'Fluted bezel', 'Gem-set bezel'] },
     { name: 'braclet', title: 'Choose a braclet', options: ['Any braclet', 'Leather Strap', 'Oyster', 'President', 'Gem-Set Braslet'] },
@@ -91,7 +91,7 @@ export class AdvancedSearchComponent implements OnInit {
               this.brands.push({ _id: brand._id, name: brand.name, checked: false });
             }
           }
-          this.brands.unshift({ _id: 'Any brand', name: 'Any brand', checked: true });
+          this.brands.unshift({ _id: 'Any brand', name: 'Any brand', checked: false });
           this.brandsListRows = this.chunk(this.brands, 8);
         }
       });
@@ -123,22 +123,9 @@ export class AdvancedSearchComponent implements OnInit {
           const RESULTS = <SearchResults>this.response.payload;
           this.watchesSearchResults = <Watch[]>RESULTS.watches;
           this.renderWatches();
-          this.sort();
         }
       });
-    }/*
-    else {
-      this.watchesService.readWatches().subscribe(data => {
-        this.responseData = data;
-        this.response = this.responseData.response;
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          this.watchesSearchResults = <Watch[]>this.response.payload;
-          this.renderWatches();
-        }
-      });
-    }*/
+    }
   }
 
   resetResults() {
@@ -162,6 +149,7 @@ export class AdvancedSearchComponent implements OnInit {
 
   renderWatches() {
     this.watches = this.filter(this.watchesSearchResults);
+    this.sort();
   }
 
   sort() {
@@ -206,7 +194,9 @@ export class AdvancedSearchComponent implements OnInit {
       (this.filters.braclet === 'Any braclet') &&
       (this.filters.marker === 'Any hour markers') &&
       (this.minPrice === 0 && this.maxPrice === 500000) &&
-      (this.brands.length === 1 && this.brands[0].checked)) {
+      (this.brands.length === 0 ||
+        this.brands[0].checked ||
+        !this.brands.find(brand => brand.checked === true))) {
       return watches;
     }
     else {
@@ -221,8 +211,19 @@ export class AdvancedSearchComponent implements OnInit {
 
         if (this.filters.size !== 'Any size') {
           if (watch.caseDiameter) {
-            sizeFilterMatch = (watch.caseDiameter.toLowerCase().trim())
-              .localeCompare(this.filters.size.toLowerCase().trim()) === 0;
+            if (this.filters.size === 'Small size') {
+              sizeFilterMatch = Number(watch.caseDiameter) < 36;
+            }
+            else if (this.filters.size === 'Mid size') {
+              sizeFilterMatch = Number(watch.caseDiameter) >= 36 &&
+                Number(watch.caseDiameter) < 40;
+            }
+            else if (this.filters.size === 'Large size') {
+              sizeFilterMatch = Number(watch.caseDiameter) >= 40;
+            }
+            else {
+              sizeFilterMatch = false;
+            }
           } else {
             sizeFilterMatch = false;
           }
@@ -272,15 +273,14 @@ export class AdvancedSearchComponent implements OnInit {
           }
         }
 
-        if (this.brands.length > 1 && !this.brands[0].checked) {
-          for (const brand of this.brands) {
-            if (brand.checked) {
-              brandFilterMatch = watch.brandObject === brand._id;
-              break;
-            }
-            else {
-              brandFilterMatch = false;
-            }
+        if (!this.brands[0].checked) {
+          if (watch.brandObject) {
+            brandFilterMatch =
+            this.brands.find((brand) => brand.checked && brand._id === watch.brandObject) !== undefined ;
+          }
+          else {
+
+            bezelFilterMatch = false;
           }
         }
 

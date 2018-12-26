@@ -83,6 +83,12 @@ export class BrandComponent implements OnInit {
           } else {
             this.brandObject = <Brand>this.response.payload;
             this.collections = this.brandObject['collectionObjects'];
+            // filter out empty collections
+            this.collections = this.collections.filter((collection) => {
+              if (collection.watchObjects) {
+                return collection.watchObjects.length > 0;
+              }
+            });
             this.breads.push({ name: this.brandObject.name, url: '#' });
           }
         });

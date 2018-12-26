@@ -98,6 +98,8 @@ export class Watch {
   public section4PhotoUrl?: string;
   public section4PhotoFile?: File;
 
+  public maximumDiscount?: number;
+
   constructor() {
     this.brandObject = new Brand();
     this.collectionObject = new Collection();
@@ -107,5 +109,13 @@ export class Watch {
     this.caseAdditionalFeatures = [new Value];
     this.dialAdditionalFeatures = [new Value];
     this.bandAdditionalFeatures = [new Value];
+    this.mainPhotoUrl = '';
+    this.banner1PhotoUrl = '';
+    this.banner2PhotoUrl = '';
+    this.section1PhotoUrl = '';
+    this.section2PhotoUrl = '';
+    this.section3PhotoUrl = '';
+    this.section4PhotoUrl = '';
+
   }
 }

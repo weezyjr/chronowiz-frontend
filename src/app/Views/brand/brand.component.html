@@ -8,7 +8,7 @@
   <source [src]="brandObject?.headerPhotoUrl" type="video/mp4">
   </video>
   <app-hero *ngIf="brandObject?.headerPhotoUrl && !isVideo(brandObject?.headerPhotoUrl)" [cover]="brandObject?.headerPhotoUrl"></app-hero>
-  <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1600x150/FFFFFF/FFFFFF"></app-hero>
+  <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1920x1080/FFFFFF/FFFFFF"></app-hero>
 </div>
 
 <div class="container">
@@ -24,10 +24,6 @@
         {{gender}} </li>
     </ul>
   </div>
-
-  <!--
-   <app-card-carousel *ngFor="let collection of collections | slice: 0:collectionLimit" [collection]="collection" [gender]="currentGender"></app-card-carousel>
- -->
 
   <app-collection-section *ngFor="let collection of collections | slice: 0:collectionLimit" [collection]="collection"
     [gender]="currentGender"></app-collection-section>

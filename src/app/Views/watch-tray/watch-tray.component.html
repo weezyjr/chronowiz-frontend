@@ -1,0 +1,209 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<div class="container">
+
+
+  <h1> Watch tray </h1>
+
+  <p class="sassy-text"> View and select your watches </p>
+
+  <app-carousel>
+
+    <table class="table watch-tray-table text-center">
+      <tr>
+        <td class="attr">
+          <button [routerLink]="['/home']" class="btn secondry-btn m-0"> proceed to checkout </button>
+        </td>
+        <td *ngFor="let watch of watches" class="right-wrong">
+          <i class="far fa-check-circle"></i>
+          <i class="far fa-times-circle" (click)="removeWatch(watch?.referenceNumber)"></i>
+        </td>
+      </tr>
+      <tr>
+        <td class="attr">
+          <span class="bold-attr">
+            You can compare selected watches, choose that you want to order or remove from the list.
+          </span>
+        </td>
+        <td *ngFor="let watch of watches">
+          <div class="img-container">
+            <img [src]="watch?.mainPhotoUrl? watch?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" alt="watch">
+          </div>
+          <h4>
+            {{watch?.brandObject?.name}}
+          </h4>
+          <h5>
+            {{watch?.collectionObject?.name}}
+          </h5>
+        </td>
+      </tr>
+      <tr class="hover">
+        <td class="attr">
+          Reference <br>
+          Model Case <br>
+          Movement <br>
+          Braclet <br>
+          Dial
+        </td>
+        <td *ngFor="let watch of watches">
+          <span>{{watch?.referenceNumber}}</span>
+          <br>
+          <span *ngIf="watch?.model"> {{watch?.model}}, </span>
+          <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
+          <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}</span>
+          <span *ngIf="watch?.perpetual">{{watch?.perpetual}} </span>
+          <br>
+          <span>{{watch?.movementAutomaticOrManual}}</span>
+          <br>
+          <span>{{watch?.band}}</span>
+          <br>
+          <span *ngIf="watch?.dialColour">{{watch?.dialColour}},</span>
+          <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}},</span>
+          <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}},</span>
+          <span *ngIf="watch?.dialHands">{{watch?.dialHands}},</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="attr">Price</td>
+        <td *ngFor="let watch of watches">
+          {{watch?.price | currency: watch?.priceCurrency }}
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Oyster architecture</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Diameter</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Material</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Bezel</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseBezelMaterial}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Winding Crown</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Crystal</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted">{{watch?.caseFront}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Water-resistance</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted">{{watch?.waterResistance}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Water-resistance</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberNumber}},</span>
+          <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberName}} </span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Precision</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Functions</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted">{{watchFunctionsToStr(watch?.functions)}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Oscillator</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Escapement</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Winding</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted"></span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Power Reserve</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.movementPowerReserve">{{watch?.movementPowerReserve}} h</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Braclet Material</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted">{{watch?.bandMaterial}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Clasp</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted">{{watch?.bandClasp}}</span>
+        </td>
+      </tr>
+
+      <tr *ngIf="showAll">
+        <td class="attr">Certification</td>
+        <td *ngFor="let watch of watches">
+          <span class="muted" *ngIf="watch?.movementCertificate">{{watch?.movementCertificate}},</span>
+          <span class="muted" *ngIf="watch?.awards">{{watch?.awards}} </span>
+        </td>
+      </tr>
+
+    </table>
+
+  </app-carousel>
+
+  <div class="row mt-2">
+    <div class="col-md-6 col-12">
+      <button (click)="toggleShowMore()" class="btn secondry-btn m-2"> Show {{showAll ? 'less':'more'}} </button>
+    </div>
+
+    <div class="col-md-6 col-12">
+      <button class="btn primary-btn wide-btn m-2 float-right"> Proceed to checkout </button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

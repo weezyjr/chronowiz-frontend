@@ -434,10 +434,21 @@ export class AddBrandFormComponent implements OnInit {
 
     try {
       /** wait for files uploading */
-      await this.uploadLogoPhoto();
-      await this.uploadHeaderFile();
-      await this.uploadBanner1Photo();
-      await this.uploadBanner2Photo();
+      if (!this.brand.logoPhotoUrl) {
+        await this.uploadLogoPhoto();
+      }
+
+      if (!this.brand.headerPhotoUrl) {
+        await this.uploadHeaderFile();
+      }
+
+      if (!this.brand.banner2PhotoUrl) {
+        await this.uploadBanner1Photo();
+      }
+
+      if (!this.brand.banner2PhotoUrl) {
+        await this.uploadBanner2Photo();
+      }
 
       /** Submit depnding on the mode type */
       if (this.mode === 'create') {

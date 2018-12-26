@@ -9,6 +9,8 @@ export class Collection {
   public isUndefined?: boolean;
   public watchObjects?: Watch[];
 
+  public maximumDiscount?: number;
+
   constructor() {
     this._id = '';
   }

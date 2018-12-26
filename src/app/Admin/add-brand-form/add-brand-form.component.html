@@ -14,17 +14,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetBrand(); brandForm.reset();" name="mode" value="create"
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="create"
           [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetBrand(); brandForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode"
           value="update" [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetBrand(); brandForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode"
           value="delete" [(ngModel)]="mode">
         Delete
       </label>
@@ -85,15 +85,15 @@
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
                     [(ngModel)]="brand.logoPhotoFile"
                     (change)="onLogoPhotoChange($event)"
-                    required
-                    name="logoPhotoFile" #logoPhotoFile="ngModel" >
+                    [required]="!brand.logoPhotoUrl"
+                    name="logoPhotoFileRef" #logoPhotoFileRef="ngModel" >
               </div>
             </div>
             <div class="col-sm-2 col-4">
               <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
             </div>
           </div>
-          <div [hidden]="logoPhotoFile.valid || logoPhotoFile.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="logoPhotoFileRef.valid || logoPhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
             required</div>
         </div>
 
@@ -102,18 +102,19 @@
             <h6> Current header Photo </h6>
             <img *ngIf="brand?.headerPhotoUrl && !s3Service.isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'"
               class="img-responsive">
-            <video *ngIf="brand?.headerPhotoUrl && s3Service.isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted
-              oncanplay="this.play()" onloadedmetadata="this.muted = true">
+            <video *ngIf="brand?.headerPhotoUrl && s3Service.isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted text-left
+              oncanplay="this.play()" onloadedmetadata="this.muted">
               <source [src]="brand?.headerPhotoUrl" type="video/mp4">
             </video>
           </div>
           <label for="headerPhotoFileInput">Header photo</label>
+          <p class="muted text-left m-0 p-0"> Width: 1920px x Height: 1080px </p>
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': brand?.headerPhotoFile}" [disabled]="mode == 'delete' || loading" type="file"
                   class="form-control" (change)="onHeaderPhotoChange($event)" name="headerPhotoFile"
-                  #headerPhotoFile="ngModel" [(ngModel)]="brand.headerPhotoFile">
+                  #headerPhotoFileRef="ngModel" [(ngModel)]="brand.headerPhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
@@ -124,6 +125,7 @@
 
         <div class="form-field py-2">
           <label for="banner1PhotoFileInput">Banner 1 Photo</label>
+          <p class="muted text-left m-0 p-0"> Width: 1920px x Height: 450px </p>
           <div *ngIf="brand?.banner1PhotoUrl" class="preview">
             <h6> Current banner 1 Photo </h6>
             <img [src]="brand?.banner1PhotoUrl" [alt]="brand?.name + ' banner1'" class="img-responsive">
@@ -132,21 +134,22 @@
             <div class="col-sm-10 col-8">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
-                required
+                [required]="!brand.banner1PhotoUrl"
                 (change)="onBanner1PhotoChange($event)"
-                  name="banner1PhotoFile" #banner1PhotoFile="ngModel" [(ngModel)]="brand.banner1PhotoFile">
+                  name="banner1PhotoFileRef" #banner1PhotoFileRef="ngModel" [(ngModel)]="brand.banner1PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner1PhotoFile.valid || banner1PhotoFile.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="banner1PhotoFileRef.valid || banner1PhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
             required</div>
         </div>
 
         <div class="form-field py-2">
           <label for="banner2PhotoFile">Banner 2 Photo</label>
+          <p class="muted text-left m-0 p-0"> Width: 1920px x Height: 300px </p>
           <div *ngIf="brand?.banner2PhotoUrl" class="preview">
             <h6> Current banner 2 Photo </h6>
             <img [src]="brand?.banner2PhotoUrl" [alt]="brand?.name + ' banner2'" class="img-responsive">
@@ -155,16 +158,16 @@
             <div class="col-sm-10 col-8">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
-                required
+                [required]="!brand.banner2PhotoUrl"
                 (change)="onBanner2PhotoChange($event)"
-                 name="banner2PhotoFile" #banner2PhotoFile="ngModel" [(ngModel)]="brand.banner2PhotoFile">
+                 name="banner2PhotoFileRef" #banner2PhotoFileRef="ngModel" [(ngModel)]="brand.banner2PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner2PhotoFile.valid || banner2PhotoFile.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="banner2PhotoFileRef.valid || banner2PhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
             required</div>
         </div>
       </div>

@@ -58,6 +58,7 @@ import { CollectionSectionComponent } from './components/collection-section/coll
 import { ConfirmPasswordDirective } from './Views/register/confirmPassword.directive';
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
 import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
+import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 
 
 @NgModule({
@@ -104,7 +105,8 @@ import { SetNewPasswordComponent } from './User/set-new-password/set-new-passwor
     AdvancedSearchComponent,
     CollectionSectionComponent,
     ResetPasswordComponent,
-    SetNewPasswordComponent
+    SetNewPasswordComponent,
+    WatchTrayComponent
   ],
   imports: [
     Ng5SliderModule,

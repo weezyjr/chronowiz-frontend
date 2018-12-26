@@ -1,5 +1,12 @@
 import { Watch } from '../Watch/watch';
 
+class Value {
+  public value: string;
+  constructor() {
+    this.value = '';
+  }
+}
+
 export class Retailer {
   _id?: number;
   email: string;
@@ -17,13 +24,16 @@ export class Retailer {
   watchObjects?: Watch[];
   jwt?: string;
 
-  brandsDiscountLimit?: number;
-  collectionsDiscountLimit?: number;
-  watchesDiscountLimit?: number;
+  brandsDiscountLimit?: Value[];
+  collectionsDiscountLimit?: Value[];
+  watchesDiscountLimit?: Value[];
 
   constructor() {
     this.email = '';
     this.password = '';
+    this.brandsDiscountLimit = [new Value];
+    this.collectionsDiscountLimit = [new Value];
+    this.watchesDiscountLimit = [new Value];
   }
 
 }

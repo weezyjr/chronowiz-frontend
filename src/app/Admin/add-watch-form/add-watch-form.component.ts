@@ -9,6 +9,12 @@ import { Link } from 'src/app/Link';
 import { AdminService } from '../admin.service';
 import { S3Service } from '../S3/s3.service';
 
+class Value {
+  public value: string;
+  constructor() {
+    this.value = '';
+  }
+}
 
 @Component({
   templateUrl: './add-watch-form.component.html',
@@ -302,51 +308,92 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   addMovementAdditionalFeatures() {
-    this.watch.movementAdditionalFeatures.push({ value: '' });
+    if (this.watch.movementAdditionalFeatures) {
+      this.watch.movementAdditionalFeatures.push(new Value());
+    } else {
+      this.watch.movementAdditionalFeatures = [new Value()];
+    }
   }
 
   removeMovementAdditionalFeatures() {
-    this.watch.movementAdditionalFeatures.pop();
+    if (this.watch.movementAdditionalFeatures && this.watch.movementAdditionalFeatures.length > 0) {
+      this.watch.movementAdditionalFeatures.pop();
+    }
   }
 
   addFunctions() {
-    this.watch.functions.push({ value: '' });
+    if (this.watch.functions) {
+      this.watch.functions.push(new Value());
+    }
+    else {
+      this.watch.functions = [new Value()];
+    }
   }
 
   addComplication() {
-    this.watch.complications.push({ value: '' });
+    if (this.watch.complications) {
+      this.watch.complications.push(new Value());
+    }
+    else {
+      this.watch.complications = [new Value()];
+    }
   }
 
   removeComplication() {
-    this.watch.complications.pop();
+    if (this.watch.complications && this.watch.complications.length > 0) {
+      this.watch.complications.pop();
+    }
   }
 
   removeFunctions() {
-    this.watch.functions.pop();
+    if (this.watch.functions && this.watch.functions.length > 0) {
+      this.watch.functions.pop();
+    }
   }
 
   addCaseAdditionalFeatures() {
-    this.watch.caseAdditionalFeatures.push({ value: '' });
+    if (this.watch.caseAdditionalFeatures) {
+      this.watch.caseAdditionalFeatures.push(new Value());
+    }
+    else {
+      this.watch.caseAdditionalFeatures = [new Value()];
+    }
   }
 
   removeCaseAdditionalFeatures() {
-    this.watch.caseAdditionalFeatures.pop();
+    if (this.watch.caseAdditionalFeatures && this.watch.caseAdditionalFeatures.length > 0) {
+      this.watch.caseAdditionalFeatures.pop();
+    }
   }
 
   addDialAdditionalFeatures() {
-    this.watch.dialAdditionalFeatures.push({ value: '' });
+    if (this.watch.dialAdditionalFeatures) {
+      this.watch.dialAdditionalFeatures.push(new Value());
+    }
+    else {
+      this.watch.dialAdditionalFeatures = [new Value()];
+    }
   }
 
   removeDialAdditionalFeatures() {
-    this.watch.dialAdditionalFeatures.pop();
+    if (this.watch.dialAdditionalFeatures && this.watch.dialAdditionalFeatures.length > 0) {
+      this.watch.dialAdditionalFeatures.pop();
+    }
   }
 
   addBandAdditionalFeatures() {
-    this.watch.bandAdditionalFeatures.push({ value: '' });
+    if (this.watch.bandAdditionalFeatures) {
+      this.watch.bandAdditionalFeatures.push(new Value());
+    }
+    else {
+      this.watch.bandAdditionalFeatures = [new Value()];
+    }
   }
 
   removeBandAdditionalFeatures() {
-    this.watch.bandAdditionalFeatures.pop();
+    if (this.watch.bandAdditionalFeatures && this.addBandAdditionalFeatures.length > 0) {
+      this.watch.bandAdditionalFeatures.pop();
+    }
   }
 
   /**
@@ -492,13 +539,33 @@ export class AddWatchFormComponent implements OnInit {
   async onSubmit() {
     this.loading = true;
     try {
-      await this.uploadMainPhoto();
-      await this.uploadBanner1Photo();
-      await this.uploadBanner2Photo();
-      await this.uploadSection1Photo();
-      await this.uploadSection2Photo();
-      await this.uploadSection3Photo();
-      await this.uploadSection4Photo();
+      if (!this.watch.mainPhotoUrl) {
+        await this.uploadMainPhoto();
+      }
+
+      if (!this.watch.banner1PhotoUrl) {
+        await this.uploadBanner1Photo();
+      }
+
+      if (!this.watch.banner2PhotoUrl) {
+        await this.uploadBanner2Photo();
+      }
+
+      if (!this.watch.section1PhotoUrl) {
+        await this.uploadSection1Photo();
+      }
+
+      if (!this.watch.section2PhotoUrl) {
+        await this.uploadSection2Photo();
+      }
+
+      if (!this.watch.section3PhotoUrl) {
+        await this.uploadSection3Photo();
+      }
+
+      if (!this.watch.section4PhotoUrl) {
+        await this.uploadSection4Photo();
+      }
 
       if (this.mode === 'create') {
         await this.createWatch();

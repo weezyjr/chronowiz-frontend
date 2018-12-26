@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { Watch } from 'src/app/Watch/watch';
-import { watch } from 'fs';
+import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
 
 @Component({
   selector: 'app-watch',
@@ -13,8 +13,6 @@ import { watch } from 'fs';
   styleUrls: ['./watch.component.sass']
 })
 export class WatchComponent implements OnInit {
-
-
   watch: Watch = new Watch();
   responseData: ResponseData;
   response: ResponseObject;
@@ -53,7 +51,11 @@ export class WatchComponent implements OnInit {
     name: 'Brand', url: '/home'
   }];
 
-  constructor(private activeRoute: ActivatedRoute, private router: Router, private watchesService: WatchesService, private _notificationsService: NotificationsService) {
+  constructor(
+    private watchTrayService: WatchTrayService,
+    private activeRoute: ActivatedRoute,
+    private watchesService: WatchesService,
+    private _notificationsService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -104,4 +106,13 @@ export class WatchComponent implements OnInit {
     }
   }
 
+  async addToWatchTray() {
+    await this.watchTrayService.addToWatchTray(this.watch);
+    if (this.watchTrayService.currentWatchTrayValue) {
+      this._notificationsService.success('Success', 'The watch is added to the watch tray');
+    }
+    else {
+      this._notificationsService.error('Error', 'Something went wrong, please try again');
+    }
+  }
 }
