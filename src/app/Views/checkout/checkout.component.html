@@ -1,0 +1,68 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="container-fluidr">
+  <div class="row my-5 mx-auto">
+    <div class="col-12">
+
+      <div class="page-breads">
+        <ul class="list-inline w-100 px-2 text-center">
+          <li class="list-inline-item"><a class="checked"> Checkout </a></li>
+          <li class="list-inline-item"><a> Shipping </a></li>
+          <li class="list-inline-item"><a> Payment </a></li>
+          <li class="list-inline-item"><a> Confirmation </a></li>
+        </ul>
+      </div>
+
+      <table class="watch-table table-responsive my-3">
+        <thead>
+          <tr>
+            <th class="small">Item</th>
+            <th class="small">Description</th>
+            <th class="small">Price</th>
+            <th class="small">QTY</th>
+            <th class="small">Total</th>
+            <th class="small">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let watch of watches">
+            <td>
+              <div class="img-container">
+                <img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
+              </div>
+            </td>
+            <td>
+              <p class="m-0">
+                <span class="bold" *ngIf="watch?.model">{{watch?.model}} </span>
+                <span class="small" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
+                <span class="small" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
+                <span class="small" *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+                <br>
+                <span class="bold">Reference number:
+                  <span class="small">
+                    {{watch?.referenceNumber}}
+                  </span>
+                </span>
+              </p>
+            </td>
+            <td>
+              <p class="small m-0"> {{watch?.price | currency: watch?.priceCurrency : 'symbol' : '1.0' }} </p>
+            </td>
+            <td class="text-center">
+              <input class="form-input" class="qty" [(ngModel)]="watch.qty" min="1" type="number">
+            </td>
+            <td>
+              <p class="small m-0"> {{watch?.price * watch?.qty | currency: watch?.priceCurrency : 'symbol' : '1.0' }}
+              </p>
+            </td>
+            <td class="text-center">
+              <i class="far fa-times-circle" (click)="removeFromCheckout(watch?.referenceNumber)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

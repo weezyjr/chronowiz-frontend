@@ -59,10 +59,15 @@ import { ConfirmPasswordDirective } from './Views/register/confirmPassword.direc
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
 import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
+import { CheckoutComponent } from './Views/checkout/checkout.component';
+
+// import { NgxSiemaModule } from 'ngx-siema';
+// import { SelectModule } from 'ng2-select';
 
 
 @NgModule({
   declarations: [
+    // SelectModule,
     ConfirmPasswordDirective,
     AppComponent,
     AddWatchFormComponent,
@@ -106,9 +111,11 @@ import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
     CollectionSectionComponent,
     ResetPasswordComponent,
     SetNewPasswordComponent,
-    WatchTrayComponent
+    WatchTrayComponent,
+    CheckoutComponent
   ],
   imports: [
+    // NgxSiemaModule.forRoot(),
     Ng5SliderModule,
     BrowserModule,
     ReactiveFormsModule,

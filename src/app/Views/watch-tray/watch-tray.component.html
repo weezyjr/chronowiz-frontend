@@ -12,10 +12,10 @@
     <table class="table watch-tray-table text-center">
       <tr>
         <td class="attr">
-          <button [routerLink]="['/home']" class="btn secondry-btn m-0"> proceed to checkout </button>
+          <button [routerLink]="['/checkout']" class="btn secondry-btn m-0"> proceed to checkout </button>
         </td>
         <td *ngFor="let watch of watches" class="right-wrong">
-          <i class="far fa-check-circle"></i>
+          <i class="far fa-check-circle" (click)="addWatchToCheckOut(watch)"></i>
           <i class="far fa-times-circle" (click)="removeWatch(watch?.referenceNumber)"></i>
         </td>
       </tr>
@@ -201,7 +201,7 @@
     </div>
 
     <div class="col-md-6 col-12">
-      <button class="btn primary-btn wide-btn m-2 float-right"> Proceed to checkout </button>
+      <button class="btn primary-btn wide-btn m-2 float-right"  [routerLink]="['/checkout']"  > Proceed to checkout </button>
     </div>
   </div>
 </div>

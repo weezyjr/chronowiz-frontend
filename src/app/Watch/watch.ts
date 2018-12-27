@@ -99,6 +99,7 @@ export class Watch {
   public section4PhotoFile?: File;
 
   public maximumDiscount?: number;
+  public qty?: number;
 
   constructor() {
     this.brandObject = new Brand();
@@ -116,6 +117,7 @@ export class Watch {
     this.section2PhotoUrl = '';
     this.section3PhotoUrl = '';
     this.section4PhotoUrl = '';
+    this.qty = 1;
 
   }
 }

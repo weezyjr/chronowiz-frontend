@@ -23,6 +23,7 @@ import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
 import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
+import { CheckoutComponent } from './Views/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -138,6 +139,10 @@ const routes: Routes = [
   {
     path: 'watch-tray',
     component: WatchTrayComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   },
   {
     path: '**',

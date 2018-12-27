@@ -1,0 +1,82 @@
+.watch-table
+  text-align: left;
+  width: 100%;
+  thead
+    background: #F5F5F5;
+    text-transform: uppercase;
+  th
+    padding: 10px;
+    font-weight: 900;
+    font-size: 14px;
+  tr
+    border-bottom: 1px solid #979797;
+  td
+    p
+      padding: 0 10px
+      font-weight: 300;
+      text-align: left !important;
+  .table-img
+    height: 100px;
+    max-width: 100%;
+
+.bold
+  font-weight: 400;
+
+
+.img-container
+  width: 100px
+
+.qty
+  width: 30px
+  font-size: 10px
+
+.right-wrong
+  text-align: right;
+  vertical-align: bottom;
+  .fa-check-circle
+    color: #7A1C1C
+    i
+      cursor: pointer
+      margin-left: 5px;
+      margin-right: 5px;
+      font-size: 16px;
+
+.page-breads
+  text-align: center;
+  ul
+    margin: 0;
+  a
+    font-weight: 300;
+    letter-spacing: 0.1px;
+    color: #212121;
+    text-transform: uppercase
+    font-size: 14px
+    .checked
+      color: #7A1C1C
+  li:not(:last-child)::after
+    content: ">";
+
+.move-left
+  padding: 0 31px;
+
+.disable
+  pointer-events: none;
+  cursor: default;
+
+
+@media screen and (max-width: 500px)
+  .small
+    font-size: 10px
+  .bold
+    font-size: 12px
+    display: block
+  .img-container
+    width: 70px
+  .table-img
+    height: 70px !important
+  .container-fluid
+    padding: 0
+  th
+    font-size: 10px !important
+  .col-12
+    padding: 0

@@ -19,13 +19,13 @@
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode"
-          value="update" [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="update"
+          [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode"
-          value="delete" [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="delete"
+          [(ngModel)]="mode">
         Delete
       </label>
     </div>
@@ -40,8 +40,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
-                <select type="text" (change)="onBrandSelection($event.target.value)" class="form-control"
-                  name="selectionBrand">
+                <select type="text" (change)="onBrandSelection($event.target.value)" class="form-control" name="selectionBrand">
                   <option value="" checked></option>
                   <option *ngFor="let selectionBrand of selectionBrands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
                 </select>
@@ -63,11 +62,19 @@
             <option value=""></option>
             <option [value]="brand?.name" *ngFor="let brand of staticBrandNames"> {{brand.name}} </option>
           </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="brand.name" name="nameText"
-            #nameText="ngModel">
+          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="brand.name"
+            name="nameText" #nameText="ngModel">
           <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
             name is required</div>
         </div>
+
+<!---
+
+        <div class="form-group">
+          <ng-select [items]="['hello','world']" placeholder="No brand name selected">
+          </ng-select>
+        </div>-->
+
 
         <br />
         <h3>Brand Media Section</h3>
@@ -82,11 +89,9 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
-                    [(ngModel)]="brand.logoPhotoFile"
-                    (change)="onLogoPhotoChange($event)"
-                    [required]="!brand.logoPhotoUrl"
-                    name="logoPhotoFileRef" #logoPhotoFileRef="ngModel" >
+                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [(ngModel)]="brand.logoPhotoFile"
+                  (change)="onLogoPhotoChange($event)" [required]="!brand.logoPhotoUrl" name="logoPhotoFileRef"
+                  #logoPhotoFileRef="ngModel">
               </div>
             </div>
             <div class="col-sm-2 col-4">
@@ -100,10 +105,10 @@
         <div class="form-field py-2">
           <div *ngIf="brand?.headerPhotoUrl" class="preview">
             <h6> Current header Photo </h6>
-            <img *ngIf="brand?.headerPhotoUrl && !s3Service.isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl" [alt]="brand?.name + ' header'"
-              class="img-responsive">
-            <video *ngIf="brand?.headerPhotoUrl && s3Service.isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay loop muted text-left
-              oncanplay="this.play()" onloadedmetadata="this.muted">
+            <img *ngIf="brand?.headerPhotoUrl && !s3Service.isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl"
+              [alt]="brand?.name + ' header'" class="img-responsive">
+            <video *ngIf="brand?.headerPhotoUrl && s3Service.isVideo(brand?.headerPhotoUrl)" class="main-vid" autoplay
+              loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
               <source [src]="brand?.headerPhotoUrl" type="video/mp4">
             </video>
           </div>
@@ -133,17 +138,17 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
-                [required]="!brand.banner1PhotoUrl"
-                (change)="onBanner1PhotoChange($event)"
-                  name="banner1PhotoFileRef" #banner1PhotoFileRef="ngModel" [(ngModel)]="brand.banner1PhotoFile">
+                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [required]="!brand.banner1PhotoUrl"
+                  (change)="onBanner1PhotoChange($event)" name="banner1PhotoFileRef" #banner1PhotoFileRef="ngModel"
+                  [(ngModel)]="brand.banner1PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner1PhotoFileRef.valid || banner1PhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="banner1PhotoFileRef.valid || banner1PhotoFileRef.pristine" class="alert alert-danger">Logo
+            Photo is
             required</div>
         </div>
 
@@ -157,17 +162,17 @@
           <div class="row">
             <div class="col-sm-10 col-8">
               <div class="form-group">
-                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control"
-                [required]="!brand.banner2PhotoUrl"
-                (change)="onBanner2PhotoChange($event)"
-                 name="banner2PhotoFileRef" #banner2PhotoFileRef="ngModel" [(ngModel)]="brand.banner2PhotoFile">
+                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [required]="!brand.banner2PhotoUrl"
+                  (change)="onBanner2PhotoChange($event)" name="banner2PhotoFileRef" #banner2PhotoFileRef="ngModel"
+                  [(ngModel)]="brand.banner2PhotoFile">
               </div>
             </div>
             <div class="col-sm-2 col-4">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner2PhotoFileRef.valid || banner2PhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="banner2PhotoFileRef.valid || banner2PhotoFileRef.pristine" class="alert alert-danger">Logo
+            Photo is
             required</div>
         </div>
       </div>
