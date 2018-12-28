@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
-import { Watch } from 'src/app/Watch/watch';
-import { CheckoutService } from 'src/app/WatchTray/checkout.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Watch } from 'src/app/Watch/watch';
+import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
+import { CheckoutService } from 'src/app/WatchTray/checkout.service';
+// import { NgxSiemaOptions } from 'src/app/components/ngx-siema';
 
 @Component({
   selector: 'app-watch-tray',
@@ -10,22 +11,28 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./watch-tray.component.sass']
 })
 export class WatchTrayComponent implements OnInit {
+  /*
+    options: NgxSiemaOptions = {
+      selector: '.siema',
+    };*/
 
   public showAll = false;
   public watches: Watch[] = [];
-  constructor(private watchTrayService: WatchTrayService,
+  constructor(
+    private watchTrayService: WatchTrayService,
     private checkoutServive: CheckoutService,
     private _NotificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.watches = this.watchTrayService.currentWatchTrayValue;
-    this.watchTrayService.print(this.watches[0]);
-    for (const watch of this.watches) {
-      if (this.isTheWatchisInTheCheckout(watch)) {
-        watch.addedToCheckOut = true;
-      }
-      else {
-        watch.addedToCheckOut = false;
+    if (this.watches) {
+      for (const watch of this.watches) {
+        if (this.isTheWatchisInTheCheckout(watch)) {
+          watch.addedToCheckOut = true;
+        }
+        else {
+          watch.addedToCheckOut = false;
+        }
       }
     }
   }

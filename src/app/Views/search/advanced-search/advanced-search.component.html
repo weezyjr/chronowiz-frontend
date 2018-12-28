@@ -87,7 +87,7 @@
         </app-filter-collapsible>
       </div>
 
-      <div class="watchs">
+      <div class="watchs" *ngIf="query">
         <div class="row">
           <div class="col-md-3 my-4" *ngFor="let watch of watches | slice: 0:watchsLimit">
             <app-item-card [watch]="watch"></app-item-card>
