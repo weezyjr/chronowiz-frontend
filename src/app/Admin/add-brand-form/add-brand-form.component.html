@@ -55,7 +55,7 @@
         <h3>Brand Details</h3>
         <br />
 
-        <div class="form-group">
+        <!--  <div class="form-group">
           <label for="name">Brand name</label>
           <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" required [ngModel]="brand?.name"
             (ngModelChange)="brand.name = $event" name="name" #name="ngModel">
@@ -66,15 +66,21 @@
             name="nameText" #nameText="ngModel">
           <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
             name is required</div>
-        </div>
-
-<!---
-
+        </div> -->
         <div class="form-group">
-          <ng-select [items]="['hello','world']" placeholder="No brand name selected">
+          <ng-select [items]="staticBrandNames" #BrandName="ngModel" name="BrandName" required bindLabel="name" bindValue="name" [addTag]="addCustomBrand"
+            placeholder="Select brand name" [(ngModel)]="brand.name">
           </ng-select>
-        </div>-->
+          <div [hidden]="BrandName.valid || BrandName.pristine" class="alert alert-danger">
+            Brand name is required
+          </div>
+        </div>
+        <!--
 
+        <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
+          name is required</div>
+        </div>
+      -->
 
         <br />
         <h3>Brand Media Section</h3>
@@ -175,7 +181,15 @@
             Photo is
             required</div>
         </div>
+
+        <div class="form-group">
+          <label for="model">Discount limit</label>
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"
+            id="maximumDiscount" [(ngModel)]="brand.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+        </div>
+
       </div>
+
       <br />
       <div style="text-align: center" *ngIf="(mode == 'create') || (brand._id)">
         <div class="row m-1">

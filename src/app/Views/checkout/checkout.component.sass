@@ -4,6 +4,8 @@
   thead
     background: #F5F5F5;
     text-transform: uppercase;
+    tr
+      border: none !important
   th
     padding: 10px;
     font-weight: 900;
@@ -51,8 +53,8 @@
     color: #212121;
     text-transform: uppercase
     font-size: 14px
-    .checked
-      color: #7A1C1C
+  a.checked
+    color: #7A1C1C
   li:not(:last-child)::after
     content: ">";
 
@@ -63,8 +65,26 @@
   pointer-events: none;
   cursor: default;
 
+.desc
+  p
+    min-width: 132px
 
-@media screen and (max-width: 500px)
+.totalPriceSection
+  text-align: right
+  .totalPriceText
+    padding-right: 66px
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: -0.9px;
+    color: #333333;
+  .totalPrice
+    padding-right: 15px
+    font-weight: 300;
+    font-size: 24px;
+    text-align: right;
+    letter-spacing: -1px;
+
+@media screen and (max-width: 570px)
   .small
     font-size: 10px
   .bold
@@ -74,9 +94,12 @@
     width: 70px
   .table-img
     height: 70px !important
-  .container-fluid
+  .container
     padding: 0
   th
     font-size: 10px !important
   .col-12
     padding: 0
+  .page-breads
+    a
+      font-size: 10.7px

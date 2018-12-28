@@ -36,37 +36,25 @@
         <h3>Select Watch by Brand & Collection</h3>
         <br />
 
-        <div>
-          <div class="row">
-            <div class="col">
-              <div class="form-group">
-                <label for="selectionBrand">Brand</label>
-                <select type="text" (change)="onBrandSelection($event.target.value)" class="form-control" id="selectionBrand"
-                  name="selectionBrand">
-                  <option value=""></option>
-                  <option *ngFor="let selectionBrand of selectionBrands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
+        <div class="form-group">
+          <label for="selectionBrand">Brand</label>
+          <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
+            bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+          </ng-select>
         </div>
 
         <div class="form-group">
           <label for="selectionCollection">Collection</label>
-          <select type="text" (change)="onCollectionSelection($event.target.value)" class="form-control" id="selectionCollection"
-            name="selectionCollection">
-            <option value=""></option>
-            <option *ngFor="let selectionCollection of selectionCollections" [value]="selectionCollection?._id">{{selectionCollection?.name}}</option>
-          </select>
+          <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
+            placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
+          </ng-select>
         </div>
 
         <div class="form-group">
           <label for="selectionWatch">Watch</label>
-          <select type="text" (change)="onWatchSelection($event.target.value)" class="form-control" id="selectionWatch"
-            name="selectionWatch">
-            <option value=""></option>
-            <option *ngFor="let selectionWatch of selectedCollection?.watchObjects" [value]="selectionWatch?.referenceNumber">{{selectionWatch?.referenceNumber}}</option>
-          </select>
+          <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber"
+            bindValue="referenceNumber" placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
+          </ng-select>
         </div>
 
         <div>
@@ -94,25 +82,25 @@
         <h3>Watch Details</h3>
         <br />
 
-        <div class="form-group">
-          <label for="watchBrand">Watch Brand</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" (change)="onWatchBrandSelectiond($event.target.value)"
-            class="form-control" id="watchBrand" required [ngModel]="watch?.brandObject?._id" (ngModelChange)="watch.brandObject._id = $event"
-            name="watchBrand" #watchBrand="ngModel">
-            <option value=""></option>
-            <option *ngFor="let brand of selectionBrands" [value]="brand?._id">{{brand?.name}}</option>
-          </select>
-          <div [hidden]="watchBrand.valid || watchBrand.pristine" class="alert alert-danger">Brand is required</div>
-        </div>
 
         <div class="form-group">
-          <label for="watchCollection">Watch Collection</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" (change)="onWatchCollectionSelected($event.target.value)"
-            class="form-control" id="watchCollection" [ngModel]="watch?.collectionObject?._id" (ngModelChange)="watch.collectionObject._id = $event"
-            name="watchCollection" #watchCollection="ngModel">
-            <option value=""></option>
-            <option *ngFor="let collection of watchCollections" [value]="collection?._id">{{collection?.name}}</option>
-          </select>
+          <label for="watchBrand">Watch Brand</label>
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="selectionBrands" [loading]="selectionBrands?.length === 0"
+            #BrandName="ngModel" name="BrandName" required bindLabel="name" bindValue="_id" placeholder="Select brand"
+            [ngModel]="watch?.brandObject?._id" (change)="onWatchBrandSelectiond(watch?.brandObject?._id)"
+            (ngModelChange)="watch.brandObject._id = $event">
+          </ng-select>
+          <div [hidden]="BrandName.valid || BrandName.pristine" class="alert alert-danger">
+            Brand name is required
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="watchCollections" #collectionName="ngModel" name="collectionName"
+            bindLabel="name" bindValue="_id" placeholder="Select collection" [ngModel]="watch?.collectionObject?._id"
+            (ngModelChange)="watch.collectionObject._id = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -122,7 +110,7 @@
         </div>
 
         <div class="form-group">
-          <label for="referenceNumber">Reference Number</label>
+          <label for="referenceNumber">Reference number</label>
           <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.referenceNumber"
             required name="referenceNumber" #referenceNumber="ngModel">
           <div [hidden]="referenceNumber.valid || referenceNumber.pristine" class="alert alert-danger">Reference Number
@@ -132,16 +120,11 @@
 
         <div class="form-group">
           <label for="gender">Gender</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.gender"
-            (ngModelChange)="watch.gender = $event" name="gender" #gender="ngModel">
-            <option value=""></option>
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Unisex">Unisex</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.gender"
-            name="genderText" #genderText="ngModel">
+          <ng-select [items]="genderOptions" #gender="ngModel" name="gender" bindLabel="name" bindValue="name" [addTag]="addCustomOption"
+            [ngModel]="watch?.gender" (ngModelChange)="watch.gender = $event">
+          </ng-select>
         </div>
+
 
         <div class="form-group">
           <label for="productionYear">Production Year</label>
@@ -155,16 +138,12 @@
             name="limited" #limited="ngModel">
         </div>
 
+
         <div class="form-group">
-          <label for="awards">Awards</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.awards"
-            (ngModelChange)="watch.awards = $event" name="awards" #awards="ngModel">
-            <option value=""></option>
-            <option value="Geneva Seal">Geneva Seal</option>
-            <option value="Other">Other</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.awards"
-            name="awardsText" #awardsText="ngModel">
+          <label for="awards">awards</label>
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="awardsOptions" #awards="ngModel" name="awards"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.awards" (ngModelChange)="watch.awards = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -183,19 +162,13 @@
             name="movementCaliberName" #movementCaliberName="ngModel">
         </div>
 
+
         <div class="form-group">
           <label for="movementAutomaticOrManual">Movement Automatic or Manual</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.movementAutomaticOrManual"
-            (ngModelChange)="watch.movementAutomaticOrManual = $event" name="movementAutomaticOrManual"
-            #movementAutomaticOrManual="ngModel">
-            <option value=""></option>
-            <option value="Manually Wound">Manually Wound</option>
-            <option value="Automatic">Automatic</option>
-            <option value="Self Winding">Self Winding</option>
-            <option value="Quartz">Quartz</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementAutomaticOrManual"
-            name="movementAutomaticOrManualText" #movementAutomaticOrManualText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="movementAutomaticOrManualOptions"
+            #movementAutomaticOrManual="ngModel" name="movementAutomaticOrManual" bindLabel="name" bindValue="name"
+            [addTag]="addCustomOption" [ngModel]="watch?.movementAutomaticOrManual" (ngModelChange)="watch.movementAutomaticOrManual = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -272,13 +245,10 @@
 
         <div class="form-group">
           <label for="movementCertificate">Movement Certificate</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.movementCertificate"
-            (ngModelChange)="watch.movementCertificate = $event" name="movementCertificate" #movementCertificate="ngModel">
-            <option value=""></option>
-            <option value="COSC">COSC</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementCertificate"
-            name="movementCertificateText" #movementCertificateText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="movementCertificateOptions" #movementCertificate="ngModel"
+            name="movementCertificate" bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.movementCertificate"
+            (ngModelChange)="watch.movementCertificate = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -295,6 +265,14 @@
         </div>
 
         <div class="form-group">
+          <label for="movementDecoration">Movement Decoration</label>
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="movementDecorationOptions" #movementDecoration="ngModel"
+            name="movementDecoration" bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.movementDecoration"
+            (ngModelChange)="watch.movementDecoration = $event">
+          </ng-select>
+        </div>
+
+        <div class="form-group">
           <label for="movementSpring">Movement Spring</label>
           <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementSpring"
             name="movementSpring" #movementSpring="ngModel">
@@ -302,24 +280,10 @@
 
         <div class="form-group">
           <label for="movementTourbillon">Movement Tourbillon</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.movementTourbillon"
-            (ngModelChange)="watch.movementTourbillon = $event" name="movementTourbillon" #movementTourbillon="ngModel">
-            <option value=""></option>
-            <option value="Flying Tourbillon">Flying Tourbillon</option>
-            <option value="One Minute Tourbillon">One Minute Tourbillon</option>
-            <option value="2 x One Minute Tourbillon">2 x One Minute Tourbillon</option>
-            <option value="One Minute Flying Tourbillon">One Minute Flying Tourbillon</option>
-            <option value="24 Second Tourbillon Cage Inclined at 25 angle">24 Second Tourbillon Cage Inclined at 25
-              angle
-            </option>
-            <option value="Spherical Double-Axis Tourbillon">Spherical Double-Axis Tourbillon</option>
-            <option value="One Minute Tourbillon with external balance spring">One Minute Tourbillon with external
-              balance spring
-            </option>
-            <option value="Flying Double Tourbillon">Flying Double Tourbillon</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementTourbillon"
-            name="movementTourbillonText" #movementTourbillonText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="movementTourbillonOptions" #movementTourbillon="ngModel"
+            name="movementTourbillon" bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.movementTourbillon"
+            (ngModelChange)="watch.movementTourbillon = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -439,24 +403,17 @@
 
         <div class="form-group">
           <label for="caseFront">Case Front</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.caseFront"
-            (ngModelChange)="watch.caseFront = $event" name="caseFront" #caseFront="ngModel">
-            <option value=""></option>
-            <option value="Saphire Crystal">Saphire Crystal</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.caseFront"
-            name="caseFrontText" #caseFrontText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="caseFrontOptions" #caseFront="ngModel" name="caseFront"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.caseFront" (ngModelChange)="watch.caseFront = $event">
+          </ng-select>
         </div>
 
+
         <div class="form-group">
-          <label for="caseBack">Case Back</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.caseBack"
-            (ngModelChange)="watch.caseBack = $event" name="caseBack" #caseBack="ngModel">
-            <option value=""></option>
-            <option value="Transparent">Transparent</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.caseBack"
-            name="caseBackText" #caseBackText="ngModel">
+          <label for="caseBack">Case Front</label>
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="caseBackOptions" #caseBack="ngModel" name="caseBack"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.caseBack" (ngModelChange)="watch.caseBack = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -491,14 +448,9 @@
 
         <div class="form-group">
           <label for="caseCrown">Case Crown</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.caseCrown"
-            (ngModelChange)="watch.caseCrown = $event" name="caseCrown" #caseCrown="ngModel">
-            <option value=""></option>
-            <option value="Screw-in Crown">Screw-in Crown</option>
-            <option value="screw-locked crown">Screw-locked Crown</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.caseCrown"
-            name="caseCrownText" #caseCrownText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="caseCrownOptions" #caseCrown="ngModel" name="caseCrown"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.caseCrown" (ngModelChange)="watch.caseCrown = $event">
+          </ng-select>
         </div>
 
         <div>
@@ -531,18 +483,9 @@
 
         <div class="form-group">
           <label for="dialIndex">Dial Index</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.dialIndex"
-            (ngModelChange)="watch.dialIndex = $event" name="dialIndex" #dialIndex="ngModel">
-            <option value=""></option>
-            <option value="Roman numeral">Roman numeral</option>
-            <option value="Arabic numeral">Arabic numeral</option>
-            <option value="Breguet numeral">Breguet numeral</option>
-            <option value="Indices">Indices</option>
-            <option value="Blank Dial">Blank Dial</option>
-            <option value="Mixed">Mixed</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.dialIndex"
-            name="dialIndexText" #dialIndexText="ngModel">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="dialIndexOptions" #dialIndex="ngModel" name="dialIndex"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.dialIndex" (ngModelChange)="watch.dialIndex = $event">
+          </ng-select>
         </div>
 
         <div class="form-group">
@@ -558,29 +501,10 @@
         </div>
 
         <div class="form-group">
-          <label for="dialHands">Dial Hands</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.dialHands"
-            (ngModelChange)="watch.dialHands = $event" name="dialHands" #dialHands="ngModel">
-            <option value=""></option>
-            <option value="ALPHA HANDS">ALPHA HANDS</option>
-            <option value="ARROW HANDS">ARROW HANDS</option>
-            <option value="BATON HANDS">BATON HANDS</option>
-            <option value="BREGUET HANDS">BREGUET HANDS</option>
-            <option value="CATHEDRAL HANDS">CATHEDRAL HANDS</option>
-            <option value="DAUPHINE HANDS">DAUPHINE HANDS</option>
-            <option value="FLEUR DE LYS HANDS">FLEUR DE LYS HANDS</option>
-            <option value="LANCE HANDS">LANCE HANDS</option>
-            <option value="LEAF HANDS">LEAF HANDS</option>
-            <option value="MERCEDES HANDS">MERCEDES HANDS</option>
-            <option value="PLONGEUR HANDS">PLONGEUR HANDS</option>
-            <option value="SYRINGE HANDS">SYRINGE HANDS</option>
-            <option value="SNOWFLAKE HANDS">SNOWFLAKE HANDS</option>
-            <option value="SPADE HANDS">SPADE HANDS</option>
-            <option value="SWORD HANDS">SWORD HANDS</option>
-            <option value="Other">Other</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.dialHands"
-            name="dialHandsText" #dialHandsText="ngModel">
+          <label for="dialIndex">Dial Hands</label>
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="dialHandsOptions" #dialHands="ngModel" name="dialHands"
+            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.dialHands" (ngModelChange)="watch.dialHands = $event">
+          </ng-select>
         </div>
 
         <div>
@@ -668,17 +592,10 @@
           <div class="col-6">
             <div class="form-group">
               <label for="priceCurrency">Price Currency</label>
-              <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.priceCurrency"
-                (ngModelChange)="watch.priceCurrency = $event" name="priceCurrency" #priceCurrency="ngModel">
-                <option value=""></option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="CHF">CHF</option>
-                <option value="AED">AED</option>
-              </select>
-              <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.priceCurrency"
-                name="priceCurrencyText" #priceCurrencyText="ngModel">
+              <ng-select [disabled]="mode == 'delete' || loading" [items]="priceCurrencyOptions" #priceCurrency="ngModel"
+                name="priceCurrency" bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.priceCurrency"
+                (ngModelChange)="watch.priceCurrency = $event">
+              </ng-select>
             </div>
           </div>
         </div>
@@ -901,7 +818,16 @@
             </div>
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="model">Discount limit</label>
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"
+            id="maximumDiscount" [(ngModel)]="watch.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+        </div>
+
       </div>
+
+
 
       <br />
 

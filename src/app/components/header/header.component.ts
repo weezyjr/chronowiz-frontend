@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { Router } from '@angular/router';
+import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
 
 @Component({
   selector: 'app-header',
@@ -46,8 +47,17 @@ export class HeaderComponent implements OnInit {
   paperBagIconSrc: String;
   navMenuOpened: Boolean;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  constructor(
+    private watchTrayService: WatchTrayService,
+    private authenticationService: AuthenticationService,
+    private router: Router) {
 
+  }
+
+  get numberOfWatchesInTheWatchTray(): number {
+    if (this.watchTrayService.currentWatchTrayValue) {
+      return this.watchTrayService.currentWatchTrayValue.length;
+    }
   }
 
   ngOnInit() {
@@ -95,7 +105,7 @@ export class HeaderComponent implements OnInit {
       document.getElementById('mySidenav').style.width = '100%';
       this.navMenuOpened = true;
     }
-    else{
+    else {
       document.getElementById('mySidenav').style.width = '0px';
       this.navMenuOpened = false;
     }

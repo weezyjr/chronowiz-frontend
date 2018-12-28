@@ -352,6 +352,12 @@ export class AddBrandFormComponent implements OnInit {
   }
 
   /**
+   * Add Custom Brand Name
+   */
+
+  addCustomBrand = (term) => ({name: term});
+
+  /**
    * Bind Files
    * */
 

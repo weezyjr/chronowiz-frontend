@@ -20,19 +20,48 @@ export class WatchTrayComponent implements OnInit {
   ngOnInit() {
     this.watches = this.watchTrayService.currentWatchTrayValue;
     this.watchTrayService.print(this.watches[0]);
+    for (const watch of this.watches) {
+      if (this.isTheWatchisInTheCheckout(watch)) {
+        watch.addedToCheckOut = true;
+      }
+      else {
+        watch.addedToCheckOut = false;
+      }
+    }
   }
 
-  removeWatch(ref: string) {
-    this.watchTrayService.removeFromWatchTray(ref);
+  removeWatch(watch: Watch) {
+    this.watchTrayService.removeFromWatchTray(watch.referenceNumber);
+    if (watch.addedToCheckOut) {
+      this.checkoutServive.removeFromCheckout(watch.referenceNumber);
+    }
   }
 
-  addWatchToCheckOut(watch: Watch) {
-    this.checkoutServive.addToCheckout(watch);
-    if (this.checkoutServive.currentCheckoutWatchesValue
-      .find((_watch) => _watch.referenceNumber === watch.referenceNumber)) {
+  toggleWatchInCheckOut(watch: Watch) {
+
+    if (this.isTheWatchisInTheCheckout(watch)) {
+      this.checkoutServive.removeFromCheckout(watch.referenceNumber);
+      watch.addedToCheckOut = false;
+      this._NotificationsService.success('success', 'removed to checkout');
+    }
+    else {
+      this.checkoutServive.addToCheckout(watch);
+      watch.addedToCheckOut = true;
       this._NotificationsService.success('success', 'added to checkout');
     }
 
+  }
+
+  isTheWatchisInTheCheckout(watch): boolean {
+    if (this.checkoutServive.currentCheckoutWatchesValue) {
+      if (this.checkoutServive.currentCheckoutWatchesValue
+        .find((_watch) => _watch.referenceNumber === watch.referenceNumber)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
   }
 
   watchFunctionsToStr(functions) {

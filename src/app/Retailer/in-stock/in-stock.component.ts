@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 export class InStockComponent implements OnInit {
 
   // Filter Selection
-  brands: Brand[];
+  selectionBrands: Brand[];
   selectedBrand: Brand = new Brand();
   selectionCollections: Collection[];
   selectedCollection: Collection = new Collection();
@@ -32,13 +32,13 @@ export class InStockComponent implements OnInit {
   watchs: Watch[];
   profile: Retailer = new Retailer();
 
+
   navRoutes: Link[] = [
     new Link('Add to Stock', 'retailer/add-to-stock'),
     new Link('In Stock', 'retailer/in-stock', true)
   ];
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     private retailerService: RetailerService,
     private _notificationsService: NotificationsService) {
@@ -111,68 +111,79 @@ export class InStockComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         }
         else {
-          this.brands = <Brand[]>this.response.payload;
+          this.selectionBrands = <Brand[]>this.response.payload;
         }
       });
   }
 
-  onSelectionBrandSelected(selectedBrandId: String) {
-    this.retailerService.getBrandById(selectedBrandId)
-      .subscribe(data => {
-        console.log(data);
+  async onBrandSelection(selectedBrandId: String) {
+    if (selectedBrandId) {
+      await this.retailerService.getBrandById(selectedBrandId)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        }
-        else {
-          this.selectedBrand = <Brand>this.response.payload;
-          this.selectionCollections = this.selectedBrand.collectionObjects;
-          this.filters.brandID = this.selectedBrand._id;
-          console.log(this.filters);
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this.selectedBrand = <Brand>this.response.payload;
+            this.selectionCollections = this.selectedBrand.collectionObjects;
+            this.filters.brandID = this.selectedBrand._id;
+            console.log(this.filters);
+          }
+        });
+    } else {
+      this.filters.brandID = '';
+    }
   }
 
-  onSelectionCollectionSelected(selectedCollectionId: String) {
-    this.retailerService.getCollectionById(selectedCollectionId)
-      .subscribe(data => {
-        console.log(data);
+  async onCollectionSelection(selectedCollectionId: String) {
+    if (selectedCollectionId) {
+      await this.retailerService.getCollectionById(selectedCollectionId)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        }
-        else {
-          this.selectedCollection = <Collection>this.response.payload;
-          this.filters.collectionID = this.selectedCollection._id;
-          console.log(this.filters);
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this.selectedCollection = <Collection>this.response.payload;
+            this.filters.collectionID = this.selectedCollection._id;
+            console.log(this.filters);
+          }
+        });
+    } else {
+      this.filters.collectionID = '';
+    }
   }
 
-  onSelectionWatchSelected(selectedWatchRef: String) {
-    // TODO shouldn't do another request unless we do a search
-    this.retailerService.getWatchById(selectedWatchRef)
-      .subscribe(data => {
-        console.log(data);
+  async onWatchSelection(selectedWatchRef: String) {
+    if (selectedWatchRef) {
+      await this.retailerService.getWatchById(selectedWatchRef)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        }
-        else {
-          this.selectedWatch = <Watch>this.response.payload;
-          this.filters.watchRef = this.selectedWatch.referenceNumber;
-          console.log(this.filters);
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this.selectedWatch = <Watch>this.response.payload;
+            this.filters.watchRef = this.selectedWatch.referenceNumber;
+            console.log(this.filters);
+          }
+        });
+    } else {
+      this.filters.watchRef = '';
+    }
   }
 
   viewWatch(ref: String) {

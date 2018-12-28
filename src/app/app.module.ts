@@ -62,7 +62,7 @@ import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
 
 // import { NgxSiemaModule } from 'ngx-siema';
-// import { SelectModule } from 'ng2-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -115,6 +115,7 @@ import { CheckoutComponent } from './Views/checkout/checkout.component';
     CheckoutComponent
   ],
   imports: [
+    NgSelectModule,
     // NgxSiemaModule.forRoot(),
     Ng5SliderModule,
     BrowserModule,

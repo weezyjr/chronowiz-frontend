@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Watch } from 'src/app/Watch/watch';
 import { CheckoutService } from 'src/app/WatchTray/checkout.service';
-
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -21,6 +20,14 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.watches = this.checkoutService.currentCheckoutWatchesValue;
+  }
+
+  get totalPrice(): number {
+    let _total = 0;
+    for (const watch of this.watches) {
+      _total += watch.price * watch.qty;
+    }
+    return _total;
   }
 
   removeFromCheckout(ref: string) {

@@ -10,37 +10,25 @@
     <h3>Select Watch by Brand & Collection</h3>
     <br />
 
-    <div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="selectionBrand">Brand</label>
-            <select type="text" (change)="onSelectionBrandSelected($event.target.value)" class="form-control" id="selectionBrand"
-              name="selectionBrand">
-              <option value=""></option>
-              <option *ngFor="let selectionBrand of brands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <div class="form-group">
+      <label for="selectionBrand">Brand</label>
+      <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands" bindLabel="name"
+        bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+      </ng-select>
     </div>
 
     <div class="form-group">
       <label for="selectionCollection">Collection</label>
-      <select type="text" (change)="onSelectionCollectionSelected($event.target.value)" class="form-control" id="selectionCollection"
-        name="selectionCollection">
-        <option value=""></option>
-        <option *ngFor="let selectionCollection of selectionCollections" [value]="selectionCollection?._id">{{selectionCollection?.name}}</option>
-      </select>
+      <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id" placeholder="Select collection"
+        (change)="onCollectionSelection($event?._id)">
+      </ng-select>
     </div>
 
     <div class="form-group">
       <label for="selectionWatch">Watch</label>
-      <select type="text" (change)="onSelectionWatchSelected($event.target.value)" class="form-control" id="selectionWatch"
-        name="selectionWatch">
-        <option value=""></option>
-        <option *ngFor="let selectionWatch of selectedCollection?.watchObjects" [value]="selectionWatch?.referenceNumber">{{selectionWatch?.referenceNumber}}</option>
-      </select>
+      <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber" bindValue="referenceNumber"
+        placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
+      </ng-select>
     </div>
 
     <div>
@@ -57,7 +45,7 @@
         </div>
       </div>
       <div class="col-4">
-        <button class="btn btn-lg primary-btn" (click)="onSelectionWatchSelected(selectionWatchReferenceNumber)">Search</button>
+        <button class="btn btn-lg primary-btn" (click)="onWatchSelection(selectionWatchReferenceNumber)">Search</button>
       </div>
     </div>
     <div *ngIf="(watch?.referenceNumber)">
@@ -70,7 +58,7 @@
             <app-item-card *ngIf="watch" [watch]="watch"></app-item-card>
           </div>
           <p class="muted">Reference Number: {{watch?.referenceNumber}} </p>
-          <p> Price: {{watch?.price | currency: watch?.priceCurrency  }} </p>
+          <p> Price: {{watch?.price | currency: watch?.priceCurrency }} </p>
           <div class="row">
             <div class="col-12">
               <button class="btn primary-btn" (click)="viewWatch(watch?.referenceNumber)"> View Watch </button>

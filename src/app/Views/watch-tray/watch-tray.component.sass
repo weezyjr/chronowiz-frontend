@@ -65,8 +65,12 @@
     font-weight: 900
     color: #212121
 
-.card-carousel-wrapper
-  align-items: flex-start
+.hover:hover
+  background: #f5f5f5
 
-.card-carousel--nav__left, .card-carousel--nav__right
-  margin-top: 366px
+::ng-deep
+  .card-carousel-wrapper
+    align-items: flex-start !important
+
+  .card-carousel--nav__left, .card-carousel--nav__right
+    margin-top: 366px !important

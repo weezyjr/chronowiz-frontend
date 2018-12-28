@@ -1,18 +1,21 @@
 <header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
   <div class="container">
     <div class="logo">
-      <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo" alt="logo"></a>
+      <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo"
+          alt="logo"></a>
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
         <div class="float-left text-left">
           <li class="chronowiz-logo"><a *ngIf="_brandName" [routerLink]="['/home']">
-            <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
-          </a>
+              <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
+            </a>
           </li>
-          <li class="list-inline-item"><a href="javascript:void(0)" (click)="toggleNav()"> <img class="menu" [src]="navMenuOpened? menuCloseSrc : menuIconSrc" alt=""> </a></li>
-          <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc" alt="">
-          </a></li>
+          <li class="list-inline-item"><a href="javascript:void(0)" (click)="toggleNav()"> <img class="menu" [src]="navMenuOpened? menuCloseSrc : menuIconSrc"
+                alt=""> </a></li>
+          <li class="list-inline-item d_none"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
+                alt="">
+            </a></li>
         </div>
         <div class="float-right">
           <li class="list-inline-item">
@@ -29,9 +32,15 @@
               </div>
             </div>
           </li>
-          <li class="list-inline-item search-icon"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc" alt="">
-          </a></li>
-          <li class="list-inline-item"><a [routerLink]="['/watch-tray']"> <img class="icon" [src]="paperBagIconSrc" alt=""> </a></li>
+          <li class="list-inline-item search-icon"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
+                alt="">
+            </a></li>
+          <li class="list-inline-item"><a [routerLink]="['/watch-tray']"> <img class="icon" [src]="paperBagIconSrc" alt="">
+              <div class="tray-notify" *ngIf="numberOfWatchesInTheWatchTray > 0">
+                {{numberOfWatchesInTheWatchTray}}
+              </div>
+            </a>
+          </li>
         </div>
       </ul>
     </nav>

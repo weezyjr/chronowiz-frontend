@@ -35,6 +35,92 @@ export class AddWatchFormComponent implements OnInit {
     new Link('Retailer Form', 'app-add-retailer-form')
   ];
 
+  genderOptions: Array<Object> = [
+    { name: 'Men' },
+    { name: 'Women' },
+    { name: 'Unisex' }
+  ];
+
+  awardsOptions: Array<Object> = [
+    { name: 'Geneva Seal' }
+  ];
+
+  movementAutomaticOrManualOptions: Array<Object> = [
+    { name: 'Manually Wound' },
+    { name: 'Automatic' },
+    { name: 'Self Winding' },
+    { name: 'Quartz' }
+  ];
+
+  movementCertificateOptions: Array<Object> = [
+    { name: 'COSC' }
+  ];
+
+  movementDecorationOptions: Array<Object> = [
+    { name: 'Côtes de Genève' },
+    { name: 'Guilloche' },
+    { name: 'Perlage' }
+  ];
+
+  movementTourbillonOptions: Array<Object> = [
+    { name: 'Flying Tourbillon' },
+    { name: 'One Minute Tourbillon' },
+    { name: '2 x One Minute Tourbillon' },
+    { name: 'One Minute Flying Tourbillon' },
+    { name: '24 Second Tourbillon Cage Inclined at 25 angle' },
+    { name: 'Spherical Double-Axis Tourbillon' },
+    { name: 'One Minute Tourbillon with external balance spring' },
+    { name: 'Flying Double Tourbillon' }
+  ];
+
+  caseFrontOptions: Array<Object> = [
+    { name: 'Saphire Crystal' }
+  ];
+
+  caseBackOptions: Array<Object> = [
+    { name: 'Transparent' }
+  ];
+
+  caseCrownOptions: Array<Object> = [
+    { name: 'Screw-in Crown' },
+    { name: 'screw-locked crown' }
+  ];
+
+  dialIndexOptions: Array<Object> = [
+    { name: 'Roman numeral' },
+    { name: 'Arabic numeral' },
+    { name: 'Breguet numeral' },
+    { name: 'Indices' },
+    { name: 'Blank Dial' },
+    { name: 'Mixed' }
+  ];
+
+  dialHandsOptions: Array<Object> = [
+    { name: 'ALPHA HANDS' },
+    { name: 'ARROW HANDS' },
+    { name: 'BATON HANDS' },
+    { name: 'BREGUET HANDS' },
+    { name: 'CATHEDRAL HANDS' },
+    { name: 'DAUPHINE HANDS' },
+    { name: 'FLEUR DE LYS HANDS' },
+    { name: 'LANCE HANDS' },
+    { name: 'LEAF HANDS' },
+    { name: 'MERCEDES HANDS' },
+    { name: 'PLONGEUR HANDS' },
+    { name: 'SYRINGE HANDS"' },
+    { name: 'SNOWFLAKE HANDS' },
+    { name: 'SPADE HANDS' },
+    { name: 'SWORD HANDS' }
+  ];
+
+  priceCurrencyOptions: Array<Object> = [
+    { name: 'USD' },
+    { name: 'EUR' },
+    { name: 'GBP' },
+    { name: 'CHF' },
+    { name: 'AED' }
+  ];
+
   // Selection
   selectionBrands: Brand[];
   selectedBrand: Brand = new Brand();
@@ -66,6 +152,12 @@ export class AddWatchFormComponent implements OnInit {
   ngOnInit() {
     this.resetWatch();
   }
+
+  /**
+   * Add Custom Brand Name
+   */
+
+  addCustomOption = (term) => ({ name: term });
 
   /**
    * Reset Watch
@@ -106,35 +198,39 @@ export class AddWatchFormComponent implements OnInit {
   }
 
 
-  onBrandSelection(selectedBrandId: String) {
-    this.adminService.readBrandById(selectedBrandId)
-      .subscribe((data: ResponseData) => {
+  async onBrandSelection(selectedBrandId: String) {
+    if (selectedBrandId) {
+      await this.adminService.readBrandById(selectedBrandId)
+        .subscribe((data: ResponseData) => {
 
-        const response: ResponseObject = data.response;
+          const response: ResponseObject = data.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          this.selectedBrand = <Brand>response.payload;
-          this.selectionCollections = this.selectedBrand.collectionObjects;
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            this.selectedBrand = <Brand>response.payload;
+            this.selectionCollections = this.selectedBrand.collectionObjects;
+          }
+        });
+    }
   }
 
-  onCollectionSelection(selectedCollectionId: String) {
-    this.adminService.readCollectionById(selectedCollectionId)
-      .subscribe((data: ResponseData) => {
+  async onCollectionSelection(selectedCollectionId: String) {
+    if (selectedCollectionId) {
+      await this.adminService.readCollectionById(selectedCollectionId)
+        .subscribe((data: ResponseData) => {
 
-        const response: ResponseObject = data.response;
+          const response: ResponseObject = data.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          this.selectedCollection = <Collection>response.payload;
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            this.selectedCollection = <Collection>response.payload;
+          }
+        });
+    }
   }
 
   postProcessWatch(watch: any): Promise<any> {
@@ -172,34 +268,34 @@ export class AddWatchFormComponent implements OnInit {
     });
   }
 
-  onWatchSelection(selectedWatchRef: string) {
-    // TODO shouldn't do another request unless we do a search
+  async onWatchSelection(selectedWatchRef: string) {
+    if (selectedWatchRef) {
+      await this.adminService.readWatch(selectedWatchRef)
+        .subscribe((data: ResponseData) => {
 
-    this.adminService.readWatch(selectedWatchRef)
-      .subscribe((data: ResponseData) => {
+          const response: ResponseObject = data.response;
 
-        const response: ResponseObject = data.response;
-
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          const watch = response.payload;
-          this.postProcessWatch(watch).then((postProcessedWatch) => {
-            this.watch = <Watch>postProcessedWatch;
-            this.onWatchBrandSelectiond(this.watch.brandObject._id);
-          });
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            const watch = response.payload;
+            this.postProcessWatch(watch).then((postProcessedWatch) => {
+              this.watch = <Watch>postProcessedWatch;
+              this.onWatchBrandSelectiond(this.watch.brandObject._id);
+            });
+          }
+        });
+    }
   }
 
-  onWatchBrandSelectiond(selectedBrandId: string | String) {
+  async onWatchBrandSelectiond(selectedBrandId: string | String) {
     if (!selectedBrandId || selectedBrandId === '') {
       console.log('empty selected brand id');
       return;
     }
 
-    this.adminService.readBrandById(selectedBrandId)
+    await this.adminService.readBrandById(selectedBrandId)
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -493,7 +589,7 @@ export class AddWatchFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
-
+        console.log(response);
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
         }
@@ -504,12 +600,12 @@ export class AddWatchFormComponent implements OnInit {
   }
 
   updateWatch(): void {
-    console.log(this.watch);
 
     this.adminService.updateWatch(this.watch, this.watch._id)
-      .subscribe((data: ResponseData) => {
+    .subscribe((data: ResponseData) => {
 
-        const response: ResponseObject = data.response;
+      const response: ResponseObject = data.response;
+      console.log(response);
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
@@ -525,7 +621,7 @@ export class AddWatchFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
-
+        console.log(response);
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
         }

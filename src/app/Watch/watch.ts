@@ -100,6 +100,7 @@ export class Watch {
 
   public maximumDiscount?: number;
   public qty?: number;
+  public addedToCheckOut?: boolean;
 
   constructor() {
     this.brandObject = new Brand();

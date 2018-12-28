@@ -8,6 +8,7 @@ import { Brand } from 'src/app/Brand/brand';
 import { Collection } from 'src/app/Collection/collection';
 import { Watch } from 'src/app/Watch/watch';
 import { RetailerService } from '../retailer.service';
+import { AuthenticationService } from 'src/app/Auth/authentication.service';
 
 @Component({
   selector: 'app-add-to-stock',
@@ -20,13 +21,15 @@ export class AddToStockComponent implements OnInit {
   response: ResponseObject;
 
   watch: Watch = new Watch();
-  brands: Brand[];
+  selectionBrands: Brand[];
+  selectionWatchReferenceNumber: string;
 
   // Selection
   selectedBrand: Brand = new Brand();
   selectionCollections: Collection[];
   selectedCollection: Collection = new Collection();
-  selectionWatchReferenceNumber: string;
+
+
   status = false;
 
   navRoutes: Link[] = [
@@ -35,6 +38,7 @@ export class AddToStockComponent implements OnInit {
   ];
 
   constructor(
+    private authService: AuthenticationService,
     private retailerService: RetailerService,
     private router: Router,
     private _notificationsService: NotificationsService) {
@@ -61,13 +65,13 @@ export class AddToStockComponent implements OnInit {
           this._notificationsService.error('Error', this.response.message.en);
         }
         else {
-          this.brands = <Brand[]>this.response.payload;
+          this.selectionBrands = <Brand[]>this.response.payload;
         }
       });
   }
 
-  onSelectionBrandSelected(selectedBrandId) {
-    this.retailerService.getBrandById(selectedBrandId)
+  async onBrandSelection(selectedBrandId) {
+    await this.retailerService.getBrandById(selectedBrandId)
       .subscribe(data => {
         console.log(data);
 
@@ -84,44 +88,57 @@ export class AddToStockComponent implements OnInit {
       });
   }
 
-  onSelectionCollectionSelected(selectedCollectionId) {
-    this.retailerService.getCollectionById(selectedCollectionId)
-      .subscribe(data => {
-        console.log(data);
+  async onCollectionSelection(selectedCollectionId) {
+    if (selectedCollectionId) {
+      await this.retailerService.getCollectionById(selectedCollectionId)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        }
-        else {
-          this.selectedCollection = <Collection>this.response.payload;
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this.selectedCollection = <Collection>this.response.payload;
+          }
+        });
+    }
   }
 
-  onSelectionWatchSelected(selectedWatchRef) {
-    // TODO shouldn't do another request unless we do a search
+  async onWatchSelection(selectedWatchRef) {
+    if (selectedWatchRef) {
 
-    this.status = false;
-    console.log('searched', this.status);
+      this.status = false;
 
-    this.retailerService.getWatchById(selectedWatchRef)
-      .subscribe(data => {
-        console.log(data);
+      await this.retailerService.getWatchById(selectedWatchRef)
+        .subscribe(data => {
+          console.log(data);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this.watch = <Watch>this.response.payload;
+            console.log(this.watch);
+          }
+        });
+
+      if (this.authService.currentRetailerValue.watchObjects) {
+        console.log(this.authService.currentRetailerValue.watchObjects);
+        const watchExist = this.authService.currentRetailerValue.watchObjects
+          .find((_watch) => _watch.referenceNumber === this.watch.referenceNumber) !== undefined;
+
+        if (watchExist) {
+          this.status = true;
         }
-        else {
-          this.watch = <Watch>this.response.payload;
-          console.log(this.watch);
-        }
-      });
+      }
+
+    }
   }
 
   async addToStock(status) {
