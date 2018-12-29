@@ -7,225 +7,461 @@
 
   <p class="sassy-text"> View and select your watches </p>
 
-  <div class="watch-tray">
-    <div class="row py-2">
-      <div class="col-md-2dot4  attr-btn">
-        <button [routerLink]="['/checkout']" class="btn secondry-btn m-0"> proceed to checkout </button>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4 col-12">
-        <span class="attr bold-attr">
-          You can compare selected watches, choose that you want to order or remove from the list.
-        </span>
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6" *ngFor="let watch of watches">
-        <div class="right-wrong">
-          <i [ngClass]="watch?.addedToCheckOut? 'fas': 'far'" class="fa-check-circle" (click)="toggleWatchInCheckOut(watch)"></i>
-          <i class="far fa-times-circle" (click)="removeWatch(watch)"></i>
+  <app-carousel>
+    <div class="watch-tray">
+      <div class="row py-2">
+        <div class="col-md-2 col-12 attr-btn">
+          <button [routerLink]="['/checkout']" class="btn secondry-btn m-0"> proceed to checkout </button>
         </div>
-        <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
-          <img [src]="watch?.mainPhotoUrl? watch?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" alt="watch">
-        </a>
-        <h4>
-          {{watch?.brandObject?.name}}
-        </h4>
-        <h5>
-          {{watch?.collectionObject?.name}}
-        </h5>
+      </div>
+
+      <div class="row pb-4">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 no-gutters">
+              <span class="attr bold-attr">
+                You can compare selected watches, choose that you want to order or remove from the list.
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <div class="right-wrong">
+                <i [ngClass]="watch?.addedToCheckOut? 'fas': 'far'" class="fa-check-circle" (click)="toggleWatchInCheckOut(watch)"></i>
+                <i class="far fa-times-circle" (click)="removeWatch(watch)"></i>
+              </div>
+              <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
+                <img [src]="watch?.mainPhotoUrl? watch?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" alt="watch">
+              </a>
+              <h4>
+                {{watch?.brandObject?.name}}
+              </h4>
+              <h5>
+                {{watch?.collectionObject?.name}}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row p-sm-y">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 no-gutters attr" >
+              Reference
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span>{{watch?.referenceNumber}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-sm-y">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Model Case
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span *ngIf="watch?.model"> {{watch?.model}}, </span>
+              <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm, </span>
+              <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}} </span>
+              <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-sm-y">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Movement
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span>{{watch?.movementAutomaticOrManual}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-sm-y">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Braclet
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span>{{watch?.band}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-sm-y">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Dial
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span *ngIf="watch?.dialColour">{{watch?.dialColour}}, </span>
+              <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}}, </span>
+              <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}}, </span>
+              <span *ngIf="watch?.dialHands">{{watch?.dialHands}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row py-2">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Price
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span>
+                {{watch?.price | currency: watch?.priceCurrency }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Oyster architecture
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Diameter
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Material
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Bezel
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseBezelMaterial}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Winding Crow
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Crystal
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted">{{watch?.caseFront}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Water-resistance
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted">{{watch?.waterResistance}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Calibre
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberNumber}},</span>
+              <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberName}} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Precision
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Functions
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted">{{watchFunctionsToStr(watch?.functions)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Oscillator
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Escapement
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Winding
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Power Reserve
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.movementPowerReserve">{{watch?.movementPowerReserve}} h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Braclet Material
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted">{{watch?.bandMaterial}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Clasp
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted">{{watch?.bandClasp}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="showAll" class="row py-2 hover">
+        <div class="col-md-2 col-12 no-gutters">
+          <div class="row no-gutters">
+            <div class="col-12 attr no-gutters">
+              Certification
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 col-12">
+          <div class="row flex-nowrap">
+            <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
+              <span class="muted" *ngIf="watch?.movementCertificate">{{watch?.movementCertificate}},</span>
+              <span class="muted" *ngIf="watch?.awards">{{watch?.awards}} </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4 col-12  attr">
-        Reference
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span>{{watch?.referenceNumber}}</span>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4 col-12  attr">
-        Model Case
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span *ngIf="watch?.model"> {{watch?.model}}, </span>
-        <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm, </span>
-        <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}} </span>
-        <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4  col-12 attr">
-        Movement
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span>{{watch?.movementAutomaticOrManual}}</span>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4 col-12  attr">
-        Braclet
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span>{{watch?.band}}</span>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4  col-12 attr">
-        Dial
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span *ngIf="watch?.dialColour">{{watch?.dialColour}}, </span>
-        <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}}, </span>
-        <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}}, </span>
-        <span *ngIf="watch?.dialHands">{{watch?.dialHands}} </span>
-      </div>
-    </div>
-
-    <div class="row py-2">
-      <div class="col-md-2dot4 col-12  attr">
-        Price
-      </div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span>
-          {{watch?.price | currency: watch?.priceCurrency }}
-        </span>
-      </div>
-    </div>
-
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4  col-12 attr">Oyster architecture</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Diameter</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm</span>
-      </div>
-    </div>
-
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Material</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}</span>
-      </div>
-    </div>
-
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12 attr">Bezel</div>
-      <div class="col-md-2dot4 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.caseDiameter">{{watch?.caseBezelMaterial}}</span>
-      </div>
-    </div>
-
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12 attr">Winding Crow py-2n</div>
-      <div class="col-md-2dot4 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4  col-12 attr">Crystal</div>
-      <div class="col-md-2dot4 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted">{{watch?.caseFront}}</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Water-resistance</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted">{{watch?.waterResistance}}</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4  col-12 attr">Calibre</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberNumber}},</span>
-        <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberName}} </span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Precision</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Functions</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted">{{watchFunctionsToStr(watch?.functions)}}</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4  col-12 attr">Oscillator</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Escapement</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4  col-12 attr">Winding</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted"></span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Power Reserve</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.movementPowerReserve">{{watch?.movementPowerReserve}} h</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Braclet Material</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted">{{watch?.bandMaterial}}</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Clasp</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted">{{watch?.bandClasp}}</span>
-      </div>
-    </div>
-
-    <div *ngIf="showAll" class="row py-2 hover">
-      <div class="col-md-2dot4 col-12  attr">Certification</div>
-      <div class="col-md-2dot4  col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-        <span class="muted" *ngIf="watch?.movementCertificate">{{watch?.movementCertificate}},</span>
-        <span class="muted" *ngIf="watch?.awards">{{watch?.awards}} </span>
-      </div>
-    </div>
-  </div>
-
+  </app-carousel>
   <div class="row py-2" *ngIf="showAll">
     <div class="col-12 text-right-md">
       <button class="btn primary-btn wide-btn m-2" [routerLink]="['/checkout']"> Proceed to checkout </button>
@@ -237,6 +473,5 @@
       <button (click)="toggleShowMore()" class="btn secondry-btn m-2"> Show {{showAll ? 'less':'more'}} </button>
     </div>
   </div>
-
 </div>
 <app-footer></app-footer>

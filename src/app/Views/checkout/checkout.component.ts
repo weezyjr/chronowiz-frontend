@@ -19,7 +19,9 @@ export class CheckoutComponent implements OnInit {
   constructor(private checkoutService: CheckoutService) { }
 
   ngOnInit() {
-    this.watches = this.checkoutService.currentCheckoutWatchesValue;
+    if (this.checkoutService.currentCheckoutWatchesValue) {
+      this.watches = this.checkoutService.currentCheckoutWatchesValue;
+    }
   }
 
   get totalPrice(): number {
