@@ -25,7 +25,7 @@
         <li class="results-title" *ngIf="watches?.length > 0"> <a [routerLink]="['/search/advanced-search']"> View all watches </a></li>
       </ul>
       <div class="col-12 p-3">
-        <button [routerLink]="['/search/advanced-search']"  class="btn secondry-btn wide-btn m-2"> Advanced Search </button>
+        <button [routerLink]="['/search/advanced-search', {'query': query}]"  class="btn secondry-btn wide-btn m-2"> Advanced Search </button>
       </div>
     </form>
   </div>

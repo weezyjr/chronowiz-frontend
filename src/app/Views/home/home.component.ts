@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     if (this.query && this.query.trim() !== '') {
       this.brands = this.brands.filter((brand) => {
         if (brand['name']) {
-          return (brand['name'].toLowerCase().indexOf(this.query.toLowerCase()) > -1);
+          return (brand['name'].toLowerCase().trim().indexOf(this.query.toLowerCase().trim()) > -1);
         }
       });
     }

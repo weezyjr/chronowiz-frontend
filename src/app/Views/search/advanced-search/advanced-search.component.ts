@@ -8,6 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { SearchResults } from 'src/app/Search/SearchResults';
 import { Options } from 'ng5-slider';
 import { BrandsService } from 'src/app/Brand/brands.service';
+import { ParamMap, ActivatedRoute } from '@angular/router';
 
 interface BrandCheckBox {
   _id: string;
@@ -98,12 +99,20 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private brandsService: BrandsService,
     private searchService: SearchService,
     private _notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.getBrands();
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      this.query = params.get('query');
+      if (this.query) {
+        console.log(this.query);
+        this.search();
+      }
+    });
   }
 
   openSortMenu() {
@@ -276,7 +285,7 @@ export class AdvancedSearchComponent implements OnInit {
         if (!this.brands[0].checked) {
           if (watch.brandObject) {
             brandFilterMatch =
-            this.brands.find((brand) => brand.checked && brand._id === watch.brandObject) !== undefined ;
+              this.brands.find((brand) => brand.checked && brand._id === watch.brandObject) !== undefined;
           }
           else {
 

@@ -89,9 +89,9 @@
         </div>
 
         <div class="form-group">
-          <label for="model">Discount limit</label>
+          <label for="maximumDiscount">Maximum Discount</label>
           <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"
-            id="maximumDiscount" [(ngModel)]="collection.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+          min="0" max="100" [(ngModel)]="collection.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
         </div>
 
       </div>

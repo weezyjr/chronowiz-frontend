@@ -63,6 +63,7 @@ import { CheckoutComponent } from './Views/checkout/checkout.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSiemaModule } from './components/ngx-siema/';
+import { AdminSelectionComponent } from './components/admin-selection/admin-selection.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { NgxSiemaModule } from './components/ngx-siema/';
     ResetPasswordComponent,
     SetNewPasswordComponent,
     WatchTrayComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminSelectionComponent
   ],
   imports: [
     NgxSiemaModule.forRoot(),

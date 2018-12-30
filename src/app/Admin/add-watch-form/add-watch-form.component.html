@@ -97,6 +97,7 @@
 
 
         <div class="form-group">
+          <label for="collectionName">Collection</label>
           <ng-select [disabled]="mode == 'delete' || loading" [items]="watchCollections" #collectionName="ngModel" name="collectionName"
             bindLabel="name" bindValue="_id" placeholder="Select collection" [ngModel]="watch?.collectionObject?._id"
             (ngModelChange)="watch.collectionObject._id = $event">
@@ -820,9 +821,9 @@
         </div>
 
         <div class="form-group">
-          <label for="model">Discount limit</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"
-            id="maximumDiscount" [(ngModel)]="watch.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+          <label for="maximumDiscount">Maximum Discount</label>
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" min="0" max="100"
+            [(ngModel)]="watch.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
         </div>
 
       </div>

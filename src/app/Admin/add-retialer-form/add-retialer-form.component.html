@@ -46,22 +46,22 @@
 
     <form #retailerForm="ngForm" *ngIf="(mode == 'create') || (retailer.email)">
       <div>
-        <br />
-        <h3>Retailer Account</h3>
-        <br />
+          <br />
+          <h3>Retailer Account</h3>
+          <br />
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input [disabled]="mode == 'delete' || loading" type="email" class="form-control" id="email" required [(ngModel)]="retailer.email"
-            name="email" #email="ngModel">
+          <input [disabled]="mode == 'delete' || loading" type="email" class="form-control" id="email" required
+            [(ngModel)]="retailer.email" name="email" #email="ngModel">
           <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Retailer Email is required</div>
         </div>
 
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input [disabled]="mode == 'delete' || loading" type="password" class="form-control" id="password" required [(ngModel)]="retailer.password"
-            name="password" #password="ngModel" pattern="^.*(?=.{8,})((?=.*[!@#$%^&\\*()\-_=\\+{};:,\\<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
+          <input [disabled]="mode == 'delete' || loading" type="password" class="form-control" id="password" required
+            [(ngModel)]="retailer.password" name="password" #password="ngModel" pattern="^.*(?=.{8,})((?=.*[!@#$%^&\\*()\-_=\\+{};:,\\<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
           <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
             <ul>
               <li>The password must contain at least 1 lowercase alphabetical character</li>
@@ -135,27 +135,123 @@
 
 
         <br />
-        <h3>Brand Discount Limit</h3>
+        <h3>Brand Max Discounts</h3>
         <br />
 
-        
-
-        <div class="form-group">
-          <label for="brand">Brand</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" min="0" max="100" class="form-control"
-            name="brand">
+        <div>
+          <label>Brand Max Discounts</label>
+          <div class="row">
+            <div class="col-10 float-left" *ngFor="let discount of retailer?.brandsMaxDiscounts; let in=index">
+              <div class="form-group">
+                <label>Select Brand</label>
+                <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand" name="brandDiscounts{{in}}"
+                  [(ngModel)]="retailer.brandsMaxDiscounts[in]._id">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Discount Value</label>
+                <input [disabled]="mode == 'delete' || loading  || !retailer.brandsMaxDiscounts[in]._id" type="number" min="0" max="100" class="form-control"
+                  [(ngModel)]="retailer.brandsMaxDiscounts[in].value" name="brandDiscountsValue{{in}}">
+              </div>
+              <hr>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg primary-btn" (click)="addBrandDiscount()">+</button>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg secondry-btn" (click)="removeBrandDiscount()">-</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="collection">Collection</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" min="0" max="100" class="form-control"
-            name="collection">
+        <br />
+        <h3>Collection Max Discounts</h3>
+        <br />
+
+        <div>
+          <label>Collection Max Discounts</label>
+          <div class="row">
+            <div class="col-10 float-left" *ngFor="let discount of retailer?.collectionsMaxDiscounts; let in=index">
+              <div class="form-group">
+                <label>Select Brand</label>
+                <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
+                  (change)="onBrandSelection($event?._id)">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label for="selectionCollection">Select Collection</label>
+                <ng-select [items]="selectionCollections" name="collectionsMaxDiscounts{{in}}" bindLabel="name" bindValue="_id"
+                  placeholder="Select collection" [(ngModel)]="retailer.collectionsMaxDiscounts[in]._id">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label>Discount Value</label>
+                <input [disabled]="mode == 'delete' || loading || !retailer.collectionsMaxDiscounts[in]._id" type="number" min="0" max="100" class="form-control"
+                  [(ngModel)]="retailer.collectionsMaxDiscounts[in].value" name="collectionsMaxDiscountsValue{{in}}">
+              </div>
+              <hr>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg primary-btn" (click)="addCollectionDiscount()">+</button>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg secondry-btn" (click)="removeCollectionDiscount()">-</button>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="watch">Watch</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" min="0" max="100" class="form-control"
-            name="watch">
+        <br />
+        <h3>Watch Max Discounts</h3>
+        <br />
+
+        <div>
+          <label>Watch Max Discounts</label>
+          <div class="row">
+            <div class="col-10 float-left" *ngFor="let discount of retailer?.watchesMaxDiscounts; let in=index">
+              <div class="form-group">
+                <label>Select Brand</label>
+                <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
+                  (change)="onBrandSelection($event?._id)">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label for="selectionCollection">Select Collection</label>
+                <ng-select [items]="selectionCollections" bindLabel="name" bindValue="_id"
+                  placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
+                </ng-select>
+              </div>
+              <div class="form-group">
+                <label for="selectionWatch">Watch</label>
+                <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{in}}" bindLabel="referenceNumber"
+                  bindValue="_id" placeholder="Select watch" [(ngModel)]="retailer.watchesMaxDiscounts[in]._id">
+                </ng-select>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <label for="selectionWatch">Or select by reference number</label>
+                    <input type="text" class="form-control" id="watchInputReferenceNumber" [(ngModel)]="selectionWatchReferenceNumber[in]"
+                      name="watchInputReferenceNumber">
+                  </div>
+                </div>
+                <div class="col-4">
+                  <button class="btn btn-lg primary-btn" (click)="onWatchSelection(selectionWatchReferenceNumber[in])">Search</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Discount Value</label>
+                <input [disabled]="mode == 'delete' || loading || !retailer.watchesMaxDiscounts[in]._id" type="number" min="0" max="100" class="form-control"
+                  [(ngModel)]="retailer.watchesMaxDiscounts[in].value" name="watchesMaxDiscountsValue{{in}}">
+              </div>
+              <hr>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg primary-btn" (click)="addWatchDiscount()">+</button>
+            </div>
+            <div class="col-1 float-right">
+              <button class="btn btn-lg secondry-btn" (click)="removeWatchDiscount()">-</button>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -165,7 +261,7 @@
           <div class="col-6">
             <button type="submit" class="btn primary-btn btn-lg" (click)="onSubmit();" [disabled]="(!retailerForm.form.valid || loading)  && (mode != 'delete')">
               {{loading? 'loading..' : mode }}</button>
-              <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>
           <div class="col-6">
             <button type="button" class="btn btn-lg secondry-btn" (click)=" resetRetailer(); retailerForm.reset();">Clear</button>

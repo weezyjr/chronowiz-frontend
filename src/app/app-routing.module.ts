@@ -63,7 +63,11 @@ const routes: Routes = [
   },
   {
     path: 'search/advanced-search',
-    component: AdvancedSearchComponent
+    component: AdvancedSearchComponent,
+    children: [{
+      path: ':query',
+      component: SearchComponent
+    }]
   },
   {
     path: 'admin/login',
