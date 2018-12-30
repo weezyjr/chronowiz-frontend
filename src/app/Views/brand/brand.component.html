@@ -2,7 +2,7 @@
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <!--<app-hero *ngIf="brandObject" [cover]="brandObject?.banner1PhotoUrl ? brandObject?.banner1PhotoUrl: 'http://placehold.it/1600x900'"></app-hero>-->
 
-<div class="mx-auto">
+<div class="mx-auto hero-container">
   <video *ngIf="brandObject?.headerPhotoUrl && isVideo(brandObject?.headerPhotoUrl)" class="main-vid"
   autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
   <source [src]="brandObject?.headerPhotoUrl" type="video/mp4">
