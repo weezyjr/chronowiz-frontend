@@ -286,7 +286,7 @@ export class AddBrandFormComponent implements OnInit {
   async uploadHeaderFile() {
     await this.s3Service.upload(this.headerPhotoFile, this.brandsUrlPathGenerator('headerPhotoUrl'))
       .then(async (url: string) => {
-        this._notificationsService.success(`Succes ${this.headerPhotoFile.name} uploaded successfully`);
+        this._notificationsService.success(`Success ${this.headerPhotoFile.name} uploaded successfully`);
         this.brand.headerPhotoUrl = url;
       },
         async () => {
@@ -355,7 +355,7 @@ export class AddBrandFormComponent implements OnInit {
    * Add Custom Brand Name
    */
 
-  addCustomBrand = (term) => ({name: term});
+  addCustomBrand = (term) => ({ name: term });
 
   /**
    * Bind Files
@@ -409,6 +409,7 @@ export class AddBrandFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
+        console.log(response);
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
@@ -455,6 +456,8 @@ export class AddBrandFormComponent implements OnInit {
       if (!this.brand.banner2PhotoUrl) {
         await this.uploadBanner2Photo();
       }
+
+      console.log('this brand', this.brand);
 
       /** Submit depnding on the mode type */
       if (this.mode === 'create') {

@@ -9,10 +9,10 @@
   </video>
   <app-hero *ngIf="brandObject?.headerPhotoUrl && !isVideo(brandObject?.headerPhotoUrl)" [cover]="brandObject?.headerPhotoUrl"></app-hero>
   <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1920x1080/FFFFFF/FFFFFF"></app-hero>
+
 </div>
 
 <div class="container">
-
   <header class="title text-center">
     <h1>{{brandObject?.name}}</h1>
     <h5>The Collections</h5>
