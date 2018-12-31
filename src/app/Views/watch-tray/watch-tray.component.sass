@@ -49,9 +49,6 @@
     color: #333333
     text-align: left
     padding: 4px 0;
-  .attr-btn
-    button
-      width: 140px
 
   .right-wrong
     text-align: right
@@ -71,8 +68,15 @@
     color: #212121
     word-break: initial
 
-.hover:hover
-  background: #f5f5f5
+.mobileOnly
+  display: none
+
+.desktopOnly
+  display: block
+
+.attr-btn
+  button
+    width: 140px
 
 .row
   margin: auto !important
@@ -92,6 +96,12 @@
   padding-top: 0.5rem
 
 @media (max-width: 769px)
+  .mobileOnly
+    display: block
+  .desktopOnly
+    display: none
+  .attr-row
+    flex-wrap: nowrap !important
   .img-container
     height: 150px !important
     img

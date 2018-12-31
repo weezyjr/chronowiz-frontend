@@ -22,10 +22,10 @@
         <li class="results-title" *ngIf="watches?.length > 0">watches: </li>
         <li class="results-item" *ngFor="let watch of watches | slice: 0:10"> <a [routerLink]="['/watch',watch?.referenceNumber]">
             {{watch?.model}} </a> </li>
-        <li class="results-title" *ngIf="watches?.length > 0"> <a [routerLink]="['/search/advanced-search', {'query': query}]"> View all watches </a></li>
+        <li class="results-title" *ngIf="watches?.length > 0"> <a [routerLink]="['/search/advanced-search', {'query': query? query: ''}]"> View all watches </a></li>
       </ul>
       <div class="col-12 p-3">
-        <button [routerLink]="['/search/advanced-search', {'query': query}]"  class="btn secondry-btn wide-btn m-2"> Advanced Search </button>
+        <button [routerLink]="['/search/advanced-search', {'query': query? query: ''}]"  class="btn secondry-btn wide-btn m-2"> Advanced Search </button>
       </div>
     </form>
   </div>

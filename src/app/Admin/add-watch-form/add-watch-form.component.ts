@@ -590,6 +590,7 @@ export class AddWatchFormComponent implements OnInit {
 
         const response: ResponseObject = data.response;
         console.log(response);
+        console.log(this.watch);
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
         }
@@ -602,10 +603,10 @@ export class AddWatchFormComponent implements OnInit {
   updateWatch(): void {
 
     this.adminService.updateWatch(this.watch, this.watch._id)
-    .subscribe((data: ResponseData) => {
+      .subscribe((data: ResponseData) => {
 
-      const response: ResponseObject = data.response;
-      console.log(response);
+        const response: ResponseObject = data.response;
+        console.log(response);
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);

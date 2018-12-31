@@ -36,7 +36,7 @@ export class Watch {
   public movementTourbillon?: string;
   public movementRotor?: string;
   public movementAdditionalFeatures?: Value[];
-  public numberOfParts?: Number;
+  public movementNumberOfParts?: Number;
 
   public functions?: Value[];
   public complications?: Value[];

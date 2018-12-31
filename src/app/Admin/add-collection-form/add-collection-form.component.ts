@@ -109,6 +109,7 @@ export class AddCollectionFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
+        console.log(response);
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
@@ -124,6 +125,8 @@ export class AddCollectionFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
+        console.log(response);
+
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
@@ -139,6 +142,8 @@ export class AddCollectionFormComponent implements OnInit {
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
+        console.log(response);
+
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);

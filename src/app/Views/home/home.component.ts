@@ -4,6 +4,7 @@ import { Brand } from 'src/app/Brand/brand';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,11 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class HomeComponent implements OnInit {
 
+  private env = environment;
+
   SEARCH_ICON_PATH = '../../../assets/search.svg';
   LOGO_PATH = '../../../assets/home/logos/';
+  mainVideoUrl = this.env.cloadFlareUrl + 'high30.mp4';
 
   brands: Brand[];
 

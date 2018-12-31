@@ -68,10 +68,11 @@
             name is required</div>
         </div> -->
         <div class="form-group">
-          <ng-select [items]="staticBrandNames" #BrandName="ngModel" name="BrandName" required bindLabel="name" bindValue="name" [addTag]="addCustomBrand"
-            placeholder="Select brand name" [(ngModel)]="brand.name">
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="staticBrandNames" #BrandName="ngModel" name="BrandName"
+            required bindLabel="name" bindValue="name" [addTag]="addCustomBrand" placeholder="Select brand name"
+            [(ngModel)]="brand.name">
           </ng-select>
-          <div [hidden]="BrandName.valid || BrandName.pristine" class="alert alert-danger">
+          <div [hidden]="!brandForm.submitted || BrandName.valid || BrandName.pristine" class="alert alert-danger">
             Brand name is required
           </div>
         </div>
@@ -104,7 +105,8 @@
               <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
             </div>
           </div>
-          <div [hidden]="logoPhotoFileRef.valid || logoPhotoFileRef.pristine" class="alert alert-danger">Logo Photo is
+          <div [hidden]="!brandForm.submitted || logoPhotoFileRef.valid || logoPhotoFileRef.pristine" class="alert alert-danger">Logo
+            Photo is
             required</div>
         </div>
 
@@ -153,7 +155,7 @@
               <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner1PhotoFileRef.valid || banner1PhotoFileRef.pristine" class="alert alert-danger">Logo
+          <div [hidden]="(!brandForm.submitted || banner1PhotoFileRef.valid || banner1PhotoFileRef.pristine)" class="alert alert-danger">Logo
             Photo is
             required</div>
         </div>
@@ -177,15 +179,20 @@
               <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
             </div>
           </div>
-          <div [hidden]="banner2PhotoFileRef.valid || banner2PhotoFileRef.pristine" class="alert alert-danger">Logo
+          <div [hidden]="!brandForm.submitted || banner2PhotoFileRef.valid || banner2PhotoFileRef.pristine" class="alert alert-danger">Logo
             Photo is
             required</div>
         </div>
 
+        <br />
+        <h3>Discount Section</h3>
+        <br />
+
+
         <div class="form-group">
           <label for="maximumDiscount">Maximum Discount</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"
-            min="0" max="100" [(ngModel)]="brand.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" min="0" max="100"
+            [(ngModel)]="brand.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
         </div>
 
       </div>

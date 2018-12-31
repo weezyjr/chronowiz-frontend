@@ -108,7 +108,7 @@ export class AdvancedSearchComponent implements OnInit {
     this.getBrands();
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.query = params.get('query');
-      if (this.query) {
+      if (this.query && this.query !== '' && this.query !== undefined && this.query !== 'undefined') {
         console.log(this.query);
         this.search();
       }

@@ -7,14 +7,14 @@
 
   <p class="sassy-text"> View and select your watches </p>
 
-  <app-carousel>
-    <div class="watch-tray">
-      <div class="row py-2">
-        <div class="col-md-2 col-12 attr-btn">
-          <button [routerLink]="['/checkout']" class="btn secondry-btn m-0"> proceed to checkout </button>
-        </div>
-      </div>
+  <div class="row py-2">
+    <div class="col-md-2 col-12 attr-btn">
+      <button [routerLink]="['/checkout']" class="btn secondry-btn m-0"> proceed to checkout </button>
+    </div>
+  </div>
 
+  <app-carousel [len]="watches.length">
+    <div class="watch-tray">
       <div class="row pb-4">
         <div class="col-md-2 col-12 no-gutters">
           <div class="row no-gutters">
@@ -49,8 +49,11 @@
 
       <div class="row p-sm-y">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 no-gutters attr" >
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Reference
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Reference
             </div>
           </div>
@@ -66,8 +69,11 @@
 
       <div class="row p-sm-y">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Model Case
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Model Case
             </div>
           </div>
@@ -86,8 +92,11 @@
 
       <div class="row p-sm-y">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Movement
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Movement
             </div>
           </div>
@@ -103,8 +112,11 @@
 
       <div class="row p-sm-y">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Braclet
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Braclet
             </div>
           </div>
@@ -120,8 +132,11 @@
 
       <div class="row p-sm-y">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Dial
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Dial
             </div>
           </div>
@@ -140,8 +155,11 @@
 
       <div class="row py-2">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Price
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Price
             </div>
           </div>
@@ -159,8 +177,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Oyster architecture
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Oyster architecture
             </div>
           </div>
@@ -177,8 +198,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Diameter
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Diameter
             </div>
           </div>
@@ -195,8 +219,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Material
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Material
             </div>
           </div>
@@ -213,8 +240,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Bezel
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Bezel
             </div>
           </div>
@@ -231,8 +261,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Winding Crow
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Winding Crow
             </div>
           </div>
@@ -248,8 +281,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Crystal
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Crystal
             </div>
           </div>
@@ -266,8 +302,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Water-resistance
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Water-resistance
             </div>
           </div>
@@ -284,9 +323,12 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
-              Calibre
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Caliber
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
+              Caliber
             </div>
           </div>
         </div>
@@ -302,8 +344,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Precision
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Precision
             </div>
           </div>
@@ -320,8 +365,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Functions
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Functions
             </div>
           </div>
@@ -338,8 +386,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Oscillator
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Oscillator
             </div>
           </div>
@@ -355,8 +406,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Escapement
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Escapement
             </div>
           </div>
@@ -373,8 +427,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Winding
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Winding
             </div>
           </div>
@@ -391,9 +448,12 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
-              Power Reserve
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Power reserve
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
+              Power reserve
             </div>
           </div>
         </div>
@@ -408,9 +468,12 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
-              Braclet Material
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Braclet material
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
+              Braclet material
             </div>
           </div>
         </div>
@@ -426,8 +489,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Clasp
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Clasp
             </div>
           </div>
@@ -444,8 +510,11 @@
 
       <div *ngIf="showAll" class="row py-2 hover">
         <div class="col-md-2 col-12 no-gutters">
-          <div class="row no-gutters">
-            <div class="col-12 attr no-gutters">
+          <div class="row no-gutters attr-row">
+            <div class="col-12 no-gutters attr desktopOnly">
+              Certification
+            </div>
+            <div class="col-12 no-gutters attr mobileOnly" *ngFor="let watch of watches">
               Certification
             </div>
           </div>
@@ -461,7 +530,7 @@
       </div>
     </div>
   </app-carousel>
-  <div class="row py-2" >
+  <div class="row py-2">
     <div class="col-12 text-right-md">
       <button class="btn primary-btn wide-btn m-2" [routerLink]="['/checkout']"> Proceed to checkout </button>
     </div>

@@ -13,8 +13,16 @@ export class CarouselComponent implements OnInit {
   len = 5;
 
   // TODO: Smart pagination factor
-  @Input()
-  paginationFactor = 220;
+  get paginationFactor() {
+    const _content = document.getElementById('content');
+    if (_content) {
+      console.log(_content.clientWidth);
+      return _content.clientWidth - 30;
+    } else {
+      return 300;
+    }
+  }
+
 
   get currentWindowsWidth() { return document.documentElement.clientWidth; }
 

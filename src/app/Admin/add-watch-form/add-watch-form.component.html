@@ -90,7 +90,7 @@
             [ngModel]="watch?.brandObject?._id" (change)="onWatchBrandSelectiond(watch?.brandObject?._id)"
             (ngModelChange)="watch.brandObject._id = $event">
           </ng-select>
-          <div [hidden]="BrandName.valid || BrandName.pristine" class="alert alert-danger">
+          <div [hidden]="!watchForm.submitted || BrandName.valid || BrandName.pristine" class="alert alert-danger">
             Brand name is required
           </div>
         </div>
@@ -114,7 +114,7 @@
           <label for="referenceNumber">Reference number</label>
           <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.referenceNumber"
             required name="referenceNumber" #referenceNumber="ngModel">
-          <div [hidden]="referenceNumber.valid || referenceNumber.pristine" class="alert alert-danger">Reference Number
+          <div [hidden]="!watchForm.submitted || referenceNumber.valid || referenceNumber.pristine" class="alert alert-danger">Reference Number
             is required
           </div>
         </div>
@@ -254,19 +254,6 @@
 
         <div class="form-group">
           <label for="movementDecoration">Movement Decoration</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" [ngModel]="watch?.movementDecoration"
-            (ngModelChange)="watch.movementDecoration = $event" name="movementDecoration" #movementDecoration="ngModel">
-            <option value=""></option>
-            <option value="Côtes de Genève">Côtes de Genève</option>
-            <option value="Guilloche">Guilloche</option>
-            <option value="Perlage">Perlage</option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementDecoration"
-            name="movementDecorationText" #movementDecorationText="ngModel">
-        </div>
-
-        <div class="form-group">
-          <label for="movementDecoration">Movement Decoration</label>
           <ng-select [disabled]="mode == 'delete' || loading" [items]="movementDecorationOptions" #movementDecoration="ngModel"
             name="movementDecoration" bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.movementDecoration"
             (ngModelChange)="watch.movementDecoration = $event">
@@ -313,7 +300,7 @@
 
         <div class="form-group">
           <label for="numberOfParts">Number of Parts</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" [(ngModel)]="watch.numberOfParts"
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" [(ngModel)]="watch.movementNumberOfParts"
             name="numberOfParts" #numberOfParts="ngModel">
         </div>
 
@@ -819,6 +806,10 @@
             </div>
           </div>
         </div>
+
+        <br />
+        <h3>Discount Section</h3>
+        <br />
 
         <div class="form-group">
           <label for="maximumDiscount">Maximum Discount</label>

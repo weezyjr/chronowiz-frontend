@@ -18,6 +18,7 @@ export class WatchTrayComponent implements OnInit {
 
   public showAll = false;
   public watches: Watch[] = [];
+
   constructor(
     private watchTrayService: WatchTrayService,
     private checkoutServive: CheckoutService,

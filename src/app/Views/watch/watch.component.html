@@ -20,14 +20,17 @@
     </p>
   </div>
   <div class="d-flex p-5 align-items-center justify-content-center">
-    <button (click)="addToWatchTray()" class="add-to-watch-tray"><i class="fa"><img src="../../../assets/paper-bag.svg" width="12" alt=""></i>
+    <button (click)="addToWatchTray()" class="add-to-watch-tray"><i class="fa"><img src="../../../assets/paper-bag.svg"
+          width="12" alt=""></i>
       add to watch tray</button>
     <div (click)="scrollTo('technicals')" class="technical-details"> + Technical detail </div>
   </div>
 </div>
 
-<app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
-<app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x450/FFFFFF/FFFFFF"></app-hero>
+<div class="banner1container">
+  <app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
+  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x450/FFFFFF/FFFFFF"></app-hero>
+</div>
 
 <div class="container pb-5">
 
@@ -42,8 +45,10 @@
   </div>
 </div>
 
-<app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
-<app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x300/FFFFFF/FFFFFF"></app-hero>
+<div class="banner2contanier">
+  <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
+  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x300/FFFFFF/FFFFFF"></app-hero>
+</div>
 
 <div class="container">
   <!--
