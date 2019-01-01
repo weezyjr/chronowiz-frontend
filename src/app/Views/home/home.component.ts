@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BrandsService } from 'src/app/Brand/brands.service';
-import { Brand } from 'src/app/Brand/brand';
+import { BrandsService } from 'src/app/User/Brand/brands.service';
+import { Brand } from 'src/app/Types/brand';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';

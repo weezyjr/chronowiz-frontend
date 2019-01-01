@@ -1,0 +1,76 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import { HandleError, HttpErrorHandlerService } from 'src/app/API/http-error-handler.service';
+import { ResponseData } from 'src/app/API/response-data';
+import { Watch } from 'src/app/Types/watch';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WatchesService
+{
+  env = environment;
+
+  watchesUrl = this.env.backendUrl + 'user/watches/';
+
+  private handleError: HandleError;
+
+  constructor(
+    private http: HttpClient,
+    httpErrorHandler: HttpErrorHandlerService)
+  {
+    this.handleError = httpErrorHandler.createHandleError('WatchesService');
+  }
+
+  createWatch(watch: Watch): Observable<ResponseData>
+  {
+    return this.http.post<ResponseData>(this.watchesUrl, {'payload': watch}, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+  readWatch(_id: string): Observable<ResponseData>
+  {
+    return this.http.get<ResponseData>(this.watchesUrl + '/' + _id, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+  updateWatch(watchObject: any, id: String): Observable<ResponseData> {
+    return this.http.put<ResponseData>(this.watchesUrl + '/' + id, { 'payload': watchObject }, httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  deleteWatch(_id: string): Observable<ResponseData>
+  {
+    return this.http.delete<ResponseData>(this.watchesUrl + '/' + _id, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+  readWatches(): Observable<ResponseData>
+  {
+    return this.http.get<ResponseData>(this.watchesUrl, httpOptions)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+}

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from 'src/app/Search/search.service';
-import { Brand } from 'src/app/Brand/brand';
-import { Collection } from 'src/app/Collection/collection';
-import { Watch } from 'src/app/Watch/watch';
+import { Brand } from 'src/app/Types/brand';
+import { Collection } from 'src/app/Types/collection';
+import { Watch } from 'src/app/Types/watch';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
-import { SearchResults } from 'src/app/Search/SearchResults';
+import { SearchService } from 'src/app/User/Search/search.service';
+import { SearchResults } from 'src/app/Types/SearchResults';
 
 @Component({
   selector: 'app-search',

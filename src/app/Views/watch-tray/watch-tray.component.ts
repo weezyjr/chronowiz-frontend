@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
-import { Watch } from 'src/app/Watch/watch';
-import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
-import { CheckoutService } from 'src/app/WatchTray/checkout.service';
-// import { NgxSiemaOptions } from 'src/app/components/ngx-siema';
+import { Watch } from 'src/app/Types/watch';
+import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
+import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
 
 @Component({
   selector: 'app-watch-tray',
@@ -11,10 +10,6 @@ import { CheckoutService } from 'src/app/WatchTray/checkout.service';
   styleUrls: ['./watch-tray.component.sass']
 })
 export class WatchTrayComponent implements OnInit {
-  /*
-    options: NgxSiemaOptions = {
-      selector: '.siema',
-    };*/
 
   public showAll = false;
   public watches: Watch[] = [];

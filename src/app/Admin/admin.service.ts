@@ -6,10 +6,10 @@ import { environment } from '../../environments/environment';
 import { HandleError, HttpErrorHandlerService } from '../API/http-error-handler.service';
 import { ResponseData } from '../API/response-data';
 import { AuthenticationService } from '../Auth/authentication.service';
-import { Brand } from '../Brand/brand';
-import { Collection } from '../Collection/collection';
-import { Watch } from '../Watch/watch';
-import { Retailer } from '../Retailer/retailer';
+import { Brand } from '../Types/brand';
+import { Collection } from '../Types/collection';
+import { Watch } from '../Types/watch';
+import { Retailer } from '../Types/retailer';
 
 
 @Injectable({

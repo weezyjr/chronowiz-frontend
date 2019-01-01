@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Watch } from '../Watch/watch';
+import { Watch } from '../Types/watch';
 
 @Pipe({
   name: 'watchesRetailerFilter'

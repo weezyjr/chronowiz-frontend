@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <app-carousel [len]="watchesLength" elementsPerLg="5">
+  <app-carousel [len]="watchesLength">
     <div class="watch-tray">
       <div class="row pb-4">
         <div class="col-md-2 col-12 no-gutters">
@@ -39,7 +39,7 @@
                 {{watch?.brandObject?.name}}
               </h4>
               <h5>
-                {{watch?.collectionObject?.name}}
+                {{watch?.collectionObject?.name | collectionName}}
               </h5>
             </div>
           </div>

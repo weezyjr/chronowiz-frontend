@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
-import { Collection } from 'src/app/Collection/collection';
-import { BrandsService } from 'src/app/Brand/brands.service';
-import { Brand } from 'src/app/Brand/brand';
+import { Collection } from 'src/app/Types/collection';
+import { BrandsService } from 'src/app/User/Brand/brands.service';
+import { Brand } from 'src/app/Types/brand';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({

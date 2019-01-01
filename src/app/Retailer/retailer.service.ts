@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { ResponseData } from '../API/response-data';
 import { environment } from '../../environments/environment';
 import { HandleError, HttpErrorHandlerService } from '../API/http-error-handler.service';
-import { Retailer } from './retailer';
 import { AuthenticationService } from '../Auth/authentication.service';
 
 

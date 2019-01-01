@@ -9,63 +9,57 @@ import { RouterModule } from '@angular/router';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminLoginComponent } from './Admin/login/login.component';
-
-import { AddWatchFormComponent } from './Admin/add-watch-form/add-watch-form.component';
-import { AddBrandFormComponent } from './Admin/add-brand-form/add-brand-form.component';
-import { AddCollectionFormComponent } from './Admin/add-collection-form/add-collection-form.component';
-import { HttpErrorHandlerService } from './API/http-error-handler.service';
-import { WatchesService } from './Watch/watches.service';
-import { SearchService } from './Search/search.service';
 
 import { ErrorInterceptor } from './API/error.interceptor';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { FooterComponent } from './Components/footer/footer.component';
 import { BrandComponent } from './Views/brand/brand.component';
-import { ItemCardComponent } from './components/item-card/item-card.component';
-import { CardCarouselComponent } from './components/card-carousel/card-carousel.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { ItemCardComponent } from './Components/item-card/item-card.component';
+import { BreadcrumbComponent } from './Components/breadcrumb/breadcrumb.component';
 import { HomeComponent } from './Views/home/home.component';
-import { FooterHeroComponent } from './components/footer-hero/footer-hero.component';
-import { HeroComponent } from './components/hero/hero.component';
+import { HeroComponent } from './Components/hero/hero.component';
 import { CollectionsComponent } from './Views/collections/collections.component';
 import { GenderPipe } from './Filters/gender.pipe';
 
-import { CollapsibleComponent } from './components/collapsible/collapsible.component';
-import { FilterCollapsibleComponent } from './components/filter-collapsible/filter-collapsible.component';
+import { CollapsibleComponent } from './Components/collapsible/collapsible.component';
+import { FilterCollapsibleComponent } from './Components/filter-collapsible/filter-collapsible.component';
 import { WatchComponent } from './Views/watch/watch.component';
-import { SocialMediaSectionComponent } from './components/social-media-section/social-media-section.component';
-import { AttributeTableComponent } from './components/attribute-table/attribute-table.component';
-import { WatchSectionComponent } from './components/watch-section/watch-section.component';
-import { RetailerLoginComponent } from './Retailer/login/login.component';
-import { AddRetialerFormComponent } from './Admin/add-retialer-form/add-retialer-form.component';
-import { FormHeaderComponent } from './components/forms/form-header/form-header.component';
-import { TabsComponent } from './components/forms/tabs/tabs.component';
-import { AddToStockComponent } from './Retailer/add-to-stock/add-to-stock.component';
-import { ToggleBtnComponent } from './components/toggle-btn/toggle-btn.component';
-import { InStockComponent } from './Retailer/in-stock/in-stock.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { AttributeTableComponent } from './Components/attribute-table/attribute-table.component';
+import { WatchSectionComponent } from './Components/watch-section/watch-section.component';
+import { FormHeaderComponent } from './Components/forms/form-header/form-header.component';
+import { TabsComponent } from './Components/forms/tabs/tabs.component';
+import { ToggleBtnComponent } from './Components/toggle-btn/toggle-btn.component';
+import { SideMenuComponent } from './Components/side-menu/side-menu.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { LoginComponent } from './Views/login/login.component';
-import { ProfileComponent } from './User/profile/profile.component';
 import { SearchComponent } from './Views/search/search.component';
 import { Ng5SliderModule } from 'ng5-slider';
-import { CarouselComponent } from './components/carousel/carousel.component';
+import { CarouselComponent } from './Components/carousel/carousel.component';
 import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced-search.component';
-import { WatchesPipe } from './Filters/Watches.pipe';
 import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
-import { CollectionSectionComponent } from './components/collection-section/collection-section.component';
+import { CollectionSectionComponent } from './Components/collection-section/collection-section.component';
 import { ConfirmPasswordDirective } from './Views/register/confirmPassword.directive';
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
-import { SetNewPasswordComponent } from './User/set-new-password/set-new-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxSiemaModule } from './components/ngx-siema/';
-import { AdminSelectionComponent } from './components/admin-selection/admin-selection.component';
+import { AdminSelectionComponent } from './Components/admin-selection/admin-selection.component';
 import { SafeUrlPipe } from './Filters/safeUrl.pipe';
-
+import { CollectionNamePipe } from './Filters/collectionName.pipe';
+import { RetailerLoginComponent } from './Retailer/Views/login/login.component';
+import { AddRetialerFormComponent } from './Admin/Views/add-retialer-form/add-retialer-form.component';
+import { AddToStockComponent } from './Retailer/Views/add-to-stock/add-to-stock.component';
+import { InStockComponent } from './Retailer/Views/in-stock/in-stock.component';
+import { ProfileComponent } from './User/Views/profile/profile.component';
+import { SetNewPasswordComponent } from './User/Views/set-new-password/set-new-password.component';
+import { AddWatchFormComponent } from './Admin/Views/add-watch-form/add-watch-form.component';
+import { AdminLoginComponent } from './Admin/Views/login/login.component';
+import { AddBrandFormComponent } from './Admin/Views/add-brand-form/add-brand-form.component';
+import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/add-collection-form.component';
+import { HttpErrorHandlerService } from './API/http-error-handler.service';
+import { WatchesService } from './User/Watch/watches.service';
+import { SearchService } from './User/Search/search.service';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -80,20 +74,17 @@ import { SafeUrlPipe } from './Filters/safeUrl.pipe';
     FooterComponent,
     BrandComponent,
     ItemCardComponent,
-    CardCarouselComponent,
     BreadcrumbComponent,
     HomeComponent,
-    FooterHeroComponent,
     HeroComponent,
     CollectionsComponent,
+    CollectionNamePipe,
     SafeUrlPipe,
     GenderPipe,
-    WatchesPipe,
     WatchesRetailerPipe,
     CollapsibleComponent,
     FilterCollapsibleComponent,
     WatchComponent,
-    SocialMediaSectionComponent,
     AttributeTableComponent,
     WatchSectionComponent,
     AddRetialerFormComponent,
@@ -114,10 +105,9 @@ import { SafeUrlPipe } from './Filters/safeUrl.pipe';
     SetNewPasswordComponent,
     WatchTrayComponent,
     CheckoutComponent,
-    AdminSelectionComponent
+    AdminSelectionComponent,
   ],
   imports: [
-    NgxSiemaModule.forRoot(),
     NgSelectModule,
     Ng5SliderModule,
     BrowserModule,

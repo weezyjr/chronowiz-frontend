@@ -6,10 +6,10 @@ import { environment } from '../../environments/environment';
 import { HandleError, HttpErrorHandlerService } from '../API/http-error-handler.service';
 import { ResponseData } from '../API/response-data';
 import { ResponseObject } from '../API/responseObject';
-import { Admin } from '../Admin/admin';
-import { Retailer } from '../Retailer/retailer';
+import { Admin } from '../Types/admin';
+import { Retailer } from '../Types/retailer';
 import { Router } from '@angular/router';
-import { User } from '../User/User';
+import { User } from '../Types/User';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

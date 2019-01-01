@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WatchesService } from 'src/app/Watch/watches.service';
+import { WatchesService } from 'src/app/User/Watch/watches.service';
 import { NotificationsService } from 'angular2-notifications';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
-import { Watch } from 'src/app/Watch/watch';
-import { WatchTrayService } from 'src/app/WatchTray/watch-tray.service';
+import { Watch } from 'src/app/Types/watch';
+import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
 
 @Component({
   selector: 'app-watch',

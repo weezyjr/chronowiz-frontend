@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Watch } from 'src/app/Watch/watch';
-import { CheckoutService } from 'src/app/WatchTray/checkout.service';
+import { Watch } from 'src/app/Types/watch';
+import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',

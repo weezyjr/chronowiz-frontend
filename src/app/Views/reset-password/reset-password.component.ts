@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
-import { User } from 'src/app/User/User';
+import { User } from 'src/app/Types/User';
 
 @Component({
   selector: 'app-reset-password',
