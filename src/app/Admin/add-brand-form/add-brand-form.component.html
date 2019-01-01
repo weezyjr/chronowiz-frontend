@@ -40,10 +40,9 @@
             <div class="col">
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
-                <select type="text" (change)="onBrandSelection($event.target.value)" class="form-control" name="selectionBrand">
-                  <option value="" checked></option>
-                  <option *ngFor="let selectionBrand of selectionBrands" [value]="selectionBrand?._id">{{selectionBrand?.name}}</option>
-                </select>
+                <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
+                 [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+                </ng-select>
               </div>
             </div>
           </div>
@@ -94,14 +93,14 @@
             <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-sm-10 col-8">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [(ngModel)]="brand.logoPhotoFile"
                   (change)="onLogoPhotoChange($event)" [required]="!brand.logoPhotoUrl" name="logoPhotoFileRef"
                   #logoPhotoFileRef="ngModel">
               </div>
             </div>
-            <div class="col-sm-2 col-4">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearLogoPhoto()">Clear</button>
             </div>
           </div>
@@ -123,14 +122,14 @@
           <label for="headerPhotoFileInput">Header photo</label>
           <p class="muted text-left m-0 p-0"> Width: 1920px x Height: 1080px </p>
           <div class="row">
-            <div class="col-sm-10 col-8">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': brand?.headerPhotoFile}" [disabled]="mode == 'delete' || loading" type="file"
                   class="form-control" (change)="onHeaderPhotoChange($event)" name="headerPhotoFile"
                   #headerPhotoFileRef="ngModel" [(ngModel)]="brand.headerPhotoFile">
               </div>
             </div>
-            <div class="col-sm-2 col-4">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearHeaderPhoto()">Clear</button>
             </div>
           </div>
@@ -144,14 +143,14 @@
             <img [src]="brand?.banner1PhotoUrl" [alt]="brand?.name + ' banner1'" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-sm-10 col-8">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [required]="!brand.banner1PhotoUrl"
                   (change)="onBanner1PhotoChange($event)" name="banner1PhotoFileRef" #banner1PhotoFileRef="ngModel"
                   [(ngModel)]="brand.banner1PhotoFile">
               </div>
             </div>
-            <div class="col-sm-2 col-4">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
@@ -168,14 +167,14 @@
             <img [src]="brand?.banner2PhotoUrl" [alt]="brand?.name + ' banner2'" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-sm-10 col-8">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [required]="!brand.banner2PhotoUrl"
                   (change)="onBanner2PhotoChange($event)" name="banner2PhotoFileRef" #banner2PhotoFileRef="ngModel"
                   [(ngModel)]="brand.banner2PhotoFile">
               </div>
             </div>
-            <div class="col-sm-2 col-4">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
             </div>
           </div>

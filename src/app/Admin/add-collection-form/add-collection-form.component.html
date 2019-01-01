@@ -42,7 +42,7 @@
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
                 <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
-                  bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onSelectionBrandSelected($event?._id)">
+                [(ngModel)]="selectionBrandId"  bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onSelectionBrandSelected($event?._id)">
                 </ng-select>
               </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
           <label for="selectionCollection">Collection</label>
           <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
-            placeholder="Select Collection" (change)="onSelectionCollectionSelected($event?._id)">
+          [(ngModel)]="selectionCollectionId"  placeholder="Select Collection" (change)="onSelectionCollectionSelected($event?._id)">
           </ng-select>
         </div>
       </div>

@@ -121,6 +121,10 @@ export class AddWatchFormComponent implements OnInit {
     { name: 'AED' }
   ];
 
+  selectionBrandId: string;
+  selectionCollectionId: string;
+  selectionCollectionRef: string;
+
   // Selection
   selectionBrands: Brand[];
   selectedBrand: Brand = new Brand();
@@ -165,10 +169,8 @@ export class AddWatchFormComponent implements OnInit {
 
   resetWatch() {
     this.watch = new Watch();
-    this.selectedBrand = new Brand();
-    this.selectedCollection = new Collection;
-    this.selectionCollections = [];
-    this.selectionBrands = [];
+    this.selectionCollections = null;
+    this.selectionBrands = null;
     this.mainPhotoFile = null;
     this.banner1PhotoFile = null;
     this.banner2PhotoFile = null;

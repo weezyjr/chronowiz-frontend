@@ -20,6 +20,7 @@ export class AddBrandFormComponent implements OnInit {
   headerPhotoFile: File;
   banner1PhotoFile: File;
   banner2PhotoFile: File;
+  selectionBrandId: string;
 
   // Loading flag
   loading: Boolean = false;

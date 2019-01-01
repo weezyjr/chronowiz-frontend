@@ -39,21 +39,21 @@
         <div class="form-group">
           <label for="selectionBrand">Brand</label>
           <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
-            bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+           [(ngModel)]="selectionBrandId"  bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
           </ng-select>
         </div>
 
         <div class="form-group">
           <label for="selectionCollection">Collection</label>
           <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
-            placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
+            [(ngModel)]="selectionCollectionId" placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
           </ng-select>
         </div>
 
         <div class="form-group">
           <label for="selectionWatch">Watch</label>
           <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber"
-            bindValue="referenceNumber" placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
+          [(ngModel)]="selectionCollectionRef" bindValue="referenceNumber" placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
           </ng-select>
         </div>
 
@@ -64,13 +64,13 @@
         </div>
 
         <div class="row">
-          <div class="col-8">
+          <div class="col-sm-8 col-6">
             <div class="form-group">
               <input type="text" class="form-control" id="watchInputReferenceNumber" [(ngModel)]="selectionWatchReferenceNumber"
                 name="watchInputReferenceNumber" #watchInputReferenceNumber="ngModel">
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-sm-4 col-6">
             <button class="btn btn-lg primary-btn" (click)="onWatchSelection(selectionWatchReferenceNumber)">Search</button>
           </div>
         </div>
@@ -187,7 +187,7 @@
                   name="movementDiameter" #movementDiameter="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-2">
               <div class="units">mm</div>
             </div>
           </div>
@@ -202,7 +202,7 @@
                   name="movementHeight" #movementHeight="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-2">
               <div class="units">mm</div>
             </div>
           </div>
@@ -283,16 +283,16 @@
         <div>
           <label for="movementAdditionalFeatures">Movement Additional Features</label>
           <div class="row">
-            <div class="col-10" *ngFor="let movementAdditionalFeature of watch.movementAdditionalFeatures; let in = index">
+            <div class="col-sm-10 col-6" *ngFor="let movementAdditionalFeature of watch.movementAdditionalFeatures; let in = index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.movementAdditionalFeatures[in].value"
                   name="movementAdditionalFeatures{{in}}" #movementAdditionalFeatures="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg primary-btn" (click)="addMovementAdditionalFeatures()">+</button>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg secondry-btn" (click)="removeMovementAdditionalFeatures()">-</button>
             </div>
           </div>
@@ -311,16 +311,16 @@
         <div>
           <label for="complications">Complications</label>
           <div class="row">
-            <div class="col-10" *ngFor="let complication of watch?.complications; let in=index">
+            <div class="col-sm-10 col-6" *ngFor="let complication of watch?.complications; let in=index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.complications[in].value"
                   name="complications{{in}}" #complications="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg primary-btn" (click)="addComplication()">+</button>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg secondry-btn" (click)="removeComplication()">-</button>
             </div>
           </div>
@@ -333,16 +333,16 @@
         <div>
           <label for="functions">Functions</label>
           <div class="row">
-            <div class="col-10 float-left" *ngFor="let function of watch?.functions; let in=index">
+            <div class="col-sm-10 col-6 float-left" *ngFor="let function of watch?.functions; let in=index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.functions[in].value"
                   name="functions{{in}}" #functions="ngModel">
               </div>
             </div>
-            <div class="col-1 float-right">
+            <div class="col-sm-1 col-3 float-right">
               <button class="btn btn-lg primary-btn" (click)="addFunctions()">+</button>
             </div>
-            <div class="col-1 float-right">
+            <div class="col-sm-1 col-3 float-right">
               <button class="btn btn-lg secondry-btn" (click)="removeFunctions()">-</button>
             </div>
           </div>
@@ -368,7 +368,7 @@
                   name="caseDiameter" #caseDiameter="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-2">
               <div class="units">mm</div>
             </div>
           </div>
@@ -383,7 +383,7 @@
                   name="caseHeight" #caseHeight="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-2">
               <div class="units">mm</div>
             </div>
           </div>
@@ -413,7 +413,7 @@
         <div>
           <label for="waterResistance">Water Resistance</label>
           <div class="row">
-            <div class="col-12">
+            <div class="col-sm-1 col-32">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.waterResistance"
                   name="waterResistance" #waterResistance="ngModel">
@@ -425,7 +425,7 @@
         <div>
           <label for="waterProof">Water Proof</label>
           <div class="row">
-            <div class="col-12">
+            <div class="col-sm-1 col-32">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.waterProof"
                   name="waterProof" #waterProof="ngModel">
@@ -444,16 +444,16 @@
         <div>
           <label for="caseAdditionalFeatures">Case Additional Features</label>
           <div class="row">
-            <div class="col-10" *ngFor="let caseAdditionalFeature of watch.caseAdditionalFeatures; let in = index">
+            <div class="col-sm-10 col-6" *ngFor="let caseAdditionalFeature of watch.caseAdditionalFeatures; let in = index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.caseAdditionalFeatures[in].value"
                   name="caseAdditionalFeatures{{in}}" #caseAdditionalFeatures="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg primary-btn" (click)="addCaseAdditionalFeatures()">+</button>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg secondry-btn" (click)="removeCaseAdditionalFeatures()">-</button>
             </div>
           </div>
@@ -498,16 +498,16 @@
         <div>
           <label for="dialAdditionalFeatures">Dial Additional Features</label>
           <div class="row">
-            <div class="col-10" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in = index">
+            <div class="col-sm-10 col-6" *ngFor="let dialAdditionalFeature of watch.dialAdditionalFeatures; let in = index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.dialAdditionalFeatures[in].value"
                   name="dialAdditionalFeatures{{in}}" #dialAdditionalFeatures="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg primary-btn" (click)="addDialAdditionalFeatures()">+</button>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg secondry-btn" (click)="removeDialAdditionalFeatures()">-</button>
             </div>
           </div>
@@ -550,16 +550,16 @@
         <div>
           <label for="bandAdditionalFeatures">Band Additional Features</label>
           <div class="row">
-            <div class="col-10" *ngFor="let bandAdditionalFeature of watch.bandAdditionalFeatures; let in=index">
+            <div class="col-sm-10 col-6" *ngFor="let bandAdditionalFeature of watch.bandAdditionalFeatures; let in=index">
               <div class="form-group">
                 <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="watch.bandAdditionalFeatures[in].value"
                   name="bandAdditionalFeatures{{in}}" #bandAdditionalFeatures="ngModel">
               </div>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg primary-btn" (click)="addBandAdditionalFeatures()">+</button>
             </div>
-            <div class="col-1">
+            <div class="col-sm-1 col-3">
               <button class="btn btn-lg secondry-btn" (click)="removeBandAdditionalFeatures()">-</button>
             </div>
           </div>
@@ -600,14 +600,14 @@
             <img [src]="watch?.mainPhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.mainPhotoFile}" [disabled]="mode == 'delete' || loading" type="file"
                   class="form-control" (change)="onMainPhotoChanged($event)" #mainPhotoElementRef [(ngModel)]="watch.mainPhotoFile"
                   name="mainPhotoFile" #mainPhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearMainPhoto()">Clear</button>
             </div>
           </div>
@@ -621,14 +621,14 @@
             <img [src]="watch?.banner1PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.banner1PhotoFile}" [disabled]="mode == 'delete' || loading" type="file"
                   class="form-control" (change)="onBanner1PhotoChanged($event)" #banner1PhotoElementRef [(ngModel)]="watch.banner1PhotoFile"
                   name="banner1PhotoFile" #banner1PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner1Photo()">Clear</button>
             </div>
           </div>
@@ -642,14 +642,14 @@
             <img [src]="watch?.banner2PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.banner2PhotoFile}" [disabled]="mode == 'delete' || loading" type="file"
                   class="form-control" (change)="onBanner2PhotoChanged($event)" #banner2PhotoElementRef [(ngModel)]="watch.banner2PhotoFile"
                   name="banner2PhotoFile" #banner2PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearBanner2Photo()">Clear</button>
             </div>
           </div>
@@ -679,14 +679,14 @@
             <img [src]="watch?.section1PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section1PhotoFile}" [disabled]="mode == 'delete' || loading"
                   type="file" class="form-control" (change)="onSection1PhotoChanged($event)" #section1PhotoElementRef
                   [(ngModel)]="watch.section1PhotoFile" name="section1PhotoFile" #section1PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearSection1Photo()">Clear</button>
             </div>
           </div>
@@ -716,14 +716,14 @@
             <img [src]="watch?.section2PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section2PhotoFile}" [disabled]="mode == 'delete' || loading"
                   type="file" class="form-control" (change)="onSection2PhotoChanged($event)" #section2PhotoElementRef
                   [(ngModel)]="watch.section2PhotoFile" name="section2PhotoFile" #section2PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <button class="btn btn-lg secondry-btn" (click)="clearSection2Photo()">Clear</button>
             </div>
           </div>
@@ -753,14 +753,14 @@
             <img [src]="watch?.section3PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section3PhotoFile}" [disabled]="mode == 'delete' || loading"
                   type="file" class="form-control" (change)="onSection3PhotoChanged($event)" #section3PhotoElementRef
                   [(ngModel)]="watch.section3PhotoFile" name="section3PhotoFile" #section3PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <div class="form-group">
                 <button class="btn btn-lg secondry-btn" (click)="clearSection3Photo()">Clear</button>
               </div>
@@ -792,14 +792,14 @@
             <img [src]="watch?.section4PhotoUrl" class="img-responsive">
           </div>
           <div class="row">
-            <div class="col-10">
+            <div class="col-sm-10 col-6">
               <div class="form-group">
                 <input [ngClass]="{'valid-img': watch?.section4PhotoFile}" [disabled]="mode == 'delete' || loading"
                   type="file" class="form-control" (change)="onSection4PhotoChanged($event)" #section4PhotoElementRef
                   [(ngModel)]="watch.section4PhotoFile" name="section4PhotoFile" #section4PhotoFile="ngModel">
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-sm-2 col-6">
               <div class="form-group">
                 <button class="btn btn-lg secondry-btn" (click)="clearSection4Photo()">Clear</button>
               </div>

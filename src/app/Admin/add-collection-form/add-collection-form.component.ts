@@ -16,6 +16,9 @@ export class AddCollectionFormComponent implements OnInit {
 
   collection: Collection = new Collection();
 
+  selectionBrandId: string;
+  selectionCollectionId: string;
+
   // loading flag
   loading: Boolean = false;
 
