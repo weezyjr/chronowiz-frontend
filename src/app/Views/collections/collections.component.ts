@@ -102,7 +102,7 @@ export class CollectionsComponent implements OnInit {
       (this.filters.material === 'Any material') &&
       (this.filters.bezel === 'Any bezel') &&
       (this.filters.braclet === 'Any braclet') &&
-      (this.filters.marker === 'Any hour markers')) {
+      (this.filters.marker === 'Any hour markers') ){
       return watches;
     }
     else {
@@ -113,12 +113,21 @@ export class CollectionsComponent implements OnInit {
           bracletFilterMatch = true,
           markerFilterMatch = true;
 
-        const brandNameFilterMatch = true;
-
         if (this.filters.size !== 'Any size') {
           if (watch.caseDiameter) {
-            sizeFilterMatch = (watch.caseDiameter.toLowerCase().trim())
-              .localeCompare(this.filters.size.toLowerCase().trim()) === 0;
+            if (this.filters.size === 'Small size') {
+              sizeFilterMatch = Number(watch.caseDiameter) < 36;
+            }
+            else if (this.filters.size === 'Mid size') {
+              sizeFilterMatch = Number(watch.caseDiameter) >= 36 &&
+                Number(watch.caseDiameter) < 40;
+            }
+            else if (this.filters.size === 'Large size') {
+              sizeFilterMatch = Number(watch.caseDiameter) >= 40;
+            }
+            else {
+              sizeFilterMatch = false;
+            }
           } else {
             sizeFilterMatch = false;
           }
@@ -164,9 +173,9 @@ export class CollectionsComponent implements OnInit {
           materialFilterMatch &&
           bezelFilterMatch &&
           bracletFilterMatch &&
-          markerFilterMatch &&
-          brandNameFilterMatch;
+          markerFilterMatch;
       });
     }
   }
+
 }

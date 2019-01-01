@@ -45,12 +45,10 @@ export class CarouselComponent implements OnInit {
 
   get transitionStyle() { return { 'transform': 'translateX' + '(' + this.currentOffset + 'px' + ')' }; }
   get atEndOfList() {
-    // return this.currentOffset <= (this.paginationFactor * -1) * (this.len - this.carouselSize);
-    console.log('atEndOfList', this.currentPage === this.numberOfPages, this.numberOfPages, this.currentPage);
     return this.currentPage === this.numberOfPages;
   }
   get atHeadOfList() {
-    return this.currentOffset === 0;
+    return this.currentPage === 1;
   }
   moveCarousel(direction: number) {
     // Find a more elegant way to express the :style. consider using props to make it truly generic

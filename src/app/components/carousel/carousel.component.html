@@ -3,7 +3,7 @@
     <div class="card-carousel--nav__left" (click)="moveCarousel(-1)" *ngIf="!atHeadOfList"></div>
     <div class="card-carousel">
       <div class="card-carousel--overflow-container">
-        <div class="card-carousel-cards row flex-nowrap" id="content" [ngStyle]="transitionStyle">
+        <div class="card-carousel-cards" id="content" [ngStyle]="transitionStyle">
           <ng-content></ng-content>
         </div>
       </div>

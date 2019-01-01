@@ -38,7 +38,11 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit() {
     if (this.user.email) {
       console.log(this.user.email);
-      this.isPasswordReseted = true;
+      this.authenticationService.sendResetPasswordEmail(this.user.email)
+      .subscribe((data: ResponseData) => {
+        console.log(data);
+        this.isPasswordReseted = true;
+      });
     }
   }
 

@@ -7,8 +7,8 @@
 
     <form #searchForm="ngForm" class="search-bar mx-auto my-3">
       <div class="search text-center m-auto">
-        <input autocomplete="off" class="search-form-input search m-auto text-center" (input)="search()" name="searchQuery" [(ngModel)]="query"
-          type="text" placeholder="Search">
+        <input autocomplete="off" class="search-form-input search m-auto text-center" (input)="search()" name="searchQuery"
+          [(ngModel)]="query" type="text" placeholder="Search">
         <img class="icon" src="../../../assets/search.svg" alt="search-icon">
       </div>
     </form>
@@ -35,17 +35,21 @@
             </div>
           </div>
           <!-- Desktop filter carousel -->
-          <app-carousel class="filter-desktop-carousel">
-            <div class="col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
-              <h6>{{ filter.title }}</h6>
-              <label class="radio" *ngFor="let option of filter?.options; let i = index">
-                {{option}}
-                <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]"
-                  (change)="renderWatches()">
-                <span class="checkmark"></span>
-              </label>
+          <div class="filter-desktop-carousel">
+            <div class="row filter">
+                <div class="col-md-1 d-lg-block d-md-none"></div>
+              <div class="col-lg-2 col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
+                <h6>{{ filter.title }}</h6>
+                <label class="radio" *ngFor="let option of filter?.options; let i = index">
+                  {{option}}
+                  <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]"
+                    (change)="renderWatches()">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-1 d-lg-block d-md-none"></div>
             </div>
-          </app-carousel>
+          </div>
 
           <!-- mobile filter collapsible choose brand -->
           <app-collapsible class="filter-mobile-collapsible" [text]="filter?.title" *ngFor="let filter of filtersRows">

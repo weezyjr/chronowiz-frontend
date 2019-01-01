@@ -31,6 +31,7 @@ export class AuthenticationService {
   retailerLoginUrl = this.env.backendUrl + 'retailer/account/login';
   userLoginUrl = this.env.backendUrl + 'user/account/login';
   userRegisterUrl = this.env.backendUrl + 'user/account/signup';
+  sendUserResetPasswordEmailUrl = this.env.backendUrl + 'user/account/resetPasswordSendEmail';
 
   responseData: ResponseData;
   response: ResponseObject;
@@ -108,6 +109,13 @@ export class AuthenticationService {
         }
 
         return data;
+      }));
+  }
+
+  sendResetPasswordEmail(email: string): Observable<ResponseData> {
+    return this.http.post<ResponseData>(this.sendUserResetPasswordEmailUrl, { 'payload': { email } })
+      .pipe(map((responseData: ResponseData) => {
+          return responseData;
       }));
   }
 
