@@ -19,6 +19,17 @@ export class WatchTrayComponent implements OnInit {
   public showAll = false;
   public watches: Watch[] = [];
 
+  get currentWindowsWidth() { return document.documentElement.clientWidth; }
+
+  get watchesLength() {
+    if (this.currentWindowsWidth >= 768) {
+      // 1 for the attributes titles
+      return this.watches.length + 1;
+    } else {
+      return this.watches.length;
+    }
+  }
+
   constructor(
     private watchTrayService: WatchTrayService,
     private checkoutServive: CheckoutService,

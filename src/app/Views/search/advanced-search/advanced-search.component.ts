@@ -92,7 +92,7 @@ export class AdvancedSearchComponent implements OnInit {
               this.brands.push({ _id: brand._id, name: brand.name, checked: false });
             }
           }
-          this.brands.unshift({ _id: 'Any brand', name: 'Any brand', checked: false });
+          this.brands.unshift({ _id: 'Any brand', name: 'Any brand', checked: true });
           this.brandsListRows = this.chunk(this.brands, 8);
         }
       });
