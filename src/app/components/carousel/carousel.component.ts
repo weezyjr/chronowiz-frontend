@@ -8,15 +8,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CarouselComponent implements OnInit {
 
   public currentOffset = 0;
+  public currentPage = 1;
 
-  @Input()
-  len = 5;
+  @Input() len = 5;
+  @Input() elementsPerSm = 2;
+  @Input() elementsPerMd = 3;
+  @Input() elementsPerLg = 4;
+
 
   // TODO: Smart pagination factor
   get paginationFactor() {
     const _content = document.getElementById('content');
     if (_content) {
-      console.log(_content.clientWidth);
       return _content.clientWidth - 30;
     } else {
       return 300;
@@ -28,18 +31,23 @@ export class CarouselComponent implements OnInit {
 
   get carouselSize() {
     if (this.currentWindowsWidth < 576) {
-      return 2;
+      return this.elementsPerSm;
     } else if (this.currentWindowsWidth >= 576 && this.currentWindowsWidth <= 768) {
-      return 3;
+      return this.elementsPerMd;
     } else {
-      return 4;
+      return this.elementsPerLg;
     }
+  }
+
+  get numberOfPages() {
+    return Math.ceil(this.len / this.carouselSize);
   }
 
   get transitionStyle() { return { 'transform': 'translateX' + '(' + this.currentOffset + 'px' + ')' }; }
   get atEndOfList() {
-    /** removed watchList.length */
-    return this.currentOffset <= (this.paginationFactor * -1) * (this.len - this.carouselSize);
+    // return this.currentOffset <= (this.paginationFactor * -1) * (this.len - this.carouselSize);
+    console.log('atEndOfList', this.currentPage === this.numberOfPages, this.numberOfPages, this.currentPage);
+    return this.currentPage === this.numberOfPages;
   }
   get atHeadOfList() {
     return this.currentOffset === 0;
@@ -48,8 +56,12 @@ export class CarouselComponent implements OnInit {
     // Find a more elegant way to express the :style. consider using props to make it truly generic
     if (direction === 1 && !this.atEndOfList) {
       this.currentOffset -= this.paginationFactor;
+      this.currentPage++;
+      console.log(this.currentPage);
     } else if (direction === -1 && !this.atHeadOfList) {
       this.currentOffset += this.paginationFactor;
+      this.currentPage--;
+      console.log(this.currentPage);
     }
   }
   constructor() { }

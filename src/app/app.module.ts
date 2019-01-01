@@ -64,6 +64,7 @@ import { CheckoutComponent } from './Views/checkout/checkout.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSiemaModule } from './components/ngx-siema/';
 import { AdminSelectionComponent } from './components/admin-selection/admin-selection.component';
+import { SafeUrlPipe } from './Filters/safeUrl.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { AdminSelectionComponent } from './components/admin-selection/admin-sele
     FooterHeroComponent,
     HeroComponent,
     CollectionsComponent,
+    SafeUrlPipe,
     GenderPipe,
     WatchesPipe,
     WatchesRetailerPipe,
