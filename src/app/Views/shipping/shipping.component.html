@@ -1,0 +1,157 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="container">
+  <div class="row mb-5 mt-3 mx-auto">
+    <div class="col-12">
+      <div class="page-breads">
+        <ul class="list-inline w-100 px-2 text-center">
+          <li class="list-inline-item"><a (click)="goToCheckout()"> Checkout </a></li>
+          <li class="list-inline-item"><a (click)="goToShipping()" class="checked"> Shipping </a></li>
+          <li class="list-inline-item"><a> Payment </a></li>
+          <li class="list-inline-item"><a> Confirmation </a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-12 mt-4">
+      <form class="form" #shippingForm="ngForm" (ngSubmit)="shippingForm.form.valid? onSubmit() : null">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <p class="sassy-text">Select a Shipping Method:</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 text-center form-group">
+            <select class="form-input shipping-type" required [(ngModel)]="shippingData.shippingType"  name="shippingType">
+              <option value="Free Shipping (3-5 business days)" checked> Free Shipping (3-5 business days) </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="firstName">*First name</label>
+            <input type="text" required [(ngModel)]="shippingData.firstName" class="form-input" #firstName="ngModel" name="firstName" placeholder="John">
+            <div [hidden]="firstName.valid || firstName.pristine" class="invalid">First name is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="lastName">*Last name</label>
+            <input type="text" required [(ngModel)]="shippingData.lastName" #lastName="ngModel" class="form-input" name="lastName" placeholder="Smith">
+            <div [hidden]="lastName.valid || lastName.pristine" class="invalid">Last name is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="email">*Email</label>
+            <input type="email" required [(ngModel)]="shippingData.email"
+             pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"
+             class="form-input" name="email" placeholder="johnsmith@gmail.com">
+             <div [hidden]="email.valid || email.pristine" class="invalid">Email is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="phone">*Phone</label>
+            <input type="text" required #phone="ngModel"
+            pattern="^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$"
+            [(ngModel)]="shippingData.phone" class="form-input" name="phone" placeholder="3978787988">
+            <div [hidden]="phone.valid || phone.pristine" class="invalid">Phone is not valid</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="title-label"> *Billing Adress </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="billingCountry">*Country</label>
+            <input type="text" class="form-input" #billingCountry="ngModel" required [(ngModel)]="shippingData.billingCountry" name="billingCountry" placeholder="USA">
+            <div [hidden]="billingCountry.valid || billingCountry.pristine" class="invalid">Country is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="billingCityTown">*City/Town</label>
+            <input type="text" class="form-input" #billingCity="ngModel" required [(ngModel)]="shippingData.billingCity" name="billingCityTown" placeholder="New York">
+            <div [hidden]="billingCity.valid || billingCity.pristine" class="invalid">City is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="billingState">*State</label>
+            <input type="text" class="form-input" #billingState="ngModel" required [(ngModel)]="shippingData.billingState" name="billingState" placeholder="New York">
+            <div [hidden]="billingState.valid || billingState.pristine" class="invalid">State is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="billingZip">*Postcode/zip</label>
+            <input type="number" class="form-input" #billingZip="ngModel" pattern="^\d{5}$" required [(ngModel)]="shippingData.billingZip" name="billingZip" placeholder="3978">
+            <div [hidden]="billingZip.valid || billingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="address">*Address</label>
+            <input type="text" class="form-input" #billingAddress="ngModel" required [(ngModel)]="shippingData.billingAddress" name="billingAddress" placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="billingAddress.valid || billingAddress.pristine" class="invalid">Address is required</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="title-label d-inline"> *Shipping Adress </label>
+              <label class="checkbox-container d-inline">
+                Same as billing
+                <input type="checkbox" name="shippingSameAsBilling" (change)="clearShippingInputs()" [(ngModel)]="shippingData.shippingSameAsBilling">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!shippingData?.shippingSameAsBilling">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="shippingCountry">*Country</label>
+            <input type="text" #shippingCountry="ngModel" required class="form-input" [(ngModel)]="shippingData.shippingCountry" name="shippingCountry" placeholder="USA">
+            <div [hidden]="shippingCountry.valid || shippingCountry.pristine" class="invalid">Country is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="shippingCityTown">*City/Town</label>
+            <input type="text"  #shippingCity="ngModel" required class="form-input" [(ngModel)]="shippingData.shippingCity"  name="shippingCityTown" placeholder="New York">
+            <div [hidden]="shippingCity.valid || shippingCity.pristine" class="invalid">City is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="shippingState">*State</label>
+            <input type="text" #shippingState="ngModel" required class="form-input" [(ngModel)]="shippingData.shippingState"  name="shippingState" placeholder="New York">
+            <div [hidden]="shippingState.valid || shippingState.pristine" class="invalid">State is required</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="shippingZip">*Postcode/zip</label>
+            <input type="number" pattern="^\d{5}$" #shippingZip="ngModel" required class="form-input" [(ngModel)]="shippingData.shippingZip"  name="shippingZip" placeholder="3978">
+            <div [hidden]="shippingZip.valid || shippingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="shippingAddress">*Address</label>
+            <input type="text" #shippingAddress="ngModel" required class="form-input" name="shippingAddress" [(ngModel)]="shippingData.shippingAddress"  placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="shippingAddress.valid || shippingAddress.pristine" class="invalid">Address is required</div>
+          </div>
+        </div>
+
+        <div class="text-center mx-auto">
+          <button class="btn secondry-btn" type="submit" [disabled]="!shippingForm.form.valid"> {{'Next >'}} </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

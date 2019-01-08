@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Watch } from 'src/app/Types/watch';
 import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -16,7 +17,7 @@ export class CheckoutComponent implements OnInit {
     name: 'Checkout', url: '/checkout'
   }];
 
-  constructor(private checkoutService: CheckoutService) { }
+  constructor(private checkoutService: CheckoutService, private router: Router) { }
 
   ngOnInit() {
     if (this.checkoutService.currentCheckoutWatchesValue) {
@@ -30,6 +31,14 @@ export class CheckoutComponent implements OnInit {
       _total += watch.price * watch.qty;
     }
     return _total;
+  }
+
+  goToShipping() {
+    this.router.navigateByUrl('/shipping');
+  }
+
+  goToCheckout() {
+    this.router.navigateByUrl('/checkout');
   }
 
   removeFromCheckout(ref: string) {

@@ -60,6 +60,14 @@ import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/ad
 import { HttpErrorHandlerService } from './API/http-error-handler.service';
 import { WatchesService } from './User/Watch/watches.service';
 import { SearchService } from './User/Search/search.service';
+import { ShippingComponent } from './Views/shipping/shipping.component';
+import { BrandsService } from './User/Brand/brands.service';
+import { AuthenticationService } from './Auth/authentication.service';
+import { WatchTrayService } from './User/WatchTray/watch-tray.service';
+import { CheckoutService } from './User/WatchTray/checkout.service';
+import { CollectionsService } from './User/Collection/collections.service';
+import { RetailerService } from './Retailer/retailer.service';
+import { AdminService } from './Admin/admin.service';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -106,6 +114,7 @@ import { SearchService } from './User/Search/search.service';
     WatchTrayComponent,
     CheckoutComponent,
     AdminSelectionComponent,
+    ShippingComponent,
   ],
   imports: [
     NgSelectModule,
@@ -133,6 +142,13 @@ import { SearchService } from './User/Search/search.service';
     HttpErrorHandlerService,
     WatchesService,
     SearchService,
+    AuthenticationService,
+    WatchTrayService,
+    CheckoutService,
+    BrandsService,
+    CollectionsService,
+    RetailerService,
+    AdminService,
     /* {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

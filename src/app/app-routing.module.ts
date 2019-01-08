@@ -24,12 +24,17 @@ import { ResetPasswordComponent } from './Views/reset-password/reset-password.co
 import { SetNewPasswordComponent } from './User/Views/set-new-password/set-new-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
+import { ShippingComponent } from './Views/shipping/shipping.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'shipping',
+    component: ShippingComponent
   },
   {
     path: 'home',

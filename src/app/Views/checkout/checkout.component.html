@@ -6,8 +6,8 @@
     <div class="col-12">
       <div class="page-breads">
         <ul class="list-inline w-100 px-2 text-center">
-          <li class="list-inline-item"><a class="checked"> Checkout </a></li>
-          <li class="list-inline-item"><a> Shipping </a></li>
+          <li class="list-inline-item"><a (click)="goToCheckout()"  class="checked"> Checkout </a></li>
+          <li class="list-inline-item"><a (click)="goToShipping()"> Shipping </a></li>
           <li class="list-inline-item"><a> Payment </a></li>
           <li class="list-inline-item"><a> Confirmation </a></li>
         </ul>
@@ -67,7 +67,7 @@
         <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
       </p>
       <div class="text-center mx-auto">
-        <button class="btn secondry-btn"> {{'Next >'}} </button>
+        <button class="btn secondry-btn" (click)="goToShipping()" [disabled]="watches?.length === 0"> {{'Next >'}} </button>
       </div>
     </div>
   </div>
