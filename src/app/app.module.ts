@@ -68,6 +68,8 @@ import { CheckoutService } from './User/WatchTray/checkout.service';
 import { CollectionsService } from './User/Collection/collections.service';
 import { RetailerService } from './Retailer/retailer.service';
 import { AdminService } from './Admin/admin.service';
+import { AccordionComponent } from './Components/accordion/accordion.component';
+import { PaymentComponent } from './Views/payment/payment.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -115,6 +117,8 @@ import { AdminService } from './Admin/admin.service';
     CheckoutComponent,
     AdminSelectionComponent,
     ShippingComponent,
+    AccordionComponent,
+    PaymentComponent,
   ],
   imports: [
     NgSelectModule,

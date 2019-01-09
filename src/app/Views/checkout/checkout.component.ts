@@ -33,15 +33,15 @@ export class CheckoutComponent implements OnInit {
     return _total;
   }
 
-  goToShipping() {
-    this.router.navigateByUrl('/shipping');
-  }
-
-  goToCheckout() {
-    this.router.navigateByUrl('/checkout');
+  goToPage(str: String) {
+    this.router.navigateByUrl('/' + str);
   }
 
   removeFromCheckout(ref: string) {
     this.checkoutService.removeFromCheckout(ref);
+  }
+
+  onSubmit(){
+    this.goToPage('shipping');
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 class ShippingData {
   shippingType: String;
@@ -61,14 +62,19 @@ export class ShippingComponent implements OnInit {
 
   public shippingData: ShippingData = new ShippingData();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   onSubmit() {
     console.log(this.shippingData);
+    this.goToPage('payment');
   }
 
   clearShippingInputs() {
     this.shippingData.clearShipping();
+  }
+
+  goToPage(str: String) {
+    this.router.navigateByUrl('/' + str);
   }
 
   ngOnInit() {

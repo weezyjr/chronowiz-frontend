@@ -1,0 +1,126 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="row">
+  <div class="col-12">
+    <div class="page-breads">
+      <ul class="list-inline w-100 px-2 text-center">
+        <li class="list-inline-item"><a (click)="goToPage('checkout')"> Checkout </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('shipping')"> Shipping </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('payment')" class="checked"> Payment </a></li>
+        <li class="list-inline-item"><a> Confirmation </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row mb-5 mt-3 mx-auto">
+    <div class="col-12 mt-3">
+      <form class="form" #shippingForm="ngForm" (ngSubmit)="validForm()? onSubmit() : null">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <p class="sassy-text">Select a Payment Method:</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="accordion" (click)="toggleCreditCardAccordion()" [ngClass]="{'active': paymentData?.creditCard}">
+              Credit Card</div>
+            <div *ngIf="paymentData?.creditCard" class="content">
+              <label for="creditCardNumber">Credit card number</label>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-8 col-7">
+                    <input type="text" pattern="^(\d{4}[- ]){3}\d{4}|\d{16}$" required [(ngModel)]="paymentData.creditCardNumber"
+                      class="form-input" #creditCardNumber="ngModel" name="creditCardNumber">
+                    <div [hidden]="creditCardNumber.valid || creditCardNumber.pristine" class="invalid">
+                      Cerdit Card number is required
+                    </div>
+                  </div>
+                  <div class="col-sm-4 col-5">
+                    <span class="text-left">
+                      <img src="../../../assets/visa.svg" alt="Visa">
+                    </span>
+                    <span class="text-right">
+                      <img src="../../../assets/МС.svg" alt="Master Card">
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-12">
+                  <label for="">Expiration date</label>
+
+                  <input type="number" pattern="^((0[1-9])|([1-9])|(1[0-2]))$" name="expirationDateMonth" required [(ngModel)]="paymentData.expirationDateMonth"
+                    #expirationDateMonth="ngModel" class=" form-input number-form-input">
+
+                  <input type="number" pattern="^(\d{2})$" name="expirationDateYear" required [(ngModel)]="paymentData.expirationDateYear"
+                    #expirationDateYear="ngModel" class=" form-input number-form-input">
+
+                  <div [hidden]="expirationDateMonth.valid || expirationDateMonth.pristine" class="invalid">
+                    Expiration Month is required
+                  </div>
+
+                  <div [hidden]="expirationDateYear.valid || expirationDateYear.pristine" class="invalid">
+                    Expiration Year is required
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-12">
+                  <label for="">Secret code</label>
+                  <input type="password" name="secretCode" required [(ngModel)]="paymentData.secretCode" #secretCode="ngModel"
+                    class=" form-input secret-code-form-input">
+                  <div [hidden]="secretCode.valid || secretCode.pristine" class="invalid">
+                    Expiration Year is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="accordion" (click)="toggleEscrowAccordion()" [ngClass]="{'active': paymentData?.escrow}">
+              Escrow </div>
+            <div *ngIf="paymentData?.escrow" class="content">
+              <div class="p-5"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="accordion" (click)="toggleWireTransferAccordion()" [ngClass]="{'active': paymentData?.wireTransfer}">
+              Wire Transfer +50$ </div>
+            <div *ngIf="paymentData.wireTransfer" class="content">
+              <p class="wire-transfer">
+                Lorem ipsum dolor sit amet, eu mei postea numquam accusam. Nec nibh mundi euismod no, sea dicit docendi
+                senserit ad, ad nam odio iudico.
+              </p>
+              <div class="download text-center mb-5">
+                <a href="#" class="text-center">
+                  <img src="../../../assets/pdf.svg" alt="pdf">
+                  <div class="pt-1">download</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-center mx-auto">
+          <button class="btn secondry-btn" type="submit" [disabled]="!validForm()"> {{'Next >'}} </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

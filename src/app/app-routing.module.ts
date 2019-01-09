@@ -25,6 +25,7 @@ import { SetNewPasswordComponent } from './User/Views/set-new-password/set-new-p
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
 import { ShippingComponent } from './Views/shipping/shipping.component';
+import { PaymentComponent } from './Views/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'shipping',
     component: ShippingComponent
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent
   },
   {
     path: 'home',

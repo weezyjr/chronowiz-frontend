@@ -1,0 +1,75 @@
+form
+  max-width: 348px
+  label
+    font-size: 11px
+    letter-spacing: 0.1px
+    color: #212121
+    display: block
+    margin: 0
+  input
+    margin: 0
+  .number-form-input
+    width: 58px
+    margin-right: 15px
+  .secret-code-form-input
+    width: 70px
+  .wire-transfer
+    font-weight: 300
+    line-height: normal
+    font-size: 12px
+    text-align: center
+    letter-spacing: 0.1px
+    color: #212121
+    margin-top: 33px
+
+.accordion
+  width: 100%
+  background: white
+  color: #212121
+  font-size: 12px
+  text-align: center
+  letter-spacing: 0.1px
+  border: 0.5px solid #909090
+  box-sizing: border-box
+  border-radius: 2px
+  padding: 5px 10px
+  height: 32px
+  cursor: pointer
+  outline: none
+  margin: 8px auto 8px
+
+.active
+  background: #7A1C1C
+  color: #fff
+
+.content
+  margin-bottom: 12px
+
+.show-content
+  max-height: initial !important
+
+.accordion:not(.active):after
+  content: ''
+  color: #909090
+  float: right
+  width: 0
+  height: 0
+  border-left: 4px solid transparent
+  border-right: 4px solid transparent
+  border-top: 7px solid #909090
+  margin: 5px
+
+.active:after
+  content: ''
+  color: white
+  float: right
+  width: 0
+  height: 0
+  border-left: 4px solid transparent
+  border-right: 4px solid transparent
+  border-bottom: 7px solid white
+  margin: 5px
+
+
+.invalid
+  margin: 0

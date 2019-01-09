@@ -11,15 +11,20 @@
       <div class="row">
 
         <div class="col-12">
-          <input class="form-input" placeholder="Email" [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" type="email" name="email" [ngModel]="user.email" required  #email="ngModel">
-          <div [hidden]="email.valid || email.pristine" class="invalid">
-            Invalid Email
+          <div class="form-group">
+            <input class="form-input" placeholder="Email" [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              type="email" name="email" [ngModel]="user.email" required #email="ngModel">
+            <div [hidden]="email.valid || email.pristine" class="invalid">
+              Invalid Email
+            </div>
           </div>
         </div>
 
         <div class="col-12">
-          <input required class="form-input" #password="ngModel" placeholder="Password" type="password" name="password"
-            [(ngModel)]="user.password">
+          <div class="form-group">
+            <input required class="form-input" #password="ngModel" placeholder="Password" type="password" name="password"
+              [(ngModel)]="user.password">
+          </div>
         </div>
 
         <div class="col-12 text-center p-3">

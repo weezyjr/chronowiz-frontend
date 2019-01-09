@@ -11,31 +11,38 @@
       <div class="row">
 
         <div class="col-12">
-          <input class="form-input" placeholder="Email" [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" type="email" name="email" required  #email="ngModel">
-          <div [hidden]="email.valid || email.pristine" class="invalid">
-            Invalid Email
+          <div class="form-group">
+            <input class="form-input" placeholder="Email" [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+              type="email" name="email" required #email="ngModel">
+            <div [hidden]="email.valid || email.pristine" class="invalid">
+              Invalid Email
+            </div>
           </div>
         </div>
 
         <div class="col-12">
-          <input required class="form-input" #password="ngModel" placeholder="Password" type="password" name="password"
-            [(ngModel)]="user.password" appConfirmPassword="confirmPassword" minlength="8" pattern="^.*(?=.{8,})((?=.*[!@#$%^&\\*()\-_=\\+{};:,\\<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
-          <div [hidden]="password.valid || password.pristine" class="invalid">
-            The password must be at least 8 charachters containg
-            <ul>
-              <li>1 or more Uppercase Alphabet</li>
-              <li>1 or more Lowercase Alphabet</li>
-              <li>1 or more Digit Charachter</li>
-              <li>1 or more Special Charachter</li>
-            </ul>
+          <div class="form-group">
+            <input required class="form-input" #password="ngModel" placeholder="Password" type="password" name="password"
+              [(ngModel)]="user.password" appConfirmPassword="confirmPassword" minlength="8" pattern="^.*(?=.{8,})((?=.*[!@#$%^&\\*()\-_=\\+{};:,\\<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
+            <div [hidden]="password.valid || password.pristine" class="invalid">
+              The password must be at least 8 charachters containg
+              <ul>
+                <li>1 or more Uppercase Alphabet</li>
+                <li>1 or more Lowercase Alphabet</li>
+                <li>1 or more Digit Charachter</li>
+                <li>1 or more Special Charachter</li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div class="col-12">
-          <input required class="form-input" #confirmPasswordFeild="ngModel" placeholder="Confirm Password" type="password"
-          appConfirmPassword="password" name="confirmPassword" [(ngModel)]="confirmPassword">
-          <div [hidden]="confirmPasswordFeild.valid || confirmPasswordFeild.pristine" class="invalid">
-            The passwrods doesn't match
+          <div class="form-group">
+            <input required class="form-input" #confirmPasswordFeild="ngModel" placeholder="Confirm Password" type="password"
+              appConfirmPassword="password" name="confirmPassword" [(ngModel)]="confirmPassword">
+            <div [hidden]="confirmPasswordFeild.valid || confirmPasswordFeild.pristine" class="invalid">
+              The passwrods doesn't match
+            </div>
           </div>
         </div>
 

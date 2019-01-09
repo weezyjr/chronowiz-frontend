@@ -1,0 +1,4 @@
+<button class="accordion" (click)="toggleAccordion()" [ngClass]="{'active': isOpen}"> {{text}} </button>
+<div *ngIf="isOpen" class="content">
+  <ng-content></ng-content>
+</div>

@@ -1,18 +1,20 @@
 <simple-notifications></simple-notifications>
 <app-header [bg_white]="true"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="row no-gutters">
+  <div class="col-12">
+    <div class="page-breads">
+      <ul class="list-inline w-100 px-2 text-center">
+        <li class="list-inline-item"><a (click)="goToPage('checkout')" class="checked"> Checkout </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('shipping')"> Shipping </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('payment')" > Payment </a></li>
+        <li class="list-inline-item"><a> Confirmation </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row mb-5 mt-3 mx-auto">
-    <div class="col-12">
-      <div class="page-breads">
-        <ul class="list-inline w-100 px-2 text-center">
-          <li class="list-inline-item"><a (click)="goToCheckout()"  class="checked"> Checkout </a></li>
-          <li class="list-inline-item"><a (click)="goToShipping()"> Shipping </a></li>
-          <li class="list-inline-item"><a> Payment </a></li>
-          <li class="list-inline-item"><a> Confirmation </a></li>
-        </ul>
-      </div>
-    </div>
     <div class="col-12 mt-4">
       <table class="watch-table table-responsive-sm my-3">
         <thead>
@@ -67,7 +69,7 @@
         <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
       </p>
       <div class="text-center mx-auto">
-        <button class="btn secondry-btn" (click)="goToShipping()" [disabled]="watches?.length === 0"> {{'Next >'}} </button>
+        <button class="btn secondry-btn" (click)="onSubmit()" [disabled]="watches?.length === 0"> {{'Next >'}} </button>
       </div>
     </div>
   </div>
