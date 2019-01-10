@@ -36,6 +36,7 @@ export class PaymentComponent implements OnInit {
 
   onSubmit() {
     console.log(this.paymentData);
+    this.goToPage('confirmation');
   }
 
   goToPage(str: String) {
