@@ -1,7 +1,7 @@
 <div id="mySidenav" class="sidenav">
   <div class="container">
-    <a [ngClass]="{'black':black}" href="javascript:void(0)">About Us</a>
+    <a [ngClass]="{'black':black}" [routerLink]="['/about']">About Us</a>
     <a [ngClass]="{'black':black}" href="javascript:void(0)" (click)="showBrands()">Brands</a>
-    <a [ngClass]="{'black':black}" href="javascript:void(0)">Contact Us</a>
+    <a [ngClass]="{'black':black}" [routerLink]="['/contact']">Contact Us</a>
   </div>
 </div>

@@ -70,6 +70,7 @@ import { RetailerService } from './Retailer/retailer.service';
 import { AdminService } from './Admin/admin.service';
 import { AccordionComponent } from './Components/accordion/accordion.component';
 import { PaymentComponent } from './Views/payment/payment.component';
+import { AboutUsComponent } from './Views/about-us/about-us.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -119,6 +120,7 @@ import { PaymentComponent } from './Views/payment/payment.component';
     ShippingComponent,
     AccordionComponent,
     PaymentComponent,
+    AboutUsComponent,
   ],
   imports: [
     NgSelectModule,

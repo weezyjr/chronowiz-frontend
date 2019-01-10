@@ -26,6 +26,7 @@ import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
 import { ShippingComponent } from './Views/shipping/shipping.component';
 import { PaymentComponent } from './Views/payment/payment.component';
+import { AboutUsComponent } from './Views/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'shipping',
     component: ShippingComponent
+  },
+  {
+    path: 'about',
+    component: AboutUsComponent
   },
   {
     path: 'payment',
