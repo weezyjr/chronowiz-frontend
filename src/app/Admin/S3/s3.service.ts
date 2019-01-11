@@ -68,7 +68,7 @@ export class S3Service {
           throw new Error(err);
         }
         else {
-          resolve(encodeURI(this.env.cloadFlareUrl + fileUploadParams.Key));
+          resolve(encodeURI(this.env.cloudfrontUrl + fileUploadParams.Key));
         }
       });
     });

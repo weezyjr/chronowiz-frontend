@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   SEARCH_ICON_PATH = '../../../assets/search.svg';
   LOGO_PATH = '../../../assets/home/logos/';
-  mainVideoUrl = this.env.cloadFlareUrl + 'high30.mp4';
+  mainVideoUrl = this.env.cloudfrontUrl + 'high30.mp4';
 
   brands: Brand[];
 
