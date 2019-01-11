@@ -88,7 +88,7 @@
                   <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
                 </td>
                 <td>
-                  <input class="form-input" name="discount" placeholder="Discount %" [(ngModel)]="watchObject?.retailerWatchDiscount" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" type="number">
+                  <input class="form-input" [(ngModel)]="watchObject.retailerWatchDiscount" placeholder="Discount %" type="number">
                   <button class="btn primary-btn" (click)="updateDiscount(watchObject)">Save</button>
                 </td>
               </tr>

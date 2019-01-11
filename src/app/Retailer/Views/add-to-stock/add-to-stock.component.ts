@@ -127,17 +127,17 @@ export class AddToStockComponent implements OnInit {
             console.log(this.watch);
           }
         });
-
+/*
       if (this.authService.currentRetailerValue.watchObjects) {
         console.log(this.authService.currentRetailerValue.watchObjects);
         const watchExist = this.authService.currentRetailerValue.watchObjects
-          .find((_watch) => _watch.referenceNumber === this.watch.referenceNumber) !== undefined;
+          .find((_watchObjects) => _watchObjects.watch.referenceNumber === this.watch.referenceNumber) !== undefined;
 
         if (watchExist) {
           this.status = true;
         }
       }
-
+*/
     }
   }
 

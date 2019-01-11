@@ -28,6 +28,7 @@ import { ShippingComponent } from './Views/shipping/shipping.component';
 import { PaymentComponent } from './Views/payment/payment.component';
 import { AboutUsComponent } from './Views/about-us/about-us.component';
 import { ConfirmationComponent } from './Views/confirmation/confirmation.component';
+import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'confirmation',
     component: ConfirmationComponent
+  },
+  {
+    path: 'terms-conditions',
+    component: TermsConditionsComponent
   },
   {
     path: 'payment',
