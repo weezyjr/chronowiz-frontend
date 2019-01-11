@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
 import { Retailer } from 'src/app/Types/retailer';
 import { RetailerService } from '../../retailer.service';
 
+class WatchObjects {
+  watch: Watch = new Watch();
+  retailerWatchDiscount: Number = 0;
+}
+
 @Component({
   selector: 'app-in-stock',
   templateUrl: './in-stock.component.html',
@@ -28,7 +33,8 @@ export class InStockComponent implements OnInit {
   responseData: ResponseData;
   response: ResponseObject;
 
-  watchs: Watch[];
+  watchObjects: WatchObjects[];
+
   profile: Retailer = new Retailer();
 
 
@@ -61,7 +67,7 @@ export class InStockComponent implements OnInit {
         }
         else {
           this.profile = <Retailer>this.response.payload;
-          this.watchs = this.profile.watchObjects;
+          this.watchObjects = this.profile.watchObjects;
         }
       });
   }
@@ -182,6 +188,24 @@ export class InStockComponent implements OnInit {
         });
     } else {
       this.filters.watchRef = '';
+    }
+  }
+
+  async updateDiscount(watchObject: WatchObjects) {
+    if (watchObject && watchObject.watch && watchObject.watch._id && watchObject.retailerWatchDiscount) {
+      await this.retailerService.UpdateWatchDiscount(watchObject.watch._id, watchObject.retailerWatchDiscount)
+        .subscribe(data => {
+          console.log(data);
+          this.responseData = data;
+          this.response = this.responseData.response;
+
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          }
+          else {
+            this._notificationsService.success('Success', this.response.message.en);
+          }
+        });
     }
   }
 

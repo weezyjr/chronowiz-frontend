@@ -3,11 +3,17 @@ import { Watch } from './watch';
 class Discount {
   public _id: string;
   public value: number;
-  constructor(){
+  constructor() {
     this._id = '';
     this.value = 0;
   }
 }
+
+class WatchObjects {
+  watch: Watch = new Watch();
+  retailerWatchDiscount: Number = 0;
+}
+
 
 export class Retailer {
   _id?: number;
@@ -23,7 +29,7 @@ export class Retailer {
   phoneNumber?: string;
   fax?: string;
   mobileNumber?: string;
-  watchObjects?: Watch[];
+  watchObjects?: WatchObjects[];
   jwt?: string;
 
   brandsMaxDiscounts?: Discount[];

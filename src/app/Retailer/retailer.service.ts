@@ -14,10 +14,13 @@ import { AuthenticationService } from '../Auth/authentication.service';
 export class RetailerService {
   env = environment;
 
-  retailerWatchUrl = this.env.backendUrl + 'retailer/watches';
-  retailerCollectionUrl = this.env.backendUrl + 'retailer/collections';
-  retailerBrandUrl = this.env.backendUrl + 'retailer/brands';
-  retailerProfileUrl = this.env.backendUrl + 'retailer/account/profile';
+  private retailerWatchUrl = this.env.backendUrl + 'retailer/watches';
+  private retailerCollectionUrl = this.env.backendUrl + 'retailer/collections';
+  private retailerBrandUrl = this.env.backendUrl + 'retailer/brands';
+  private retailerProfileUrl = this.env.backendUrl + 'retailer/account/profile';
+  private addToStockbyId = this.env.backendUrl + 'retailer/watches/AddToStockById';
+  private removeFromStockbyId = this.env.backendUrl + 'retailer/watches/RemoveFromStockById';
+  private UpdateRetailerWatchDiscount = this.env.backendUrl + 'retailer/watches/UpdateRetailerWatchDiscount';
 
   private handleError: HandleError;
   private httpOptions = {
@@ -75,15 +78,21 @@ export class RetailerService {
   }
 
   addWatchToStock(_id: String): Observable<ResponseData> {
-    console.log(this.retailerWatchUrl + '/' + _id);
-    return this.http.put<ResponseData>(this.retailerWatchUrl + '/' + _id, {}, this.httpOptions)
+    return this.http.put<ResponseData>(this.addToStockbyId + '/' + _id, {}, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
+
+  UpdateWatchDiscount(_id: String, discount: Number): Observable<ResponseData> {
+    return this.http.put<ResponseData>(this.UpdateRetailerWatchDiscount + '/' + _id, { retailerWatchDiscount: discount }, this.httpOptions)
       .pipe(map(data => {
         return data;
       }));
   }
 
   removeWatchFromStock(_id: String): Observable<ResponseData> {
-    return this.http.delete<ResponseData>(this.retailerWatchUrl + '/' + _id, this.httpOptions)
+    return this.http.delete<ResponseData>(this.removeFromStockbyId + '/' + _id, this.httpOptions)
       .pipe(map(data => {
         return data;
       }));
