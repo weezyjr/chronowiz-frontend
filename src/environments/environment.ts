@@ -8,7 +8,7 @@ export const environment =
     backendUrl: 'http://localhost:3000/api/',
     s3MediaBucket: 'chronowiz-loc-media',
     S3MediaBucketUrl: 'https://s3-eu-west-1.amazonaws.com/chronowiz-loc-media/',
-    cloadFlareUrl: ' https://media.chronowiz.com/'
+    cloadFlareUrl: 'https://media.chronowiz.com/'
   };
 
 /*
