@@ -1,0 +1,70 @@
+<simple-notifications></simple-notifications>
+<app-header [bg_white]="true"></app-header>
+<div class="container contact-us mb-5">
+
+  <div class="row">
+    <div class="col-12">
+      <h1> CONTACT US </h1>
+    </div>
+  </div>
+
+  <div class="row py-4">
+    <div class="col-md-6 col-12 mb-5">
+      <div class="row">
+        <div class="phone-section pb-3 col-md-12 col-6">
+          <div class="title">Phone</div>
+          <div class="limited-width">
+            <div class="text">Call us: <span class="bold-text">1 888 482 7768</span></div>
+            <div class="text text-right"> 24 hours a day</div>
+          </div>
+          <br>
+          <div class="limited-width">
+            <div class="text">Call us: <span class="bold-text">1 888 676 2660 </span></div>
+            <div class="text text-right"> 6am - 8pm PST</div>
+          </div>
+          <br>
+          <div class="text">Email us: info@chronowiz.com</div>
+        </div>
+
+        <div class="address-section pb-3 col-md-12 col-6">
+          <div class="title">Address</div>
+          <div class="text">27 MERRY LN NP000131206</div>
+          <br>
+          <div class="text">EAST HANOVER, NJ 07936-3901</div>
+          <br>
+          <div class="text">United States</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-12">
+      <form #contactUsForm="ngForm" (ngSubmit)="contactUsForm.form.valid? onSubmit() : null">
+        <div class="row">
+          <div class="col-12 form-group">
+            <label for="contactName">Name*</label>
+            <input type="text" required [(ngModel)]="contactUs.name" class="form-input" #contactName="ngModel" name="contactName"
+              placeholder="John">
+            <div [hidden]="contactName.valid || contactName.pristine" class="invalid">name is required</div>
+          </div>
+
+          <div class="col-12 form-group">
+            <label for="email">*Email</label>
+            <input type="email" required [(ngModel)]="contactUs.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"
+              class="form-input" name="email" placeholder="johnsmith@gmail.com">
+            <div [hidden]="email.valid || email.pristine" class="invalid">Email is not valid</div>
+          </div>
+
+          <div class="col-12 form-group">
+            <label for="message">Message (optional)</label>
+            <textarea name="message" [(ngModel)]="contactUs.message" name="message" cols="30" rows="10"></textarea>
+          </div>
+
+          <div class="col-12 text-center mx-auto">
+            <button class="btn secondry-btn" type="submit" [disabled]="!contactUsForm.form.valid"> Submit </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
