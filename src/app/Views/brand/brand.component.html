@@ -8,7 +8,7 @@
   <source [src]="brandObject?.headerPhotoUrl" type="video/mp4">
   </video>
   <app-hero *ngIf="brandObject?.headerPhotoUrl && !isVideo(brandObject?.headerPhotoUrl)" [cover]="brandObject?.headerPhotoUrl"></app-hero>
-  <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1920x1080/FFFFFF/FFFFFF"></app-hero>
+  <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1600x400/FFFFFF/FFFFFF"></app-hero>
 
 </div>
 
