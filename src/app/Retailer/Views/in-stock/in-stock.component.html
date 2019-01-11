@@ -85,7 +85,7 @@
                   <p> {{watchObject?.watch?.price | currency: watchObject?.watch?.priceCurrency }} </p>
                 </td>
                 <td>
-                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watch?._id)"></app-toggle-btn>
+                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watchObject?.watch?._id)"></app-toggle-btn>
                 </td>
                 <td>
                   <input class="form-input" [(ngModel)]="watchObject.retailerWatchDiscount" placeholder="Discount %" type="number">

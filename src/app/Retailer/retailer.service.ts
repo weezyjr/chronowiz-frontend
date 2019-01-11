@@ -85,7 +85,7 @@ export class RetailerService {
   }
 
   UpdateWatchDiscount(_id: String, discount: Number): Observable<ResponseData> {
-    return this.http.put<ResponseData>(this.UpdateRetailerWatchDiscount + '/' + _id, { retailerWatchDiscount: discount }, this.httpOptions)
+    return this.http.put<ResponseData>(this.UpdateRetailerWatchDiscount + '/' + _id, { payload: { retailerWatchDiscount: discount } }, this.httpOptions)
       .pipe(map(data => {
         return data;
       }));
