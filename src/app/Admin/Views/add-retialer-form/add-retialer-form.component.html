@@ -240,7 +240,7 @@
               </div>
               <div class="form-group">
                 <label>Discount Value</label>
-                <input [disabled]="mode == 'delete' || loading || !retailer.watchesMaxDiscounts[in]._id" type="number" min="0" max="100" class="form-control"
+                <input [disabled]="mode == 'delete' || loading || !retailer.watchesMaxDiscounts[in]._id" type="number"  placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
                   [(ngModel)]="retailer.watchesMaxDiscounts[in].value" name="watchesMaxDiscountsValue{{in}}">
               </div>
               <hr>

@@ -92,7 +92,7 @@
 
         <div class="form-group">
           <label for="maximumDiscount">Maximum Discount</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" min="0" max="100"
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control"  placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$"
             [(ngModel)]="collection.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
         </div>
 

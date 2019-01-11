@@ -88,6 +88,7 @@
 
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Brand Logo</label>
+          <p class="muted text-left m-0 p-0"> Any size is ok, recommended:  Width: 100px x Height: 100px </p>
           <div *ngIf="brand?.logoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
             <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
@@ -190,7 +191,7 @@
 
         <div class="form-group">
           <label for="maximumDiscount">Maximum Discount</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" min="0" max="100"
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$"
             [(ngModel)]="brand.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
         </div>
 
