@@ -75,6 +75,8 @@ import { ConfirmationComponent } from './Views/confirmation/confirmation.compone
 import { ResetPasswordCodeComponent } from './User/Views/reset-password-code/reset-password-code.component';
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
+import { EducationComponent } from './Views/education/education.component';
+import { WaterResistanceComponent } from './Views/education/water-resistance/water-resistance.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -128,7 +130,9 @@ import { ContactUsComponent } from './Views/contact-us/contact-us.component';
     ConfirmationComponent,
     ResetPasswordCodeComponent,
     TermsConditionsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    EducationComponent,
+    WaterResistanceComponent
   ],
   imports: [
     NgSelectModule,

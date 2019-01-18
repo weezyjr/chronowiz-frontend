@@ -16,7 +16,7 @@ export class CollectionsComponent implements OnInit {
 
   responseData: ResponseData;
   response: ResponseObject;
-  collcetion: Collection;
+  collection: Collection;
   watchsLimit = 12;
   watches: Watch[];
 
@@ -77,13 +77,13 @@ export class CollectionsComponent implements OnInit {
           if (this.response.type.match('ERROR')) {
             this._notificationsService.error('Error', this.response.message.en);
           } else {
-            this.collcetion = <Collection>this.response.payload;
+            this.collection = <Collection>this.response.payload;
             this.renderWatches();
-            this.breads.push({ name: this.collcetion.brandObject.name, url: `/brand/${this.collcetion.brandObject._id}` });
+            this.breads.push({ name: this.collection.brandObject.name, url: `/brand/${this.collection.brandObject._id}` });
             this.breads.push({
               name:
-                (this.collcetion.name !== 'UNDEFINED') &&
-                  (this.collcetion.name) ? this.collcetion.name : 'Collection', url: ''
+                (this.collection.name !== 'UNDEFINED') &&
+                  (this.collection.name) ? this.collection.name : 'Collection', url: ''
             });
           }
         });
@@ -91,7 +91,7 @@ export class CollectionsComponent implements OnInit {
   }
 
   renderWatches() {
-    this.watches = this.filter(this.collcetion.watchObjects);
+    this.watches = this.filter(this.collection.watchObjects);
   }
 
   filter(watches: Watch[]): Watch[] {

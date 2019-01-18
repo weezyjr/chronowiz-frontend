@@ -1,14 +1,14 @@
-<app-header [bg_white]="true" [_brandName]="collcetion?.brandObject?.name" [_brandLogo]="collcetion?.brandObject?.logoPhotoUrl"></app-header>
+<app-header [bg_white]="true" [_brandName]="collection?.brandObject?.name" [_brandLogo]="collection?.brandObject?.logoPhotoUrl"></app-header>
 <app-breadcrumb [breads]="breads"></app-breadcrumb>
 <div class="container">
   <div class="collections-title text-center">
-    <h1 *ngIf="collcetion?.name === 'UNDEFINED'"> Collcetion </h1>
-    <h1 *ngIf="collcetion?.name !== 'UNDEFINED'"> {{collcetion?.name}} </h1>
-    <h2> {{collcetion?.brandObject?.name}} </h2>
+    <h1 *ngIf="collection?.name === 'UNDEFINED'"> collection </h1>
+    <h1 *ngIf="collection?.name !== 'UNDEFINED'"> {{collection?.name}} </h1>
+    <h2> {{collection?.brandObject?.name}} </h2>
   </div>
   <div class="collection-desc">
     <p class="muted">
-      {{collcetion?.description}}
+      {{collection?.description}}
     </p>
   </div>
 

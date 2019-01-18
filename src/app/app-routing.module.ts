@@ -30,6 +30,7 @@ import { AboutUsComponent } from './Views/about-us/about-us.component';
 import { ConfirmationComponent } from './Views/confirmation/confirmation.component';
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
+import { EducationComponent } from './Views/education/education.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path: 'terms-conditions',
     component: TermsConditionsComponent
+  },
+  {
+    path: 'education',
+    component: EducationComponent
   },
   {
     path: 'contact',
