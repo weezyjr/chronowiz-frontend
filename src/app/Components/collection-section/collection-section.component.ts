@@ -30,12 +30,10 @@ export class CollectionSectionComponent implements OnInit {
   get watches(): Watch[] {
     // default: in case of collection input
     if (!this._watches_ && this._collection_ && this._collection_.watchObjects) {
-      console.log(1, this._watches_);
       return this._collection_.watchObjects;
     }
     else {
       // if the watches explicitly was the input
-      console.log(2, this._watches_);
       return this._watches_;
     }
   }
