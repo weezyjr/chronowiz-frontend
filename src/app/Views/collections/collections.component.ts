@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CollectionsService } from 'src/app/User/Collection/collections.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -6,19 +6,21 @@ import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Collection } from 'src/app/Types/collection';
 import { Watch } from 'src/app/Types/watch';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-collections',
   templateUrl: './collections.component.html',
   styleUrls: ['./collections.component.sass']
 })
-export class CollectionsComponent implements OnInit {
+export class CollectionsComponent implements OnInit, OnDestroy {
 
-  responseData: ResponseData;
-  response: ResponseObject;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   collection: Collection;
-  watchsLimit = 12;
   watches: Watch[];
+  watchsLimit = 12;
 
   breads = [{
     name: 'Home', url: '/home',
@@ -68,17 +70,22 @@ export class CollectionsComponent implements OnInit {
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
       collectionID = params.get('id');
       this.collectionsService.readCollectionById(collectionID)
-        .subscribe(data => {
-          console.log(data);
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
+          console.log(responseData);
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+          const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
           } else {
-            this.collection = <Collection>this.response.payload;
+            this.collection = <Collection>response.payload;
+
+            // back up the watches
+            this.watches = this.collection.watchObjects;
+
             this.renderWatches();
+            // update bread crumbs
             this.breads.push({ name: this.collection.brandObject.name, url: `/brand/${this.collection.brandObject._id}` });
             this.breads.push({
               name:
@@ -176,6 +183,12 @@ export class CollectionsComponent implements OnInit {
           markerFilterMatch;
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

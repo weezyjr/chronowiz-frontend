@@ -1,10 +1,10 @@
-<div class="mt-5" *ngIf="(collection?.watchObjects | gender: gender).length > 0">
+<div class="mt-5" *ngIf="watches">
   <a [routerLink]="['./', collection?._id]">
     <h2 class="collection-title" *ngIf="collection?.name != 'UNDEFINED'"> {{collection?.name}}</h2>
     <h2 class="collection-title" *ngIf="collection?.name == 'UNDEFINED'"> Collection </h2>
   </a>
   <div class="row">
-    <div class="col-md-2 col-sm-3 col-6" *ngFor="let watch of collection?.watchObjects | gender: gender">
+    <div class="col-md-2 col-sm-3 col-6" *ngFor="let watch of watches | gender: gender">
       <div class="card">
         <a [routerLink]="[url,watch?.referenceNumber]">
           <div class="card-img">

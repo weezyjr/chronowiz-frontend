@@ -40,11 +40,14 @@
   </app-filter-collapsible>
 
   <div class="watches-section">
-    <div class="row">
+   <!---- <div class="row">
       <div class="col-md-3 my-4" *ngFor="let watch of watches | slice: 0:watchsLimit">
         <app-item-card [watch]="watch"></app-item-card>
       </div>
-    </div>
+    </div>-->
+
+    <app-collection-section [watches]="watches | slice: 0:watchsLimit"></app-collection-section>
+
     <div class="text-center mx-auto show-more my-5">
       <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
     </div>

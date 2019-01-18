@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
@@ -6,16 +6,18 @@ import { Collection } from 'src/app/Types/collection';
 import { BrandsService } from 'src/app/User/Brand/brands.service';
 import { Brand } from 'src/app/Types/brand';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
   styleUrls: ['./brand.component.sass']
 })
-export class BrandComponent implements OnInit {
+export class BrandComponent implements OnInit, OnDestroy {
 
-  responseData: ResponseData;
-  response: ResponseObject;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   collectionLimit = 4;
   currentGender = 'All';
   genders = ['All', 'Men', 'Women'];
@@ -69,29 +71,38 @@ export class BrandComponent implements OnInit {
 
   ngOnInit() {
     let brandName: string | String;
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      brandName = params.get('name');
-      this.brandsService.readBrandByName(brandName)
-        .subscribe(data => {
-          console.log(data);
+    this.activatedRoute.paramMap.pipe(takeUntil(this.destroy$))
+      .subscribe((params: ParamMap) => {
+        brandName = params.get('name');
+        this.brandsService.readBrandByName(brandName)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((responseData: ResponseData) => {
+            console.log(responseData);
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+            const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
-          } else {
-            this.brandObject = <Brand>this.response.payload;
-            this.collections = this.brandObject['collectionObjects'];
-            // filter out empty collections
-            this.collections = this.collections.filter((collection) => {
-              if (collection.watchObjects) {
-                return collection.watchObjects.length > 0;
-              }
-            });
-            this.breads.push({ name: this.brandObject.name, url: '#' });
-          }
-        });
-    });
+            if (response.type.match('ERROR')) {
+              this._notificationsService.error('Error', response.message.en);
+            } else {
+              this.brandObject = <Brand>response.payload;
+              this.collections = this.brandObject['collectionObjects'];
+              // filter out empty collections
+              this.collections = this.collections.filter((collection) => {
+                if (collection.watchObjects) {
+                  return collection.watchObjects.length > 0;
+                }
+              });
+              // update breadcrumps
+              this.breads.push({ name: this.brandObject.name, url: '#' });
+            }
+          });
+      });
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
 }
