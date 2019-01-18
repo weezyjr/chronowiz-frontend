@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Retailer } from 'src/app/Types/retailer';
+import { Retailer, BrandDiscount, CollectionDiscount, WatchDiscount } from 'src/app/Types/retailer';
 import { Link } from 'src/app/Types/Link';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
@@ -49,8 +49,8 @@ export class AddRetialerFormComponent implements OnInit {
 
   constructor(private adminService: AdminService, private _notificationsService: NotificationsService) {
     this.getBrands();
-    for (const discount of this.retailer.watchesMaxDiscounts) {
-      this.selectionWatchReferenceNumber.push(discount._id);
+    for (const watchDiscount of this.retailer.maximumWatchDiscounts) {
+      this.selectionWatchReferenceNumber.push(watchDiscount.watchObject);
     }
   }
 
@@ -58,58 +58,58 @@ export class AddRetialerFormComponent implements OnInit {
   }
 
   addBrandDiscount() {
-    if (this.retailer.brandsMaxDiscounts) {
-      this.retailer.brandsMaxDiscounts.push(new Discount());
+    if (this.retailer.maximumBrandDiscounts) {
+      this.retailer.maximumBrandDiscounts.push(new BrandDiscount());
     }
     else {
-      this.retailer.brandsMaxDiscounts = [new Discount()];
+      this.retailer.maximumBrandDiscounts = [new BrandDiscount()];
     }
-    console.log(this.retailer.brandsMaxDiscounts);
+    console.log(this.retailer.maximumBrandDiscounts);
   }
 
   removeBrandDiscount() {
-    if (this.retailer.brandsMaxDiscounts && this.retailer.brandsMaxDiscounts.length > 0) {
-      this.retailer.brandsMaxDiscounts.pop();
+    if (this.retailer.maximumBrandDiscounts && this.retailer.maximumBrandDiscounts.length > 0) {
+      this.retailer.maximumBrandDiscounts.pop();
     }
-    console.log(this.retailer.brandsMaxDiscounts);
+    console.log(this.retailer.maximumBrandDiscounts);
   }
 
 
   addCollectionDiscount() {
-    if (this.retailer.collectionsMaxDiscounts) {
-      this.retailer.collectionsMaxDiscounts.push(new Discount());
+    if (this.retailer.maximumCollectionDiscounts) {
+      this.retailer.maximumCollectionDiscounts.push(new CollectionDiscount());
     }
     else {
-      this.retailer.collectionsMaxDiscounts = [new Discount()];
+      this.retailer.maximumCollectionDiscounts = [new CollectionDiscount()];
     }
-    console.log(this.retailer.collectionsMaxDiscounts);
+    console.log(this.retailer.maximumCollectionDiscounts);
   }
 
   removeCollectionDiscount() {
-    if (this.retailer.collectionsMaxDiscounts && this.retailer.collectionsMaxDiscounts.length > 0) {
-      this.retailer.collectionsMaxDiscounts.pop();
+    if (this.retailer.maximumCollectionDiscounts && this.retailer.maximumCollectionDiscounts.length > 0) {
+      this.retailer.maximumCollectionDiscounts.pop();
     }
-    console.log(this.retailer.collectionsMaxDiscounts);
+    console.log(this.retailer.maximumCollectionDiscounts);
   }
 
   addWatchDiscount() {
-    if (this.retailer.watchesMaxDiscounts) {
-      this.retailer.watchesMaxDiscounts.push(new Discount());
+    if (this.retailer.maximumWatchDiscounts) {
+      this.retailer.maximumWatchDiscounts.push(new WatchDiscount());
       this.selectionWatchReferenceNumber.push('');
     }
     else {
-      this.retailer.watchesMaxDiscounts = [new Discount()];
+      this.retailer.maximumWatchDiscounts = [new WatchDiscount()];
       this.selectionWatchReferenceNumber = [''];
     }
-    console.log(this.retailer.watchesMaxDiscounts);
+    console.log(this.retailer.maximumWatchDiscounts);
   }
 
   removeWatchDiscount() {
-    if (this.retailer.watchesMaxDiscounts && this.retailer.watchesMaxDiscounts.length > 0) {
-      this.retailer.watchesMaxDiscounts.pop();
+    if (this.retailer.maximumWatchDiscounts && this.retailer.maximumWatchDiscounts.length > 0) {
+      this.retailer.maximumWatchDiscounts.pop();
       this.selectionWatchReferenceNumber.pop();
     }
-    console.log(this.retailer.watchesMaxDiscounts);
+    console.log(this.retailer.maximumWatchDiscounts);
   }
 
 
@@ -158,13 +158,14 @@ export class AddRetialerFormComponent implements OnInit {
 
   updateRetailer() {
     console.log(this.retailer);
-    this.adminService.updateRetailer(this.retailer, this.selectedEmail)
+    this.adminService.updateRetailer(this.retailer)
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
+          console.log(data);
         }
         else {
           this._notificationsService.success('Success', response.message.en);
@@ -173,8 +174,7 @@ export class AddRetialerFormComponent implements OnInit {
   }
 
   deleteRetailer() {
-    console.log(this.selectedEmail);
-    this.adminService.deleteRetailerByEmail(this.selectedEmail)
+    this.adminService.deleteRetailer(this.retailer)
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -264,12 +264,64 @@ export class AddRetialerFormComponent implements OnInit {
           else {
             const watch = <Watch>response.payload;
             // add the id to the last element in the array
-            this.retailer.watchesMaxDiscounts[this.retailer.watchesMaxDiscounts.length - 1]._id = watch._id;
+            this.retailer.maximumWatchDiscounts[this.retailer.maximumWatchDiscounts.length - 1].watchObject = watch._id;
           }
         });
     }
   }
 
+  async updateBrandMaxDiscount(brandMaxDiscount: BrandDiscount) {
+    console.log(brandMaxDiscount);
+    await this.adminService.updateRetailerBrandMaxDiscount(this.retailer._id, brandMaxDiscount)
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
+
+        const response: ResponseObject = responseData.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', 'Discount has been saved');
+        }
+      });
+  }
+
+
+  async updateCollectionMaxDiscount(collectionMaxDiscount: CollectionDiscount) {
+    console.log(collectionMaxDiscount);
+    await this.adminService.updateRetailerCollectionMaxDiscount(this.retailer._id, collectionMaxDiscount)
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
+
+        const response: ResponseObject = responseData.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', 'Discount has been saved');
+        }
+      });
+  }
+
+
+  async updateWatchMaxDiscount(watchMaxDiscount: WatchDiscount) {
+    console.log(watchMaxDiscount);
+    await this.adminService.updateRetailerWatchMaxDiscount(this.retailer._id, watchMaxDiscount)
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
+
+        const response: ResponseObject = responseData.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        }
+        else {
+          this._notificationsService.success('Success', 'Discount has been saved');
+        }
+      });
+  }
 
 
   async onSubmit() {

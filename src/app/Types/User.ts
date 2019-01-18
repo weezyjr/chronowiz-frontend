@@ -1,6 +1,6 @@
 export class User
 {
-  _id?: number;
+  _id?: string;
   email: string;
   password: string;
   jwt?: string;

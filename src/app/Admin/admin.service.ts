@@ -9,8 +9,7 @@ import { AuthenticationService } from '../Auth/authentication.service';
 import { Brand } from '../Types/brand';
 import { Collection } from '../Types/collection';
 import { Watch } from '../Types/watch';
-import { Retailer } from '../Types/retailer';
-
+import { Retailer, BrandDiscount, CollectionDiscount, WatchDiscount } from '../Types/retailer';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,10 @@ export class AdminService {
   collectionsUrl = this.env.backendUrl + 'admin/collections';
   watchesUrl = this.env.backendUrl + 'admin/watches';
   retailerAdminUrl = this.env.backendUrl + 'admin/retailers';
+  retailerBrandMaxDiscountUrl = this.retailerAdminUrl + '/brandMaxDiscount';
+  retailerCollectionMaxDiscountUrl = this.retailerAdminUrl + '/collectionMaxDiscount';
+  retailerWatchMaxDiscountUrl = this.retailerAdminUrl + '/watchMaxDiscount';
+
 
   private handleError: HandleError;
 
@@ -180,8 +183,8 @@ export class AdminService {
       }));
   }
 
-  updateRetailer(retailer: Retailer, email: String): Observable<ResponseData> {
-    return this.http.put<ResponseData>(this.retailerAdminUrl + '/' + email, { 'payload': retailer }, this.httpOptions)
+  updateRetailer(retailer: Retailer): Observable<ResponseData> {
+    return this.http.put<ResponseData>(this.retailerAdminUrl + '/' + retailer._id, { 'payload': retailer }, this.httpOptions)
       .pipe(map(data => {
         return data;
       }));
@@ -194,11 +197,41 @@ export class AdminService {
       }));
   }
 
-  deleteRetailerByEmail(email: String): Observable<ResponseData> {
-    return this.http.delete<ResponseData>(this.retailerAdminUrl + '/' + email, this.httpOptions)
+  deleteRetailer(retailer: Retailer): Observable<ResponseData> {
+    return this.http.delete<ResponseData>(this.retailerAdminUrl + '/' + retailer._id, this.httpOptions)
       .pipe(map(data => {
         return data;
       }));
   }
+
+  updateRetailerBrandMaxDiscount(retailerId: string, discount: BrandDiscount) {
+    return this.http.put<ResponseData>(this.retailerBrandMaxDiscountUrl + '/' + retailerId,
+    { 'payload': discount }, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+
+  updateRetailerCollectionMaxDiscount(retailerId: string, discount: CollectionDiscount) {
+    return this.http.put<ResponseData>(this.retailerCollectionMaxDiscountUrl + '/' + retailerId,
+    { 'payload': discount }, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+
+
+  updateRetailerWatchMaxDiscount(retailerId: string, discount: WatchDiscount) {
+    return this.http.put<ResponseData>(this.retailerWatchMaxDiscountUrl + '/' + retailerId,
+    { 'payload': discount }, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+
+
 
 }

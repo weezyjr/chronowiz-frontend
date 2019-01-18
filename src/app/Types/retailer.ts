@@ -1,22 +1,40 @@
 import { Watch } from './watch';
 
-class Discount {
-  public _id: string;
-  public value: number;
-  constructor() {
-    this._id = '';
-    this.value = 0;
+export class BrandDiscount {
+  public brandObject: string;
+  public maximumBrandDiscount: number;
+  constructor(){
+    this.brandObject = '';
+    this.maximumBrandDiscount = 0;
   }
 }
 
-class WatchObjects {
+export class CollectionDiscount {
+  public collectionObject: string;
+  public maximumCollectionDiscount: number;
+  constructor(){
+    this.collectionObject = '';
+    this.maximumCollectionDiscount = 0;
+  }
+}
+
+export class WatchDiscount {
+  public watchObject: string;
+  public maximumWatchDiscount: number;
+  constructor(){
+    this.watchObject = '';
+    this.maximumWatchDiscount = 0;
+  }
+}
+
+export class WatchObjects {
   watch: Watch = new Watch();
   retailerWatchDiscount: Number = 0;
 }
 
 
 export class Retailer {
-  _id?: number;
+  _id?: string;
   email: string;
   password: string;
   companyName?: string;
@@ -32,16 +50,16 @@ export class Retailer {
   watchObjects?: WatchObjects[];
   jwt?: string;
 
-  brandsMaxDiscounts?: Discount[];
-  collectionsMaxDiscounts?: Discount[];
-  watchesMaxDiscounts?: Discount[];
+  maximumBrandDiscounts?: BrandDiscount[];
+  maximumCollectionDiscounts?: CollectionDiscount[];
+  maximumWatchDiscounts?: WatchDiscount[];
 
   constructor() {
     this.email = '';
     this.password = '';
-    this.brandsMaxDiscounts = [new Discount];
-    this.collectionsMaxDiscounts = [new Discount];
-    this.watchesMaxDiscounts = [new Discount];
+    this.maximumBrandDiscounts = [new BrandDiscount()];
+    this.maximumCollectionDiscounts = [new CollectionDiscount()];
+    this.maximumWatchDiscounts = [new WatchDiscount()];
   }
 
 }
