@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Link } from 'src/app/Types/Link';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
 import { Brand } from 'src/app/Types/brand';
 import { Collection } from 'src/app/Types/collection';
 import { Watch } from 'src/app/Types/watch';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { RetailerService } from '../../retailer.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-to-stock',
   templateUrl: './add-to-stock.component.html',
   styleUrls: ['./add-to-stock.component.sass']
 })
-export class AddToStockComponent implements OnInit {
+export class AddToStockComponent implements OnInit, OnDestroy {
 
-  responseData: ResponseData;
-  response: ResponseObject;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   watch: Watch = new Watch();
   selectionBrands: Brand[];
@@ -38,7 +38,6 @@ export class AddToStockComponent implements OnInit {
   ];
 
   constructor(
-    private authService: AuthenticationService,
     private retailerService: RetailerService,
     private router: Router,
     private _notificationsService: NotificationsService) {
@@ -55,35 +54,35 @@ export class AddToStockComponent implements OnInit {
 
   getBrands() {
     this.retailerService.getBrands()
-      .subscribe(data => {
-        console.log(data);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+          console.log(responseData);
         }
         else {
-          this.selectionBrands = <Brand[]>this.response.payload;
+          this.selectionBrands = <Brand[]>response.payload;
         }
       });
   }
 
   async onBrandSelection(selectedBrandId) {
     await this.retailerService.getBrandById(selectedBrandId)
-      .subscribe(data => {
-        console.log(data);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+          console.log(responseData);
         }
         else {
-          this.selectedBrand = <Brand>this.response.payload;
-          this.selectionCollections = this.selectedBrand.collectionObjects;
+          this.selectedBrand = <Brand>response.payload;
+          this.selectionCollections = <Collection[]>this.selectedBrand.collectionObjects;
         }
       });
   }
@@ -91,17 +90,17 @@ export class AddToStockComponent implements OnInit {
   async onCollectionSelection(selectedCollectionId) {
     if (selectedCollectionId) {
       await this.retailerService.getCollectionById(selectedCollectionId)
-        .subscribe(data => {
-          console.log(data);
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+          const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+            console.log(responseData);
           }
           else {
-            this.selectedCollection = <Collection>this.response.payload;
+            this.selectedCollection = <Collection>response.payload;
           }
         });
     }
@@ -113,31 +112,31 @@ export class AddToStockComponent implements OnInit {
       this.status = false;
 
       await this.retailerService.getWatchById(selectedWatchRef)
-        .subscribe(data => {
-          console.log(data);
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+          const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+            console.log(responseData);
           }
           else {
-            this.watch = <Watch>this.response.payload;
+            this.watch = <Watch>response.payload;
             console.log(this.watch);
           }
         });
-/*
-      if (this.authService.currentRetailerValue.watchObjects) {
-        console.log(this.authService.currentRetailerValue.watchObjects);
-        const watchExist = this.authService.currentRetailerValue.watchObjects
-          .find((_watchObjects) => _watchObjects.watch.referenceNumber === this.watch.referenceNumber) !== undefined;
+      /*
+            if (this.authService.currentRetailerValue.watchObjects) {
+              console.log(this.authService.currentRetailerValue.watchObjects);
+              const watchExist = this.authService.currentRetailerValue.watchObjects
+                .find((_watchObjects) => _watchObjects.watch.referenceNumber === this.watch.referenceNumber) !== undefined;
 
-        if (watchExist) {
-          this.status = true;
-        }
-      }
-*/
+              if (watchExist) {
+                this.status = true;
+              }
+            }
+      */
     }
   }
 
@@ -145,35 +144,43 @@ export class AddToStockComponent implements OnInit {
     if (status) {
       this.status = true;
       await this.retailerService.addWatchToStock(this.watch._id)
-        .subscribe(data => {
-          console.log(data);
-          this.responseData = data;
-          this.response = this.responseData.response;
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          const response: ResponseObject = responseData.response;
+
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+            console.log(responseData);
           }
           else {
-            this._notificationsService.success('Success', this.response.message.en);
+            this._notificationsService.success('Success', response.message.en);
           }
         });
     }
     else {
       this.status = false;
       await this.retailerService.removeWatchFromStock(this.watch._id)
-        .subscribe(data => {
-          console.log(data);
-          this.responseData = data;
-          this.response = this.responseData.response;
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          const response: ResponseObject = responseData.response;
+
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+            console.log(responseData);
           }
           else {
-            this._notificationsService.success('Success', this.response.message.en);
+            this._notificationsService.success('Success', response.message.en);
           }
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

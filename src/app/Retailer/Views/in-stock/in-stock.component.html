@@ -70,26 +70,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let watchObject of watchObjects | watchesRetailerFilter: filters.brandID : filters.collectionID : filters.watchRef">
-                <td><img class="table-img" [src]="watchObject.watch.mainPhotoUrl? watchObject.watch.mainPhotoUrl: 'http://placehold.it/480x720/FFFFFF/FFFFFF'"></td>
+              <tr *ngFor="let watchObjectWrapper of watchObjectWrappers">
+                <td><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p class="m-0">
-                    <span class="bold" *ngIf="watchObject?.watch?.model">{{watchObject?.watch?.model}},</span>
-                    <span *ngIf="watchObject?.watch?.caseDiameter">{{watchObject?.watch?.caseDiameter}} mm,</span>
-                    <span *ngIf="watchObject?.watch?.caseMaterial">{{watchObject?.watch?.caseMaterial}},</span>
-                    <span *ngIf="watchObject?.watch?.perpetual">{{watchObject?.watch?.perpetual}}</span>
+                    <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}},</span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">{{watchObjectWrapper?.watchObject?.caseDiameter}} mm,</span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">{{watchObjectWrapper?.watchObject?.caseMaterial}},</span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.perpetual">{{watchObjectWrapper?.watchObject?.perpetual}}</span>
                   </p>
-                  <p class="bold">Reference Number: {{watchObject?.watch?.referenceNumber}} </p>
+                  <p class="bold">Reference Number: {{watchObjectWrapper?.watchObject?.referenceNumber}} </p>
                 </td>
                 <td>
-                  <p> {{watchObject?.watch?.price | currency: watchObject?.watch?.priceCurrency }} </p>
+                  <p> {{watchObjectWrapper?.watchObject?.price | currency: watchObjectWrapper?.watchObject?.priceCurrency }} </p>
                 </td>
                 <td>
-                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watchObject?.watch?._id)"></app-toggle-btn>
+                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watchObjectWrapper?.watchObject?._id)"></app-toggle-btn>
                 </td>
                 <td>
-                  <input class="form-input" [(ngModel)]="watchObject.retailerWatchDiscount" placeholder="Discount %" type="number">
-                  <button class="btn primary-btn" (click)="updateDiscount(watchObject)">Save</button>
+                  <input class="form-input" [(ngModel)]="watchObjectWrapper.retailerWatchDiscount" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" type="number">
+                  <button class="btn primary-btn" (click)="updateDiscount(watchObjectWrapper)">Save</button>
                 </td>
               </tr>
             </tbody>

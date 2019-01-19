@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 import { Link } from 'src/app/Types/Link';
 import { ResponseData } from 'src/app/API/response-data';
@@ -6,12 +6,16 @@ import { Brand } from 'src/app/Types/brand';
 import { S3Service } from '../../S3/s3.service';
 import { AdminService } from '../../admin.service';
 import { ResponseObject } from 'src/app/API/responseObject';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: './add-brand-form.component.html',
   styleUrls: ['./add-brand-form.component.sass']
 })
-export class AddBrandFormComponent implements OnInit {
+export class AddBrandFormComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   brand: Brand = new Brand();
 
@@ -226,6 +230,7 @@ export class AddBrandFormComponent implements OnInit {
   */
   getBrands(): void {
     this.adminService.readAllBrands()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -244,6 +249,7 @@ export class AddBrandFormComponent implements OnInit {
    */
   onBrandSelection(selectedBrandId: String) {
     this.adminService.readBrandById(selectedBrandId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
 
         const response: ResponseObject = data.response;
@@ -392,6 +398,7 @@ export class AddBrandFormComponent implements OnInit {
 
   createBrand(): void {
     this.adminService.createBrand(this.brand)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -407,6 +414,7 @@ export class AddBrandFormComponent implements OnInit {
 
   updateBrand() {
     this.adminService.updateBrand(this.brand, this.brand._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -423,6 +431,7 @@ export class AddBrandFormComponent implements OnInit {
 
   deleteBrand(): void {
     this.adminService.deleteBrandById(this.brand._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -477,5 +486,11 @@ export class AddBrandFormComponent implements OnInit {
     finally {
       this.loading = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

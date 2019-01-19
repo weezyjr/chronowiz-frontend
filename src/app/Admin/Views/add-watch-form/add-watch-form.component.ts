@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 import { Watch } from 'src/app/Types/watch';
 import { Link } from 'src/app/Types/Link';
@@ -8,6 +8,8 @@ import { AdminService } from '../../admin.service';
 import { S3Service } from '../../S3/s3.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 class Value {
   public value: string;
   constructor() {
@@ -19,7 +21,9 @@ class Value {
   templateUrl: './add-watch-form.component.html',
   styleUrls: ['./add-watch-form.component.sass']
 })
-export class AddWatchFormComponent implements OnInit {
+export class AddWatchFormComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   watch: Watch = new Watch();
 
@@ -185,6 +189,7 @@ export class AddWatchFormComponent implements OnInit {
    */
   getBrands() {
     this.adminService.readAllBrands()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -202,6 +207,7 @@ export class AddWatchFormComponent implements OnInit {
   async onBrandSelection(selectedBrandId: String) {
     if (selectedBrandId) {
       await this.adminService.readBrandById(selectedBrandId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -220,6 +226,7 @@ export class AddWatchFormComponent implements OnInit {
   async onCollectionSelection(selectedCollectionId: String) {
     if (selectedCollectionId) {
       await this.adminService.readCollectionById(selectedCollectionId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -272,6 +279,7 @@ export class AddWatchFormComponent implements OnInit {
   async onWatchSelection(selectedWatchRef: string) {
     if (selectedWatchRef) {
       await this.adminService.readWatch(selectedWatchRef)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -297,6 +305,7 @@ export class AddWatchFormComponent implements OnInit {
     }
 
     await this.adminService.readBrandById(selectedBrandId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -317,6 +326,7 @@ export class AddWatchFormComponent implements OnInit {
     }
 
     this.adminService.readCollectionById(selectedCollectionId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -587,6 +597,7 @@ export class AddWatchFormComponent implements OnInit {
 
   createWatch(): void {
     this.adminService.createWatch(this.watch)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -604,6 +615,7 @@ export class AddWatchFormComponent implements OnInit {
   updateWatch(): void {
 
     this.adminService.updateWatch(this.watch, this.watch._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -620,6 +632,7 @@ export class AddWatchFormComponent implements OnInit {
 
   deleteWatch(): void {
     this.adminService.deleteWatch(this.watch._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -684,6 +697,12 @@ export class AddWatchFormComponent implements OnInit {
     finally {
       this.loading = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -36,7 +36,6 @@ import { SearchComponent } from './Views/search/search.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { CarouselComponent } from './Components/carousel/carousel.component';
 import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced-search.component';
-import { WatchesRetailerPipe } from './Filters/watchesRetailer.pipe';
 import { CollectionSectionComponent } from './Components/collection-section/collection-section.component';
 import { ConfirmPasswordDirective } from './Views/register/confirmPassword.directive';
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
@@ -98,7 +97,6 @@ import { WaterResistanceComponent } from './Views/education/water-resistance/wat
     CollectionNamePipe,
     SafeUrlPipe,
     GenderPipe,
-    WatchesRetailerPipe,
     CollapsibleComponent,
     FilterCollapsibleComponent,
     WatchComponent,

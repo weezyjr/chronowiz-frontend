@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Retailer, BrandDiscount, CollectionDiscount, WatchDiscount } from 'src/app/Types/retailer';
 import { Link } from 'src/app/Types/Link';
 import { ResponseObject } from 'src/app/API/responseObject';
@@ -8,21 +8,16 @@ import { Watch } from 'src/app/Types/watch';
 import { Collection } from 'src/app/Types/collection';
 import { Brand } from 'src/app/Types/brand';
 import { AdminService } from '../../admin.service';
-
-class Discount {
-  public _id: string;
-  public value: number;
-  constructor() {
-    this._id = '';
-    this.value = 0;
-  }
-}
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   templateUrl: './add-retialer-form.component.html',
   styleUrls: ['./add-retialer-form.component.sass']
 })
-export class AddRetialerFormComponent implements OnInit {
+export class AddRetialerFormComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   retailer: Retailer = new Retailer();
 
@@ -49,8 +44,9 @@ export class AddRetialerFormComponent implements OnInit {
 
   constructor(private adminService: AdminService, private _notificationsService: NotificationsService) {
     this.getBrands();
+    // fill the selectionWatchRefNumber to extend array length
     for (const watchDiscount of this.retailer.maximumWatchDiscounts) {
-      this.selectionWatchReferenceNumber.push(watchDiscount.watchObject);
+      this.selectionWatchReferenceNumber.push(watchDiscount.watchObject._id);
     }
   }
 
@@ -120,6 +116,7 @@ export class AddRetialerFormComponent implements OnInit {
   onRetailerSelection() {
     console.log(this.selectedEmail);
     this.adminService.getRetailerByEmail(this.selectedEmail)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -143,6 +140,7 @@ export class AddRetialerFormComponent implements OnInit {
   createRetailer() {
     console.log(this.retailer);
     this.adminService.createRetailer(this.retailer)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -159,6 +157,7 @@ export class AddRetialerFormComponent implements OnInit {
   updateRetailer() {
     console.log(this.retailer);
     this.adminService.updateRetailer(this.retailer)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -175,6 +174,7 @@ export class AddRetialerFormComponent implements OnInit {
 
   deleteRetailer() {
     this.adminService.deleteRetailer(this.retailer)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -199,6 +199,7 @@ export class AddRetialerFormComponent implements OnInit {
   */
   getBrands(): boolean {
     this.adminService.readAllBrands()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -219,6 +220,7 @@ export class AddRetialerFormComponent implements OnInit {
   async onBrandSelection(selectedBrandId: String) {
     if (selectedBrandId) {
       await this.adminService.readBrandById(selectedBrandId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -237,6 +239,7 @@ export class AddRetialerFormComponent implements OnInit {
   async onCollectionSelection(selectedCollectionId: String) {
     if (selectedCollectionId) {
       await this.adminService.readCollectionById(selectedCollectionId)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -254,6 +257,7 @@ export class AddRetialerFormComponent implements OnInit {
   async onWatchSelection(selectedWatchRef: string) {
     if (selectedWatchRef) {
       await this.adminService.readWatch(selectedWatchRef)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((data: ResponseData) => {
 
           const response: ResponseObject = data.response;
@@ -264,7 +268,8 @@ export class AddRetialerFormComponent implements OnInit {
           else {
             const watch = <Watch>response.payload;
             // add the id to the last element in the array
-            this.retailer.maximumWatchDiscounts[this.retailer.maximumWatchDiscounts.length - 1].watchObject = watch._id;
+            const lastElement = this.retailer.maximumWatchDiscounts.length - 1;
+            this.retailer.maximumWatchDiscounts[lastElement].watchObject._id = watch._id;
           }
         });
     }
@@ -273,6 +278,7 @@ export class AddRetialerFormComponent implements OnInit {
   async updateBrandMaxDiscount(brandMaxDiscount: BrandDiscount) {
     console.log(brandMaxDiscount);
     await this.adminService.updateRetailerBrandMaxDiscount(this.retailer._id, brandMaxDiscount)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         console.log(responseData);
 
@@ -291,6 +297,7 @@ export class AddRetialerFormComponent implements OnInit {
   async updateCollectionMaxDiscount(collectionMaxDiscount: CollectionDiscount) {
     console.log(collectionMaxDiscount);
     await this.adminService.updateRetailerCollectionMaxDiscount(this.retailer._id, collectionMaxDiscount)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         console.log(responseData);
 
@@ -309,6 +316,7 @@ export class AddRetialerFormComponent implements OnInit {
   async updateWatchMaxDiscount(watchMaxDiscount: WatchDiscount) {
     console.log(watchMaxDiscount);
     await this.adminService.updateRetailerWatchMaxDiscount(this.retailer._id, watchMaxDiscount)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         console.log(responseData);
 
@@ -343,5 +351,11 @@ export class AddRetialerFormComponent implements OnInit {
     finally {
       this.loading = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

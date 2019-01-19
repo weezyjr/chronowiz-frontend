@@ -22,7 +22,6 @@ export class BrandComponent implements OnInit, OnDestroy {
   currentGender = 'All';
   genders = ['All', 'Men', 'Women'];
   // brand object
-  public brand: any;
   public brandObject: Brand;
   public collections: Collection[];
 
@@ -36,7 +35,7 @@ export class BrandComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute, private brandsService: BrandsService, private _notificationsService: NotificationsService) {
   }
 
-  filterGender(gender) {
+  filterGender(gender: string) {
     this.currentGender = gender;
   }
 
@@ -85,7 +84,7 @@ export class BrandComponent implements OnInit, OnDestroy {
               this._notificationsService.error('Error', response.message.en);
             } else {
               this.brandObject = <Brand>response.payload;
-              this.collections = this.brandObject['collectionObjects'];
+              this.collections = <Collection[]>this.brandObject['collectionObjects'];
               // filter out empty collections
               this.collections = this.collections.filter((collection) => {
                 if (collection.watchObjects) {

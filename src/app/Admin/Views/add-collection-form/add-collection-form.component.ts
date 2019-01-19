@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 import { Collection } from 'src/app/Types/collection';
 import { Link } from 'src/app/Types/Link';
@@ -6,13 +6,17 @@ import { Brand } from 'src/app/Types/brand';
 import { AdminService } from '../../admin.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
   templateUrl: './add-collection-form.component.html',
   styleUrls: ['./add-collection-form.component.sass']
 })
-export class AddCollectionFormComponent implements OnInit {
+export class AddCollectionFormComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   collection: Collection = new Collection();
 
@@ -52,6 +56,7 @@ export class AddCollectionFormComponent implements OnInit {
    */
   getBrands(): void {
     this.adminService.readAllBrands()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -67,6 +72,7 @@ export class AddCollectionFormComponent implements OnInit {
 
   onSelectionBrandSelected(selectedBrandId: String): void {
     this.adminService.readBrandById(selectedBrandId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -83,6 +89,7 @@ export class AddCollectionFormComponent implements OnInit {
 
   onSelectionCollectionSelected(selectedCollectionId: String): void {
     this.adminService.readCollectionById(selectedCollectionId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -109,6 +116,7 @@ export class AddCollectionFormComponent implements OnInit {
   /** Create, Update and delete collection */
   createCollection(): void {
     this.adminService.createCollection(this.collection)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -125,6 +133,7 @@ export class AddCollectionFormComponent implements OnInit {
 
   updateCollection(): void {
     this.adminService.updateCollectionById(this.collection, this.collection._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -142,6 +151,7 @@ export class AddCollectionFormComponent implements OnInit {
 
   deleteCollection(): void {
     this.adminService.deleteCollectionById(this.collection._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
         const response: ResponseObject = data.response;
@@ -174,5 +184,11 @@ export class AddCollectionFormComponent implements OnInit {
     finally {
       this.loading = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

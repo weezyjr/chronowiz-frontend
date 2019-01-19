@@ -145,7 +145,7 @@
                 <div class="form-group">
                   <label>Brand Max Discount</label>
                   <label>Select Brand</label>
-                  <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand" name="brandDiscounts{{i}}"
+                  <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand" name="brandDiscounts{{i}}"
                     [(ngModel)]="brandDiscount.brandObject">
                   </ng-select>
                 </div>
@@ -160,12 +160,12 @@
                 </div>
                 <hr>
               </div>
-              <div class="col-1 float-right">
-                <button class="btn btn-lg primary-btn" (click)="addBrandDiscount()">+</button>
+              <div class="col-2 float-right">
+                <button class="btn btn-lg primary-btn" (click)="addBrandDiscount()">Add New +</button>
               </div>
-              <div class="col-1 float-right">
+            <!--  <div class="col-1 float-right">
                 <button class="btn btn-lg secondry-btn" (click)="removeBrandDiscount()">-</button>
-              </div>
+              </div>-->
             </div>
 
           </div>
@@ -187,7 +187,7 @@
                 <div class="form-group">
                   <label for="selectionCollection">Select Collection</label>
                   <ng-select [items]="selectionCollections" name="collectionsMaxDiscounts{{i}}" bindLabel="name"
-                    bindValue="_id" placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
+                     placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
                   </ng-select>
                 </div>
                 <div class="form-group">
@@ -201,12 +201,12 @@
                 </div>
                 <hr>
               </div>
-              <div class="col-1 float-right">
-                <button class="btn btn-lg primary-btn" (click)="addCollectionDiscount()">+</button>
+              <div class="col-2 float-right">
+                <button class="btn btn-lg primary-btn" (click)="addCollectionDiscount()">Add New +</button>
               </div>
-              <div class="col-1 float-right">
+            <!---  <div class="col-1 float-right">
                 <button class="btn btn-lg secondry-btn" (click)="removeCollectionDiscount()">-</button>
-              </div>
+              </div>-->
             </div>
           </div>
 
@@ -233,7 +233,7 @@
                 <div class="form-group">
                   <label for="selectionWatch">Watch</label>
                   <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}" bindLabel="referenceNumber"
-                    bindValue="_id" placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
+                     placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
                   </ng-select>
                 </div>
                 <div class="row">
@@ -258,12 +258,12 @@
                 </div>
                 <hr>
               </div>
-              <div class="col-1 float-right">
-                <button class="btn btn-lg primary-btn" (click)="addWatchDiscount()">+</button>
+              <div class="col-2 float-right">
+                <button class="btn btn-lg primary-btn" (click)="addWatchDiscount()">Add New +</button>
               </div>
-              <div class="col-1 float-right">
+            <!---  <div class="col-1 float-right">
                 <button class="btn btn-lg secondry-btn" (click)="removeWatchDiscount()">-</button>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>

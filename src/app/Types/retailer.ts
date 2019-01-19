@@ -1,34 +1,36 @@
 import { Watch } from './watch';
+import { Brand } from './brand';
+import { Collection } from './collection';
 
 export class BrandDiscount {
-  public brandObject: string;
+  public brandObject: Brand;
   public maximumBrandDiscount: number;
   constructor(){
-    this.brandObject = '';
+    this.brandObject = new Brand();
     this.maximumBrandDiscount = 0;
   }
 }
 
 export class CollectionDiscount {
-  public collectionObject: string;
+  public collectionObject: Collection;
   public maximumCollectionDiscount: number;
   constructor(){
-    this.collectionObject = '';
+    this.collectionObject = new Collection();
     this.maximumCollectionDiscount = 0;
   }
 }
 
 export class WatchDiscount {
-  public watchObject: string;
+  public watchObject: Watch;
   public maximumWatchDiscount: number;
   constructor(){
-    this.watchObject = '';
+    this.watchObject = new Watch();
     this.maximumWatchDiscount = 0;
   }
 }
 
 export class WatchObjects {
-  watch: Watch = new Watch();
+  watchObject: Watch = new Watch();
   retailerWatchDiscount: Number = 0;
 }
 

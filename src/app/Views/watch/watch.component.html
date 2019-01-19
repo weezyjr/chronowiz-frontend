@@ -29,7 +29,7 @@
 
 <div class="banner1container">
   <app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
-  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x450/FFFFFF/FFFFFF"></app-hero>
+  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x100/FFFFFF/FFFFFF"></app-hero>
 </div>
 
 <div class="container pb-5">
@@ -47,7 +47,7 @@
 
 <div class="banner2contanier">
   <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
-  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x300/FFFFFF/FFFFFF"></app-hero>
+  <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x150/FFFFFF/FFFFFF"></app-hero>
 </div>
 
 <div class="container">
