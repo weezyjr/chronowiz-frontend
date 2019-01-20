@@ -31,6 +31,7 @@ import { ConfirmationComponent } from './Views/confirmation/confirmation.compone
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
 import { EducationComponent } from './Views/education/education.component';
+import { WaterResistanceComponent } from './Views/education/water-resistance/water-resistance.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'education',
     component: EducationComponent
+  },
+  {
+    path: 'education/water-resistance',
+    component: WaterResistanceComponent
   },
   {
     path: 'contact',
