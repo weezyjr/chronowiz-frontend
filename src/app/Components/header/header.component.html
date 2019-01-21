@@ -1,4 +1,5 @@
-<header class="header" [ngClass]="{'transparent':transparent, 'bg_white': bg_white}">
+<header class="header"
+[style.background-color]="backgroundColor">
   <div class="container">
     <div class="logo">
       <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo"
@@ -22,7 +23,7 @@
             <div (click)="openUserMenu()">
               <img class="icon" [src]="userIconSrc" alt="">
             </div>
-            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': bg_white || transparent}">
+            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': content_color === 'white' || opacity === 0}">
               <div class="arrow-up"></div>
               <div class="drop-down-content">
                 <ul>
@@ -46,5 +47,5 @@
     </nav>
   </div>
 </header>
-<div *ngIf="bg_white" class="fix-height"></div>
-<app-side-menu [black]="bg_white == true || transparent == true"></app-side-menu>
+<div *ngIf="content_color === 'white' && opacity === 100" class="fix-height"></div>
+<app-side-menu [black]="content_color === 'black'"></app-side-menu>

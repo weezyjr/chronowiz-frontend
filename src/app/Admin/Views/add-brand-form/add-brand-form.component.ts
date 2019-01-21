@@ -197,6 +197,11 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     { name: 'Zenith ' },
     { name: 'Other' }];
 
+    headerContentColorOptions: Array<Object> = [
+      { name: 'black'},
+      { name: ' white'}
+    ];
+
   // naviagtion links
   navRoutes: Link[] = [
     new Link('Watch Form', 'app-add-watch-form'),

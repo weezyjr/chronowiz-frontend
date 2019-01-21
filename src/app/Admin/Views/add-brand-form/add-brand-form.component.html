@@ -184,6 +184,31 @@
             required</div>
         </div>
 
+
+        <br />
+        <h3>Header Section</h3>
+        <br />
+
+        <div class="form-group">
+          <label for="headerBackgroundColor">Background color</label>
+          <input [disabled]="mode == 'delete' || loading" type="color" value="#ffffff" class="form-control"
+            [(ngModel)]="brand.headerBackgroundColor" name="headerBackgroundColor" #headerBackgroundColor="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="headerContentColor">Content color</label>
+          <ng-select [items]="headerContentColorOptions" name="headerContentColor"
+           [(ngModel)]="brand.headerContentColor" bindLabel="name" bindValue="name" placeholder="Select header content color">
+          </ng-select>
+        </div>
+
+        <div class="form-group">
+          <label for="headerBackgroundOpacity">Background Opacity</label>
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$"
+            [(ngModel)]="brand.headerBackgroundOpacity" name="headerBackgroundOpacity" #headerBackgroundOpacity="ngModel">
+        </div>
+
+
         <br />
         <h3>Discount Section</h3>
         <br />

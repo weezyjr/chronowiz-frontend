@@ -18,6 +18,10 @@ export class Brand {
 
   public maximumDiscount?: number;
 
+  public headerBackgroundColor?: string; // hexadecimel e.g. #ffffff
+  public headerContentColor?: string; // black or white
+  public headerBackgroundOpacity?: number; // 0 - 100 %
+
   constructor(name?: string) {
     this._id = '';
     if (name) {
@@ -30,5 +34,8 @@ export class Brand {
     this.banner1PhotoUrl = '';
     this.banner2PhotoUrl = '';
     this.logoPhotoUrl = '';
+    this.headerBackgroundColor = '#fff';
+    this.headerContentColor = 'black';
+    this.headerBackgroundOpacity = 75;
   }
 }

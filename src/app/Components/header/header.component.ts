@@ -11,11 +11,16 @@ import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input()
-  transparent: Boolean = true;
+  private _bg_rgb_: number[] = [];
 
   @Input()
-  bg_white: Boolean = false;
+  background_color: String | string = '#ffffff';
+
+  @Input()
+  content_color: 'black' | 'white' = 'black';
+
+  @Input()
+  opacity = 100;
 
   @Input()
   _brandLogo: String;
@@ -61,8 +66,20 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  get backgroundColor(): string {
+    if (this.opacity && this.opacity !== 0) {
+      return `rgba(${this._bg_rgb_[0]},${this._bg_rgb_[1]},${this._bg_rgb_[2]}, ${this.opacity / 100} )`;
+    } else {
+      return `none`;
+    }
+  }
+
+
   ngOnInit() {
-    if (this.transparent === true) {
+    // convert background color from hex to rgb
+    this._bg_rgb_ = this.HEX2RGB(this.background_color);
+
+    if (this.content_color === 'black') {
       if (!this._brandLogo) {
         this._brandLogo = '../../../assets/logo.svg';
       }
@@ -82,6 +99,36 @@ export class HeaderComponent implements OnInit {
       this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
     }
 
+  }
+
+  HEX2RGB(hex: String): number[] {
+    if (hex.charAt(0) === '#') {
+      hex = hex.substr(1);
+    }
+    if ((hex.length < 2) || (hex.length > 6)) {
+      return [];
+    }
+    const values = hex.split('');
+    let r: number,
+      g: number,
+      b: number;
+
+    if (hex.length === 2) {
+      r = parseInt(values[0].toString() + values[1].toString(), 16);
+      g = r;
+      b = r;
+    } else if (hex.length === 3) {
+      r = parseInt(values[0].toString() + values[0].toString(), 16);
+      g = parseInt(values[1].toString() + values[1].toString(), 16);
+      b = parseInt(values[2].toString() + values[2].toString(), 16);
+    } else if (hex.length === 6) {
+      r = parseInt(values[0].toString() + values[1].toString(), 16);
+      g = parseInt(values[2].toString() + values[3].toString(), 16);
+      b = parseInt(values[4].toString() + values[5].toString(), 16);
+    } else {
+      return [];
+    }
+    return [r, g, b];
   }
 
   logout() {
