@@ -2,7 +2,7 @@
 <div class="container mt-3 mb-5">
   <div class="sassy-text">Hello {{user?.firstName}}!</div>
   <h1>Account overview</h1>
-  <app-collapsible text="Your Primary Account Information" color="red">
+  <app-collapsible text="Your Primary Account Information" color="red" [active]="true">
 
     <div class="contanier-fluid">
       <div class="row no-gutters sections">
@@ -99,9 +99,9 @@
     </div>
   </app-collapsible>
 
-  <div class="my-5"></div>
+  <div class="my-4"></div>
 
-  <app-collapsible text="Your Order History" color="gray">
+  <app-collapsible text="Your Order History" color="gray" [active]="true">
     <table class="table table-bordered table-responsive-sm">
       <thead>
         <tr>
@@ -111,24 +111,17 @@
           <th scope="col">Status</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>05/04/18</td>
-          <td>RF000056700240000</td>
-          <td>{{19500 | currency}}</td>
-          <td>Verifying</td>
+      <tbody *ngFor="let order of orders; let i=index">
+        <tr (click)="toggleShowDetails(order?.showDetails, i)">
+          <td>{{order?.date}}</td>
+          <td>{{order?._id}}</td>
+          <td>{{order?.totalPrice | currency}}</td>
+          <td>{{order?.state}}</td>
         </tr>
-        <tr>
-          <td>03/03/18</td>
-          <td>RF000056600240000</td>
-          <td>{{15000 | currency}}</td>
-          <td>Shipped</td>
-        </tr>
-        <tr>
-          <td>01/04/17</td>
-          <td>RF000034500240000</td>
-          <td>{{34000 | currency}}</td>
-          <td>Shipped</td>
+        <tr *ngIf="order?.showDetails">
+          <td colspan="4">
+            <app-order-confirmation [order]="order"></app-order-confirmation>
+          </td>
         </tr>
       </tbody>
     </table>

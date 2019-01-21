@@ -1,7 +1,8 @@
-export class User {
+import { Watch } from './watch';
+
+export class Order {
   _id?: string;
   email: string;
-  password?: string;
   jwt?: string;
 
   firstName?: String = '';
@@ -30,6 +31,12 @@ export class User {
   creditCard?: Boolean = false;
   escrow?: Boolean = false;
   wireTransfer?: Boolean = false;
+
+  watches?: Watch[];
+  showDetails?: Boolean = false;
+  date?: String = '01/01/2019';
+  totalPrice?: Number;
+  state?: String;
 
   constructor(test?: Boolean) {
     if (test) {
@@ -62,9 +69,15 @@ export class User {
       this.creditCard = true;
       this.escrow = false;
       this.wireTransfer = false;
+      this.showDetails = false;
+      this.date = '01/01/2019';
+      this.totalPrice = 150;
+      this.state = 'verfied';
+      this.watches = [new Watch(true)];
     }
-    else{
+    else {
       this.email = '';
+      this.showDetails = false;
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Brand } from './brand';
 import { Collection } from './collection';
+import { watch } from 'fs';
 
 class Value {
   public value: string;
@@ -102,7 +103,7 @@ export class Watch {
   public qty?: number;
   public addedToCheckOut?: boolean;
 
-  constructor() {
+  constructor(test?: Boolean) {
     this.brandObject = new Brand();
     this.collectionObject = new Collection();
     this.movementAdditionalFeatures = [new Value];
@@ -120,5 +121,31 @@ export class Watch {
     this.section4PhotoUrl = '';
     this.qty = 1;
 
+    if (test) {
+      this.brandObject = new Brand();
+      this.collectionObject = new Collection();
+      this.movementAdditionalFeatures = [new Value];
+      this.functions = [new Value];
+      this.complications = [new Value];
+      this.caseAdditionalFeatures = [new Value];
+      this.dialAdditionalFeatures = [new Value];
+      this.bandAdditionalFeatures = [new Value];
+      this.mainPhotoUrl = 'https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/watches/AS.FD41/mainPhoto_1542028482235.jpg';
+      this.banner1PhotoUrl = '';
+      this.banner2PhotoUrl = '';
+      this.section1PhotoUrl = '';
+      this.section2PhotoUrl = '';
+      this.section3PhotoUrl = '';
+      this.section4PhotoUrl = '';
+      this.qty = 1;
+      this.model = 'lorem';
+      this.caseDiameter = '25';
+      this.caseMaterial = 'gold',
+      this.movementAutomaticOrManual = 'automatic';
+      this.band = 'gold';
+      this.dialColour = 'yellow',
+      this.dialHands = 'both';
+
+    }
   }
 }

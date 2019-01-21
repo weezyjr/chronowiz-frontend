@@ -80,6 +80,7 @@ import { OrderComponent } from './Views/order/order.component';
 import { EditPersonalInfoComponent } from './User/Views/edit-personal-info/edit-personal-info.component';
 import { EditPaymentInfoComponent } from './User/Views/edit-payment-info/edit-payment-info.component';
 import { EditAddressInfoComponent } from './User/Views/edit-address-info/edit-address-info.component';
+import { OrderConfirmationComponent } from './Components/order-confirmation/order-confirmation.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -138,7 +139,8 @@ import { EditAddressInfoComponent } from './User/Views/edit-address-info/edit-ad
     OrderComponent,
     EditPersonalInfoComponent,
     EditPaymentInfoComponent,
-    EditAddressInfoComponent
+    EditAddressInfoComponent,
+    OrderConfirmationComponent
   ],
   imports: [
     NgSelectModule,

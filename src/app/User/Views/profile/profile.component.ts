@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Types/User';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/Types/Order';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
+  orders: Order[] = [new Order(true)];
   user = new User(true);
 
   creditCardEndingIn: String;
@@ -50,6 +52,12 @@ export class ProfileComponent implements OnInit {
     }
 
     return 'visa';
+  }
+
+  toggleShowDetails(currentState: Boolean, index: number) {
+    if (this.orders[index]) {
+      this.orders[index].showDetails = !currentState;
+    }
   }
 
 }
