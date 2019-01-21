@@ -19,8 +19,24 @@ export class EditAddressInfoComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
     }
-    else{
+    else {
       this.user = this.authenticationService.currentUserValue;
+    }
+  }
+
+  updateShippingInputs() {
+    if (this.user.shippingSameAsBilling) {
+      this.user.shippingCountry = this.user.billingCountry;
+      this.user.shippingCity = this.user.billingCity;
+      this.user.shippingState = this.user.billingState;
+      this.user.shippingZip = this.user.billingZip;
+      this.user.shippingAddress = this.user.billingAddress;
+    } else {
+      this.user.shippingCountry = '';
+      this.user.shippingCity = '';
+      this.user.shippingState = '';
+      this.user.shippingZip = '';
+      this.user.shippingAddress = '';
     }
   }
 

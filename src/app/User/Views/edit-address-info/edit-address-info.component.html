@@ -1,11 +1,10 @@
 <simple-notifications></simple-notifications>
 <app-header></app-header>
-<div class="container mx-auto full-height d-flex align-items-center text-center">
-  <div class="login-form mx-auto">
-    <h1> Edit personal Info</h1>
-    <form class="form" #editAddressInfo="ngForm" (ngSubmit)="editAddressInfo.form.valid? onSubmit() : null">
-      <div class="row">
-
+<div class="container">
+  <div class="row mb-5 mt-3 mx-auto">
+    <div class="col-12">
+      <h1> Edit Address Info</h1>
+      <form class="form" #editAddressInfo="ngForm" (ngSubmit)="editAddressInfo.form.valid? onSubmit() : null">
         <div class="row">
           <div class="col-12">
             <div class="form-group">
@@ -16,8 +15,8 @@
 
         <div class="row">
           <div class="col-12 text-center form-group">
-            <select class="form-input shipping-type" [(ngModel)]="shippingData.shippingType"  name="shippingType">
-              <option value="Free Shipping (3-5 business days)" checked> Free Shipping (3-5 business days) </option>
+            <select class="form-input shipping-type" [(ngModel)]="user.shippingType" name="shippingType">
+              <option value="Free Shipping (3-5 business days)"> Free Shipping (3-5 business days) </option>
             </select>
           </div>
         </div>
@@ -73,7 +72,7 @@
               <label class="title-label d-inline">Shipping Adress </label>
               <label class="checkbox-container d-inline ml-2">
                 Same as billing
-                <input type="checkbox" name="shippingSameAsBilling" (change)="clearShippingInputs()" [(ngModel)]="user.shippingSameAsBilling">
+                <input type="checkbox" name="shippingSameAsBilling" (change)="updateShippingInputs()" [(ngModel)]="user.shippingSameAsBilling">
                 <span class="checkmark"></span>
               </label>
             </div>
@@ -117,14 +116,15 @@
           </div>
         </div>
 
-
-        <div class="col-12">
-          <button class="btn primary-btn wide-btn" type="submit"> Save </button>
-          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <div class="row">
+          <div class="col-12">
+            <button class="btn primary-btn wide-btn" type="submit"> Save </button>
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          </div>
         </div>
-      </div>
-    </form>
 
+      </form>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>
