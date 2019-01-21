@@ -26,7 +26,7 @@ export class ConfirmationComponent implements OnInit {
   watches: Watch[] = [];
 
   onSubmit() {
-    this._notificationsService.success('Success');
+    this.goToPage('orders');
   }
 
   goToPage(str: String) {

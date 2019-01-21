@@ -76,6 +76,7 @@ import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditi
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
 import { EducationComponent } from './Views/education/education.component';
 import { WaterResistanceComponent } from './Views/education/water-resistance/water-resistance.component';
+import { OrderComponent } from './Views/order/order.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -130,7 +131,8 @@ import { WaterResistanceComponent } from './Views/education/water-resistance/wat
     TermsConditionsComponent,
     ContactUsComponent,
     EducationComponent,
-    WaterResistanceComponent
+    WaterResistanceComponent,
+    OrderComponent
   ],
   imports: [
     NgSelectModule,

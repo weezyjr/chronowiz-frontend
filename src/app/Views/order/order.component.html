@@ -1,19 +1,10 @@
 <simple-notifications></simple-notifications>
-<app-header ></app-header>
-<app-breadcrumb [breads]="breads"></app-breadcrumb>
-<div class="row no-gutters">
-  <div class="col-12">
-    <div class="page-breads">
-      <ul class="list-inline w-100 px-2 text-center">
-        <li class="list-inline-item"><a (click)="goToPage('checkout')" class="checked"> Checkout </a></li>
-        <li class="list-inline-item"><a (click)="goToPage('shipping')"> Shipping </a></li>
-        <li class="list-inline-item"><a (click)="goToPage('payment')" > Payment </a></li>
-        <li class="list-inline-item"><a (click)="goToPage('confirmation')"> Confirmation </a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<app-header></app-header>
 <div class="container">
+  <div class="text-center">
+    <h1> Order #RF1021 </h1>
+    <h2 class="text-center"> 05/04/2018 </h2>
+  </div>
   <div class="row mb-5 mt-3 mx-auto">
     <div class="col-12 mt-4">
       <table class="watch-table table-responsive-sm my-3">
@@ -52,7 +43,7 @@
               <p class="small m-0"> {{watch?.price | currency: watch?.priceCurrency : 'symbol' : '1.0' }} </p>
             </td>
             <td class="text-center">
-              <input class="form-input" class="qty" [(ngModel)]="watch.qty" min="1" type="number">
+              <p class="small"> {{watch?.qty}} </p>
             </td>
             <td>
               <p class="small m-0"> {{watch?.price * watch?.qty | currency: watch?.priceCurrency : 'symbol' : '1.0' }}
@@ -64,7 +55,12 @@
           </tr>
         </tbody>
       </table>
+
       <p class="totalPriceSection">
+        <span class="totalPriceText">Shipping : </span>
+        <span class="totalPrice"> {{20 | currency: 'USD'}} </span>
+      </p>
+      <p class="totalPriceSection borders">
         <span class="totalPriceText">Total : </span>
         <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
       </p>
