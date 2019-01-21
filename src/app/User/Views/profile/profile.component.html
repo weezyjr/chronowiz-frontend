@@ -28,7 +28,8 @@
 
           <div class="row mt-3">
             <div class="col-12">
-              <button class="btn secondry-btn"> Edit Personal Info </button>
+              <button class="btn secondry-btn" (click)="goTo('account/edit-personal-info')"> Edit Personal Info
+              </button>
             </div>
           </div>
         </div>
@@ -44,25 +45,27 @@
           <div class="row">
             <div class="col-12">
               <div class="payment">
-                <div class="info pb-2">
-                  <img src="../../../assets/mastercard.svg" alt="mastercard">
-                  Ending in 6793
+                <div *ngIf="user?.creditCardNumber">
+                  <div class="info pb-2">
+                    <img src="../../../assets/{{creditCardType}}.svg" alt="mastercard">
+                    Ending in {{creditCardEndingIn}}
+                  </div>
                 </div>
-                <div class="info">Exp. 09-2020</div>
+                <div class="info">Exp. {{user?.expirationDateMonth}}-20{{user?.expirationDateYear}}</div>
                 <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
                 <br>
-                <div class="info">27 MERRY LN NP000131206</div>
+                <div class="info">{{user?.billingAddress}}</div>
                 <br>
-                <div class="info">EAST HANOVER, </div>
-                <div class="info">NJ 07936-3901 </div>
+                <div class="info" *ngIf="user?.billingCity">{{user?.billingCity}}, </div>
+                <div class="info">{{user?.billingState}} {{user?.billingZip}}</div>
                 <br>
-                <div class="info">United States </div>
+                <div class="info">{{user?.billingCountry}}</div>
               </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-12">
-              <button class="btn secondry-btn"> Edit Payment Info </button>
+              <button class="btn secondry-btn" (click)="goTo('account/edit-payment-info')"> Edit Payment Info </button>
             </div>
           </div>
         </div>
@@ -79,15 +82,15 @@
             <div class="col-12">
               <div class="address">
                 <div class="info py-3">{{user?.firstName}} {{user?.lastName}}</div>
-                <div class="info py-3">27 MERRY LN NP000131206</div>
-                <div class="info py-3">EAST HANOVER, NJ 07936-3901</div>
-                <div class="info py-3">United States</div>
+                <div class="info py-3">{{user?.shippingAddress}}</div>
+                <div class="info py-3">{{user?.shippingCity}}, {{user?.shippingState}} {{user?.shippingZip}}</div>
+                <div class="info py-3">{{user?.shippingCountry}}</div>
               </div>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-12">
-              <button class="btn secondry-btn"> Edit Address Info </button>
+              <button class="btn secondry-btn" (click)="goTo('account/edit-address-info')"> Edit Address Info </button>
             </div>
           </div>
         </div>

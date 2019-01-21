@@ -40,16 +40,22 @@ export class User {
       this.lastName = 'Adel';
       this.phone = '+201271347337';
 
-      this.billingCountry = '';
-      this.billingState = '';
-      this.billingCity = '';
-      this.billingZip = '';
-      this.billingAddress = '';
+      this.billingCountry = 'Egypt';
+      this.billingState = 'Alexandria';
+      this.billingCity = 'Muharamm Beh';
+      this.billingZip = '21515';
+      this.billingAddress = '22 El-Manzalawy St.';
+
+      this.shippingCountry = 'Egypt';
+      this.shippingState = 'Alexandria';
+      this.shippingCity = 'Muharamm Beh';
+      this.shippingZip = '21515';
+      this.shippingAddress = '22 El-Manzalawy St.';
 
       this.shippingType = 'Free Shipping (3-5 business days)';
       this.shippingSameAsBilling = true;
 
-      this.creditCardNumber = '1111 2222 3333 4444';
+      this.creditCardNumber = '4111 2222 3333 4444';
       this.expirationDateMonth = '12';
       this.expirationDateYear = '19';
       this.securityNumber = '123';

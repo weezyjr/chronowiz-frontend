@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ResponseData } from 'src/app/API/response-data';
-import { ResponseObject } from 'src/app/API/responseObject';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationsService } from 'angular2-notifications';
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/Types/User';
+import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { NotificationsService } from 'angular2-notifications';
+
 
 @Component({
-  selector: 'app-set-new-password',
-  templateUrl: './set-new-password.component.html',
-  styleUrls: ['./set-new-password.component.sass']
+  selector: 'app-edit-address-info',
+  templateUrl: './edit-address-info.component.html',
+  styleUrls: ['./edit-address-info.component.sass']
 })
-export class SetNewPasswordComponent implements OnInit {
+export class EditAddressInfoComponent implements OnInit {
+
   user: User = new User();
-  confirmPassword: String;
   loading = false;
-  returnUrl: string;
 
   constructor(private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _notificationsService: NotificationsService) {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(['/login']);
+    }
+    else{
+      this.user = this.authenticationService.currentUserValue;
     }
   }
 
@@ -27,9 +28,7 @@ export class SetNewPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.user.password) {
-      console.log(this.user.password);
-    }
+    console.log(this.user);
   }
 
 }

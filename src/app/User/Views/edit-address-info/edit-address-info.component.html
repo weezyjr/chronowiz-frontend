@@ -1,0 +1,130 @@
+<simple-notifications></simple-notifications>
+<app-header></app-header>
+<div class="container mx-auto full-height d-flex align-items-center text-center">
+  <div class="login-form mx-auto">
+    <h1> Edit personal Info</h1>
+    <form class="form" #editAddressInfo="ngForm" (ngSubmit)="editAddressInfo.form.valid? onSubmit() : null">
+      <div class="row">
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <p class="sassy-text">Select a Shipping Method:</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 text-center form-group">
+            <select class="form-input shipping-type" [(ngModel)]="shippingData.shippingType"  name="shippingType">
+              <option value="Free Shipping (3-5 business days)" checked> Free Shipping (3-5 business days) </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="title-label"> Billing Adress </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="billingCountry">Country</label>
+            <input type="text" class="form-input" #billingCountry="ngModel" [(ngModel)]="user.billingCountry" name="billingCountry"
+              placeholder="USA">
+            <div [hidden]="billingCountry.valid || billingCountry.pristine" class="invalid">Country is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="billingCityTown">City/Town</label>
+            <input type="text" class="form-input" #billingCity="ngModel" [(ngModel)]="user.billingCity" name="billingCityTown"
+              placeholder="New York">
+            <div [hidden]="billingCity.valid || billingCity.pristine" class="invalid">City is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="billingState">State</label>
+            <input type="text" class="form-input" #billingState="ngModel" [(ngModel)]="user.billingState" name="billingState"
+              placeholder="New York">
+            <div [hidden]="billingState.valid || billingState.pristine" class="invalid">State is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="billingZip">Postcode/zip</label>
+            <input type="number" class="form-input" #billingZip="ngModel" pattern="^\d{5}$" [(ngModel)]="user.billingZip"
+              name="billingZip" placeholder="3978">
+            <div [hidden]="billingZip.valid || billingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="address">Address</label>
+            <input type="text" class="form-input" #billingAddress="ngModel" [(ngModel)]="user.billingAddress" name="billingAddress"
+              placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="billingAddress.valid || billingAddress.pristine" class="invalid">Address is not valid</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="title-label d-inline">Shipping Adress </label>
+              <label class="checkbox-container d-inline ml-2">
+                Same as billing
+                <input type="checkbox" name="shippingSameAsBilling" (change)="clearShippingInputs()" [(ngModel)]="user.shippingSameAsBilling">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="!user?.shippingSameAsBilling">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="shippingCountry">Country</label>
+            <input type="text" #shippingCountry="ngModel" class="form-input" [(ngModel)]="user.shippingCountry" name="shippingCountry"
+              placeholder="USA">
+            <div [hidden]="shippingCountry.valid || shippingCountry.pristine" class="invalid">Country is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="shippingCityTown">City/Town</label>
+            <input type="text" #shippingCity="ngModel" class="form-input" [(ngModel)]="user.shippingCity" name="shippingCityTown"
+              placeholder="New York">
+            <div [hidden]="shippingCity.valid || shippingCity.pristine" class="invalid">City is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="shippingState">State</label>
+            <input type="text" #shippingState="ngModel" class="form-input" [(ngModel)]="user.shippingState" name="shippingState"
+              placeholder="New York">
+            <div [hidden]="shippingState.valid || shippingState.pristine" class="invalid">State is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="shippingZip">Postcode/zip</label>
+            <input type="number" pattern="^\d{5}$" #shippingZip="ngModel" class="form-input" [(ngModel)]="user.shippingZip"
+              name="shippingZip" placeholder="3978">
+            <div [hidden]="shippingZip.valid || shippingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="shippingAddress">Address</label>
+            <input type="text" #shippingAddress="ngModel" class="form-input" name="shippingAddress" [(ngModel)]="user.shippingAddress"
+              placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="shippingAddress.valid || shippingAddress.pristine" class="invalid">Address is not valid</div>
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <button class="btn primary-btn wide-btn" type="submit"> Save </button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<app-footer></app-footer>

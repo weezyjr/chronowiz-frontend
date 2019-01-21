@@ -49,18 +49,21 @@ table
     letter-spacing: 0.12px
     color: #212121
 
+@media (max-width: 991px)
+  .info-section
+    box-shadow: none
+    border-bottom: 1px solid #c0c0c0
+  .sections
+    border: 0
+
 @media (max-width: 500px)
   table
     th
       font-size: 10px
     td
       font-size: 12px
-  .info-section
-    box-shadow: none
-    border-bottom: 1px solid #c0c0c0
-  .sections
-    border: 0
-    
+
+
 ::ng-deep
   .content
     background: #fff !important
