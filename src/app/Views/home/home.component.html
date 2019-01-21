@@ -1,11 +1,13 @@
-<app-header content_color="white" opacity="0"></app-header>
+<app-header content_color="white" background_color="#000000" opacity="0"></app-header>
 <!----<video class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
   <source src="https://s3-eu-west-1.amazonaws.com/chronowiz-liv-media/home/chronowiz.mp4"
     type="video/mp4">
 </video>-->
-<video class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
-  <source [src]="mainVideoUrl | safeUrl" type="video/mp4">
-</video>
+<div class="background-fallback">
+  <video class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
+    <source [src]="mainVideoUrl | safeUrl" type="video/mp4">
+  </video>
+</div>
 
 <div class="container">
   <section>
@@ -25,18 +27,19 @@
       </div>
     </div>
     <div class="text-center mx-auto show-more my-4">
-      <button id="showMoreBrands" class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
+      <button id="showMoreBrands" class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' :
+        'More'}}</button>
     </div>
   </section>
-  <br/>
-  <br/>
-  <br/>
+  <br />
+  <br />
+  <br />
 
- <!--
+  <!--
    <app-social-media-section></app-social-media-section>
  -->
 
-<!--
+  <!--
   <app-footer-hero></app-footer-hero>
 -->
 
