@@ -1,3 +1,136 @@
-<p>
-  profile works!
-</p>
+<app-header></app-header>
+<div class="container mt-3 mb-5">
+  <div class="sassy-text">Hello {{user?.firstName}}!</div>
+  <h1>Account overview</h1>
+  <app-collapsible text="Your Primary Account Information" color="red">
+
+    <div class="contanier-fluid">
+      <div class="row no-gutters sections">
+
+        <div class="col-lg-4 col-12 info-section pb-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="bold-text text-left"> Your personal info </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="personal">
+                <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
+                <br>
+                <div class="info">{{user?.email}}</div>
+                <br>
+                <div class="info">{{user?.phone}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-12">
+              <button class="btn secondry-btn"> Edit Personal Info </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4 col-12 info-section pb-3">
+          <div class="row">
+            <div class="col-12">
+              <div class="bold-text text-left"> Payment Info </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="payment">
+                <div class="info pb-2">
+                  <img src="../../../assets/mastercard.svg" alt="mastercard">
+                  Ending in 6793
+                </div>
+                <div class="info">Exp. 09-2020</div>
+                <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
+                <br>
+                <div class="info">27 MERRY LN NP000131206</div>
+                <br>
+                <div class="info">EAST HANOVER, </div>
+                <div class="info">NJ 07936-3901 </div>
+                <br>
+                <div class="info">United States </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <button class="btn secondry-btn"> Edit Payment Info </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4 col-12 info-section pb-2">
+          <div class="row">
+            <div class="col-12">
+              <div class="bold-text text-left"> Billing Address </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="address">
+                <div class="info py-3">{{user?.firstName}} {{user?.lastName}}</div>
+                <div class="info py-3">27 MERRY LN NP000131206</div>
+                <div class="info py-3">EAST HANOVER, NJ 07936-3901</div>
+                <div class="info py-3">United States</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <button class="btn secondry-btn"> Edit Address Info </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </app-collapsible>
+
+  <div class="my-5"></div>
+
+  <app-collapsible text="Your Order History" color="gray">
+    <table class="table table-bordered table-responsive-sm">
+      <thead>
+        <tr>
+          <th scope="col">Order Date</th>
+          <th scope="col">Order Number</th>
+          <th scope="col">Total Price</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>05/04/18</td>
+          <td>RF000056700240000</td>
+          <td>{{19500 | currency}}</td>
+          <td>Verifying</td>
+        </tr>
+        <tr>
+          <td>03/03/18</td>
+          <td>RF000056600240000</td>
+          <td>{{15000 | currency}}</td>
+          <td>Shipped</td>
+        </tr>
+        <tr>
+          <td>01/04/17</td>
+          <td>RF000034500240000</td>
+          <td>{{34000 | currency}}</td>
+          <td>Shipped</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-collapsible>
+
+
+</div>
+<app-footer></app-footer>

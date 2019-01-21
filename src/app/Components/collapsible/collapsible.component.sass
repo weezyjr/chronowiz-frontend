@@ -16,6 +16,32 @@
   font-size: 14px
   text-transform: uppercase
 
+.collapsible-red
+  width: 100%
+  font-weight: 300
+  outline: none
+  cursor: pointer
+  border: none
+  background-color: #7A1C1C
+  color: white
+  text-transform: uppercase
+  font-size: 14px
+  text-align: left
+  padding: 5px 20px
+
+.collapsible-gray
+  width: 100%
+  font-weight: 300
+  outline: none
+  cursor: pointer
+  border: none
+  background-color: #EEEEEE
+  color: #212121
+  text-transform: uppercase
+  font-size: 14px
+  text-align: left
+  padding: 5px 20px
+
 .collapsible:last-child
   border-bottom: 1px solid #eee
 
@@ -27,7 +53,7 @@
   max-height: 0
   transition: max-height 0.2s ease-out
 
-.collapsible:not(.active):after
+.collapsible:not(.active):after, .collapsible-gray:not(.active):after
   content: ''
   color: black
   float: right
@@ -48,6 +74,21 @@
   border-right: 4px solid transparent
   border-bottom: 7px solid black
   margin: 4px
+
+.collapsible-red .active:after
+    border-bottom: 7px solid white !important
+
+.collapsible-red:not(.active):after
+  content: ''
+  color: white
+  float: right
+  width: 0
+  height: 0
+  border-left: 4px solid transparent
+  border-right: 4px solid transparent
+  border-top: 7px solid white
+  margin: 4px
+
 
 .show
   max-height: initial !important;

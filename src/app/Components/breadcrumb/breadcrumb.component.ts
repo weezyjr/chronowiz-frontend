@@ -15,6 +15,10 @@ export class BreadcrumbComponent implements OnInit {
   }, {
     name: 'bread3', url: '#'
   }];
+
+  @Input()
+  content_color: 'black' | 'white' = 'black';
+
   constructor() { }
 
   ngOnInit() {

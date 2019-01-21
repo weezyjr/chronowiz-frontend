@@ -11,6 +11,10 @@ export class CollapsibleComponent implements OnInit {
   @Input()
   text: String = '';
 
+
+  @Input()
+  color: 'red' | 'gray' | 'default' = 'default';
+
   active: Boolean = false;
 
   constructor() {

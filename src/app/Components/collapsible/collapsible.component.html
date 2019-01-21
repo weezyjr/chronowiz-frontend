@@ -1,4 +1,6 @@
-<button class="collapsible" (click)="toggleContent()" [ngClass]="{'active': active}">{{text}}</button>
+<button
+[ngClass]="{'active': active, 'collapsible': color === 'default', 'collapsible-red': color === 'red', 'collapsible-gray': color === 'gray'}"
+(click)="toggleContent()" >{{text}}</button>
 <div class="content" [ngClass]="{'show': active}">
   <ng-content></ng-content>
 </div>

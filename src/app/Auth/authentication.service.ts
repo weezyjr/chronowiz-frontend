@@ -20,7 +20,7 @@ export class AuthenticationService {
   private currentRetailerSubject: BehaviorSubject<Retailer>;
   public currentRetailer: Observable<Retailer>;
 
-  private currentUserSubject: BehaviorSubject<Retailer>;
+  private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
   private handleError: HandleError;
@@ -57,7 +57,7 @@ export class AuthenticationService {
     return this.currentRetailerSubject.value;
   }
 
-  public get currentUserValue(): Retailer {
+  public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
 

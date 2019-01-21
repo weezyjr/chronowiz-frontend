@@ -23,7 +23,7 @@
             <div (click)="openUserMenu()">
               <img class="icon" [src]="userIconSrc" alt="">
             </div>
-            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': content_color === 'white' || opacity === 0}">
+            <div class="drop-down-menu" *ngIf="logged" [ngClass]="{'d-none': menuClosed, 'second-menu': (background_color === '#ffffff' && opacity === 100) || opacity === 0}">
               <div class="arrow-up"></div>
               <div class="drop-down-content">
                 <ul>
