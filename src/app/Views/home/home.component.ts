@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BrandsService } from 'src/app/User/Brand/brands.service';
 import { Brand } from 'src/app/Types/brand';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../environments/environment';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
 
   private env = environment;
 
@@ -20,13 +25,10 @@ export class HomeComponent implements OnInit {
   mainVideoUrl = this.env.cloudfrontUrl + 'high30.mp4';
 
   brands: Brand[];
-
-  responseData: ResponseData;
-  response: ResponseObject;
+  _brands_: Brand[];
 
   public query: String;
 
-  brandBackup: Brand[];
 
   brandsLimit = 8;
 
@@ -36,7 +38,7 @@ export class HomeComponent implements OnInit {
   // search by query
   filterResults() {
     // return the array to the backup one
-    this.brands = this.brandBackup;
+    this.brands = this._brands_;
     // filter the brands array by query
     if (this.query && this.query.trim() !== '') {
       this.brands = this.brands.filter((brand) => {
@@ -63,19 +65,25 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.brandsService.readAllBrands()
-      .subscribe(data => {
-        console.log(data);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
         } else {
-          this.brands = <Brand[]>this.response.payload;
-          this.brandBackup = <Brand[]>this.response.payload;
+          this.brands = <Brand[]>response.payload;
+          this._brands_ = <Brand[]>response.payload;
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

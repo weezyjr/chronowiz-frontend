@@ -24,8 +24,8 @@ export class User {
   shippingAddress?: String = '';
 
   creditCardNumber?: String;
-  expirationDateMonth?: String;
-  expirationDateYear?: String;
+  creditCardExpirationMonth?: String;
+  creditCardExpirationYear?: String;
   securityNumber?: String;
   creditCard?: Boolean = false;
   escrow?: Boolean = false;
@@ -56,8 +56,8 @@ export class User {
       this.shippingSameAsBilling = true;
 
       this.creditCardNumber = '4111 2222 3333 4444';
-      this.expirationDateMonth = '12';
-      this.expirationDateYear = '19';
+      this.creditCardExpirationMonth = '12';
+      this.creditCardExpirationYear = '19';
       this.securityNumber = '123';
       this.creditCard = true;
       this.escrow = false;

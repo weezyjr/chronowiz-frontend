@@ -1,16 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/Types/User';
 import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-edit-payment-info',
   templateUrl: './edit-payment-info.component.html',
   styleUrls: ['./edit-payment-info.component.sass']
 })
-export class EditPaymentInfoComponent implements OnInit {
+export class EditPaymentInfoComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild(NgForm) shippingForm: NgForm;
 
@@ -76,6 +79,12 @@ export class EditPaymentInfoComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

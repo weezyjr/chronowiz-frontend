@@ -15,7 +15,6 @@
             <th class="small">Price</th>
             <th class="small">QTY</th>
             <th class="small">Total</th>
-            <th class="small">Remove</th>
           </tr>
         </thead>
         <tbody>
@@ -48,9 +47,6 @@
             <td>
               <p class="small m-0"> {{watch?.price * watch?.qty | currency: watch?.priceCurrency : 'symbol' : '1.0' }}
               </p>
-            </td>
-            <td class="text-center">
-              <i class="far fa-times-circle" (click)="removeFromCheckout(watch?.referenceNumber)"></i>
             </td>
           </tr>
         </tbody>

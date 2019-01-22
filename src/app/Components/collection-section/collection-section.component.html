@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-2 col-sm-3 col-6" *ngFor="let watch of watches | gender: gender">
       <div class="card">
-        <a [routerLink]="[url,watch?.referenceNumber]">
+        <a [routerLink]="['/watch',watch?.referenceNumber]">
           <div class="card-img">
             <img [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'" [alt]="watch?.model">
           </div>

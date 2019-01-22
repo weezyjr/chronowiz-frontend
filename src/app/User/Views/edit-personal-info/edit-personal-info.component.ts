@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { User } from 'src/app/Types/User';
+import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './edit-personal-info.component.html',
   styleUrls: ['./edit-personal-info.component.sass']
 })
-export class EditPersonalInfoComponent implements OnInit {
+export class EditPersonalInfoComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   user: User = new User();
   loading = false;
@@ -27,6 +30,12 @@ export class EditPersonalInfoComponent implements OnInit {
 
   onSubmit() {
     console.log(this.user);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

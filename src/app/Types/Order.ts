@@ -2,36 +2,45 @@ import { Watch } from './watch';
 
 export class Order {
   _id?: string;
-  email: string;
   jwt?: string;
 
+  // Personal Info
+  email: string;
   firstName?: String = '';
   lastName?: String = '';
   phone?: String = '';
 
+  // billing address
   billingCountry?: String = '';
   billingState?: String = '';
   billingCity?: String = '';
   billingZip?: String = '';
   billingAddress?: String = '';
 
+
+  // shipping type
   shippingType?: String = 'Free Shipping (3-5 business days)';
   shippingSameAsBilling?: Boolean = false;
 
+  // shipping address
   shippingCountry?: String = '';
   shippingState?: String = '';
   shippingCity?: String = '';
   shippingZip?: String = '';
   shippingAddress?: String = '';
 
-  creditCardNumber?: String;
-  expirationDateMonth?: String;
-  expirationDateYear?: String;
-  securityNumber?: String;
+  // payment method
   creditCard?: Boolean = false;
   escrow?: Boolean = false;
   wireTransfer?: Boolean = false;
 
+  // credit card Info
+  creditCardNumber?: String;
+  creditCardExpirationMonth?: String;
+  creditCardExpirationYear?: String;
+  securityNumber?: String;
+
+  // others
   watches?: Watch[];
   showDetails?: Boolean = false;
   date?: String = '01/01/2019';
@@ -63,8 +72,8 @@ export class Order {
       this.shippingSameAsBilling = true;
 
       this.creditCardNumber = '4111 2222 3333 4444';
-      this.expirationDateMonth = '12';
-      this.expirationDateYear = '19';
+      this.creditCardExpirationMonth = '12';
+      this.creditCardExpirationYear = '19';
       this.securityNumber = '123';
       this.creditCard = true;
       this.escrow = false;

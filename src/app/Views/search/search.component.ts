@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Brand } from 'src/app/Types/brand';
 import { Collection } from 'src/app/Types/collection';
 import { Watch } from 'src/app/Types/watch';
@@ -7,21 +7,24 @@ import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
 import { SearchService } from 'src/app/User/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.sass']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   brands: Brand[];
   collections: Collection[];
   watches: Watch[];
 
   query: string;
-  responseData: ResponseData;
-  response: ResponseObject;
+
 
   constructor(
     private searchService: SearchService,
@@ -32,16 +35,17 @@ export class SearchComponent implements OnInit {
 
   search() {
     if (this.query !== '' || this.query.length !== 0) {
-      this.searchService.search(this.query).subscribe(data => {
-        console.log(data);
+      this.searchService.search(this.query)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
         } else {
-          const RESULTS = <SearchResults>this.response.payload;
+          const RESULTS = <SearchResults>response.payload;
           this.brands = <Brand[]>RESULTS.brands;
           this.collections = <Collection[]>RESULTS.collections;
           this.watches = <Watch[]>RESULTS.watches;
@@ -122,5 +126,12 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
 
 }

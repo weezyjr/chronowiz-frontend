@@ -51,7 +51,7 @@
                     Ending in {{creditCardEndingIn}}
                   </div>
                 </div>
-                <div class="info">Exp. {{user?.expirationDateMonth}}-20{{user?.expirationDateYear}}</div>
+                <div class="info">Exp. {{user?.creditCardExpirationMonth}}-20{{user?.creditCardExpirationYear}}</div>
                 <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
                 <br>
                 <div class="info">{{user?.billingAddress}}</div>
@@ -102,7 +102,7 @@
   <div class="my-4"></div>
 
   <app-collapsible text="Your Order History" color="gray" [active]="true">
-    <table class="table table-bordered table-responsive-sm">
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">Order Date</th>

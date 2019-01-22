@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Brand } from 'src/app/Types/brand';
 import { Watch } from 'src/app/Types/watch';
 import { ResponseData } from 'src/app/API/response-data';
@@ -9,6 +9,8 @@ import { BrandsService } from 'src/app/User/Brand/brands.service';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { SearchService } from 'src/app/User/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface BrandCheckBox {
   _id: string;
@@ -21,7 +23,9 @@ interface BrandCheckBox {
   templateUrl: './advanced-search.component.html',
   styleUrls: ['./advanced-search.component.sass']
 })
-export class AdvancedSearchComponent implements OnInit {
+export class AdvancedSearchComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   watches: Watch[];
   watchesSearchResults: Watch[];
@@ -121,19 +125,21 @@ export class AdvancedSearchComponent implements OnInit {
 
   search() {
     if (this.query !== '' || this.query.length !== 0) {
-      this.searchService.search(this.query).subscribe(data => {
+      this.searchService.search(this.query)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(data => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+          this.responseData = data;
+          this.response = this.responseData.response;
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
-        } else {
-          const RESULTS = <SearchResults>this.response.payload;
-          this.watchesSearchResults = <Watch[]>RESULTS.watches;
-          this.renderWatches();
-        }
-      });
+          if (this.response.type.match('ERROR')) {
+            this._notificationsService.error('Error', this.response.message.en);
+          } else {
+            const RESULTS = <SearchResults>this.response.payload;
+            this.watchesSearchResults = <Watch[]>RESULTS.watches;
+            this.renderWatches();
+          }
+        });
     }
   }
 
@@ -303,5 +309,12 @@ export class AdvancedSearchComponent implements OnInit {
       });
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
 
 }

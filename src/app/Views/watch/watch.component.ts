@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WatchesService } from 'src/app/User/Watch/watches.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -6,16 +6,19 @@ import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { Watch } from 'src/app/Types/watch';
 import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-watch',
   templateUrl: './watch.component.html',
   styleUrls: ['./watch.component.sass']
 })
-export class WatchComponent implements OnInit {
+export class WatchComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   watch: Watch = new Watch();
-  responseData: ResponseData;
-  response: ResponseObject;
 
   get brandName() {
     try {
@@ -60,39 +63,45 @@ export class WatchComponent implements OnInit {
 
   ngOnInit() {
     let ref: string;
-    this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-      ref = params.get('ref');
-      this.watchesService.readWatch(ref)
-        .subscribe(data => {
-          console.log(data);
+    this.activeRoute.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params: ParamMap) => {
+        ref = params.get('ref');
+        this.watchesService.readWatch(ref)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((responseData: ResponseData) => {
+            console.log(responseData);
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+            const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
-          } else {
-            this.watch = <Watch>this.response.payload;
+            if (response.type.match('ERROR')) {
+              this._notificationsService.error('Error', response.message.en);
+            } else {
+              this.watch = <Watch>response.payload;
 
-            if (this.watch.brandObject && this.watch.collectionObject) {
-              if (this.watch.brandObject.name && this.watch.brandObject.name !== 'UNDEFINED') {
-                this.breads.push({ name: this.watch.brandObject.name, url: `/brand/${this.watch.brandObject.name}` });
-              } else {
-                this.breads.push({ name: 'brand', url: `/` });
+              // Bread Crumps
+              if (this.watch.brandObject) {
+                if (this.watch.brandObject.name && this.watch.brandObject.name !== 'UNDEFINED') {
+                  this.breads.push({ name: this.watch.brandObject.name, url: `/brand/${this.watch.brandObject.name}` });
+                } else {
+                  this.breads.push({ name: 'brand', url: `/watch/${this.watch.referenceNumber}` });
+                }
               }
 
               if (this.watch.collectionObject.name && this.watch.collectionObject.name !== 'UNDEFINED') {
-                this.breads.push({ name: this.watch.collectionObject.name, url: `/brand/${this.watch.brandObject.name}/${this.watch.collectionObject._id}` });
-              } else {
-                this.breads.push({ name: 'collection', url: `/` });
+                this.breads.push({ name: this.watch.collectionObject.name, url: `/collection/${this.watch.collectionObject._id}` });
+              } else if (this.watch.collectionObject.name && this.watch.collectionObject.name === 'UNDEFINED') {
+                this.breads.push({ name: 'collection', url: `/collection/${this.watch.collectionObject._id}` });
+              }
+              else {
+                this.breads.push({ name: 'collection', url: `/watch/${this.watch.referenceNumber}` });
               }
 
               this.breads.push({ name: this.watch.referenceNumber, url: '/' });
               console.log(this.watch);
             }
-          }
-        });
-    });
+          });
+      });
   }
 
   get collectionRoute(): Array<String> {
@@ -114,5 +123,11 @@ export class WatchComponent implements OnInit {
     else {
       this._notificationsService.error('Error', 'Something went wrong, please try again');
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

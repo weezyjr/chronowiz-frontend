@@ -1,25 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from 'src/app/Types/User';
 import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
 import { Router, ActivatedRoute } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.sass'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   user: User = new User();
   confirmPassword: string;
   loading = false;
   returnUrl: string;
-
-  responseData: ResponseData;
-  response: ResponseObject;
 
   constructor(
     private authenticationService: AuthenticationService, private route: ActivatedRoute, private router: Router, private _notificationsService: NotificationsService) {
@@ -43,24 +44,31 @@ export class RegisterComponent implements OnInit {
       this.loading = true;
 
       this.authenticationService.register(this.user)
-        .subscribe(data => {
-          this.responseData = data;
-          this.response = this.responseData.response;
+      .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
 
-          console.log(data);
+          const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          console.log(responseData);
+
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
             this.loading = false;
           }
           else {
-            this._notificationsService.success('Success', this.response.message.en);
+            this._notificationsService.success('Success', response.message.en);
             this.loading = false;
             console.log(this.returnUrl);
             this.router.navigate([this.returnUrl]);
           }
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

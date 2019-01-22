@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/Types/User';
 import { AuthenticationService } from 'src/app/Auth/authentication.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,9 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './edit-address-info.component.html',
   styleUrls: ['./edit-address-info.component.sass']
 })
-export class EditAddressInfoComponent implements OnInit {
+export class EditAddressInfoComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   user: User = new User();
   loading = false;
@@ -45,6 +48,12 @@ export class EditAddressInfoComponent implements OnInit {
 
   onSubmit() {
     console.log(this.user);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }
