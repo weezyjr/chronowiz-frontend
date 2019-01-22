@@ -45,10 +45,10 @@
                 <div class="form-group col-12">
                   <label for="">Expiration date</label>
 
-                  <input type="number" pattern="^((0[1-9])|([1-9])|(1[0-2]))$" name="expirationDateMonth" required [(ngModel)]="user.expirationDateMonth"
+                  <input type="number" pattern="^((0[1-9])|([1-9])|(1[0-2]))$" name="expirationDateMonth" required [(ngModel)]="user.creditCardExpirationMonth"
                     #expirationDateMonth="ngModel" class=" form-input number-form-input">
 
-                  <input type="number" pattern="^(\d{2})$" name="expirationDateYear" required [(ngModel)]="user.expirationDateYear"
+                  <input type="number" pattern="^(\d{2})$" name="expirationDateYear" required [(ngModel)]="user.creditCardExpirationYear"
                     #expirationDateYear="ngModel" class=" form-input number-form-input">
 
                   <div [hidden]="expirationDateMonth.valid || expirationDateMonth.pristine" class="invalid">

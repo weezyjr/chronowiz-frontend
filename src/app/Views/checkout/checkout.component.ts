@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Watch } from 'src/app/Types/watch';
 import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/Types/Order';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class CheckoutComponent implements OnInit {
 
   watches: Watch[] = [];
+  order: Order = new Order();
 
   public breads = [{
     name: 'Watch Tray', url: '/watch-tray',
@@ -41,7 +43,10 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.removeFromCheckout(ref);
   }
 
-  onSubmit(){
+  onSubmit() {
+    this.order.watches = this.watches;
+    this.checkoutService.currentOrder = this.order;
+    console.log(this.order);
     this.goToPage('shipping');
   }
 }

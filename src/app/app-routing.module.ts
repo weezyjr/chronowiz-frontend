@@ -24,18 +24,18 @@ import { ResetPasswordComponent } from './Views/reset-password/reset-password.co
 import { SetNewPasswordComponent } from './User/Views/set-new-password/set-new-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
 import { CheckoutComponent } from './Views/checkout/checkout.component';
-import { ShippingComponent } from './Views/shipping/shipping.component';
-import { PaymentComponent } from './Views/payment/payment.component';
 import { AboutUsComponent } from './Views/about-us/about-us.component';
-import { ConfirmationComponent } from './Views/confirmation/confirmation.component';
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
 import { EducationComponent } from './Views/education/education.component';
 import { WaterResistanceComponent } from './Views/education/water-resistance/water-resistance.component';
-import { OrderComponent } from './Views/order/order.component';
 import { EditPersonalInfoComponent } from './User/Views/edit-personal-info/edit-personal-info.component';
 import { EditPaymentInfoComponent } from './User/Views/edit-payment-info/edit-payment-info.component';
 import { EditAddressInfoComponent } from './User/Views/edit-address-info/edit-address-info.component';
+import { ShippingComponent } from './Views/checkout/shipping/shipping.component';
+import { OrderComponent } from './Views/checkout/order/order.component';
+import { ConfirmationComponent } from './Views/checkout/confirmation/confirmation.component';
+import { PaymentComponent } from './Views/checkout/payment/payment.component';
 
 const routes: Routes = [
   {

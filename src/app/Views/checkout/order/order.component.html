@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let watch of watches">
+          <tr *ngFor="let watch of order?.watches">
             <td class="text-center">
               <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
                 <img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">

@@ -30,8 +30,6 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
   watches: Watch[];
   watchesSearchResults: Watch[];
   query: String = '';
-  responseData: ResponseData;
-  response: ResponseObject;
   resultWatches: Watch[];
 
   brands: Array<BrandCheckBox> = [];
@@ -83,14 +81,15 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   getBrands() {
     this.brandsService.readAllBrands()
-      .subscribe(data => {
-        this.responseData = data;
-        this.response = this.responseData.response;
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
 
-        if (this.response.type.match('ERROR')) {
-          this._notificationsService.error('Error', this.response.message.en);
+        const response: ResponseObject = responseData.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
         } else {
-          this.brandsList = <Brand[]>this.response.payload;
+          this.brandsList = <Brand[]>response.payload;
           for (const brand of this.brandsList) {
             if (brand.name) {
               this.brands.push({ _id: brand._id, name: brand.name, checked: false });
@@ -110,13 +109,15 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getBrands();
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.query = params.get('query');
-      if (this.query && this.query !== '' && this.query !== undefined && this.query !== 'undefined') {
-        console.log(this.query);
-        this.search();
-      }
-    });
+    this.activatedRoute.paramMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params: ParamMap) => {
+        this.query = params.get('query');
+        if (this.query && this.query !== '' && this.query !== undefined && this.query !== 'undefined') {
+          console.log(this.query);
+          this.search();
+        }
+      });
   }
 
   openSortMenu() {
@@ -127,15 +128,14 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
     if (this.query !== '' || this.query.length !== 0) {
       this.searchService.search(this.query)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(data => {
+        .subscribe((responseData: ResponseData) => {
 
-          this.responseData = data;
-          this.response = this.responseData.response;
+          const response: ResponseObject = responseData.response;
 
-          if (this.response.type.match('ERROR')) {
-            this._notificationsService.error('Error', this.response.message.en);
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
           } else {
-            const RESULTS = <SearchResults>this.response.payload;
+            const RESULTS = <SearchResults>response.payload;
             this.watchesSearchResults = <Watch[]>RESULTS.watches;
             this.renderWatches();
           }

@@ -59,7 +59,6 @@ import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/ad
 import { HttpErrorHandlerService } from './API/http-error-handler.service';
 import { WatchesService } from './User/Watch/watches.service';
 import { SearchService } from './User/Search/search.service';
-import { ShippingComponent } from './Views/shipping/shipping.component';
 import { BrandsService } from './User/Brand/brands.service';
 import { AuthenticationService } from './Auth/authentication.service';
 import { WatchTrayService } from './User/WatchTray/watch-tray.service';
@@ -68,19 +67,20 @@ import { CollectionsService } from './User/Collection/collections.service';
 import { RetailerService } from './Retailer/retailer.service';
 import { AdminService } from './Admin/admin.service';
 import { AccordionComponent } from './Components/accordion/accordion.component';
-import { PaymentComponent } from './Views/payment/payment.component';
 import { AboutUsComponent } from './Views/about-us/about-us.component';
-import { ConfirmationComponent } from './Views/confirmation/confirmation.component';
 import { ResetPasswordCodeComponent } from './User/Views/reset-password-code/reset-password-code.component';
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
 import { EducationComponent } from './Views/education/education.component';
 import { WaterResistanceComponent } from './Views/education/water-resistance/water-resistance.component';
-import { OrderComponent } from './Views/order/order.component';
 import { EditPersonalInfoComponent } from './User/Views/edit-personal-info/edit-personal-info.component';
 import { EditPaymentInfoComponent } from './User/Views/edit-payment-info/edit-payment-info.component';
 import { EditAddressInfoComponent } from './User/Views/edit-address-info/edit-address-info.component';
 import { OrderConfirmationComponent } from './Components/order-confirmation/order-confirmation.component';
+import { ShippingComponent } from './Views/checkout/shipping/shipping.component';
+import { PaymentComponent } from './Views/checkout/payment/payment.component';
+import { ConfirmationComponent } from './Views/checkout/confirmation/confirmation.component';
+import { OrderComponent } from './Views/checkout/order/order.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,

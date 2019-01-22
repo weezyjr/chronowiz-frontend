@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Watch } from 'src/app/Types/watch';
+import { Order } from 'src/app/Types/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Watch } from 'src/app/Types/watch';
 export class CheckoutService {
   private _currentWatches: Watch[];
   private checkoutWatches: BehaviorSubject<Watch[]>;
+  private order$: BehaviorSubject<Order>;
 
   print(message: any) {
     const styles = ['color: green', 'background: yellow', 'font-size: 20px'].join(';');
@@ -22,6 +24,23 @@ export class CheckoutService {
 
   public get currentCheckoutWatchesValue(): Watch[] {
     return this.checkoutWatches.value;
+  }
+
+  public get currentOrder(): Order | undefined {
+    if (this.order$)
+    {
+      return this.order$.value;
+    } else {
+      return undefined;
+    }
+  }
+
+  public set currentOrder(order: Order) {
+    if (this.order$) {
+      this.order$.next(order);
+    } else {
+      this.order$ = new BehaviorSubject(order);
+    }
   }
 
   public addToCheckout(watch: Watch): Boolean {

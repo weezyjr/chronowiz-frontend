@@ -1,0 +1,39 @@
+<simple-notifications></simple-notifications>
+<app-header></app-header>
+<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<div class="row no-gutters">
+  <div class="col-12">
+    <div class="page-breads">
+      <ul class="list-inline w-100 px-2 text-center">
+        <li class="list-inline-item"><a (click)="goToPage('checkout')"> Checkout </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('shipping')"> Shipping </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('payment')"> Payment </a></li>
+        <li class="list-inline-item"><a (click)="goToPage('confirmation')" class="checked"> Confirmation </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container my-2">
+  <div class="my-5 mx-auto">
+
+    <app-order-confirmation [order]="order"></app-order-confirmation>
+
+    <div class="col-12">
+      <p class="totalPriceSection my-3">
+        <span class="totalPriceText">Total : </span>
+        <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
+      </p>
+    </div>
+
+    <div class="col-12 my-3">
+      <div class="note text-center">
+        If you are ready to make a purchase - click the button.
+      </div>
+    </div>
+
+    <div class="col-12 text-center m-auto">
+      <button class="btn primary-btn wide-btn" (click)="onSubmit()"> confirm </button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
