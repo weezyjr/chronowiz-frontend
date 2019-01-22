@@ -1,5 +1,4 @@
-<app-header [_brandName]="collection?.brandObject?.name" [_brandLogo]="collection?.brandObject?.logoPhotoUrl"></app-header>
-<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<app-header [_brandName]="collection?.brandObject?.name" [breads]="breads" [_brandLogo]="collection?.brandObject?.logoPhotoUrl"></app-header>
 <div class="container">
   <div class="collections-title text-center">
     <h1 *ngIf="collection?.name === 'UNDEFINED'"> collection </h1>

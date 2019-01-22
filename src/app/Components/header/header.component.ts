@@ -14,6 +14,9 @@ export class HeaderComponent implements OnInit {
   private _bg_rgb_: number[] = [];
 
   @Input()
+  breads: Array<Object>;
+
+  @Input()
   background_color: String | string = '#ffffff';
 
   @Input()

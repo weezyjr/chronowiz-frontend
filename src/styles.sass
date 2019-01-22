@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/scss/bootstrap'
-@import url('https://fonts.googleapis.com/css?family=Arapey:400i|Roboto:300,300i,400,400i,500,500i,700,700i');
 @import "~@ng-select/ng-select/themes/default.theme.css"
 
 $primary: #7A1C1C;
@@ -193,7 +192,7 @@ section
 
 /* On mouse-over, add a grey background color */
 .radio:hover input ~ .checkmark
-  background-color: #ccc;
+  background-color: rgba(122, 28, 28, 0.2)
 
 /* When the radio button is checked, add a blue background */
 .radio input:checked ~ .checkmark
@@ -259,7 +258,7 @@ section
 
 /* The container
 
-.checkbox-container
+.checkbox-right-container
   display: inline
   position: relative
   padding-left: 25px
@@ -283,8 +282,8 @@ section
 
 /* Create a custom checkbox
 
-.checkmark
-  border: 1px solid #212121
+.checkmark-right
+  border: 1px solid #212121 !important
   border-radius: 50%
   position: absolute
   top: 0
@@ -295,32 +294,32 @@ section
 
 /* On mouse-over, add a grey background color
 
-.checkbox-container
-  &:hover input ~ .checkmark
-    background-color: #ccc
-  input:checked ~ .checkmark
+.checkbox-right-container
+  &:hover input ~ .checkmark-right
+    background-color: rgba(122, 28, 28, 0.2)
+  input:checked ~ .checkmark-right
     background-color: #7A1C1C
 
 /* When the checkbox is checked, add a blue background
 
 /* Create the checkmark/indicator (hidden when not checked)
 
-.checkmark:after
+.checkmark-right:after
   content: ""
   position: absolute
   display: none
 
 /* Show the checkmark when checked
 
-.checkbox-container input:checked ~ .checkmark:after
+.checkbox-right-container input:checked ~ .checkmark-right:after
   border-color: #fff
 
-.checkmark:after
+.checkmark-right:after
   display: block
 
 /* Style the checkmark/indicator
 
-.checkbox-container .checkmark:after
+.checkbox-right-container .checkmark-right:after
   left: 5px
   top: 1px
   width: 4px
@@ -331,6 +330,20 @@ section
   -ms-transform: rotate(45deg)
   transform: rotate(45deg)
 
+
+.wrong-sign
+  display: inline-block
+  background: white
+  border: 1px solid #212121
+  border-radius: 50%
+  font-size: 7.7px
+  font-weight: 900
+  width: 16px
+  letter-spacing: 0px
+  padding: 2px 0px
+  text-align: center
+  height: 16px
+  cursor: pointer
 
 .wide-btn
   width: 220px;

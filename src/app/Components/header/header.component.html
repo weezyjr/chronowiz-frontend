@@ -1,5 +1,4 @@
-<header class="header"
-[style.background-color]="backgroundColor">
+<header class="header" [style.background-color]="backgroundColor">
   <div class="container">
     <div class="logo">
       <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo"
@@ -46,6 +45,11 @@
       </ul>
     </nav>
   </div>
+
+  <div *ngIf="breads">
+    <app-breadcrumb [breads]="breads" content_color="content_color"></app-breadcrumb>
+  </div>
+
 </header>
 <div *ngIf="background_color === '#ffffff' && opacity === 100" class="fix-height"></div>
 <app-side-menu [black]="content_color === 'black'"></app-side-menu>

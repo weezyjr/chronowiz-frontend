@@ -13,7 +13,13 @@
     </div>
   </div>
 
-  <app-carousel [len]="watchesLength">
+  <div class="text-center py-5" *ngIf="watches?.length === 0">
+    <p class="text-center">
+      You haven't added any watch to the watch tray
+    </p>
+  </div>
+
+  <app-carousel [len]="watchesLength" *ngIf="watches?.length !== 0">
     <div class="watch-tray">
       <div class="row pb-4">
         <div class="col-md-2 col-12 no-gutters">
@@ -29,8 +35,13 @@
           <div class="row flex-nowrap">
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
               <div class="right-wrong">
-                <i [ngClass]="watch?.addedToCheckOut? 'fas': 'far'" class="fa-check-circle" (click)="toggleWatchInCheckOut(watch)"></i>
-                <i class="far fa-times-circle" (click)="removeWatch(watch)"></i>
+                <label class="checkbox-right-container d-inline">
+                  <input type="checkbox" (change)="toggleWatchInCheckOut(watch)">
+                  <span class="checkmark-right"></span>
+                </label>
+                <!--- <i [ngClass]="watch?.addedToCheckOut? 'fas': 'far'" class="fa-check-circle" (click)="toggleWatchInCheckOut(watch)"></i>-->
+                <!----<i class="far fa-times-circle" (click)="removeWatch(watch)"></i>-->
+                <i class="wrong-sign" (click)="removeWatch(watch)">X</i>
               </div>
               <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
                 <img [src]="watch?.mainPhotoUrl? watch?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" alt="watch">

@@ -1,6 +1,5 @@
 <simple-notifications></simple-notifications>
-<app-header></app-header>
-<app-breadcrumb [breads]="breads"></app-breadcrumb>
+<app-header [breads]="breads"></app-header>
 <div class="row no-gutters">
   <div class="col-12">
     <div class="page-breads">
@@ -108,10 +107,10 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="title-label d-inline"> *Shipping Adress </label>
-              <label class="checkbox-container d-inline ml-2">
+              <label class="checkbox-right-container d-inline ml-2">
                 Same as billing
                 <input type="checkbox" name="shippingSameAsBilling" (change)="updateShippingInputs($event)" [(ngModel)]="order.shippingSameAsBilling">
-                <span class="checkmark"></span>
+                <span class="checkmark-right"></span>
               </label>
             </div>
           </div>
