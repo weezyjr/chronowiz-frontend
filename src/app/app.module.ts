@@ -57,13 +57,7 @@ import { AdminLoginComponent } from './Admin/Views/login/login.component';
 import { AddBrandFormComponent } from './Admin/Views/add-brand-form/add-brand-form.component';
 import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/add-collection-form.component';
 import { HttpErrorHandlerService } from './API/http-error-handler.service';
-import { WatchesService } from './User/Watch/watches.service';
-import { SearchService } from './User/Search/search.service';
-import { BrandsService } from './User/Brand/brands.service';
-import { AuthenticationService } from './Auth/authentication.service';
-import { WatchTrayService } from './User/WatchTray/watch-tray.service';
-import { CheckoutService } from './User/WatchTray/checkout.service';
-import { CollectionsService } from './User/Collection/collections.service';
+import { AuthenticationService } from './Auth/Authentication.service';
 import { RetailerService } from './Retailer/retailer.service';
 import { AdminService } from './Admin/admin.service';
 import { AccordionComponent } from './Components/accordion/accordion.component';
@@ -81,6 +75,12 @@ import { ShippingComponent } from './Views/checkout/shipping/shipping.component'
 import { PaymentComponent } from './Views/checkout/payment/payment.component';
 import { ConfirmationComponent } from './Views/checkout/confirmation/confirmation.component';
 import { OrderComponent } from './Views/checkout/order/order.component';
+import { WatchesService } from './User/Services/Watch/watches.service';
+import { SearchService } from './User/Services/Search/search.service';
+import { BrandsService } from './User/Services/Brand/brands.service';
+import { WatchTrayService } from './User/Services/WatchTray/watch-tray.service';
+import { CheckoutService } from './User/Services/WatchTray/checkout.service';
+import { CollectionsService } from './User/Services/Collection/collections.service';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -168,14 +168,13 @@ import { OrderComponent } from './Views/checkout/order/order.component';
     HttpErrorHandlerService,
     WatchesService,
     SearchService,
-    AuthenticationService,
+    BrandsService,
     WatchTrayService,
     CheckoutService,
-    BrandsService,
+    AuthenticationService,
     CollectionsService,
     RetailerService,
     AdminService,
-    /* {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},*/
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

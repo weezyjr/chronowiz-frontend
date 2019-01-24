@@ -5,7 +5,7 @@ import { Watch } from 'src/app/Types/watch';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
-import { SearchService } from 'src/app/User/Search/search.service';
+import { SearchService } from 'src/app/User/Services/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

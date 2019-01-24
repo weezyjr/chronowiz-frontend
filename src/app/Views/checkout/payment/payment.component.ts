@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Order } from 'src/app/Types/Order';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
-import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
+import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 import { User } from 'src/app/Types/User';
 
 @Component({
@@ -105,14 +105,6 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if he skipped shipping
-    if (!this.checkoutService.currentOrder.shippingAddress ||
-      !this.checkoutService.currentOrder.shippingCity ||
-      !this.checkoutService.currentOrder.shippingCountry ||
-      !this.checkoutService.currentOrder.shippingState ||
-      !this.checkoutService.currentOrder.email) {
-      this.router.navigate(['/checkout']);
-    }
   }
 
 }

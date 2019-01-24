@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
-import { Watch } from 'src/app/Types/watch';
+import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 import { Order } from 'src/app/Types/Order';
 import { Router } from '@angular/router';
 

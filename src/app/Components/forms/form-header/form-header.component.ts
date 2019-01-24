@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 
 @Component({
   selector: 'app-form-header',

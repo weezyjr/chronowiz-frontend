@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WatchesService } from 'src/app/User/Watch/watches.service';
+import { WatchesService } from 'src/app/User/Services/Watch/watches.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { Watch } from 'src/app/Types/watch';
-import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
+import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 

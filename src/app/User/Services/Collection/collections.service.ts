@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { HandleError, HttpErrorHandlerService } from 'src/app/API/http-error-handler.service';

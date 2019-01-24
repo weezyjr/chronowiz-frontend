@@ -39,8 +39,6 @@
                   <input type="checkbox" (change)="toggleWatchInCheckOut(watch)">
                   <span class="checkmark-right"></span>
                 </label>
-                <!--- <i [ngClass]="watch?.addedToCheckOut? 'fas': 'far'" class="fa-check-circle" (click)="toggleWatchInCheckOut(watch)"></i>-->
-                <!----<i class="far fa-times-circle" (click)="removeWatch(watch)"></i>-->
                 <i class="wrong-sign" (click)="removeWatch(watch)">X</i>
               </div>
               <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">

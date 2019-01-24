@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLoginComponent } from './Admin/Views/login/login.component';
-import { AdminGuard } from './Auth/admin.guard';
+import { AdminGuard } from './Auth/Admin.guard';
 import { AddWatchFormComponent } from './Admin/Views/add-watch-form/add-watch-form.component';
 import { AddBrandFormComponent } from './Admin/Views/add-brand-form/add-brand-form.component';
 import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/add-collection-form.component';
@@ -9,7 +9,7 @@ import { HomeComponent } from './Views/home/home.component';
 import { BrandComponent } from './Views/brand/brand.component';
 import { CollectionsComponent } from './Views/collections/collections.component';
 import { WatchComponent } from './Views/watch/watch.component';
-import { RetailerGuard } from './Auth/retailerAuth.guard';
+import { RetailerGuard } from './Auth/RetailerAuth.guard';
 import { RetailerLoginComponent } from './Retailer/Views/login/login.component';
 import { AddRetialerFormComponent } from './Admin/Views/add-retialer-form/add-retialer-form.component';
 import { AddToStockComponent } from './Retailer/Views/add-to-stock/add-to-stock.component';
@@ -17,7 +17,7 @@ import { InStockComponent } from './Retailer/Views/in-stock/in-stock.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { LoginComponent } from './Views/login/login.component';
 import { ProfileComponent } from './User/Views/profile/profile.component';
-import { UserGuard } from './Auth/user.guard';
+import { UserGuard } from './Auth/User.guard';
 import { SearchComponent } from './Views/search/search.component';
 import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced-search.component';
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
@@ -36,6 +36,9 @@ import { ShippingComponent } from './Views/checkout/shipping/shipping.component'
 import { OrderComponent } from './Views/checkout/order/order.component';
 import { ConfirmationComponent } from './Views/checkout/confirmation/confirmation.component';
 import { PaymentComponent } from './Views/checkout/payment/payment.component';
+import { ShippingGuard } from './Auth/Shipping.guard';
+import { ConfirmationGuard } from './Auth/Confirmation.guard';
+import { PaymentGuard } from './Auth/Payment.guard';
 
 const routes: Routes = [
   {
@@ -45,7 +48,8 @@ const routes: Routes = [
   },
   {
     path: 'shipping',
-    component: ShippingComponent
+    component: ShippingComponent,
+    canActivate: [ShippingGuard]
   },
   {
     path: 'about',
@@ -57,7 +61,8 @@ const routes: Routes = [
   },
   {
     path: 'confirmation',
-    component: ConfirmationComponent
+    component: ConfirmationComponent,
+    canActivate: [ConfirmationGuard]
   },
   {
     path: 'terms-conditions',
@@ -77,7 +82,8 @@ const routes: Routes = [
   },
   {
     path: 'payment',
-    component: PaymentComponent
+    component: PaymentComponent,
+    canActivate: [PaymentGuard]
   },
   {
     path: 'home',

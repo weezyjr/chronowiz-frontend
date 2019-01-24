@@ -3,7 +3,7 @@ import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
 import { Collection } from 'src/app/Types/collection';
-import { BrandsService } from 'src/app/User/Brand/brands.service';
+import { BrandsService } from 'src/app/User/Services/Brand/brands.service';
 import { Brand } from 'src/app/Types/brand';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subject } from 'rxjs';

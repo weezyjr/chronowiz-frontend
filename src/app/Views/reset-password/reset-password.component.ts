@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ResponseObject } from 'src/app/API/responseObject';

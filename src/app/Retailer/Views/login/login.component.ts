@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

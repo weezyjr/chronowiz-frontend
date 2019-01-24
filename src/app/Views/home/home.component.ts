@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BrandsService } from 'src/app/User/Brand/brands.service';
+import { BrandsService } from 'src/app/User/Services/Brand/brands.service';
 import { Brand } from 'src/app/Types/brand';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
@@ -16,7 +16,6 @@ import { takeUntil } from 'rxjs/operators';
 export class HomeComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
-
 
   private env = environment;
 

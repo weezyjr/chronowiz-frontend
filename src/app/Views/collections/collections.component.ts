@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { CollectionsService } from 'src/app/User/Collection/collections.service';
+import { CollectionsService } from 'src/app/User/Services/Collection/collections.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';

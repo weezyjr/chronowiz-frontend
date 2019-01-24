@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/Types/Order';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
-import { NotificationsService } from 'angular2-notifications';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 import { User } from 'src/app/Types/User';
-import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
+import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 
 
 @Component({
@@ -29,22 +28,18 @@ export class ShippingComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private checkoutService: CheckoutService,
-    private router: Router){
-    if (!this.checkoutService.currentOrder) {
-      this.router.navigate(['/checkout']);
+    private router: Router) {
+
+    const CurrentOrder: Order = this.checkoutService.currentOrder;
+    // if the user is logged in
+    if (this.authenticationService.currentUser) {
+      const currentUser: User = this.authenticationService.currentUserValue;
+      this.order = Object.assign(this.order, CurrentOrder, <Order>currentUser);
+      console.log('logged', this.order);
     }
     else {
-      // if the user is logged in
-      if (this.authenticationService.currentUser) {
-        const currentUser: User = this.authenticationService.currentUserValue;
-        const CurrentOrder: Order = this.checkoutService.currentOrder;
-        this.order = Object.assign(this.order, CurrentOrder, <Order>currentUser);
-        console.log('logged', this.order);
-      }
-      else {
-        this.order = this.checkoutService.currentOrder;
-        console.log('Not logged', this.order);
-      }
+      this.order = CurrentOrder;
+      console.log('Not logged', this.order);
     }
   }
 

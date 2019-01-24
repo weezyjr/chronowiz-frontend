@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 import { Watch } from 'src/app/Types/watch';
-import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
-import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
+import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
+import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 
 @Component({
   selector: 'app-watch-tray',

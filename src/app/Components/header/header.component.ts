@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthenticationService } from 'src/app/Auth/authentication.service';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 import { Router } from '@angular/router';
-import { WatchTrayService } from 'src/app/User/WatchTray/watch-tray.service';
+import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
 
 
 @Component({

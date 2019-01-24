@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Watch } from 'src/app/Types/watch';
-import { CheckoutService } from 'src/app/User/WatchTray/checkout.service';
-import { NotificationsService } from 'angular2-notifications';
+import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 import { Order } from 'src/app/Types/Order';
 
 @Component({
@@ -59,18 +57,6 @@ export class ConfirmationComponent implements OnInit {
 
 
   ngOnInit() {
-    // if he skipped payment or shipping
-    if (!this.checkoutService.currentOrder.shippingAddress ||
-      !this.checkoutService.currentOrder.shippingCity ||
-      !this.checkoutService.currentOrder.shippingCountry ||
-      !this.checkoutService.currentOrder.shippingState ||
-      !this.checkoutService.currentOrder.email ||
-      !(this.checkoutService.currentOrder.creditCard ||
-        this.checkoutService.currentOrder.escrow ||
-        this.checkoutService.currentOrder.wireTransfer)
-    ) {
-      this.router.navigate(['/checkout']);
-    }
   }
 
 }
