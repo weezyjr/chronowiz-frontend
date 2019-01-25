@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from './Authentication.service';
 
 @Injectable({ providedIn: 'root' })
@@ -22,7 +22,7 @@ export class ResetPasswordGuard implements CanActivate {
     }
 
     // not logged in so redirect to reset password
-    this.router.navigate(['/reset-password']);
+    this.router.navigate(['/login']);
     return false;
   }
 }
