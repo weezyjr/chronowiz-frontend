@@ -1,10 +1,9 @@
-<app-header
+<app-header *ngIf="brandObject"
 [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
 [content_color]="brandObject?.headerContentColor? brandObject?.headerContentColor: 'black'"
 [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
 [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl"
 [breads]="breads"></app-header>
-<!--<app-hero *ngIf="brandObject" [cover]="brandObject?.banner1PhotoUrl ? brandObject?.banner1PhotoUrl: 'http://placehold.it/1600x900'"></app-hero>-->
 
 <div class="mx-auto hero-container">
   <video *ngIf="brandObject?.headerPhotoUrl && isVideo(brandObject?.headerPhotoUrl)" class="main-vid"
@@ -13,10 +12,9 @@
   </video>
   <app-hero *ngIf="brandObject?.headerPhotoUrl && !isVideo(brandObject?.headerPhotoUrl)" [cover]="brandObject?.headerPhotoUrl"></app-hero>
   <app-hero *ngIf="!brandObject?.headerPhotoUrl" cover="http://placehold.it/1600x350/FFFFFF/FFFFFF"></app-hero>
-
 </div>
 
-<div class="container">
+<div class="container mb-5">
   <header class="title text-center">
     <h1>{{brandObject?.name}}</h1>
     <h5>The Collections</h5>
@@ -36,12 +34,4 @@
     <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
   </div>
 </div>
-<br />
-<br />
-<br />
-
-<!--
-  <app-footer-hero></app-footer-hero>
--->
-
 <app-footer></app-footer>

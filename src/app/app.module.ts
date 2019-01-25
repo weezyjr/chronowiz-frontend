@@ -62,7 +62,6 @@ import { RetailerService } from './Retailer/retailer.service';
 import { AdminService } from './Admin/admin.service';
 import { AccordionComponent } from './Components/accordion/accordion.component';
 import { AboutUsComponent } from './Views/about-us/about-us.component';
-import { ResetPasswordCodeComponent } from './User/Views/reset-password-code/reset-password-code.component';
 import { TermsConditionsComponent } from './Views/terms-conditions/terms-conditions.component';
 import { ContactUsComponent } from './Views/contact-us/contact-us.component';
 import { EducationComponent } from './Views/education/education.component';
@@ -131,7 +130,6 @@ import { CollectionsService } from './User/Services/Collection/collections.servi
     PaymentComponent,
     AboutUsComponent,
     ConfirmationComponent,
-    ResetPasswordCodeComponent,
     TermsConditionsComponent,
     ContactUsComponent,
     EducationComponent,

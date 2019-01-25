@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -10,6 +10,7 @@ import { Admin } from '../Types/admin';
 import { Retailer } from '../Types/retailer';
 import { Router } from '@angular/router';
 import { User } from '../Types/User';
+import { ResetPassword } from '../Types/ResetPassword';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -29,12 +30,14 @@ export class AuthenticationService {
 
   adminLoginUrl = this.env.backendUrl + 'admin/account/login/';
   retailerLoginUrl = this.env.backendUrl + 'retailer/account/login';
+
   userLoginUrl = this.env.backendUrl + 'user/account/login';
   userRegisterUrl = this.env.backendUrl + 'user/account/signup';
   sendUserResetPasswordEmailUrl = this.env.backendUrl + 'user/account/resetPasswordSendEmail';
+  resetUserPasswordConfirmCodeUrl = this.env.backendUrl + 'user/account/resetPasswordConfirmCode';
+  resetUserPasswordNewPasswordUrl = this.env.backendUrl + 'user/account/resetPasswordNewPassword';
 
-  responseData: ResponseData;
-  response: ResponseObject;
+  private resetPassword$: BehaviorSubject<ResetPassword>;
 
   constructor(private http: HttpClient, httpErrorHandler: HttpErrorHandlerService, private router: Router) {
     this.currentAdminSubject = new BehaviorSubject<Admin>(JSON.parse(localStorage.getItem('currentAdmin')));
@@ -61,16 +64,35 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  public get resetPassword(): ResetPassword | undefined {
+    if (this.resetPassword$) {
+      return this.resetPassword$.value;
+    }
+    else {
+      return undefined;
+    }
+  }
+
+  public set resetPassword(resetPasswordObject: ResetPassword) {
+    if (!resetPasswordObject.email || !resetPasswordObject.recoveryEmailVerificationCode) {
+      return;
+    }
+    if (this.resetPassword$) {
+      this.resetPassword$.next(resetPasswordObject);
+    }
+    else {
+      this.resetPassword$ = new BehaviorSubject(resetPasswordObject);
+    }
+  }
+
   retailerLogin(email: string, password: string) {
     return this.http.post<ResponseData>(this.retailerLoginUrl, { 'payload': { email, password } })
-      .pipe(map(data => {
-        console.log(data);
+      .pipe(map((responseData: ResponseData) => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (!this.response.type.match('ERROR')) {
-          const retailer = <Retailer>this.response.payload;
+        if (!response.type.match('ERROR')) {
+          const retailer = <Retailer>response.payload;
 
           console.log(retailer);
 
@@ -82,21 +104,19 @@ export class AuthenticationService {
           }
         }
 
-        return data;
+        return responseData;
       }));
   }
 
 
   adminLogin(email: string, password: string) {
     return this.http.post<ResponseData>(this.adminLoginUrl, { 'payload': { email, password } })
-      .pipe(map(data => {
-        console.log(data);
+      .pipe(map((responseData: ResponseData) => {
 
-        this.responseData = data;
-        this.response = this.responseData.response;
+        const response: ResponseObject = responseData.response;
 
-        if (!this.response.type.match('ERROR')) {
-          const admin = <Admin>this.response.payload;
+        if (!response.type.match('ERROR')) {
+          const admin = <Admin>response.payload;
 
           console.log(admin);
 
@@ -108,49 +128,25 @@ export class AuthenticationService {
           }
         }
 
-        return data;
+        return responseData;
       }));
   }
 
-  sendResetPasswordEmail(email: string): Observable<ResponseData> {
+  sendUserResetPasswordEmail(email: string): Observable<ResponseData> {
     return this.http.post<ResponseData>(this.sendUserResetPasswordEmailUrl, { 'payload': { email } })
       .pipe(map((responseData: ResponseData) => {
-          return responseData;
+        return responseData;
       }));
   }
 
-  register(user: User): Observable<ResponseData> {
-    return this.http.post<ResponseData>(this.userRegisterUrl, { 'payload': user })
-      .pipe(map(data => {
-        this.responseData = data;
-        this.response = this.responseData.response;
+  resetUserPasswordConfirmCode(email: string, recoveryEmailVerificationCode: string): Observable<ResponseData> {
+    return this.http.post<ResponseData>(this.resetUserPasswordConfirmCodeUrl,
+      { 'payload': { email, recoveryEmailVerificationCode } })
+      .pipe(map((responseData: ResponseData) => {
+        const response: ResponseObject = responseData.response;
 
-        if (!this.response.type.match('ERROR')) {
-          const registeredUser = <User>this.response.payload;
-
-          console.log(registeredUser);
-
-          // login successful if there's a jwt token in the response
-          if (registeredUser && registeredUser.jwt) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(registeredUser));
-            this.currentUserSubject.next(registeredUser);
-          }
-        }
-        return data;
-      }));
-  }
-
-  login(email: string, password: string) {
-    return this.http.post<ResponseData>(this.userLoginUrl, { 'payload': { email, password } })
-      .pipe(map(data => {
-        console.log(data);
-
-        this.responseData = data;
-        this.response = this.responseData.response;
-
-        if (!this.response.type.match('ERROR')) {
-          const user = <User>this.response.payload;
+        if (!response.type.match('ERROR')) {
+          const user = <User>response.payload;
 
           console.log(user);
 
@@ -161,7 +157,64 @@ export class AuthenticationService {
             this.currentUserSubject.next(user);
           }
         }
-        return data;
+        return responseData;
+      }));
+  }
+
+  resetUserPasswordSetPassword(resetPassword: ResetPassword): Observable<ResponseData> {
+    return this.http.post<ResponseData>(this.resetUserPasswordNewPasswordUrl,
+      { 'payload': resetPassword }, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${this.currentUserValue.jwt}`
+        })
+      })
+      .pipe(map((responseData: ResponseData) => {
+        return responseData;
+      }));
+  }
+
+  register(user: User): Observable<ResponseData> {
+    return this.http.post<ResponseData>(this.userRegisterUrl, { 'payload': user })
+      .pipe(map((responseData: ResponseData) => {
+
+        const response: ResponseObject = responseData.response;
+
+        if (!response.type.match('ERROR')) {
+          const registeredUser = <User>response.payload;
+
+          console.log(registeredUser);
+
+          // login successful if there's a jwt token in the response
+          if (registeredUser && registeredUser.jwt) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(registeredUser));
+            this.currentUserSubject.next(registeredUser);
+          }
+        }
+        return responseData;
+      }));
+  }
+
+  login(email: string, password: string) {
+    return this.http.post<ResponseData>(this.userLoginUrl, { 'payload': { email, password } })
+      .pipe(map((responseData: ResponseData) => {
+
+        const response: ResponseObject = responseData.response;
+
+        if (!response.type.match('ERROR')) {
+          const user = <User>response.payload;
+
+          console.log(user);
+
+          // login successful if there's a jwt token in the response
+          if (user && user.jwt) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          }
+        }
+        return responseData;
       }));
   }
 

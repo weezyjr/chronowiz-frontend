@@ -37,6 +37,12 @@
   <app-watch-section [watch]="watch"></app-watch-section>
   <app-attribute-table id="technicals" [watch]="watch"></app-attribute-table>
 
+  <div class="d-flex p-4 align-items-center justify-content-center">
+    <div class="show-price" (click)="showPrice()"> {{price}} </div>
+    <button (click)="addToWatchTray()" class="add-to-watch-tray"><i class="fa"><img src="../../../assets/paper-bag.svg" width="12" alt=""></i>
+      add to watch tray</button>
+  </div>
+
   <div class="return-to-top text-center mx-auto w-100" (click)="scrollTo('top')">
     <img src="../../../assets/down-arrow.svg" class="watchdetails_downarrow">
     <div>

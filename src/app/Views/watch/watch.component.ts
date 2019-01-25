@@ -19,6 +19,8 @@ export class WatchComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   watch: Watch = new Watch();
+  price: string | number = 'Show Price';
+
 
   get brandName() {
     try {
@@ -122,6 +124,22 @@ export class WatchComponent implements OnInit, OnDestroy {
     }
     else {
       this._notificationsService.error('Error', 'Something went wrong, please try again');
+    }
+  }
+
+  showPrice() {
+    if (this.watch.price) {
+      if (this.watch.priceCurrency === 'Other') {
+        this.price = this.watch.price.toLocaleString('en');
+      }
+      else {
+        const formatter = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: this.watch.priceCurrency,
+          minimumFractionDigits: 0
+        });
+        this.price = formatter.format(this.watch.price) + ' ' + this.watch.priceCurrency;
+      }
     }
   }
 

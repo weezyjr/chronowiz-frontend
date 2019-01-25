@@ -39,6 +39,7 @@ import { PaymentComponent } from './Views/checkout/payment/payment.component';
 import { ShippingGuard } from './Auth/Shipping.guard';
 import { ConfirmationGuard } from './Auth/Confirmation.guard';
 import { PaymentGuard } from './Auth/Payment.guard';
+import { ResetPasswordGuard } from './Auth/resetPassword.guard';
 
 const routes: Routes = [
   {
@@ -203,7 +204,7 @@ const routes: Routes = [
   {
     path: 'account/set-new-password',
     component: SetNewPasswordComponent,
-    canActivate: [UserGuard]
+    canActivate: [ResetPasswordGuard]
   },
   {
     path: 'profile',
