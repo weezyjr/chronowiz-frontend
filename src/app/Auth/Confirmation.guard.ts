@@ -14,8 +14,8 @@ export class ConfirmationGuard implements CanActivate {
   canActivate() {
     const order: Order = this.checkoutService.currentOrder;
     if (order &&
-      order.watches &&
-      order.watches.length &&
+      order.watchObjects &&
+      order.watchObjects.length &&
       order.email &&
       order.phone &&
       order.shippingAddress &&
@@ -26,15 +26,7 @@ export class ConfirmationGuard implements CanActivate {
       order.billingCity &&
       order.billingCountry &&
       order.billingState) {
-      if (order.creditCard) {
-        if (order.creditCardNumber &&
-          order.securityNumber) {
-          return true;
-        }
-      } else if (order.escrow ||
-        order.wireTransfer) {
-        return true;
-      }
+      return true;
     }
 
     // no enough data in the order so redirect to login page with the return url

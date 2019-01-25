@@ -40,6 +40,7 @@ import { ShippingGuard } from './Auth/Shipping.guard';
 import { ConfirmationGuard } from './Auth/Confirmation.guard';
 import { PaymentGuard } from './Auth/Payment.guard';
 import { ResetPasswordGuard } from './Auth/resetPassword.guard';
+import { OrderGuard } from './Auth/order.guard';
 
 const routes: Routes = [
   {
@@ -57,8 +58,9 @@ const routes: Routes = [
     component: AboutUsComponent
   },
   {
-    path: 'orders',
-    component: OrderComponent
+    path: 'order',
+    component: OrderComponent,
+    canActivate: [OrderGuard]
   },
   {
     path: 'confirmation',

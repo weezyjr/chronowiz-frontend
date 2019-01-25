@@ -13,7 +13,7 @@ export class ShippingGuard implements CanActivate {
 
   canActivate() {
     const order: Order = this.checkoutService.currentOrder;
-    if (order && order.watches && order.watches.length) {
+    if (order && order.watchObjects && order.watchObjects.length) {
       return true;
     }
 

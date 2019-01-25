@@ -10,7 +10,6 @@ import { Order } from 'src/app/Types/Order';
 })
 export class CheckoutComponent implements OnInit {
 
-  watches: Watch[] = [];
   order: Order = new Order();
 
   public breads = [{
@@ -23,14 +22,14 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     if (this.checkoutService.currentCheckoutWatchesValue) {
-      this.watches = this.checkoutService.currentCheckoutWatchesValue;
+      this.order.watchObjects = this.checkoutService.currentCheckoutWatchesValue;
     }
   }
 
   get totalPrice(): number {
     let _total = 0;
-    for (const watch of this.watches) {
-      _total += watch.price * watch.qty;
+    for (const watch of this.order.watchObjects) {
+      _total += watch.price * watch.quantity;
     }
     return _total;
   }
@@ -44,7 +43,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    this.order.watches = this.watches;
     this.checkoutService.currentOrder = this.order;
     console.log(this.order);
     this.goToPage('shipping');

@@ -20,6 +20,8 @@ export class OrderComponent implements OnInit {
     }
     else {
       this.order = this.checkoutService.currentOrder;
+      // empty the subject
+      this.checkoutService.currentOrder = undefined;
       console.log('order', this.order);
     }
   }
@@ -29,11 +31,8 @@ export class OrderComponent implements OnInit {
 
   get totalPrice(): number {
     let _total = 20;
-    if (!this.order || !this.order.watches) {
-      return 0;
-    }
-    for (const watch of this.order.watches) {
-      _total += watch.price * watch.qty;
+    for (const watch of this.order.watchObjects) {
+      _total += watch.price * watch.quantity;
     }
     return _total;
   }

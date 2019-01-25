@@ -2,8 +2,8 @@
 <app-header></app-header>
 <div class="container mt-2 mb-5">
   <div class="text-center">
-    <h1> Order #RF1021 </h1>
-    <h2 class="text-center"> 05/04/2018 </h2>
+    <h1> Order #RF{{order.orderNumber}} </h1>
+    <h2 class="text-center"> {{order.orderDate | date:'shortDate'}} </h2>
   </div>
   <div class="row mb-5 mt-3 mx-auto">
     <div class="col-12 mt-4">
@@ -18,34 +18,38 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let watch of order?.watches">
+          <tr *ngFor="let orderWatchObject of order?.watchObjects">
             <td class="text-center">
-              <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
-                <img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
+              <a class="img-container" *ngIf="orderWatchObject?.watchObject?.referenceNumber" [routerLink]="['/watch/',orderWatchObject?.watchObject?.referenceNumber]">
+                <img class="table-img" [src]="orderWatchObject?.watchObject?.mainPhotoUrl? orderWatchObject?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
               </a>
             </td>
             <td class="desc">
               <p class="m-0">
-                <span class="bold" *ngIf="watch?.model">{{watch?.model}} </span>
-                <span class="small" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
-                <span class="small" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
-                <span class="small" *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+                <span class="bold" *ngIf="orderWatchObject?.watchObject?.model">{{orderWatchObject?.watchObject?.model}}
+                </span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}}
+                  mm,</span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}},</span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
                 <br>
                 <span class="bold">Reference number:
                   <span class="small">
-                    {{watch?.referenceNumber}}
+                    {{orderWatchObject?.watchObject?.referenceNumber}}
                   </span>
                 </span>
               </p>
             </td>
             <td>
-              <p class="small m-0"> {{watch?.price | currency: watch?.priceCurrency : 'symbol' : '1.0' }} </p>
+              <p class="small m-0"> {{orderWatchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency
+                : 'symbol' : '1.0' }} </p>
             </td>
             <td class="text-center">
-              <p class="small"> {{watch?.qty}} </p>
+              <p class="small"> {{orderWatchObject?.quantity}} </p>
             </td>
             <td>
-              <p class="small m-0"> {{watch?.price * watch?.qty | currency: watch?.priceCurrency : 'symbol' : '1.0' }}
+              <p class="small m-0"> {{orderWatchObject?.price * orderWatchObject?.quantity | currency:
+                orderWatchObject?.watchObject?.priceCurrency : 'symbol' : '1.0' }}
               </p>
             </td>
           </tr>

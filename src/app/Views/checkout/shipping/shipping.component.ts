@@ -30,11 +30,21 @@ export class ShippingComponent implements OnInit {
     private checkoutService: CheckoutService,
     private router: Router) {
 
+    if (!this.checkoutService.currentOrder) {
+      this.router.navigate(['/checkout']);
+    }
+
     const CurrentOrder: Order = this.checkoutService.currentOrder;
     // if the user is logged in
     if (this.authenticationService.currentUser) {
       const currentUser: User = this.authenticationService.currentUserValue;
-      this.order = Object.assign(this.order, CurrentOrder, <Order>currentUser);
+      this.order = Object.assign(CurrentOrder, <Order>currentUser);
+
+      // remove useless keys/values
+      delete this.order.jwt;
+      delete this.order._id;
+      delete this.order.showDetails;
+
       console.log('logged', this.order);
     }
     else {

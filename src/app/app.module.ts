@@ -80,6 +80,7 @@ import { BrandsService } from './User/Services/Brand/brands.service';
 import { WatchTrayService } from './User/Services/WatchTray/watch-tray.service';
 import { CheckoutService } from './User/Services/WatchTray/checkout.service';
 import { CollectionsService } from './User/Services/Collection/collections.service';
+import { OrderService } from './User/Services/WatchTray/order.service';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -163,6 +164,7 @@ import { CollectionsService } from './User/Services/Collection/collections.servi
   ],
   exports: [RouterModule],
   providers: [
+    OrderService,
     HttpErrorHandlerService,
     WatchesService,
     SearchService,

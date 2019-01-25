@@ -3,6 +3,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Watch } from 'src/app/Types/watch';
 import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
 import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
+import { WatchObjects } from 'src/app/Types/Order';
 
 @Component({
   selector: 'app-watch-tray',
@@ -52,24 +53,32 @@ export class WatchTrayComponent implements OnInit {
   }
 
   toggleWatchInCheckOut(watch: Watch) {
-
-    if (this.isTheWatchisInTheCheckout(watch)) {
+    const isTheWatchisInTheCheckout = watch ? this.isTheWatchisInTheCheckout(watch) : false;
+    if (isTheWatchisInTheCheckout) {
+      // remove the watch by reference number
       this.checkoutServive.removeFromCheckout(watch.referenceNumber);
+      // flag that its added
       watch.addedToCheckOut = false;
-      this._NotificationsService.success('success', 'removed to checkout');
+      // notify the user
+      this._NotificationsService.info('success', 'removed from the checkout');
     }
-    else {
-      this.checkoutServive.addToCheckout(watch);
+    else if (watch) {
+      // bundle the watchPrice, Watch and quantity in an Object
+      const watchPrice: number = watch.price ? watch.price : 0,
+        watchObject: WatchObjects = new WatchObjects(watch, 1, watchPrice);
+      // add that object to checkout
+      this.checkoutServive.addToCheckout(watchObject);
+      // flag that its added
       watch.addedToCheckOut = true;
+      // notify the user
       this._NotificationsService.success('success', 'added to checkout');
     }
-
   }
 
-  isTheWatchisInTheCheckout(watch): boolean {
-    if (this.checkoutServive.currentCheckoutWatchesValue) {
+  isTheWatchisInTheCheckout(watch: Watch): boolean {
+    if (this.checkoutServive.currentCheckoutWatchesValue && watch) {
       if (this.checkoutServive.currentCheckoutWatchesValue
-        .find((_watch) => _watch.referenceNumber === watch.referenceNumber)) {
+        .find((_watchObject) => _watchObject.watchObject.referenceNumber === watch.referenceNumber)) {
         return true;
       }
       else {
@@ -78,7 +87,7 @@ export class WatchTrayComponent implements OnInit {
     }
   }
 
-  watchFunctionsToStr(functions) {
+  watchFunctionsToStr(functions: { map: (arg0: (fun: any) => any) => { join: (arg0: string) => void; }; }) {
     return functions.map(fun => fun.value).join(', ');
   }
 

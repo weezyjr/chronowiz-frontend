@@ -15,7 +15,7 @@
 <div class="container">
   <div class="row mb-5 mt-3 mx-auto">
     <div class="col-12 mt-4">
-      <table class="watch-table table-responsive-sm my-3" *ngIf="watches?.length !== 0">
+      <table class="watch-table table-responsive-sm my-3" *ngIf="order?.watchObjects?.length !== 0">
         <thead>
           <tr>
             <th class="small">Item</th>
@@ -27,44 +27,47 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let watch of watches">
+          <tr *ngFor="let orderWatchObject of order?.watchObjects">
             <td class="text-center">
-              <a class="img-container" [routerLink]="['/watch/',watch?.referenceNumber]">
-                <img class="table-img" [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
+              <a class="img-container" *ngIf="orderWatchObject?.watchObject?.referenceNumber" [routerLink]="['/watch/',orderWatchObject?.watchObject?.referenceNumber]">
+                <img class="table-img" [src]="orderWatchObject?.watchObject?.mainPhotoUrl? orderWatchObject?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
               </a>
             </td>
             <td class="desc">
               <p class="m-0">
-                <span class="bold" *ngIf="watch?.model">{{watch?.model}} </span>
-                <span class="small" *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
-                <span class="small" *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
-                <span class="small" *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+                <span class="bold" *ngIf="orderWatchObject?.watchObject?.model">{{orderWatchObject?.watchObject?.model}}
+                </span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}}
+                  mm,</span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}},</span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
                 <br>
                 <span class="bold">Reference number:
                   <span class="small">
-                    {{watch?.referenceNumber}}
+                    {{orderWatchObject?.watchObject?.referenceNumber}}
                   </span>
                 </span>
               </p>
             </td>
             <td>
-              <p class="small m-0"> {{watch?.price | currency: watch?.priceCurrency : 'symbol' : '1.0' }} </p>
+              <p class="small m-0"> {{orderWatchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency
+                : 'symbol' : '1.0' }} </p>
             </td>
             <td class="text-center">
-              <input class="form-input" class="qty" [(ngModel)]="watch.qty" min="1" type="number">
+              <input class="form-input" class="qty" [(ngModel)]="orderWatchObject.quantity" min="1" type="number">
             </td>
             <td>
-              <p class="small m-0"> {{watch?.price * watch?.qty | currency: watch?.priceCurrency : 'symbol' : '1.0' }}
+              <p class="small m-0"> {{orderWatchObject?.price * orderWatchObject?.quantity | currency:
+                orderWatchObject?.watchObject?.priceCurrency : 'symbol' : '1.0' }}
               </p>
             </td>
             <td class="text-center">
-              <i class="wrong-sign" (click)="removeFromCheckout(watch?.referenceNumber)">X</i>
-              <!-- <i class="far fa-times-circle" (click)="removeFromCheckout(watch?.referenceNumber)"></i>-->
+              <i class="wrong-sign" (click)="removeFromCheckout(orderWatchObject?.watchObject?.referenceNumber)">X</i>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="text-center py-5" *ngIf="watches?.length === 0">
+      <div class="text-center py-5" *ngIf="order?.watchObjects?.length === 0">
         <p class="text-center">
           You haven't added any watch to the checkout
         </p>
@@ -74,7 +77,8 @@
         <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
       </p>
       <div class="text-center mx-auto">
-        <button class="btn secondry-btn" (click)="onSubmit()" [disabled]="watches?.length === 0"> {{'Next >'}} </button>
+        <button class="btn secondry-btn" (click)="onSubmit()" [disabled]="order?.watchObjects?.length === 0"> {{'Next
+          >'}} </button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@ import { CheckoutService } from '../User/Services/WatchTray/checkout.service';
 import { Order } from '../Types/Order';
 
 @Injectable({ providedIn: 'root' })
-export class PaymentGuard implements CanActivate {
+export class OrderGuard implements CanActivate {
   constructor(
     private router: Router,
     private checkoutService: CheckoutService
@@ -16,16 +16,9 @@ export class PaymentGuard implements CanActivate {
     if (order &&
       order.watchObjects &&
       order.watchObjects.length &&
-      order.email &&
-      order.phone &&
-      order.shippingAddress &&
-      order.shippingCity &&
-      order.shippingCountry &&
-      order.shippingState &&
-      order.billingAddress &&
-      order.billingCity &&
-      order.billingCountry &&
-      order.billingState) {
+      order._id &&
+      order.orderDate &&
+      order.orderNumber) {
       return true;
     }
 

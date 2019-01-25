@@ -1,14 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 import { Order } from 'src/app/Types/Order';
+import { OrderService } from 'src/app/User/Services/WatchTray/order.service';
+import { takeUntil } from 'rxjs/operators';
+import { ResponseData } from 'src/app/API/response-data';
+import { ResponseObject } from 'src/app/API/responseObject';
+import { Subject } from 'rxjs';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrls: ['./confirmation.component.sass']
 })
-export class ConfirmationComponent implements OnInit {
+export class ConfirmationComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  loading: Boolean;
 
   public breads = [{
     name: 'Watch Tray', url: '/watch-tray'
@@ -25,7 +35,23 @@ export class ConfirmationComponent implements OnInit {
   order: Order = new Order();
 
   onSubmit() {
-    this.goToPage('orders');
+    this.loading = true;
+    this.orderService.createOrder(this.order)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
+        const response: ResponseObject = responseData.response;
+        console.log(response);
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('error', response.message.en);
+          this.loading = false;
+        } else {
+          this._notificationsService.success('success', response.message.en);
+          const order = <Order>response.payload;
+          order.watchObjects = this.order.watchObjects;
+          this.checkoutService.currentOrder = order;
+          this.goToPage('order');
+        }
+      });
   }
 
   goToPage(str: String) {
@@ -34,17 +60,16 @@ export class ConfirmationComponent implements OnInit {
 
   get totalPrice(): number {
     let _total = 0;
-    if (!this.order || !this.order.watches) {
-      return 0;
-    }
-    for (const watch of this.order.watches) {
-      _total += watch.price * watch.qty;
+    for (const watch of this.order.watchObjects) {
+      _total += watch.price * watch.quantity;
     }
     return _total;
   }
 
   constructor(
     private checkoutService: CheckoutService,
+    private orderService: OrderService,
+    private _notificationsService: NotificationsService,
     private router: Router) {
     if (!this.checkoutService.currentOrder) {
       this.router.navigate(['/checkout']);
@@ -59,4 +84,9 @@ export class ConfirmationComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
 }

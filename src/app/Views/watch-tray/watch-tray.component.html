@@ -36,7 +36,7 @@
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
               <div class="right-wrong">
                 <label class="checkbox-right-container d-inline">
-                  <input type="checkbox" (change)="toggleWatchInCheckOut(watch)">
+                  <input type="checkbox" [checked]="watch?.addedToCheckOut" (change)="toggleWatchInCheckOut(watch)">
                   <span class="checkmark-right"></span>
                 </label>
                 <i class="wrong-sign" (click)="removeWatch(watch)">X</i>

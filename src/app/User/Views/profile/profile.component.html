@@ -48,10 +48,10 @@
                 <div *ngIf="user?.creditCardNumber">
                   <div class="info pb-2">
                     <img src="../../../assets/{{creditCardType}}.svg" alt="mastercard">
-                    Ending in {{creditCardEndingIn}}
+                    Ending in 4369
                   </div>
+                  <div class="info">Exp. 12-2022</div>
                 </div>
-                <div class="info">Exp. {{user?.creditCardExpirationMonth}}-20{{user?.creditCardExpirationYear}}</div>
                 <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
                 <br>
                 <div class="info">{{user?.billingAddress}}</div>
@@ -115,7 +115,7 @@
         <tr (click)="toggleShowDetails(order?.showDetails, i)">
           <td>{{order?.date}}</td>
           <td>{{order?._id}}</td>
-          <td>{{order?.totalPrice | currency}}</td>
+          <td>1600</td>
           <td>{{order?.state}}</td>
         </tr>
         <tr *ngIf="order?.showDetails">

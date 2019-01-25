@@ -6,25 +6,25 @@
       </div>
     </div>
 
-    <div class="watch-desc" *ngFor="let watch of order?.watches">
+    <div class="watch-desc" *ngFor="let orderWatchObject of order?.watchObjects">
       <div class="row">
         <div class="col-2 align-self-center">
           <div class="img-container">
-            <img [src]="watch?.mainPhotoUrl? watch?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" class="img-responsive"
+            <img [src]="orderWatchObject?.watchObject?.mainPhotoUrl? orderWatchObject?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x560/ffffff/ffffff'" class="img-responsive"
               alt="watch">
           </div>
         </div>
         <div class="col-4 align-self-center">
-          <div class="brand">{{watch?.brandObject?.name}}</div>
-          <div class="collection">{{watch?.collectionObject?.name | collectionName}}</div>
-          <div class="ref">{{watch?.referenceNumber}}</div>
+          <div class="brand">{{orderWatchObject?.watchObject?.brandObject?.name}}</div>
+          <div class="collection">{{orderWatchObject?.watchObject?.collectionObject?.name | collectionName}}</div>
+          <div class="ref">{{orderWatchObject?.watchObject?.referenceNumber}}</div>
         </div>
         <div class="col-2 align-self-end">
-          <div class="qty">{{watch?.qty}}</div>
+          <div class="qty">{{orderWatchObject?.quantity}}</div>
           <div class="attribute text-center">QTY</div>
         </div>
         <div class="col-2 align-self-end">
-          <div class="price">{{watch?.price | currency: watch?.priceCurrency }}</div>
+          <div class="price">{{orderWatchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency }}</div>
           <div class="attribute text-right">PRICE</div>
         </div>
       </div>
@@ -38,34 +38,34 @@
                 <div class="detail">
                   <div class="attr"> Model Case: </div>
                   <div class="value">
-                    <span *ngIf="watch?.model"> {{watch?.model}}, </span>
-                    <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm, </span>
-                    <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}, </span>
-                    <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
+                    <span *ngIf="orderWatchObject?.watchObject?.model"> {{orderWatchObject?.watchObject?.model}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}} mm, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
                   </div>
                 </div>
 
                 <div class="detail">
                   <div class="attr"> Movement: </div>
                   <div class="value">
-                    <span>{{watch?.movementAutomaticOrManual}}</span>
+                    <span>{{orderWatchObject?.watchObject?.movementAutomaticOrManual}}</span>
                   </div>
                 </div>
 
                 <div class="detail">
                   <div class="attr"> Braclet: </div>
                   <div class="value">
-                    <span>{{watch?.band}}</span>
+                    <span>{{orderWatchObject?.watchObject?.band}}</span>
                   </div>
                 </div>
 
                 <div class="detail">
                   <div class="attr"> Dial: </div>
                   <div class="value">
-                    <span *ngIf="watch?.dialColour">{{watch?.dialColour}}, </span>
-                    <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}}, </span>
-                    <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}}, </span>
-                    <span *ngIf="watch?.dialHands">{{watch?.dialHands}} </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialColour">{{orderWatchObject?.watchObject?.dialColour}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialFinish">{{orderWatchObject?.watchObject?.dialFinish}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialIndex">{{orderWatchObject?.watchObject?.dialIndex}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialHands">{{orderWatchObject?.watchObject?.dialHands}} </span>
                   </div>
                 </div>
               </div>
@@ -88,13 +88,13 @@
     <div class="row">
       <div class="col-12">
         <div class="payment">
-          <div *ngIf="order?.creditCardNumber">
+          <div *ngIf="order?.paymentMethod === 'credit card'">
             <div class="info pb-2">
-              <img src="../../../assets/{{creditCardType}}.svg" alt="mastercard">
-              Ending in {{creditCardEndingIn}}
+              <img src="../../../assets/visa.svg" alt="mastercard">
+              Ending in 4369
             </div>
+            <div class="info">Exp. 10-2022</div>
           </div>
-          <div class="info">Exp. {{order?.creditCardExpirationMonth}}-20{{order?.creditCardExpirationYear}}</div>
           <div class="info">{{order?.firstName}} {{order?.lastName}}</div>
           <br>
           <div class="info">{{order?.billingAddress}}</div>
@@ -143,6 +143,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Watch } from 'src/app/Types/watch';
-import { Order } from 'src/app/Types/Order';
+import { Order, WatchObjects } from 'src/app/Types/Order';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutService {
-  private _currentWatches: Watch[];
-  private checkoutWatches: BehaviorSubject<Watch[]>;
+  private _currentWatches: WatchObjects[];
+  private checkoutWatches: BehaviorSubject<WatchObjects[]>;
   private order$: BehaviorSubject<Order>;
-
-  print(message: any) {
-    const styles = ['color: green', 'background: yellow', 'font-size: 20px'].join(';');
-    console.log('%c%s', styles, message);
-  }
 
   constructor() {
     // get current watches
-    this.checkoutWatches = new BehaviorSubject<Watch[]>(JSON.parse(localStorage.getItem('checkoutWatches')));
+    this.checkoutWatches = new BehaviorSubject<WatchObjects[]>([]);
     this._currentWatches = this.checkoutWatches.value;
   }
 
-  public get currentCheckoutWatchesValue(): Watch[] {
+  public get currentCheckoutWatchesValue(): WatchObjects[] {
     return this.checkoutWatches.value;
   }
 
   public get currentOrder(): Order | undefined {
-    if (this.order$)
-    {
+    if (this.order$) {
       return this.order$.value;
     } else {
       return undefined;
@@ -43,47 +36,45 @@ export class CheckoutService {
     }
   }
 
-  public addToCheckout(watch: Watch): Boolean {
+  public addToCheckout(watchObject: WatchObjects): Boolean {
     // check if there is current watches ?
     if (this._currentWatches) {
 
       // Check if the watch is already stored ?
       const isWatchExist = this._currentWatches.find(
-        (_watch) => _watch.referenceNumber === watch.referenceNumber);
+        (_watchObject) => _watchObject.watchObject.referenceNumber === watchObject.watchObject.referenceNumber);
 
       // add it if doesn't exist
       if (!isWatchExist) {
-        // set quantity to 1
-        watch.qty = 1;
         // add to the currentWatches
-        this._currentWatches.push(watch);
+        this._currentWatches.push(watchObject);
         return false;
       }
     }
     else {
-      // set quantity to 1
-      watch.qty = 1;
       // create currentWatches array and add to it the current watch
-      this._currentWatches = [watch];
+      this._currentWatches = [watchObject];
     }
-    this._updateLocalStorage();
+    this.checkoutWatches.next(this._currentWatches);
     return true;
   }
-
-  private _updateLocalStorage() {
-    localStorage.setItem('checkoutWatches', JSON.stringify(this._currentWatches));
-    this.checkoutWatches.next(this._currentWatches);
-  }
-
+  /*
+    private _updateLocalStorage() {
+      localStorage.setItem('checkoutWatches', JSON.stringify(this._currentWatches));
+      this.checkoutWatches.next(this._currentWatches);
+    }
+  */
   public removeFromCheckout(ref: string): Boolean {
     // find watch Index
-    const watchIndex = this._currentWatches.findIndex((watch: Watch) => watch.referenceNumber === ref);
+    const watchIndex = this._currentWatches
+      .findIndex((watchObject: WatchObjects) => watchObject.watchObject.referenceNumber === ref);
 
     // check if exist
     if (watchIndex >= 0) {
       // remove it and update the local storage
       this._currentWatches.splice(watchIndex, 1);
-      this._updateLocalStorage();
+      this.checkoutWatches.next(this._currentWatches);
+      // this._updateLocalStorage();
       return true;
     }
     else {
