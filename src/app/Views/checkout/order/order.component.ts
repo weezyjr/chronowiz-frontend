@@ -29,12 +29,12 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
   }
 
-  get totalPrice(): number {
+ /* get totalPrice(): number {
     let _total = 20;
     for (const watch of this.order.watchObjects) {
       _total += watch.price * watch.quantity;
     }
     return _total;
   }
-
+*/
 }

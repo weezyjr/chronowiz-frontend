@@ -34,9 +34,16 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   order: Order = new Order();
 
-  onSubmit() {
+  async onSubmit() {
     this.loading = true;
-    this.orderService.createOrder(this.order)
+    // remove prices
+    for (const watchObject of this.order.watchObjects) {
+      if (watchObject.price) {
+        delete watchObject.price;
+      }
+    }
+    // create order
+    await this.orderService.createOrder(this.order)
       .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         const response: ResponseObject = responseData.response;
@@ -49,6 +56,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
           const order = <Order>response.payload;
           order.watchObjects = this.order.watchObjects;
           this.checkoutService.currentOrder = order;
+          this.loading = false;
           this.goToPage('order');
         }
       });

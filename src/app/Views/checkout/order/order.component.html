@@ -41,14 +41,14 @@
               </p>
             </td>
             <td>
-              <p class="small m-0"> {{orderWatchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency
+              <p class="small m-0"> {{orderWatchObject?.watchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency
                 : 'symbol' : '1.0' }} </p>
             </td>
             <td class="text-center">
               <p class="small"> {{orderWatchObject?.quantity}} </p>
             </td>
             <td>
-              <p class="small m-0"> {{orderWatchObject?.price * orderWatchObject?.quantity | currency:
+              <p class="small m-0"> {{orderWatchObject?.watchObject?.price * orderWatchObject?.quantity | currency:
                 orderWatchObject?.watchObject?.priceCurrency : 'symbol' : '1.0' }}
               </p>
             </td>
@@ -62,7 +62,7 @@
       </p>
       <p class="totalPriceSection borders">
         <span class="totalPriceText">Total : </span>
-        <span class="totalPrice"> {{totalPrice | currency: 'USD' :'symbol' : '1.0'}} </span>
+        <span class="totalPrice"> {{order?.totalPrice + 20 | currency}} </span>
       </p>
     </div>
   </div>
