@@ -34,7 +34,10 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
     new Link('Watch Form', 'app-add-watch-form'),
     new Link('Collection Form', 'app-add-collection-form', true),
     new Link('Brand Form', 'app-add-brand-form'),
-    new Link('Retailer Form', 'app-add-retailer-form')
+    new Link('Retailer Form', 'app-add-retailer-form'),
+    new Link('Orders Form', 'admin/orders'),
+    new Link('Users Form', 'admin/users')
+
   ];
 
   // Selection

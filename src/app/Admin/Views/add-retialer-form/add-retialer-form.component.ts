@@ -33,7 +33,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
     new Link('Watch Form', 'app-add-watch-form'),
     new Link('Collection Form', 'app-add-collection-form'),
     new Link('Brand Form', 'app-add-brand-form'),
-    new Link('Retailer Form', 'app-add-retailer-form', true)
+    new Link('Retailer Form', 'app-add-retailer-form', true),
+    new Link('Orders Form', 'admin/orders'),
+    new Link('Users Form', 'admin/users')
+
   ];
 
   selectionBrands: Brand[];

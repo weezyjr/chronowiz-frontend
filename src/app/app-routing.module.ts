@@ -41,6 +41,8 @@ import { ConfirmationGuard } from './Auth/Confirmation.guard';
 import { PaymentGuard } from './Auth/Payment.guard';
 import { ResetPasswordGuard } from './Auth/resetPassword.guard';
 import { OrderGuard } from './Auth/order.guard';
+import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.component';
+import { EditUserFormComponent } from './Admin/Views/edit-user-form/edit-user-form.component';
 
 const routes: Routes = [
   {
@@ -149,6 +151,16 @@ const routes: Routes = [
   {
     path: 'app-add-collection-form',
     component: AddCollectionFormComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'admin/orders',
+    component: OrdersFormComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'admin/users',
+    component: EditUserFormComponent,
     canActivate: [AdminGuard]
   },
   {

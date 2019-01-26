@@ -1,0 +1,149 @@
+<simple-notifications></simple-notifications>
+<div class="container-fluid form-container mx-auto">
+  <div class="form-page container">
+    <app-form-header userType="admin"></app-form-header>
+    <div class="my-5">
+      <h1> Orders </h1>
+    </div>
+    <app-form-tabs [links]="navRoutes"></app-form-tabs>
+
+    <div>
+      <br />
+      <h3>Select User By E-mail</h3>
+      <br />
+      <div class="row">
+        <div class="col-8">
+          <div class="form-group">
+            <input type="text" class="form-control" id="userEmail" [(ngModel)]="selectedEmail" name="userEmail">
+          </div>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-lg primary-btn" (click)="onUserSelection()">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="user?._id">
+      <form class="form" #userEditForm="ngForm" (ngSubmit)="userEditForm.form.valid? onSubmit() : null">
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="firstName">First name</label>
+            <input type="text"  [(ngModel)]="user.firstName" class="form-input" #firstName="ngModel" name="firstName"
+              placeholder="John">
+            <div [hidden]="firstName.valid || firstName.pristine" class="invalid">First name is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="lastName">Last name</label>
+            <input type="text"  [(ngModel)]="user.lastName" #lastName="ngModel" class="form-input" name="lastName"
+              placeholder="Smith">
+            <div [hidden]="lastName.valid || lastName.pristine" class="invalid">Last name is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="email">Email</label>
+            <input type="email" required [(ngModel)]="user.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"
+              class="form-input" name="email" placeholder="johnsmith@gmail.com">
+            <div [hidden]="email.valid || email.pristine" class="invalid">Email is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="phone">Phone</label>
+            <input type="text"  #phone="ngModel" pattern="^([\+][0-9]{1,3}([ \.\-])?)?([\(]{1}[0-9]{3}[\)])?([0-9A-Z \.\-]{1,32})((x|ext|extension)?[0-9]{1,4}?)$"
+              [(ngModel)]="user.phoneNumber" class="form-input" name="phone" placeholder="3978787988">
+            <div [hidden]="phone.valid || phone.pristine" class="invalid">Phone is not valid</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label class="title-label"> Billing Adress </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="billingCountry">Country</label>
+            <input type="text" class="form-input" #billingCountry="ngModel"  [(ngModel)]="user.billingCountry"
+              name="billingCountry" placeholder="USA">
+            <div [hidden]="billingCountry.valid || billingCountry.pristine" class="invalid">Country is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="billingCityTown">City/Town</label>
+            <input type="text" class="form-input" #billingCity="ngModel"  [(ngModel)]="user.billingCity" name="billingCityTown"
+              placeholder="New York">
+            <div [hidden]="billingCity.valid || billingCity.pristine" class="invalid">City is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="billingState">State</label>
+            <input type="text" class="form-input" #billingState="ngModel"  [(ngModel)]="user.billingState"
+              name="billingState" placeholder="New York">
+            <div [hidden]="billingState.valid || billingState.pristine" class="invalid">State is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="billingZip">Postcode/zip</label>
+            <input type="text" class="form-input" #billingZip="ngModel" pattern="^\d{5}$"  [(ngModel)]="user.billingZip"
+              name="billingZip" placeholder="3978">
+            <div [hidden]="billingZip.valid || billingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="address">Address</label>
+            <input type="text" class="form-input" #billingAddress="ngModel"  [(ngModel)]="user.billingAddress"
+              name="billingAddress" placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="billingAddress.valid || billingAddress.pristine" class="invalid">Address is not valid</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-12 order-md-0 form-group">
+            <label for="shippingCountry">Country</label>
+            <input type="text" #shippingCountry="ngModel"  class="form-input" [(ngModel)]="user.shippingCountry"
+              name="shippingCountry" placeholder="USA">
+            <div [hidden]="shippingCountry.valid || shippingCountry.pristine" class="invalid">Country is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-2 form-group">
+            <label for="shippingCityTown">City/Town</label>
+            <input type="text" #shippingCity="ngModel"  class="form-input" [(ngModel)]="user.shippingCity"
+              name="shippingCityTown" placeholder="New York">
+            <div [hidden]="shippingCity.valid || shippingCity.pristine" class="invalid">City is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-1 form-group">
+            <label for="shippingState">State</label>
+            <input type="text" #shippingState="ngModel"  class="form-input" [(ngModel)]="user.shippingState"
+              name="shippingState" placeholder="New York">
+            <div [hidden]="shippingState.valid || shippingState.pristine" class="invalid">State is not valid</div>
+          </div>
+
+          <div class="col-md-6 col-12 order-md-3 form-group">
+            <label for="shippingZip">Postcode/zip</label>
+            <input type="text" pattern="^\d{5}$" #shippingZip="ngModel"  class="form-input" [(ngModel)]="user.shippingZip"
+              name="shippingZip" placeholder="3978">
+            <div [hidden]="shippingZip.valid || shippingZip.pristine" class="invalid">Zip code is not valid</div>
+          </div>
+
+          <div class="col-12 form-group order-md-4">
+            <label for="shippingAddress">Address</label>
+            <input type="text" #shippingAddress="ngModel"  class="form-input" name="shippingAddress"
+              [(ngModel)]="user.shippingAddress" placeholder="27 MERRY LN NP000131206">
+            <div [hidden]="shippingAddress.valid || shippingAddress.pristine" class="invalid">Address is not valid</div>
+          </div>
+        </div>
+
+        <div class="text-center mx-auto">
+          <button class="btn secondry-btn" type="submit" [disabled]="!userEditForm.form.valid || loading"> submit </button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -113,10 +113,10 @@
       </thead>
       <tbody *ngFor="let order of user?.orderObjects; let i=index">
         <tr (click)="toggleShowDetails(order?.showDetails, i)">
-          <td>{{order?.date}}</td>
-          <td>{{order?._id}}</td>
+          <td>{{order?.orderDate | date: 'shortDate'}}</td>
+          <td>{{order?.orderNumber}}</td>
           <td>{{order?.totalPrice}}</td>
-          <td>{{order?.state}}</td>
+          <td>{{order?.status}}</td>
         </tr>
         <tr *ngIf="order?.showDetails">
           <td colspan="4">

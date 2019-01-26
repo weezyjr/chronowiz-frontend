@@ -23,7 +23,7 @@ export class Order {
   jwt?: string;
   orderNumber?: string;
   orderDate?: Date | string;
-  status?: 'verfied' | 'waiting' | 'in progress' | 'delivered' | 'shipping' | string;
+  status?: 'virified' | 'waiting' | 'in progress' | 'delivered' | 'shipping' | string;
 
   // Personal Info
   email?: string;

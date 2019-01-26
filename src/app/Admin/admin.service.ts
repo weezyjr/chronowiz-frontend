@@ -10,6 +10,7 @@ import { Brand } from '../Types/brand';
 import { Collection } from '../Types/collection';
 import { Watch } from '../Types/watch';
 import { Retailer, BrandDiscount, CollectionDiscount, WatchDiscount } from '../Types/retailer';
+import { User } from '../Types/User';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,8 @@ export class AdminService {
   retailerBrandMaxDiscountUrl = this.retailerAdminUrl + '/brandMaxDiscount';
   retailerCollectionMaxDiscountUrl = this.retailerAdminUrl + '/collectionMaxDiscount';
   retailerWatchMaxDiscountUrl = this.retailerAdminUrl + '/watchMaxDiscount';
+  usersUrl = this.env.backendUrl + 'admin/users/';
+  ordersUrl = this.env.backendUrl + 'admin/orders/';
 
 
   private handleError: HandleError;
@@ -231,7 +234,55 @@ export class AdminService {
     }));
   }
 
+  /** @param User APIs */
 
+  updateUser(userId: string, user: User) {
+    return this.http.put<ResponseData>(this.usersUrl + '/' + userId,
+    { 'payload': user }, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+  getAllUsers() {
+    return this.http.get<ResponseData>(this.usersUrl, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+  getUserByEmail(userEmail: string) {
+    return this.http.get<ResponseData>(this.usersUrl + '/' + userEmail, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+
+
+  /** @param Order APIs */
+
+  updateOrder(orderId: string, status: string) {
+    return this.http.put<ResponseData>(this.ordersUrl + '/' + orderId,
+    { 'payload': {status} }, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+  getAllOrders() {
+    return this.http.get<ResponseData>(this.ordersUrl, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
+
+  getOrderByNumber(orderNumber: string) {
+    return this.http.get<ResponseData>(this.ordersUrl + '/' + orderNumber, this.httpOptions)
+    .pipe(map(data => {
+      return data;
+    }));
+  }
 
 
 }

@@ -82,6 +82,8 @@ import { CheckoutService } from './User/Services/WatchTray/checkout.service';
 import { CollectionsService } from './User/Services/Collection/collections.service';
 import { OrderService } from './User/Services/WatchTray/order.service';
 import { ContactUsService } from './User/Services/ContactUs/contactUs.service';
+import { EditUserFormComponent } from './Admin/Views/edit-user-form/edit-user-form.component';
+import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.component';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -140,7 +142,9 @@ import { ContactUsService } from './User/Services/ContactUs/contactUs.service';
     EditPersonalInfoComponent,
     EditPaymentInfoComponent,
     EditAddressInfoComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    EditUserFormComponent,
+    OrdersFormComponent
   ],
   imports: [
     NgSelectModule,
