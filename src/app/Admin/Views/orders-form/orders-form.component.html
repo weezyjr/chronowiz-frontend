@@ -23,7 +23,7 @@
         <tr>
           <td (click)="toggleShowDetails(i)">{{order?.orderDate | date: 'shortDate'}}</td>
           <td (click)="toggleShowDetails(i)">{{order?.orderNumber}}</td>
-          <td (click)="toggleShowDetails(i)">{{order?.totalPrice}}</td>
+          <td (click)="toggleShowDetails(i)">{{order?.totalPrice | currency}}</td>
           <td>
             <ng-select [items]="orderStatus" name="orderStatus" [(ngModel)]="order.status" bindLabel="name" bindValue="name"
               placeholder="Select state">

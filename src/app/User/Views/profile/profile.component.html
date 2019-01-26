@@ -115,7 +115,7 @@
         <tr (click)="toggleShowDetails(order?.showDetails, i)">
           <td>{{order?.orderDate | date: 'shortDate'}}</td>
           <td>{{order?.orderNumber}}</td>
-          <td>{{order?.totalPrice}}</td>
+          <td>{{order?.totalPrice | currency}}</td>
           <td>{{order?.status}}</td>
         </tr>
         <tr *ngIf="order?.showDetails">
