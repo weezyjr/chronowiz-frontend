@@ -50,7 +50,7 @@ export class Order {
   shippingAddress?: string;
 
   // payment method
-  paymentMethod?: 'credit card' | 'escrow' | 'wire transfer' | string;
+  paymentMethod?: 'credit card' | 'escrow' | 'wire transfer' | 'cash' | string;
 
   // user Object
   userObject: User;
@@ -68,5 +68,6 @@ export class Order {
       this.showDetails = false;
       this.shippingType = 'Free Shipping (3-5 business days)';
       this.shippingSameAsBilling = false;
+      this.paymentMethod = 'cash';
   }
 }
