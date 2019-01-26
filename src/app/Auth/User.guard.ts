@@ -12,7 +12,7 @@ export class UserGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
+    if (currentUser && currentUser.jwt) {
       // authorised so return true
       return true;
     }

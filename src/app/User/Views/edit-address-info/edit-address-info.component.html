@@ -5,21 +5,6 @@
     <div class="col-12">
       <h1> Edit Address Info</h1>
       <form class="form" #editAddressInfo="ngForm" (ngSubmit)="editAddressInfo.form.valid? onSubmit() : null">
-        <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              <p class="sassy-text">Select a Shipping Method:</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 text-center form-group">
-            <select class="form-input shipping-type" [(ngModel)]="user.shippingType" name="shippingType">
-              <option value="Free Shipping (3-5 business days)"> Free Shipping (3-5 business days) </option>
-            </select>
-          </div>
-        </div>
 
         <div class="row">
           <div class="col-12">
@@ -53,7 +38,7 @@
 
           <div class="col-md-6 col-12 order-md-3 form-group">
             <label for="billingZip">Postcode/zip</label>
-            <input type="number" class="form-input" #billingZip="ngModel" pattern="^\d{5}$" [(ngModel)]="user.billingZip"
+            <input type="text" class="form-input" #billingZip="ngModel" pattern="^\d{5}$" [(ngModel)]="user.billingZip"
               name="billingZip" placeholder="3978">
             <div [hidden]="billingZip.valid || billingZip.pristine" class="invalid">Zip code is not valid</div>
           </div>
@@ -70,10 +55,10 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="title-label d-inline">Shipping Adress </label>
-              <label class="checkbox-container d-inline ml-2">
+              <label class="checkbox-right-container d-inline ml-2">
                 Same as billing
                 <input type="checkbox" name="shippingSameAsBilling" (change)="updateShippingInputs()" [(ngModel)]="user.shippingSameAsBilling">
-                <span class="checkmark"></span>
+                <span class="checkmark-right"></span>
               </label>
             </div>
           </div>
@@ -103,7 +88,7 @@
 
           <div class="col-md-6 col-12 order-md-3 form-group">
             <label for="shippingZip">Postcode/zip</label>
-            <input type="number" pattern="^\d{5}$" #shippingZip="ngModel" class="form-input" [(ngModel)]="user.shippingZip"
+            <input type="text" pattern="^\d{5}$" #shippingZip="ngModel" class="form-input" [(ngModel)]="user.shippingZip"
               name="shippingZip" placeholder="3978">
             <div [hidden]="shippingZip.valid || shippingZip.pristine" class="invalid">Zip code is not valid</div>
           </div>
@@ -117,8 +102,8 @@
         </div>
 
         <div class="row">
-          <div class="col-12">
-            <button class="btn primary-btn wide-btn" type="submit"> Save </button>
+          <div class="col-12 text-center mx-auto">
+            <button class="btn primary-btn wide-btn" [disabled]="loading" type="submit"> Save </button>
             <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>
         </div>

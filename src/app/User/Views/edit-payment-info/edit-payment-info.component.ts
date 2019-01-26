@@ -15,56 +15,56 @@ export class EditPaymentInfoComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  @ViewChild(NgForm) shippingForm: NgForm;
 
   public user = new User();
+  creditCard: Boolean;
+  escrow: Boolean;
+  wireTransfer: Boolean;
+
 
   onSubmit() {
     console.log(this.user);
+    this._notificationsService.success('Success');
   }
 
-  validForm(): boolean {
-    if (this.user.escrow || this.user.wireTransfer) {
-      return true;
-    }
-    else if (this.user.creditCard && this.shippingForm.valid) {
-      return true;
-    }
-    else {
-      return false;
-    }
+  goToPage(str: String) {
+    this.router.navigateByUrl('/' + str);
   }
 
   toggleCreditCardAccordion() {
     // toggle the accordion
-    this.user.creditCard = !this.user.creditCard;
+    this.creditCard = !this.creditCard;
 
     // if opened then close other accordions
-    if (this.user.creditCard) {
-      this.user.escrow = false;
-      this.user.wireTransfer = false;
+    if (this.creditCard) {
+      this.user.paymentMethod = 'credit card';
+      this.escrow = false;
+      this.wireTransfer = false;
     }
   }
 
   toggleEscrowAccordion() {
     // toggle the accordion
-    this.user.escrow = !this.user.escrow;
+    this.escrow = !this.escrow;
 
     // if opened then close other accordions
-    if (this.user.escrow) {
-      this.user.creditCard = false;
-      this.user.wireTransfer = false;
+    if (this.escrow) {
+      this.user.paymentMethod = 'escrow';
+      this.creditCard = false;
+      this.wireTransfer = false;
     }
   }
 
   toggleWireTransferAccordion() {
     // toggle the accordion
-    this.user.wireTransfer = !this.user.wireTransfer;
+    this.wireTransfer = !this.wireTransfer;
 
     // if opened then close other accordions
-    if (this.user.wireTransfer) {
-      this.user.creditCard = false;
-      this.user.escrow = false;
+    if (this.wireTransfer) {
+      this.user.paymentMethod = 'wire transfer';
+      this.creditCard = false;
+      this.escrow = false;
+
     }
   }
 

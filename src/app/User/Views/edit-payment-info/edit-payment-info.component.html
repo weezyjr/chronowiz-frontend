@@ -3,12 +3,11 @@
 <div class="container">
   <div class="row mb-5 mt-3 mx-auto">
     <div class="col-12 mt-3">
-      <form class="form" #shippingForm="ngForm" (ngSubmit)="validForm()? onSubmit() : null">
+      <form class="form" #paymentForm="ngForm" (ngSubmit)="onSubmit()">
 
         <div class="row">
           <div class="col-12">
             <div class="form-group">
-              <h1> Edit payment Info</h1>
               <p class="sassy-text">Select a Payment Method:</p>
             </div>
           </div>
@@ -16,18 +15,15 @@
 
         <div class="row">
           <div class="col-12">
-            <div class="accordion" (click)="toggleCreditCardAccordion()" [ngClass]="{'active': user?.creditCard}">
+            <div class="accordion" (click)="toggleCreditCardAccordion()" [ngClass]="{'active': creditCard}">
               Credit Card</div>
-            <div *ngIf="user?.creditCard" class="content">
+            <div *ngIf="creditCard" class="content">
               <label for="creditCardNumber">Credit card number</label>
               <div class="form-group">
                 <div class="row">
                   <div class="col-sm-8 col-7">
-                    <input type="text" pattern="^(\d{4}[- ]){3}\d{4}|\d{16}$" required [(ngModel)]="user.creditCardNumber"
-                      class="form-input" #creditCardNumber="ngModel" name="creditCardNumber">
-                    <div [hidden]="creditCardNumber.valid || creditCardNumber.pristine" class="invalid">
-                      Cerdit Card number is required
-                    </div>
+                    <input type="text" pattern="^(\d{4}[- ]){3}\d{4}|\d{16}$"
+                      class="form-input" name="creditCardNumber">
                   </div>
                   <div class="col-sm-4 col-5">
                     <span class="text-left">
@@ -45,30 +41,17 @@
                 <div class="form-group col-12">
                   <label for="">Expiration date</label>
 
-                  <input type="number" pattern="^((0[1-9])|([1-9])|(1[0-2]))$" name="expirationDateMonth" required [(ngModel)]="user.creditCardExpirationMonth"
-                    #expirationDateMonth="ngModel" class=" form-input number-form-input">
+                  <input type="number" pattern="^((0[1-9])|([1-9])|(1[0-2]))$" class="form-input number-form-input">
 
-                  <input type="number" pattern="^(\d{2})$" name="expirationDateYear" required [(ngModel)]="user.creditCardExpirationYear"
-                    #expirationDateYear="ngModel" class=" form-input number-form-input">
-
-                  <div [hidden]="expirationDateMonth.valid || expirationDateMonth.pristine" class="invalid">
-                    Expiration Month is required
-                  </div>
-
-                  <div [hidden]="expirationDateYear.valid || expirationDateYear.pristine" class="invalid">
-                    Expiration Year is required
-                  </div>
+                  <input type="number" pattern="^(\d{2})$" name="expirationDateYear" class="form-input number-form-input">
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col-12">
                   <label for="">Secret code</label>
-                  <input type="password" name="secretCode" required [(ngModel)]="user.secretCode" #secretCode="ngModel"
+                  <input type="password" name="secretCode"
                     class=" form-input secret-code-form-input">
-                  <div [hidden]="secretCode.valid || secretCode.pristine" class="invalid">
-                    Expiration Year is required
-                  </div>
                 </div>
               </div>
             </div>
@@ -77,18 +60,18 @@
 
         <div class="row">
           <div class="col-12">
-            <div class="accordion" (click)="toggleEscrowAccordion()" [ngClass]="{'active': user?.escrow}">
+            <div class="accordion" (click)="toggleEscrowAccordion()" [ngClass]="{'active': escrow}">
               Escrow </div>
-            <div *ngIf="user?.escrow" class="content">
+            <div *ngIf="escrow" class="content">
               <div class="p-5"></div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="accordion" (click)="toggleWireTransferAccordion()" [ngClass]="{'active': user?.wireTransfer}">
+            <div class="accordion" (click)="toggleWireTransferAccordion()" [ngClass]="{'active': wireTransfer}">
               Wire Transfer +50$ </div>
-            <div *ngIf="user.wireTransfer" class="content">
+            <div *ngIf="wireTransfer" class="content">
               <p class="wire-transfer">
                 Lorem ipsum dolor sit amet, eu mei postea numquam accusam. Nec nibh mundi euismod no, sea dicit docendi
                 senserit ad, ad nam odio iudico.
@@ -105,7 +88,7 @@
 
 
         <div class="text-center mx-auto">
-          <button class="btn secondry-btn" type="submit" [disabled]="!validForm()"> Save </button>
+          <button class="btn secondry-btn" type="submit"> {{'Next >'}} </button>
         </div>
       </form>
     </div>

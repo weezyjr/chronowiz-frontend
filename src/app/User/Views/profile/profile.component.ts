@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { Order } from 'src/app/Types/Order';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { AuthenticationService } from 'src/app/Auth/Authentication.service';
+import { ResponseData } from 'src/app/API/response-data';
+import { ResponseObject } from 'src/app/API/responseObject';
+import { OrderService } from '../../Services/WatchTray/order.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,16 +18,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  orders: Order[] = [new Order()];
-  user = new User(true);
+  user = new User();
 
   creditCardEndingIn: String;
   creditCardType: String;
 
-  constructor(private router: Router) {
+  constructor(private orderService: OrderService,
+    private router: Router,
+    private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
+    this.authenticationService.getUserProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
+        const response: ResponseObject = responseData.response;
+        if (response.type.match('ERROR')) {
+          console.error('not logged');
+        }
+        else {
+          this.user = <User>response.payload;
+        }
+      });
   }
 
   goTo(str: string) {
@@ -31,10 +47,25 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   }
 
-
-  toggleShowDetails(currentState: Boolean, index: number) {
-    if (this.orders[index]) {
-      this.orders[index].showDetails = !currentState;
+  async toggleShowDetails(currentState: Boolean, index: number) {
+    if (this.user.orderObjects[index]) {
+      if (!this.user.orderObjects[index].showDetails) {
+        await this.orderService.getOrderById(this.user.orderObjects[index]._id)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((responseData: ResponseData) => {
+            const response: ResponseObject = responseData.response;
+            if (response.type.match('ERROR')) {
+              console.error('error getting the order');
+            }
+            else {
+              this.user.orderObjects[index] = <Order>response.payload;
+              this.user.orderObjects[index].showDetails = true;
+            }
+          });
+      }
+      else {
+        this.user.orderObjects[index].showDetails = false;
+      }
     }
   }
 

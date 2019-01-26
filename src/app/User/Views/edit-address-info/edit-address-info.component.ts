@@ -4,6 +4,9 @@ import { User } from 'src/app/Types/User';
 import { AuthenticationService } from 'src/app/Auth/Authentication.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ResponseData } from 'src/app/API/response-data';
+import { ResponseObject } from 'src/app/API/responseObject';
 
 
 @Component({
@@ -47,7 +50,18 @@ export class EditAddressInfoComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.loading = true;
     console.log(this.user);
+    this.authenticationService.updateUserProfile(this.user).pipe(takeUntil(this.destroy$)).subscribe((responseData: ResponseData) => {
+      const response: ResponseObject = responseData.response;
+      console.log(response);
+      if (response.type.match('ERROR')) {
+        this._notificationsService.error('Error', response.message.en);
+      } else {
+        this._notificationsService.success('Success');
+      }
+      this.loading = false;
+    });
   }
 
   ngOnDestroy() {

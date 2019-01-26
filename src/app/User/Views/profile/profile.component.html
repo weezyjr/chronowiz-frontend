@@ -21,7 +21,7 @@
                 <br>
                 <div class="info">{{user?.email}}</div>
                 <br>
-                <div class="info">{{user?.phone}}</div>
+                <div class="info">{{user?.phoneNumber}}</div>
               </div>
             </div>
           </div>
@@ -45,9 +45,9 @@
           <div class="row">
             <div class="col-12">
               <div class="payment">
-                <div *ngIf="user?.creditCardNumber">
+                <div *ngIf="user?.paymentMethod === 'credit card'">
                   <div class="info pb-2">
-                    <img src="../../../assets/{{creditCardType}}.svg" alt="mastercard">
+                    <img src="../../../assets/visa.svg" alt="visa">
                     Ending in 4369
                   </div>
                   <div class="info">Exp. 12-2022</div>
@@ -111,11 +111,11 @@
           <th scope="col">Status</th>
         </tr>
       </thead>
-      <tbody *ngFor="let order of orders; let i=index">
+      <tbody *ngFor="let order of user?.orderObjects; let i=index">
         <tr (click)="toggleShowDetails(order?.showDetails, i)">
           <td>{{order?.date}}</td>
           <td>{{order?._id}}</td>
-          <td>1600</td>
+          <td>{{order?.totalPrice}}</td>
           <td>{{order?.state}}</td>
         </tr>
         <tr *ngIf="order?.showDetails">

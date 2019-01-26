@@ -50,4 +50,11 @@ export class OrderService {
         return data;
       }));
   }
+
+  getOrderById(id: string): Observable<ResponseData> {
+    return this.http.get<ResponseData>(this.orderUrl + '/' + id, this._httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
+  }
 }

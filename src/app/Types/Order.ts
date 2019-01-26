@@ -29,7 +29,7 @@ export class Order {
   email?: string;
   firstName?: string;
   lastName?: string;
-  phone?: string;
+  phoneNumber?: string;
 
   // billing address
   billingCountry?: string;
@@ -54,6 +54,9 @@ export class Order {
 
   // user Object
   userObject: User;
+
+  // total price
+  totalPrice: number;
 
   // watch Objects
   watchObjects?: WatchObjects[];

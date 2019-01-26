@@ -17,7 +17,7 @@ export class ConfirmationGuard implements CanActivate {
       order.watchObjects &&
       order.watchObjects.length &&
       order.email &&
-      order.phone &&
+      order.phoneNumber &&
       order.shippingAddress &&
       order.shippingCity &&
       order.shippingCountry &&

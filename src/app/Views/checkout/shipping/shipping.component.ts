@@ -38,12 +38,21 @@ export class ShippingComponent implements OnInit {
     // if the user is logged in
     if (this.authenticationService.currentUser) {
       const currentUser: User = this.authenticationService.currentUserValue;
-      this.order = Object.assign(CurrentOrder, <Order>currentUser);
+      this.order = Object.assign(CurrentOrder, <Order><unknown>currentUser);
 
       // remove useless keys/values
-      delete this.order.jwt;
-      delete this.order._id;
       delete this.order.showDetails;
+      if (this.order['orderObjects']) {
+        delete this.order['orderObjects'];
+      }
+
+      if (this.order['jwt']) {
+        delete this.order['jwt'];
+      }
+
+      if (this.order['_id']) {
+        delete this.order['_id'];
+      }
 
       console.log('logged', this.order);
     }

@@ -36,6 +36,8 @@ export class AuthenticationService {
   sendUserResetPasswordEmailUrl = this.env.backendUrl + 'user/account/resetPasswordSendEmail';
   resetUserPasswordConfirmCodeUrl = this.env.backendUrl + 'user/account/resetPasswordConfirmCode';
   resetUserPasswordNewPasswordUrl = this.env.backendUrl + 'user/account/resetPasswordNewPassword';
+  userProfileUrl = this.env.backendUrl + 'user/account/profile';
+  userUpdateProfileUrl = this.env.backendUrl + 'user/account/update';
 
   private resetPassword$: BehaviorSubject<ResetPassword>;
 
@@ -128,6 +130,34 @@ export class AuthenticationService {
           }
         }
 
+        return responseData;
+      }));
+  }
+
+  getUserProfile() {
+    return this.http.get<ResponseData>(this.userProfileUrl, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${this.currentUserValue.jwt}`
+      })
+    })
+      .pipe(map((responseData: ResponseData) => {
+        return responseData;
+      }));
+  }
+
+  updateUserProfile(user: User) {
+    return this.http.put<ResponseData>(this.userUpdateProfileUrl, { 'payload': user }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${this.currentUserValue.jwt}`
+      })
+    })
+      .pipe(map((responseData: ResponseData) => {
+        const updatedUser = Object.assign(this.currentUserValue, user);
+        if (updatedUser && updatedUser.jwt) {
+          localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        }
         return responseData;
       }));
   }

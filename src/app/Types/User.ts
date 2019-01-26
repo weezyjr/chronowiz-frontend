@@ -1,70 +1,42 @@
+import { Order } from './Order';
+
 export class User {
   _id?: string;
   email: string;
   password?: string;
   jwt?: string;
 
-  firstName?: String = '';
-  lastName?: String = '';
-  phone?: String = '';
+  // Personal Info
+  firstName?: string;
+  lastName?: string;
+  phoneNumber?: string;
 
-  billingCountry?: String = '';
-  billingState?: String = '';
-  billingCity?: String = '';
-  billingZip?: String = '';
-  billingAddress?: String = '';
+  // billing address
+  billingCountry?: string;
+  billingState?: string;
+  billingCity?: string;
+  billingZip?: string;
+  billingAddress?: string;
 
-  shippingType?: String = 'Free Shipping (3-5 business days)';
-  shippingSameAsBilling?: Boolean = false;
+  // shipping type
+  shippingType?: string;
+  shippingSameAsBilling?: boolean;
 
-  shippingCountry?: String = '';
-  shippingState?: String = '';
-  shippingCity?: String = '';
-  shippingZip?: String = '';
-  shippingAddress?: String = '';
+  // shipping address
+  shippingCountry?: string;
+  shippingState?: string;
+  shippingCity?: string;
+  shippingZip?: string;
+  shippingAddress?: string;
 
-  creditCardNumber?: String;
-  creditCardExpirationMonth?: String;
-  creditCardExpirationYear?: String;
-  securityNumber?: String;
-  creditCard?: Boolean = false;
-  escrow?: Boolean = false;
-  wireTransfer?: Boolean = false;
+  // payment method
+  paymentMethod?: 'credit card' | 'escrow' | 'wire transfer' | string;
 
-  constructor(test?: Boolean) {
-    if (test) {
-      this._id = '123';
-      this.email = 'user@chronowiz.com';
 
-      this.firstName = 'Ahmed';
-      this.lastName = 'Adel';
-      this.phone = '+201271347337';
+  // orders
+  orderObjects: Order[];
 
-      this.billingCountry = 'Egypt';
-      this.billingState = 'Alexandria';
-      this.billingCity = 'Muharamm Beh';
-      this.billingZip = '21515';
-      this.billingAddress = '22 El-Manzalawy St.';
-
-      this.shippingCountry = 'Egypt';
-      this.shippingState = 'Alexandria';
-      this.shippingCity = 'Muharamm Beh';
-      this.shippingZip = '21515';
-      this.shippingAddress = '22 El-Manzalawy St.';
-
-      this.shippingType = 'Free Shipping (3-5 business days)';
-      this.shippingSameAsBilling = true;
-
-      this.creditCardNumber = '4111 2222 3333 4444';
-      this.creditCardExpirationMonth = '12';
-      this.creditCardExpirationYear = '19';
-      this.securityNumber = '123';
-      this.creditCard = true;
-      this.escrow = false;
-      this.wireTransfer = false;
-    }
-    else{
+  constructor() {
       this.email = '';
-    }
   }
 }

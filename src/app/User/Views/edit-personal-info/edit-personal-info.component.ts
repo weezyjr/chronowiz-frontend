@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { User } from 'src/app/Types/User';
 import { Subject } from 'rxjs';
+import { ResponseObject } from 'src/app/API/responseObject';
+import { takeUntil } from 'rxjs/operators';
+import { ResponseData } from 'src/app/API/response-data';
 
 @Component({
   templateUrl: './edit-personal-info.component.html',
@@ -29,7 +32,18 @@ export class EditPersonalInfoComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.loading = true;
     console.log(this.user);
+    this.authenticationService.updateUserProfile(this.user).pipe(takeUntil(this.destroy$)).subscribe((responseData: ResponseData) => {
+      const response: ResponseObject = responseData.response;
+      console.log(response);
+      if (response.type.match('ERROR')) {
+        this._notificationsService.error('Error', response.message.en);
+      } else {
+        this._notificationsService.success('Success');
+      }
+      this.loading = false;
+    });
   }
 
   ngOnDestroy() {

@@ -9,7 +9,7 @@
   </div>
 
   <div class="row py-4">
-    <div class="col-md-6 col-12 mb-5">
+    <div class="col-md-6 col-12 mb-5 px-4">
       <div class="row">
         <div class="phone-section pb-3 col-md-12 col-6">
           <div class="title">Phone</div>
@@ -54,12 +54,20 @@
           </div>
 
           <div class="col-12 form-group">
-            <label for="message">Message (optional)</label>
-            <textarea name="message" [(ngModel)]="contactUs.message" name="message" cols="30" rows="10"></textarea>
+            <label for="phone">Phone (optional)</label>
+            <input type="text" [(ngModel)]="contactUs.phone" #phone="ngModel"
+              class="form-input" name="phone" placeholder="+20123456789">
+          </div>
+
+          <div class="col-12 form-group">
+            <label for="message">*Message</label>
+            <textarea name="message" #message="ngModel" required [(ngModel)]="contactUs.message" name="message" cols="30" rows="7"></textarea>
+            <div [hidden]="message.valid || message.pristine" class="invalid">Message is required</div>
           </div>
 
           <div class="col-12 text-center mx-auto">
-            <button class="btn secondry-btn" type="submit" [disabled]="!contactUsForm.form.valid"> Submit </button>
+            <button class="btn secondry-btn" type="submit" [disabled]="!contactUsForm.form.valid || loading"> Submit </button>
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>
 
         </div>
