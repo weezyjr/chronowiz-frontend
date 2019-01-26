@@ -72,7 +72,7 @@ export class OrdersFormComponent implements OnInit, OnDestroy {
 
 
   async updateOrder(order: Order) {
-    await this.adminService.updateOrder(this.order.id, this.order.status)
+    await this.adminService.updateOrder(order._id, order.status)
       .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         const response: ResponseObject = responseData.response;
