@@ -31,6 +31,9 @@ export class HeaderComponent implements OnInit {
   @Input()
   _brandName: String;
 
+  @Input()
+  noFix: Boolean = false;
+
   get logged(): Boolean {
     if (this.authenticationService.currentUserValue) {
       return true;

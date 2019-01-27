@@ -51,5 +51,5 @@
   </div>
 
 </header>
-<div *ngIf="background_color === '#ffffff' && opacity === 100" class="fix-height"></div>
+<div *ngIf="(!noFix && background_color === '#ffffff' && opacity === 100)" class="fix-height"></div>
 <app-side-menu [black]="content_color === 'black'"></app-side-menu>
