@@ -38,8 +38,8 @@
                 <span class="bold" *ngIf="orderWatchObject?.watchObject?.model">{{orderWatchObject?.watchObject?.model}}
                 </span>
                 <span class="small" *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}}
-                  mm,</span>
-                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}},</span>
+                  mm<span *ngIf="orderWatchObject?.watchObject?.caseMaterial">,&nbsp;</span> </span>
+                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}<span *ngIf="orderWatchObject?.watchObject?.perpetual">,&nbsp;</span></span>
                 <span class="small" *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
                 <br>
                 <span class="bold">Reference number:

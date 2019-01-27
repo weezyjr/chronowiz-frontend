@@ -10,9 +10,9 @@
         <p class="collection">{{watch?.collectionObject?.name}}</p>
       </div>
     -->
-    <p><span *ngIf="watch?.model">{{watch?.model}},</span>
-      <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm,</span>
-      <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}},</span>
+    <p><span *ngIf="watch?.model">{{watch?.model}}<span *ngIf="watch?.caseDiameter">,&nbsp;</span></span>
+      <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm<span *ngIf="watch?.caseMaterial">,&nbsp;</span></span>
+      <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}<span *ngIf="watch?.perpetual">,&nbsp;</span></span>
       <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
     </p>
   </a>

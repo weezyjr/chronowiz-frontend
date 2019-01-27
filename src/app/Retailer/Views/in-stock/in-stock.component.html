@@ -74,9 +74,9 @@
                 <td><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p class="m-0">
-                    <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}},</span>
-                    <span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">{{watchObjectWrapper?.watchObject?.caseDiameter}} mm,</span>
-                    <span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">{{watchObjectWrapper?.watchObject?.caseMaterial}},</span>
+                    <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}}<span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">,&nbsp;</span></span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">{{watchObjectWrapper?.watchObject?.caseDiameter}} mm<span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">,&nbsp;</span></span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">{{watchObjectWrapper?.watchObject?.caseMaterial}}<span *ngIf="watchObjectWrapper?.watchObject?.perpetual">,&nbsp;</span></span>
                     <span *ngIf="watchObjectWrapper?.watchObject?.perpetual">{{watchObjectWrapper?.watchObject?.perpetual}}</span>
                   </p>
                   <p class="bold">Reference Number: {{watchObjectWrapper?.watchObject?.referenceNumber}} </p>

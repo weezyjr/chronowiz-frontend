@@ -38,9 +38,9 @@
                 <div class="detail">
                   <div class="attr"> Model Case: </div>
                   <div class="value">
-                    <span *ngIf="orderWatchObject?.watchObject?.model"> {{orderWatchObject?.watchObject?.model}}, </span>
-                    <span *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}} mm, </span>
-                    <span *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.model"> {{orderWatchObject?.watchObject?.model}}<span *ngIf="orderWatchObject?.watchObject?.caseDiameter">,&nbsp;</span> </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}} mm<span *ngIf="orderWatchObject?.watchObject?.caseMaterial">,&nbsp;</span> </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}<span *ngIf="orderWatchObject?.watchObject?.perpetual">,&nbsp;</span> </span>
                     <span *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
                   </div>
                 </div>
@@ -62,9 +62,9 @@
                 <div class="detail">
                   <div class="attr"> Dial: </div>
                   <div class="value">
-                    <span *ngIf="orderWatchObject?.watchObject?.dialColour">{{orderWatchObject?.watchObject?.dialColour}}, </span>
-                    <span *ngIf="orderWatchObject?.watchObject?.dialFinish">{{orderWatchObject?.watchObject?.dialFinish}}, </span>
-                    <span *ngIf="orderWatchObject?.watchObject?.dialIndex">{{orderWatchObject?.watchObject?.dialIndex}}, </span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialColour">{{orderWatchObject?.watchObject?.dialColour}}<span *ngIf="orderWatchObject?.watchObject?.dialFinish">,&nbsp;</span></span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialFinish">{{orderWatchObject?.watchObject?.dialFinish}}<span *ngIf="orderWatchObject?.watchObject?.dialIndex">,&nbsp;</span></span>
+                    <span *ngIf="orderWatchObject?.watchObject?.dialIndex">{{orderWatchObject?.watchObject?.dialIndex}}<span *ngIf="orderWatchObject?.watchObject?.dialHands">,&nbsp;</span></span>
                     <span *ngIf="orderWatchObject?.watchObject?.dialHands">{{orderWatchObject?.watchObject?.dialHands}} </span>
                   </div>
                 </div>

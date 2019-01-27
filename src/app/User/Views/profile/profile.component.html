@@ -56,7 +56,7 @@
                 <br>
                 <div class="info">{{user?.billingAddress}}</div>
                 <br>
-                <div class="info" *ngIf="user?.billingCity">{{user?.billingCity}}, </div>
+                <div class="info" *ngIf="user?.billingCity">{{user?.billingCity}} <span *ngIf="user?.billingState || user?.billingZip">,&nbsp;</span> </div>
                 <div class="info">{{user?.billingState}} {{user?.billingZip}}</div>
                 <br>
                 <div class="info">{{user?.billingCountry}}</div>
@@ -83,7 +83,7 @@
               <div class="address">
                 <div class="info py-3">{{user?.firstName}} {{user?.lastName}}</div>
                 <div class="info py-3">{{user?.shippingAddress}}</div>
-                <div class="info py-3">{{user?.shippingCity}}, {{user?.shippingState}} {{user?.shippingZip}}</div>
+                <div class="info py-3">{{user?.shippingCity}} <span *ngIf="user?.shippingCity">,&nbsp;</span> {{user?.shippingState}} {{user?.shippingZip}}</div>
                 <div class="info py-3">{{user?.shippingCountry}}</div>
               </div>
             </div>
@@ -115,7 +115,7 @@
         <tr (click)="toggleShowDetails(order?.showDetails, i)">
           <td>{{order?.orderDate | date: 'shortDate'}}</td>
           <td>{{order?.orderNumber}}</td>
-          <td>{{order?.totalPrice | currency}}</td>
+          <td>{{order?.totalPrice | currency : 'USD' :'symbol' : '1.0'}}</td>
           <td>{{order?.status}}</td>
         </tr>
         <tr *ngIf="order?.showDetails">

@@ -90,9 +90,9 @@
         <div class="col-md-10 col-12">
           <div class="row flex-nowrap">
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-              <span *ngIf="watch?.model"> {{watch?.model}}, </span>
-              <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm, </span>
-              <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}} </span>
+              <span *ngIf="watch?.model"> {{watch?.model}}<span *ngIf="watch?.caseDiameter">,&nbsp;</span></span>
+              <span *ngIf="watch?.caseDiameter">{{watch?.caseDiameter}} mm<span *ngIf="watch?.caseMaterial">,&nbsp;</span></span>
+              <span *ngIf="watch?.caseMaterial">{{watch?.caseMaterial}}<span *ngIf="watch?.perpetual">,&nbsp;</span> =</span>
               <span *ngIf="watch?.perpetual">{{watch?.perpetual}}</span>
             </div>
           </div>
@@ -153,9 +153,9 @@
         <div class="col-md-10 col-12">
           <div class="row flex-nowrap">
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-              <span *ngIf="watch?.dialColour">{{watch?.dialColour}}, </span>
-              <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}}, </span>
-              <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}}, </span>
+              <span *ngIf="watch?.dialColour">{{watch?.dialColour}}<span *ngIf="watch?.dialFinish">,&nbsp;</span></span>
+              <span *ngIf="watch?.dialFinish">{{watch?.dialFinish}}<span *ngIf="watch?.dialIndex">,&nbsp;</span></span>
+              <span *ngIf="watch?.dialIndex">{{watch?.dialIndex}}<span *ngIf="watch?.dialHands">,&nbsp;</span> </span>
               <span *ngIf="watch?.dialHands">{{watch?.dialHands}} </span>
             </div>
           </div>
@@ -344,7 +344,7 @@
         <div class="col-md-10 col-12">
           <div class="row flex-nowrap">
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-              <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberNumber}},</span>
+              <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberNumber}}<span *ngIf="watch?.dialColour">,&nbsp;</span></span>
               <span class="muted" *ngIf="watch?.dialColour">{{watch?.movementCaliberName}} </span>
             </div>
           </div>
@@ -531,7 +531,7 @@
         <div class="col-md-10 col-12">
           <div class="row flex-nowrap">
             <div class="col-md-3 col-sm-4 col-6 text-center" *ngFor="let watch of watches">
-              <span class="muted" *ngIf="watch?.movementCertificate">{{watch?.movementCertificate}},</span>
+              <span class="muted" *ngIf="watch?.movementCertificate">{{watch?.movementCertificate}}<span *ngIf="watch?.awards">,&nbsp;</span></span>
               <span class="muted" *ngIf="watch?.awards">{{watch?.awards}} </span>
             </div>
           </div>
