@@ -68,4 +68,10 @@ export class WatchTrayService {
     }
   }
 
+  public removeAllWatchesFromWatchTray() {
+    localStorage.removeItem('watchTray');
+    this.watchTray.next([]);
+    this._currentWatches = [];
+  }
+
 }

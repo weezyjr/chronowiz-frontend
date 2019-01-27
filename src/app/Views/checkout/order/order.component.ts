@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from 'src/app/User/Services/WatchTray/checkout.service';
 import { Order } from 'src/app/Types/Order';
 import { Router } from '@angular/router';
+import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
 
 @Component({
   selector: 'app-order',
@@ -13,6 +14,7 @@ export class OrderComponent implements OnInit {
   order: Order = new Order();
 
   constructor(
+    private watchTrayService: WatchTrayService,
     private checkoutService: CheckoutService,
     private router: Router) {
     if (!this.checkoutService.currentOrder) {
@@ -22,6 +24,7 @@ export class OrderComponent implements OnInit {
       this.order = this.checkoutService.currentOrder;
       // empty the subject
       this.checkoutService.currentOrder = undefined;
+      this.watchTrayService.removeAllWatchesFromWatchTray();
       console.log('order', this.order);
     }
   }
