@@ -8,6 +8,7 @@ import { Brand } from 'src/app/Types/brand';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Watch } from 'src/app/Types/watch';
 
 @Component({
   selector: 'app-brand',
@@ -24,6 +25,7 @@ export class BrandComponent implements OnInit, OnDestroy {
   // brand object
   public brandObject: Brand;
   public collections: Collection[];
+  private _collection_: Collection[];
 
   // breadcrumps links
   public breads = [{
@@ -37,6 +39,31 @@ export class BrandComponent implements OnInit, OnDestroy {
 
   filterGender(gender: string) {
     this.currentGender = gender;
+    this.collections = this.filterCollection(this._collection_);
+  }
+
+  filterCollection(collections: Collection[]): Collection[] | undefined {
+    if (!collections) {
+      return undefined;
+    }
+    if (!this.currentGender || this.currentGender === 'All') {
+      return collections;
+    }
+    else {
+      return collections.filter((collection: Collection) => {
+        if (collection.watchObjects) {
+          const filteredCollection = collection.watchObjects.filter((watch: Watch) => {
+            return watch.gender === this.currentGender;
+          });
+          if (filteredCollection) {
+            return filteredCollection.length > 0;
+          }
+          else {
+            return false;
+          }
+        }
+      });
+    }
   }
 
   // render the show more list
@@ -84,9 +111,9 @@ export class BrandComponent implements OnInit, OnDestroy {
               this._notificationsService.error('Error', response.message.en);
             } else {
               this.brandObject = <Brand>response.payload;
-              this.collections = <Collection[]>this.brandObject['collectionObjects'];
+              this._collection_ = <Collection[]>this.brandObject['collectionObjects'];
               // filter out empty collections
-              this.collections = this.collections.filter((collection) => {
+              this.collections = this._collection_.filter((collection: Collection) => {
                 if (collection.watchObjects) {
                   return collection.watchObjects.length > 0;
                 }
