@@ -1,78 +1,82 @@
-<simple-notifications></simple-notifications>
-<app-header></app-header>
-<div class="container contact-us mt-3 mb-5">
+<div class="contact-us-page">
+  <simple-notifications></simple-notifications>
+  <app-header></app-header>
+  <div class="container contact-us mt-3 mb-5">
 
-  <div class="row">
-    <div class="col-12">
-      <h1> CONTACT US </h1>
-    </div>
-  </div>
-
-  <div class="row py-4">
-    <div class="col-md-6 col-12 mb-5 px-4">
-      <div class="row">
-        <div class="phone-section pb-3 col-md-12 col-6">
-          <div class="title">Phone</div>
-          <div class="limited-width">
-            <div class="text">Call us: <span class="bold-text">1 888 482 7768</span></div>
-            <div class="text text-right"> 24 hours a day</div>
-          </div>
-          <br>
-          <div class="limited-width">
-            <div class="text">Call us: <span class="bold-text">1 888 676 2660 </span></div>
-            <div class="text text-right"> 6am - 8pm PST</div>
-          </div>
-          <br>
-          <div class="text">Email us: info@chronowiz.com</div>
-        </div>
-
-        <div class="address-section pb-3 col-md-12 col-6">
-          <div class="title">Address</div>
-          <div class="text">27 MERRY LN NP000131206</div>
-          <br>
-          <div class="text">EAST HANOVER, NJ 07936-3901</div>
-          <br>
-          <div class="text">United States</div>
-        </div>
+    <div class="row">
+      <div class="col-12">
+        <h1> CONTACT US </h1>
       </div>
     </div>
-    <div class="col-md-6 col-12">
-      <form #contactUsForm="ngForm" (ngSubmit)="contactUsForm.form.valid? onSubmit() : null">
+
+    <div class="row py-4">
+      <div class="col-md-6 col-12 mb-5 px-4">
         <div class="row">
-          <div class="col-12 form-group">
-            <label for="contactName">Name*</label>
-            <input type="text" required [(ngModel)]="contactUs.name" class="form-input" #contactName="ngModel" name="contactName"
-              placeholder="John">
-            <div [hidden]="contactName.valid || contactName.pristine" class="invalid">name is required</div>
+          <div class="phone-section pb-3 col-md-12 col-6">
+            <div class="title">Phone</div>
+            <div class="limited-width">
+              <div class="text">Call us: <span class="bold-text">1 888 482 7768</span></div>
+              <div class="text text-right"> 24 hours a day</div>
+            </div>
+            <br>
+            <div class="limited-width">
+              <div class="text">Call us: <span class="bold-text">1 888 676 2660 </span></div>
+              <div class="text text-right"> 6am - 8pm PST</div>
+            </div>
+            <br>
+            <div class="text">Email us: info@chronowiz.com</div>
           </div>
 
-          <div class="col-12 form-group">
-            <label for="email">*Email</label>
-            <input type="email" required [(ngModel)]="contactUs.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"
-              class="form-input" name="email" placeholder="johnsmith@gmail.com">
-            <div [hidden]="email.valid || email.pristine" class="invalid">Email is not valid</div>
+          <div class="address-section pb-3 col-md-12 col-6">
+            <div class="title">Address</div>
+            <div class="text">27 MERRY LN NP000131206</div>
+            <br>
+            <div class="text">EAST HANOVER, NJ 07936-3901</div>
+            <br>
+            <div class="text">United States</div>
           </div>
-
-          <div class="col-12 form-group">
-            <label for="phone">Phone (optional)</label>
-            <input type="text" [(ngModel)]="contactUs.phone" #phone="ngModel"
-              class="form-input" name="phone" placeholder="+20123456789">
-          </div>
-
-          <div class="col-12 form-group">
-            <label for="message">*Message</label>
-            <textarea name="message" #message="ngModel" required [(ngModel)]="contactUs.message" name="message" cols="30" rows="7"></textarea>
-            <div [hidden]="message.valid || message.pristine" class="invalid">Message is required</div>
-          </div>
-
-          <div class="col-12 text-center mx-auto">
-            <button class="btn secondry-btn" type="submit" [disabled]="!contactUsForm.form.valid || loading"> Submit </button>
-            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-          </div>
-
         </div>
-      </form>
+      </div>
+      <div class="col-md-6 col-12">
+        <form #contactUsForm="ngForm" (ngSubmit)="contactUsForm.form.valid? onSubmit() : null">
+          <div class="row">
+            <div class="col-12 form-group">
+              <label for="contactName">Name*</label>
+              <input type="text" required [(ngModel)]="contactUs.name" class="form-input" #contactName="ngModel" name="contactName"
+                placeholder="John">
+              <div [hidden]="contactName.valid || contactName.pristine" class="invalid">name is required</div>
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="email">*Email</label>
+              <input type="email" required [(ngModel)]="contactUs.email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"
+                class="form-input" name="email" placeholder="johnsmith@gmail.com">
+              <div [hidden]="email.valid || email.pristine" class="invalid">Email is not valid</div>
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="phone">Phone (optional)</label>
+              <input type="text" [(ngModel)]="contactUs.phone" #phone="ngModel" class="form-input" name="phone"
+                placeholder="+20123456789">
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="message">*Message</label>
+              <textarea name="message" #message="ngModel" required [(ngModel)]="contactUs.message" name="message" cols="30"
+                rows="7"></textarea>
+              <div [hidden]="message.valid || message.pristine" class="invalid">Message is required</div>
+            </div>
+
+            <div class="col-12 text-center mx-auto">
+              <button class="btn secondry-btn" type="submit" [disabled]="!contactUsForm.form.valid || loading"> Submit
+              </button>
+              <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

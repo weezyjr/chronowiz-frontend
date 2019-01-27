@@ -1,132 +1,138 @@
-<app-header></app-header>
-<div class="container mt-3 mb-5">
-  <div class="sassy-text">Hello {{user?.firstName}}!</div>
-  <h1>Account overview</h1>
-  <app-collapsible text="Your Primary Account Information" color="red" [active]="true">
+<div class="profile-page">
+  <app-header></app-header>
+  <div class="container mt-3 mb-5">
+    <div class="sassy-text">Hello {{user?.firstName}}!</div>
+    <h1>Account overview</h1>
+    <app-collapsible text="Your Primary Account Information" color="red" [active]="true">
 
-    <div class="contanier-fluid">
-      <div class="row no-gutters sections">
+      <div class="contanier-fluid">
+        <div class="row no-gutters sections">
 
-        <div class="col-lg-4 col-12 info-section pb-2">
-          <div class="row">
-            <div class="col-12">
-              <div class="bold-text text-left"> Your personal info </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="personal">
-                <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
-                <br>
-                <div class="info">{{user?.email}}</div>
-                <br>
-                <div class="info">{{user?.phoneNumber}}</div>
+          <div class="col-lg-4 col-12 info-section pb-2">
+            <div class="row">
+              <div class="col-12">
+                <div class="bold-text text-left"> Your personal info </div>
               </div>
             </div>
-          </div>
 
-          <div class="row mt-3">
-            <div class="col-12">
-              <button class="btn secondry-btn" (click)="goTo('account/edit-personal-info')"> Edit Personal Info
-              </button>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-lg-4 col-12 info-section pb-3">
-          <div class="row">
-            <div class="col-12">
-              <div class="bold-text text-left"> Payment Info </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="payment">
-                <div *ngIf="user?.paymentMethod === 'credit card'">
-                  <div class="info pb-2">
-                    <img src="../../../assets/visa.svg" alt="visa">
-                    Ending in 4369
-                  </div>
-                  <div class="info">Exp. 12-2022</div>
+            <div class="row">
+              <div class="col-12">
+                <div class="personal">
+                  <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
+                  <br>
+                  <div class="info">{{user?.email}}</div>
+                  <br>
+                  <div class="info">{{user?.phoneNumber}}</div>
                 </div>
-                <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
-                <br>
-                <div class="info">{{user?.billingAddress}}</div>
-                <br>
-                <div class="info" *ngIf="user?.billingCity">{{user?.billingCity}} <span *ngIf="user?.billingState || user?.billingZip">,&nbsp;</span> </div>
-                <div class="info">{{user?.billingState}} {{user?.billingZip}}</div>
-                <br>
-                <div class="info">{{user?.billingCountry}}</div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn secondry-btn" (click)="goTo('account/edit-personal-info')"> Edit Personal Info
+                </button>
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <button class="btn secondry-btn" (click)="goTo('account/edit-payment-info')"> Edit Payment Info </button>
+
+
+          <div class="col-lg-4 col-12 info-section pb-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="bold-text text-left"> Payment Info </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-
-        <div class="col-lg-4 col-12 info-section pb-2">
-          <div class="row">
-            <div class="col-12">
-              <div class="bold-text text-left"> Billing Address </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="payment">
+                  <div *ngIf="user?.paymentMethod === 'credit card'">
+                    <div class="info pb-2">
+                      <img src="../../../assets/visa.svg" alt="visa">
+                      Ending in 4369
+                    </div>
+                    <div class="info">Exp. 12-2022</div>
+                  </div>
+                  <div class="info">{{user?.firstName}} {{user?.lastName}}</div>
+                  <br>
+                  <div class="info">{{user?.billingAddress}}</div>
+                  <br>
+                  <div class="info" *ngIf="user?.billingCity">{{user?.billingCity}} <span *ngIf="user?.billingState || user?.billingZip">,&nbsp;</span>
+                  </div>
+                  <div class="info">{{user?.billingState}} {{user?.billingZip}}</div>
+                  <br>
+                  <div class="info">{{user?.billingCountry}}</div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="address">
-                <div class="info py-3">{{user?.firstName}} {{user?.lastName}}</div>
-                <div class="info py-3">{{user?.shippingAddress}}</div>
-                <div class="info py-3">{{user?.shippingCity}} <span *ngIf="user?.shippingCity">,&nbsp;</span> {{user?.shippingState}} {{user?.shippingZip}}</div>
-                <div class="info py-3">{{user?.shippingCountry}}</div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn secondry-btn" (click)="goTo('account/edit-payment-info')"> Edit Payment Info
+                </button>
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-12">
-              <button class="btn secondry-btn" (click)="goTo('account/edit-address-info')"> Edit Address Info </button>
+
+
+          <div class="col-lg-4 col-12 info-section pb-2">
+            <div class="row">
+              <div class="col-12">
+                <div class="bold-text text-left"> Billing Address </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="address">
+                  <div class="info py-3">{{user?.firstName}} {{user?.lastName}}</div>
+                  <div class="info py-3">{{user?.shippingAddress}}</div>
+                  <div class="info py-3">{{user?.shippingCity}} <span *ngIf="user?.shippingCity">,&nbsp;</span>
+                    {{user?.shippingState}} {{user?.shippingZip}}</div>
+                  <div class="info py-3">{{user?.shippingCountry}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <button class="btn secondry-btn" (click)="goTo('account/edit-address-info')"> Edit Address Info
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
-  </app-collapsible>
+    </app-collapsible>
 
-  <div class="my-4"></div>
+    <div class="my-4"></div>
 
-  <app-collapsible text="Your Order History" color="gray" [active]="true">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">Order Date</th>
-          <th scope="col">Order Number</th>
-          <th scope="col">Total Price</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let order of user?.orderObjects; let i=index">
-        <tr (click)="toggleShowDetails(order?.showDetails, i)">
-          <td>{{order?.orderDate | date: 'shortDate'}}</td>
-          <td>{{order?.orderNumber}}</td>
-          <td>{{order?.totalPrice | currency : 'USD' :'symbol' : '1.0'}}</td>
-          <td>{{order?.status}}</td>
-        </tr>
-        <tr *ngIf="order?.showDetails">
-          <td colspan="4">
-            <app-order-confirmation [order]="order"></app-order-confirmation>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </app-collapsible>
+    <app-collapsible text="Your Order History" color="gray" [active]="true">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Number</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of user?.orderObjects; let i=index">
+          <tr (click)="toggleShowDetails(order?.showDetails, i)">
+            <td>{{order?.orderDate | date: 'shortDate'}}</td>
+            <td>{{order?.orderNumber}}</td>
+            <td>{{order?.totalPrice | currency : 'USD' :'symbol' : '1.0'}}</td>
+            <td>{{order?.status}}</td>
+          </tr>
+          <tr *ngIf="order?.showDetails">
+            <td colspan="4">
+              <app-order-confirmation [order]="order"></app-order-confirmation>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-collapsible>
 
 
+  </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

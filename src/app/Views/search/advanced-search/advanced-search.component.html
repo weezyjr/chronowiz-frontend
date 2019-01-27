@@ -1,108 +1,110 @@
-<simple-notifications></simple-notifications>
-<app-header></app-header>
-<div class="container-fluid mt-3 mx-auto full-height text-center">
-  <div class="register-form mx-auto mb-3">
+<div class="advanced-search-page">
+  <simple-notifications></simple-notifications>
+  <app-header></app-header>
+  <div class="container-fluid mt-3 mx-auto full-height text-center">
+    <div class="register-form mx-auto mb-3">
 
-    <h1> Search </h1>
+      <h1> Search </h1>
 
-    <form #searchForm="ngForm" class="search-bar mx-auto my-3">
-      <div class="search text-center m-auto">
-        <input autocomplete="off" class="search-form-input search m-auto text-center" (input)="search()" name="searchQuery"
-          [(ngModel)]="query" type="text" placeholder="Search">
-        <img class="icon" src="../../../assets/search.svg" alt="search-icon">
-        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      </div>
-    </form>
+      <form #searchForm="ngForm" class="search-bar mx-auto my-3">
+        <div class="search text-center m-auto">
+          <input autocomplete="off" class="search-form-input search m-auto text-center" (input)="search()" name="searchQuery"
+            [(ngModel)]="query" type="text" placeholder="Search">
+          <img class="icon" src="../../../assets/search.svg" alt="search-icon">
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+      </form>
 
-    <div class="container text-left filters">
-      <div>
-        <app-filter-collapsible>
-          <!-- Sort Options -->
-          <div class="d-flex p-4 align-items-center justify-content-center flex-wrap">
-            <div>
-              <div class="dropdown py-4">
-                <span>Sort by:</span>
-                <button (click)="openSortMenu()" class="dropbtn">{{sortFactor}}</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <a (click)="sortFactor = sortOption; sort()" *ngFor="let sortOption of sortOptions">{{sortOption}}</a>
+      <div class="container text-left filters">
+        <div>
+          <app-filter-collapsible>
+            <!-- Sort Options -->
+            <div class="d-flex p-4 align-items-center justify-content-center flex-wrap">
+              <div>
+                <div class="dropdown py-4">
+                  <span>Sort by:</span>
+                  <button (click)="openSortMenu()" class="dropbtn">{{sortFactor}}</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a (click)="sortFactor = sortOption; sort()" *ngFor="let sortOption of sortOptions">{{sortOption}}</a>
+                  </div>
                 </div>
               </div>
+              <div class="custom-slider">
+                <span class="slider-title"> Price range: </span>
+                <ng5-slider [(value)]="minPrice" (valueChange)="renderWatches()" (highValueChange)="renderWatches()"
+                  [(highValue)]="maxPrice" [options]="options"></ng5-slider>
+                <div class="slider-values">{{minPrice}} - {{maxPrice}}</div>
+              </div>
             </div>
-            <div class="custom-slider">
-              <span class="slider-title"> Price range: </span>
-              <ng5-slider [(value)]="minPrice" (valueChange)="renderWatches()" (highValueChange)="renderWatches()"
-                [(highValue)]="maxPrice" [options]="options"></ng5-slider>
-              <div class="slider-values">{{minPrice}} - {{maxPrice}}</div>
-            </div>
-          </div>
-          <!-- Desktop filter carousel -->
-          <div class="filter-desktop-carousel">
-            <div class="row filter">
+            <!-- Desktop filter carousel -->
+            <div class="filter-desktop-carousel">
+              <div class="row filter">
                 <div class="col-md-1 d-lg-block d-md-none"></div>
-              <div class="col-lg-2 col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
-                <h6>{{ filter.title }}</h6>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
+                  <h6>{{ filter.title }}</h6>
+                  <label class="radio" *ngFor="let option of filter?.options; let i = index">
+                    {{option}}
+                    <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]"
+                      (change)="renderWatches()">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-md-1 d-lg-block d-md-none"></div>
+              </div>
+            </div>
+
+            <!-- mobile filter collapsible choose brand -->
+            <app-collapsible class="filter-mobile-collapsible" [text]="filter?.title" *ngFor="let filter of filtersRows">
+              <div class="p-3">
                 <label class="radio" *ngFor="let option of filter?.options; let i = index">
                   {{option}}
-                  <input type="radio" [checked]="i === 0" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]"
-                    (change)="renderWatches()">
+                  <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name"
+                    [(ngModel)]="filters[filter?.name]">
                   <span class="checkmark"></span>
                 </label>
               </div>
-              <div class="col-md-1 d-lg-block d-md-none"></div>
-            </div>
-          </div>
+            </app-collapsible>
 
-          <!-- mobile filter collapsible choose brand -->
-          <app-collapsible class="filter-mobile-collapsible" [text]="filter?.title" *ngFor="let filter of filtersRows">
-            <div class="p-3">
-              <label class="radio" *ngFor="let option of filter?.options; let i = index">
-                {{option}}
-                <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name"
-                  [(ngModel)]="filters[filter?.name]">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </app-collapsible>
-
-          <!-- choose brand  collapsible-->
-          <app-collapsible class="filter-mobile-collapsible" text="Choose the brand">
-            <div class="p-5">
-              <label class="radio" *ngFor="let brand of brands; let i = index">
-                {{brand?.name}}
-                <input type="checkbox" [value]="brand?.name" (change)="renderWatches()" [(ngModel)]="brand.checked"
-                  [name]="brand?.name">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </app-collapsible>
-        </app-filter-collapsible>
-      </div>
-      <div class="filter-desktop-carousel">
-        <app-filter-collapsible text="Brands">
-          <app-carousel [len]="brandsListRows?.length">
-            <div class="col-md-3 col-sm-4 col-6 filter-row" *ngFor="let brandsRow of brandsListRows">
-              <label class="radio" *ngFor="let brand of brandsRow">
-                {{brand?.name}}
-                <input type="checkbox" [value]="brand?.name" (change)="renderWatches()" [(ngModel)]="brand.checked"
-                  [name]="brand?.name">
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </app-carousel>
-        </app-filter-collapsible>
-      </div>
-
-      <div class="watchs" *ngIf="query">
-        <div class="row">
-          <div class="col-md-3 my-4" *ngFor="let watch of watches | slice: 0:watchsLimit">
-            <app-item-card [watch]="watch"></app-item-card>
-          </div>
+            <!-- choose brand  collapsible-->
+            <app-collapsible class="filter-mobile-collapsible" text="Choose the brand">
+              <div class="p-5">
+                <label class="radio" *ngFor="let brand of brands; let i = index">
+                  {{brand?.name}}
+                  <input type="checkbox" [value]="brand?.name" (change)="renderWatches()" [(ngModel)]="brand.checked"
+                    [name]="brand?.name">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </app-collapsible>
+          </app-filter-collapsible>
         </div>
-        <div class="text-center mx-auto show-more my-5">
-          <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
+        <div class="filter-desktop-carousel">
+          <app-filter-collapsible text="Brands">
+            <app-carousel [len]="brandsListRows?.length">
+              <div class="col-md-3 col-sm-4 col-6 filter-row" *ngFor="let brandsRow of brandsListRows">
+                <label class="radio" *ngFor="let brand of brandsRow">
+                  {{brand?.name}}
+                  <input type="checkbox" [value]="brand?.name" (change)="renderWatches()" [(ngModel)]="brand.checked"
+                    [name]="brand?.name">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </app-carousel>
+          </app-filter-collapsible>
+        </div>
+
+        <div class="watchs" *ngIf="query">
+          <div class="row">
+            <div class="col-md-3 my-4" *ngFor="let watch of watches | slice: 0:watchsLimit">
+              <app-item-card [watch]="watch"></app-item-card>
+            </div>
+          </div>
+          <div class="text-center mx-auto show-more my-5">
+            <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

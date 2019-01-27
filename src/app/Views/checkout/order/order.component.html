@@ -1,70 +1,74 @@
-<simple-notifications></simple-notifications>
-<app-header></app-header>
-<div class="container mt-2 mb-5">
-  <div class="text-center">
-    <h1> Order #RF{{order.orderNumber}} </h1>
-    <h2 class="text-center"> {{order.orderDate | date:'shortDate'}} </h2>
-  </div>
-  <div class="row mb-5 mt-3 mx-auto">
-    <div class="col-12 mt-4">
-      <table class="watch-table table-responsive-sm my-3">
-        <thead>
-          <tr>
-            <th class="small">Item</th>
-            <th class="small">Description</th>
-            <th class="small">Price</th>
-            <th class="small">QTY</th>
-            <th class="small">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let orderWatchObject of order?.watchObjects">
-            <td class="text-center">
-              <a class="img-container" *ngIf="orderWatchObject?.watchObject?.referenceNumber" [routerLink]="['/watch/',orderWatchObject?.watchObject?.referenceNumber]">
-                <img class="table-img" [src]="orderWatchObject?.watchObject?.mainPhotoUrl? orderWatchObject?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
-              </a>
-            </td>
-            <td class="desc">
-              <p class="m-0">
-                <span class="bold" *ngIf="orderWatchObject?.watchObject?.model">{{orderWatchObject?.watchObject?.model}}
-                </span>
-                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}}
-                  mm<span *ngIf="orderWatchObject?.watchObject?.caseMaterial">,&nbsp;</span></span>
-                <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}<span *ngIf="orderWatchObject?.watchObject?.perpetual">,&nbsp;</span> </span>
-                <span class="small" *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
-                <br>
-                <span class="bold">Reference number:
-                  <span class="small">
-                    {{orderWatchObject?.watchObject?.referenceNumber}}
+<div class="order-page">
+  <simple-notifications></simple-notifications>
+  <app-header></app-header>
+  <div class="container mt-2 mb-5">
+    <div class="text-center">
+      <h1> Order #RF{{order.orderNumber}} </h1>
+      <h2 class="text-center"> {{order.orderDate | date:'shortDate'}} </h2>
+    </div>
+    <div class="row mb-5 mt-3 mx-auto">
+      <div class="col-12 mt-4">
+        <table class="watch-table table-responsive-sm my-3">
+          <thead>
+            <tr>
+              <th class="small">Item</th>
+              <th class="small">Description</th>
+              <th class="small">Price</th>
+              <th class="small">QTY</th>
+              <th class="small">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderWatchObject of order?.watchObjects">
+              <td class="text-center">
+                <a class="img-container" *ngIf="orderWatchObject?.watchObject?.referenceNumber" [routerLink]="['/watch/',orderWatchObject?.watchObject?.referenceNumber]">
+                  <img class="table-img" [src]="orderWatchObject?.watchObject?.mainPhotoUrl? orderWatchObject?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'">
+                </a>
+              </td>
+              <td class="desc">
+                <p class="m-0">
+                  <span class="bold" *ngIf="orderWatchObject?.watchObject?.model">{{orderWatchObject?.watchObject?.model}}
                   </span>
-                </span>
-              </p>
-            </td>
-            <td>
-              <p class="small m-0"> {{orderWatchObject?.watchObject?.price | currency: orderWatchObject?.watchObject?.priceCurrency
-                : 'symbol' : '1.0' }} </p>
-            </td>
-            <td class="text-center">
-              <p class="small"> {{orderWatchObject?.quantity}} </p>
-            </td>
-            <td>
-              <p class="small m-0"> {{orderWatchObject?.watchObject?.price * orderWatchObject?.quantity | currency:
-                orderWatchObject?.watchObject?.priceCurrency : 'symbol' : '1.0' }}
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                  <span class="small" *ngIf="orderWatchObject?.watchObject?.caseDiameter">{{orderWatchObject?.watchObject?.caseDiameter}}
+                    mm<span *ngIf="orderWatchObject?.watchObject?.caseMaterial">,&nbsp;</span></span>
+                  <span class="small" *ngIf="orderWatchObject?.watchObject?.caseMaterial">{{orderWatchObject?.watchObject?.caseMaterial}}<span
+                      *ngIf="orderWatchObject?.watchObject?.perpetual">,&nbsp;</span> </span>
+                  <span class="small" *ngIf="orderWatchObject?.watchObject?.perpetual">{{orderWatchObject?.watchObject?.perpetual}}</span>
+                  <br>
+                  <span class="bold">Reference number:
+                    <span class="small">
+                      {{orderWatchObject?.watchObject?.referenceNumber}}
+                    </span>
+                  </span>
+                </p>
+              </td>
+              <td>
+                <p class="small m-0"> {{orderWatchObject?.watchObject?.price | currency:
+                  orderWatchObject?.watchObject?.priceCurrency
+                  : 'symbol' : '1.0' }} </p>
+              </td>
+              <td class="text-center">
+                <p class="small"> {{orderWatchObject?.quantity}} </p>
+              </td>
+              <td>
+                <p class="small m-0"> {{orderWatchObject?.watchObject?.price * orderWatchObject?.quantity | currency:
+                  orderWatchObject?.watchObject?.priceCurrency : 'symbol' : '1.0' }}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <p class="totalPriceSection">
-        <span class="totalPriceText">Shipping : </span>
-        <span class="totalPrice"> {{20 | currency: 'USD'}} </span>
-      </p>
-      <p class="totalPriceSection borders">
-        <span class="totalPriceText">Total : </span>
-        <span class="totalPrice"> {{order?.totalPrice + 20 | currency}} </span>
-      </p>
+        <p class="totalPriceSection">
+          <span class="totalPriceText">Shipping : </span>
+          <span class="totalPrice"> {{20 | currency: 'USD'}} </span>
+        </p>
+        <p class="totalPriceSection borders">
+          <span class="totalPriceText">Total : </span>
+          <span class="totalPrice"> {{order?.totalPrice + 20 | currency}} </span>
+        </p>
+      </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

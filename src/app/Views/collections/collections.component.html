@@ -1,51 +1,55 @@
-<simple-notifications></simple-notifications>
-<app-header [_brandName]="collection?.brandObject?.name" [breads]="breads" [_brandLogo]="collection?.brandObject?.logoPhotoUrl"></app-header>
-<div class="container mt-2 mb-5">
-  <div class="collections-title text-center">
-    <h1 *ngIf="collection?.name === 'UNDEFINED'"> collection </h1>
-    <h1 *ngIf="collection?.name !== 'UNDEFINED'"> {{collection?.name}} </h1>
-    <h2> {{collection?.brandObject?.name}} </h2>
-  </div>
-  <div class="collection-desc">
-    <p class="muted">
-      {{collection?.description}}
-    </p>
-  </div>
+<div class="collections-page">
+  <simple-notifications></simple-notifications>
+  <app-header [_brandName]="collection?.brandObject?.name" [breads]="breads" [_brandLogo]="collection?.brandObject?.logoPhotoUrl"></app-header>
+  <div class="container mt-2 mb-5">
+    <div class="collections-title text-center">
+      <h1 *ngIf="collection?.name === 'UNDEFINED'"> collection </h1>
+      <h1 *ngIf="collection?.name !== 'UNDEFINED'"> {{collection?.name}} </h1>
+      <h2> {{collection?.brandObject?.name}} </h2>
+    </div>
+    <div class="collection-desc">
+      <p class="muted">
+        {{collection?.description}}
+      </p>
+    </div>
 
-  <app-filter-collapsible>
-    <app-collapsible [text]="filter?.title" *ngFor="let filter of filtersRows" class="filter-mobile-collapsible">
-      <div class="p-5">
-        <label class="radio" *ngFor="let option of filter?.options; let i = index">
-          {{option}}
-          <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
-          <span class="checkmark"></span>
-        </label>
-      </div>
-    </app-collapsible>
-
-    <div class="filter-desktop-carousel">
-      <div class="row filter">
-        <div class="col-md-1 d-lg-block d-md-none"></div>
-        <div class="col-lg-2 col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
-          <h6>{{ filter.title }}</h6>
+    <app-filter-collapsible>
+      <app-collapsible [text]="filter?.title" *ngFor="let filter of filtersRows" class="filter-mobile-collapsible">
+        <div class="p-5">
           <label class="radio" *ngFor="let option of filter?.options; let i = index">
             {{option}}
-            <input type="radio" [checked]="i === 0" (change)="renderWatches()"  [value]="option" [name]="filter?.name" [(ngModel)]="filters[filter?.name]">
+            <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name"
+              [(ngModel)]="filters[filter?.name]">
             <span class="checkmark"></span>
           </label>
         </div>
-        <div class="col-md-1 d-lg-block d-md-none"></div>
+      </app-collapsible>
+
+      <div class="filter-desktop-carousel">
+        <div class="row filter">
+          <div class="col-md-1 d-lg-block d-md-none"></div>
+          <div class="col-lg-2 col-md-3 col-sm-4 col-6 filter-row" *ngFor="let filter of filtersRows">
+            <h6>{{ filter.title }}</h6>
+            <label class="radio" *ngFor="let option of filter?.options; let i = index">
+              {{option}}
+              <input type="radio" [checked]="i === 0" (change)="renderWatches()" [value]="option" [name]="filter?.name"
+                [(ngModel)]="filters[filter?.name]">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="col-md-1 d-lg-block d-md-none"></div>
+        </div>
+      </div>
+    </app-filter-collapsible>
+
+    <div class="watches-section">
+
+      <app-collection-section [watches]="watches | slice: 0:watchsLimit"></app-collection-section>
+
+      <div class="text-center mx-auto show-more my-5">
+        <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
       </div>
     </div>
-  </app-filter-collapsible>
-
-  <div class="watches-section">
-
-    <app-collection-section [watches]="watches | slice: 0:watchsLimit"></app-collection-section>
-
-    <div class="text-center mx-auto show-more my-5">
-      <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
-    </div>
   </div>
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
