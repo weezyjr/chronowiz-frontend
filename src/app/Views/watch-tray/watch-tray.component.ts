@@ -18,11 +18,13 @@ export class WatchTrayComponent implements OnInit {
   get currentWindowsWidth() { return document.documentElement.clientWidth; }
 
   get watchesLength() {
-    if (this.currentWindowsWidth >= 768) {
-      // 1 for the attributes titles
-      return this.watches.length + 1;
-    } else {
-      return this.watches.length;
+    if (this.watches) {
+      if (this.currentWindowsWidth >= 768) {
+        // 1 for the attributes titles
+        return this.watches.length + 1;
+      } else {
+        return this.watches.length;
+      }
     }
   }
 

@@ -39,7 +39,7 @@
           <div class="col-md-6 col-12 order-md-3 form-group">
             <label for="billingZip">Postcode/zip</label>
             <input type="text" class="form-input" #billingZip="ngModel" pattern="^\d{5}$" [(ngModel)]="user.billingZip"
-              name="billingZip" placeholder="3978">
+              name="billingZip" placeholder="39781">
             <div [hidden]="billingZip.valid || billingZip.pristine" class="invalid">Zip code is not valid</div>
           </div>
 
@@ -89,7 +89,7 @@
           <div class="col-md-6 col-12 order-md-3 form-group">
             <label for="shippingZip">Postcode/zip</label>
             <input type="text" pattern="^\d{5}$" #shippingZip="ngModel" class="form-input" [(ngModel)]="user.shippingZip"
-              name="shippingZip" placeholder="3978">
+              name="shippingZip" placeholder="39781">
             <div [hidden]="shippingZip.valid || shippingZip.pristine" class="invalid">Zip code is not valid</div>
           </div>
 

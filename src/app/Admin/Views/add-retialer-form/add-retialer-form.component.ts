@@ -271,8 +271,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
           else {
             const watch = <Watch>response.payload;
             // add the id to the last element in the array
-            const lastElement = this.retailer.maximumWatchDiscounts.length - 1;
-            this.retailer.maximumWatchDiscounts[lastElement].watchObject._id = watch._id;
+            if (this.retailer.maximumWatchDiscounts && this.retailer.maximumWatchDiscounts.length) {
+              const lastElement = this.retailer.maximumWatchDiscounts.length - 1;
+              this.retailer.maximumWatchDiscounts[lastElement].watchObject._id = watch._id;
+            }
           }
         });
     }

@@ -39,6 +39,8 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
   sortOptions: Array<String> = ['Newest', 'Most Popular', 'Lowest Price', 'Highest Price'];
   sortFactor: String = this.sortOptions[0];
 
+  loading = false;
+
   watchsLimit = 12;
   minPrice: Number = 0;
   maxPrice: Number = 500000;
@@ -71,6 +73,9 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   chunk(array: any[], size: any) {
     const chunked_arr = [];
+    if (!array) {
+      return chunked_arr;
+    }
     let index = 0;
     while (index < array.length) {
       chunked_arr.push(array.slice(index, size + index));
@@ -125,7 +130,8 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    if (this.query !== '' || this.query.length !== 0) {
+    if (this.query && (this.query !== '' || this.query.length !== 0)) {
+      this.loading = true;
       this.searchService.search(this.query)
         .pipe(takeUntil(this.destroy$))
         .subscribe((responseData: ResponseData) => {
@@ -139,6 +145,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
             this.watchesSearchResults = <Watch[]>RESULTS.watches;
             this.renderWatches();
           }
+          this.loading = false;
         });
     }
   }
@@ -209,9 +216,9 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
       (this.filters.braclet === 'Any braclet') &&
       (this.filters.marker === 'Any hour markers') &&
       (this.minPrice === 0 && this.maxPrice === 500000) &&
-      (this.brands.length === 0 ||
+      (this.brands && (this.brands.length === 0 ||
         this.brands[0].checked ||
-        !this.brands.find(brand => brand.checked === true))) {
+        !this.brands.find(brand => brand.checked === true)))) {
       return watches;
     }
     else {

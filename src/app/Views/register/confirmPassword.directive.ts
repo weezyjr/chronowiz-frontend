@@ -34,7 +34,7 @@ export class ConfirmPasswordDirective implements Validator {
     }
     else if (password && passwordMatch && this.isPasswordControler) {
       delete password.errors['confirmPassword'];
-      if (Object.keys(password.errors).length === 0) {
+      if (Object.keys(password.errors) && Object.keys(password.errors).length === 0) {
         password.setErrors(null);
       }
     }
