@@ -26,10 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(private orderService: OrderService,
     private router: Router,
     private authenticationService: AuthenticationService) {
-  }
-
-  ngOnInit() {
-    this.authenticationService.getUserProfile()
+      this.authenticationService.getUserProfile()
       .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         const response: ResponseObject = responseData.response;
@@ -40,6 +37,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.user = <User>response.payload;
         }
       });
+  }
+
+  ngOnInit() {
+
   }
 
   goTo(str: string) {

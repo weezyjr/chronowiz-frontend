@@ -34,12 +34,15 @@ export class RetailerService {
     private http: HttpClient,
     httpErrorHandler: HttpErrorHandlerService, authenticationService: AuthenticationService) {
     this.handleError = httpErrorHandler.createHandleError('RetailerService');
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `JWT ${authenticationService.currentRetailerValue.jwt}`
-      })
-    };
+    if (authenticationService.currentRetailerValue && authenticationService.currentRetailerValue.jwt) {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `JWT ${authenticationService.currentRetailerValue.jwt}`
+        })
+      };
+    }
+    console.log('here', this.httpOptions);
   }
 
   getWatches(): Observable<ResponseData> {

@@ -46,13 +46,6 @@ export class InStockComponent implements OnInit, OnDestroy {
     private router: Router,
     private retailerService: RetailerService,
     private _notificationsService: NotificationsService) {
-  }
-
-  resetFilters() {
-    this.filters = { brandID: '', collectionID: '', watchRef: '' };
-  }
-
-  ngOnInit() {
     this.getBrands();
 
     this.retailerService.getProfile()
@@ -71,6 +64,13 @@ export class InStockComponent implements OnInit, OnDestroy {
           this.renderWatches();
         }
       });
+  }
+
+  resetFilters() {
+    this.filters = { brandID: '', collectionID: '', watchRef: '' };
+  }
+
+  ngOnInit() {
   }
 
   async addToStock(status: boolean, _id: String) {

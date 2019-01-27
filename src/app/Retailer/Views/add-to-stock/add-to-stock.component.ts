@@ -41,10 +41,10 @@ export class AddToStockComponent implements OnInit, OnDestroy {
     private retailerService: RetailerService,
     private router: Router,
     private _notificationsService: NotificationsService) {
+      this.getBrands();
   }
 
   ngOnInit() {
-    this.getBrands();
   }
 
   viewWatch(ref: String) {
@@ -61,7 +61,7 @@ export class AddToStockComponent implements OnInit, OnDestroy {
 
         if (response.type.match('ERROR')) {
           this._notificationsService.error('Error', response.message.en);
-          console.log(responseData);
+          console.warn(responseData);
         }
         else {
           this.selectionBrands = <Brand[]>response.payload;
@@ -126,17 +126,6 @@ export class AddToStockComponent implements OnInit, OnDestroy {
             console.log(this.watch);
           }
         });
-      /*
-            if (this.authService.currentRetailerValue.watchObjects) {
-              console.log(this.authService.currentRetailerValue.watchObjects);
-              const watchExist = this.authService.currentRetailerValue.watchObjects
-                .find((_watchObjects) => _watchObjects.watch.referenceNumber === this.watch.referenceNumber) !== undefined;
-
-              if (watchExist) {
-                this.status = true;
-              }
-            }
-      */
     }
   }
 

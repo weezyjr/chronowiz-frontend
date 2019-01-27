@@ -34,10 +34,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  search() {
+  async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
       this.loading = true;
-      this.searchService.search(this.query)
+      await this.searchService.search(this.query)
       .pipe(takeUntil(this.destroy$))
       .subscribe((responseData: ResponseData) => {
         console.log(responseData);

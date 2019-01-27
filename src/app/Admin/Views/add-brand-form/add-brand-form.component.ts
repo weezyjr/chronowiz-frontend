@@ -215,10 +215,11 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
 
   constructor(private adminService: AdminService,
     private s3Service: S3Service,
-    private _notificationsService: NotificationsService) { }
+    private _notificationsService: NotificationsService) {
+      this.resetBrand();
+    }
 
   ngOnInit() {
-    this.resetBrand();
   }
   /**
   * Reset Brand

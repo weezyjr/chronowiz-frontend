@@ -129,10 +129,10 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
     document.getElementById('myDropdown').classList.toggle('show');
   }
 
-  search() {
+  async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
       this.loading = true;
-      this.searchService.search(this.query)
+      await this.searchService.search(this.query)
         .pipe(takeUntil(this.destroy$))
         .subscribe((responseData: ResponseData) => {
 
@@ -302,7 +302,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
           }
           else {
 
-            bezelFilterMatch = false;
+            brandFilterMatch = false;
           }
         }
 

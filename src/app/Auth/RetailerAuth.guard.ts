@@ -15,7 +15,7 @@ export class RetailerGuard implements CanActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
   {
     const currentRetaielerUser = this.authenticationService.currentRetailerValue;
-    if (currentRetaielerUser)
+    if (currentRetaielerUser && currentRetaielerUser.jwt)
     {
       // authorised so return true
       return true;

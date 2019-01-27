@@ -34,7 +34,7 @@ export class Brand {
     this.banner1PhotoUrl = '';
     this.banner2PhotoUrl = '';
     this.logoPhotoUrl = '';
-    this.headerBackgroundColor = '#fff';
+    this.headerBackgroundColor = '#ffffff';
     this.headerContentColor = 'black';
     this.headerBackgroundOpacity = 75;
   }

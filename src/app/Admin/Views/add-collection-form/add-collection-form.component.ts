@@ -47,11 +47,10 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
 
   constructor(private adminService: AdminService,
     private _notificationsService: NotificationsService) {
+    this.resetCollection();
   }
 
   ngOnInit() {
-    this.resetCollection();
-    this.getBrands();
   }
 
   /**

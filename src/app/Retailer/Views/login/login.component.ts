@@ -78,7 +78,7 @@ export class RetailerLoginComponent implements OnInit, OnDestroy {
           this._notificationsService.success('Success', response.message.en);
           this.loading = false;
           this.router.navigate([this.returnUrl]);
-          console.log(this.returnUrl);
+          console.log('this.returnUrl');
         }
       });
   }

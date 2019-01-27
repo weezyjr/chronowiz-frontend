@@ -157,17 +157,18 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminService,
     private s3Service: S3Service,
     private _notificationsService: NotificationsService) {
+    this.resetWatch();
+
   }
 
   ngOnInit() {
-    this.resetWatch();
   }
 
   /**
    * Add Custom Brand Name
    */
 
-  addCustomOption = (term) => ({ name: term });
+  addCustomOption = (term: any) => ({ name: term });
 
   /**
    * Reset Watch

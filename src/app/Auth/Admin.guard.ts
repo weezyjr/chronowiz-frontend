@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
   {
     const currentAdmin = this.authenticationService.currentAdminValue;
-    if (currentAdmin)
+    if (currentAdmin && currentAdmin.jwt)
     {
       // authorised so return true
       return true;
