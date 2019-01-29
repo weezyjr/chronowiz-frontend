@@ -134,22 +134,22 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    redirectTo: 'app-add-watch-form',
+    redirectTo: 'admin/app-add-watch-form',
     pathMatch: 'full',
     canActivate: [AdminGuard]
   },
   {
-    path: 'app-add-watch-form',
+    path: 'admin/app-add-watch-form',
     component: AddWatchFormComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'app-add-brand-form',
+    path: 'admin/app-add-brand-form',
     component: AddBrandFormComponent,
     canActivate: [AdminGuard]
   },
   {
-    path: 'app-add-collection-form',
+    path: 'admin/app-add-collection-form',
     component: AddCollectionFormComponent,
     canActivate: [AdminGuard]
   },
@@ -184,7 +184,7 @@ const routes: Routes = [
     canActivate: [RetailerGuard]
   },
   {
-    path: 'app-add-retailer-form',
+    path: 'admin/app-add-retailer-form',
     component: AddRetialerFormComponent,
     canActivate: [AdminGuard]
   },

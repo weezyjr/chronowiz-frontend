@@ -25,15 +25,15 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
 
   // mode flag
-  mode: 'create' | 'update' | 'delete';
+  mode: 'create' | 'update' | 'delete' = 'create';
   selectedEmail: String;
 
   // navigation routes
   navRoutes: Link[] = [
-    new Link('Watch Form', 'app-add-watch-form'),
-    new Link('Collection Form', 'app-add-collection-form'),
-    new Link('Brand Form', 'app-add-brand-form'),
-    new Link('Retailer Form', 'app-add-retailer-form', true),
+    new Link('Watch Form', 'admin/app-add-watch-form'),
+    new Link('Collection Form', 'admin/app-add-collection-form'),
+    new Link('Brand Form', 'admin/app-add-brand-form'),
+    new Link('Retailer Form', 'admin/app-add-retailer-form', true),
     new Link('Orders Form', 'admin/orders'),
     new Link('Users Form', 'admin/users')
 
@@ -280,60 +280,84 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  async updateBrandMaxDiscount(brandMaxDiscount: BrandDiscount) {
+  async updateBrandMaxDiscount(brandMaxDiscount: BrandDiscount, remove?: boolean) {
+    if (remove) {
+      brandMaxDiscount.maximumBrandDiscount = null;
+    }
     console.log(brandMaxDiscount);
-    await this.adminService.updateRetailerBrandMaxDiscount(this.retailer._id, brandMaxDiscount)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((responseData: ResponseData) => {
-        console.log(responseData);
+    if (brandMaxDiscount.brandObject && brandMaxDiscount.brandObject._id) {
+      await this.adminService.updateRetailerBrandMaxDiscount(this.retailer._id, brandMaxDiscount)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
+          console.log(responseData);
 
-        const response: ResponseObject = responseData.response;
+          const response: ResponseObject = responseData.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          this._notificationsService.success('Success', 'Discount has been saved');
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            this._notificationsService.success('Success', 'Discount has been saved');
+          }
+        });
+    }
+    if (remove) {
+      this.removeBrandDiscount();
+    }
   }
 
 
-  async updateCollectionMaxDiscount(collectionMaxDiscount: CollectionDiscount) {
+  async updateCollectionMaxDiscount(collectionMaxDiscount: CollectionDiscount, remove?: boolean) {
+    if (remove) {
+      collectionMaxDiscount.maximumCollectionDiscount = null;
+    }
     console.log(collectionMaxDiscount);
-    await this.adminService.updateRetailerCollectionMaxDiscount(this.retailer._id, collectionMaxDiscount)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((responseData: ResponseData) => {
-        console.log(responseData);
+    if (collectionMaxDiscount.collectionObject && collectionMaxDiscount.collectionObject._id) {
+      await this.adminService.updateRetailerCollectionMaxDiscount(this.retailer._id, collectionMaxDiscount)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
+          console.log(responseData);
 
-        const response: ResponseObject = responseData.response;
+          const response: ResponseObject = responseData.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          this._notificationsService.success('Success', 'Discount has been saved');
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            this._notificationsService.success('Success', 'Discount has been saved');
+          }
+        });
+    }
+    if (remove) {
+      this.removeCollectionDiscount();
+    }
   }
 
 
-  async updateWatchMaxDiscount(watchMaxDiscount: WatchDiscount) {
+  async updateWatchMaxDiscount(watchMaxDiscount: WatchDiscount, remove?: boolean) {
+    if (remove) {
+      watchMaxDiscount.maximumWatchDiscount = null;
+    }
     console.log(watchMaxDiscount);
-    await this.adminService.updateRetailerWatchMaxDiscount(this.retailer._id, watchMaxDiscount)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((responseData: ResponseData) => {
-        console.log(responseData);
+    if (watchMaxDiscount.watchObject && watchMaxDiscount.watchObject._id) {
+      await this.adminService.updateRetailerWatchMaxDiscount(this.retailer._id, watchMaxDiscount)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((responseData: ResponseData) => {
+          console.log(responseData);
 
-        const response: ResponseObject = responseData.response;
+          const response: ResponseObject = responseData.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        }
-        else {
-          this._notificationsService.success('Success', 'Discount has been saved');
-        }
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          }
+          else {
+            this._notificationsService.success('Success', 'Discount has been saved');
+          }
+        });
+    }
+    if (remove) {
+      this.removeWatchDiscount();
+    }
   }
 
 

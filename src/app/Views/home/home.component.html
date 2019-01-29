@@ -1,5 +1,5 @@
 <div class="home-page">
-  <app-header content_color="white" background_color="#000000" opacity="0"></app-header>
+  <app-header content_color="light" background_color="#000000" [noHeightFix]="true" opacity="0"></app-header>
   <div class="background-fallback">
     <video class="main-vid" autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
       <source [src]="mainVideoUrl | safeUrl" type="video/mp4">

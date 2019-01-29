@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   _brandName: String;
 
   @Input()
-  noFix: Boolean = false;
+  noHeightFix: Boolean = false;
 
   get logged(): Boolean {
     if (this.authenticationService.currentUserValue) {

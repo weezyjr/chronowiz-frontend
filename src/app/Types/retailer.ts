@@ -4,7 +4,7 @@ import { Collection } from './collection';
 
 export class BrandDiscount {
   public brandObject: Brand;
-  public maximumBrandDiscount: number;
+  public maximumBrandDiscount: number | null;
   constructor(){
     this.brandObject = new Brand();
     this.maximumBrandDiscount = 0;
@@ -13,7 +13,7 @@ export class BrandDiscount {
 
 export class CollectionDiscount {
   public collectionObject: Collection;
-  public maximumCollectionDiscount: number;
+  public maximumCollectionDiscount: number | null;
   constructor(){
     this.collectionObject = new Collection();
     this.maximumCollectionDiscount = 0;
@@ -22,7 +22,7 @@ export class CollectionDiscount {
 
 export class WatchDiscount {
   public watchObject: Watch;
-  public maximumWatchDiscount: number;
+  public maximumWatchDiscount: number | null;
   constructor(){
     this.watchObject = new Watch();
     this.maximumWatchDiscount = 0;

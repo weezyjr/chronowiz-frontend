@@ -1,7 +1,9 @@
 <div class="brand-page" [ngStyle]="{'background-color': brandObject?.backgroundColor? brandObject?.backgroundColor: '#fff'}">
-  <app-header *ngIf="brandObject" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
+  <app-header
+    *ngIf="brandObject" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
     [content_color]="brandObject?.headerContentColor? brandObject?.headerContentColor: 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
-    [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl" [breads]="breads" [noFix]="true"></app-header>
+    [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl" [breads]="breads" [noHeightFix]="true">
+  </app-header>
 
   <div class="mx-auto hero-container">
     <video *ngIf="brandObject?.headerPhotoUrl && isVideo(brandObject?.headerPhotoUrl)" class="main-vid" autoplay loop

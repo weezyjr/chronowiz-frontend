@@ -13,44 +13,37 @@
       <h3>Filter Watches by Brand & Collection</h3>
       <br />
 
-      <div class="form-group">
-        <label for="selectionBrand">Brand</label>
-        <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands" bindLabel="name"
-          bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
-        </ng-select>
-      </div>
 
       <div class="form-group">
-        <label for="selectionCollection">Collection</label>
-        <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
-          placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
-        </ng-select>
-      </div>
-
-      <div class="form-group">
-        <label for="selectionWatch">Watch</label>
-        <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber"
-          bindValue="referenceNumber" placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
-        </ng-select>
-      </div>
-
-      <div>
-        <br />
-        <h3>Filter Watches By Reference Number</h3>
-        <br />
-      </div>
-
-      <div class="row">
-        <div class="col-8">
-          <div class="form-group">
-            <input type="text" class="form-control" id="watchInputReferenceNumber" [(ngModel)]="selectionWatchReferenceNumber"
+        <div class="row">
+          <div class="col-3">
+            <label for="selectionBrand">Brand</label>
+            <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
+              bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+            </ng-select>
+          </div>
+          <div class="col-3">
+            <label for="selectionCollection">Collection</label>
+            <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
+              placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
+            </ng-select>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="selectionWatch">Watch</label>
+              <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber"
+                bindValue="referenceNumber" placeholder="Select watch" (change)="onWatchSelection($event?.referenceNumber)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-3">
+              <label for="selectionWatch">Reference Number</label>
+              <input type="text" class="form-control" placeholder="Enter reference number" (change)="onWatchSelection(selectionWatchReferenceNumber)"   [(ngModel)]="selectionWatchReferenceNumber"
               name="watchInputReferenceNumber" #watchInputReferenceNumber="ngModel">
           </div>
         </div>
-        <div class="col-4">
-          <button class="btn btn-lg primary-btn" (click)="resetFilters(); onWatchSelection(selectionWatchReferenceNumber);">Search</button>
-        </div>
       </div>
+
     </form>
     <div>
       <br />
@@ -74,21 +67,26 @@
                 <td><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p class="m-0">
-                    <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}}<span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">,&nbsp;</span></span>
-                    <span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">{{watchObjectWrapper?.watchObject?.caseDiameter}} mm<span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">,&nbsp;</span></span>
-                    <span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">{{watchObjectWrapper?.watchObject?.caseMaterial}}<span *ngIf="watchObjectWrapper?.watchObject?.perpetual">,&nbsp;</span></span>
+                    <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}}<span
+                        *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">,&nbsp;</span></span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseDiameter">{{watchObjectWrapper?.watchObject?.caseDiameter}}
+                      mm<span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">,&nbsp;</span></span>
+                    <span *ngIf="watchObjectWrapper?.watchObject?.caseMaterial">{{watchObjectWrapper?.watchObject?.caseMaterial}}<span
+                        *ngIf="watchObjectWrapper?.watchObject?.perpetual">,&nbsp;</span></span>
                     <span *ngIf="watchObjectWrapper?.watchObject?.perpetual">{{watchObjectWrapper?.watchObject?.perpetual}}</span>
                   </p>
                   <p class="bold">Reference Number: {{watchObjectWrapper?.watchObject?.referenceNumber}} </p>
                 </td>
                 <td>
-                  <p> {{watchObjectWrapper?.watchObject?.price | currency: watchObjectWrapper?.watchObject?.priceCurrency }} </p>
+                  <p> {{watchObjectWrapper?.watchObject?.price | currency:
+                    watchObjectWrapper?.watchObject?.priceCurrency }} </p>
                 </td>
                 <td>
                   <app-toggle-btn [status]="true" (toggle)="addToStock($event,watchObjectWrapper?.watchObject?._id)"></app-toggle-btn>
                 </td>
                 <td>
-                  <input class="form-input" [(ngModel)]="watchObjectWrapper.retailerWatchDiscount" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" type="number">
+                  <input class="form-input" [(ngModel)]="watchObjectWrapper.retailerWatchDiscount" placeholder="(0-100)%"
+                    pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" type="number">
                   <button class="btn primary-btn" (click)="updateDiscount(watchObjectWrapper)">Save</button>
                 </td>
               </tr>
