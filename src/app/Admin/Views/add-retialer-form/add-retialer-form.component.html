@@ -60,7 +60,7 @@
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input [disabled]="mode == 'delete' || loading" type="password" class="form-control" id="password" required
+          <input [disabled]="mode == 'delete' || loading" type="password" class="form-control" id="password" [required]="mode === 'create'"
             [(ngModel)]="retailer.password" name="password" #password="ngModel" pattern="^.*(?=.{8,})((?=.*[!@#$%^&\\*()\-_=\\+{};:,\\<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$">
           <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
             <ul>

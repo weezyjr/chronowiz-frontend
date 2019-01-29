@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SideMenuComponent implements OnInit {
 
   @Input()
-  black = false;
+  dark = false;
 
   brands: Brand[];
   responseData: ResponseData;

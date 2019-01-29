@@ -8,7 +8,7 @@
       <ul class="list-inline w-100 text-center">
         <div class="float-left text-left">
           <li class="chronowiz-logo"><a *ngIf="_brandName" [routerLink]="['/home']">
-              <img src="../../../assets/small-logo.svg" class="img-responsive" alt="chronowiz logo">
+              <img *ngIf="chronoWizLogoSrc" [src]="chronoWizLogoSrc" class="img-responsive" alt="chronowiz logo">
             </a>
           </li>
           <li class="list-inline-item"><a href="javascript:void(0)" (click)="toggleNav()"> <img class="menu" [src]="navMenuOpened? menuCloseSrc : menuIconSrc"
@@ -31,6 +31,15 @@
                 </ul>
               </div>
             </div>
+            <div class="drop-down-menu" *ngIf="!logged" [ngClass]="{'d-none': menuClosed, 'second-menu': (background_color === '#ffffff' && opacity === 100) || opacity === 0}">
+              <div class="arrow-up"></div>
+              <div class="drop-down-content">
+                <ul>
+                  <li><a [routerLink]="['/login']"> User Login </a></li>
+                  <li><a [routerLink]="['/retailer']"> Retail Partner </a></li>
+                </ul>
+              </div>
+            </div>
           </li>
           <li class="list-inline-item search-icon"><a [routerLink]="['/search']"> <img class="icon" [src]="searchIconSrc"
                 alt="">
@@ -47,9 +56,9 @@
   </div>
 
   <div *ngIf="breads">
-    <app-breadcrumb [breads]="breads" content_color="content_color"></app-breadcrumb>
+    <app-breadcrumb [breads]="breads" [content_color]="content_color"></app-breadcrumb>
   </div>
 
 </header>
 <div *ngIf="(!noFix && background_color === '#ffffff' && opacity === 100)" class="fix-height"></div>
-<app-side-menu [black]="content_color === 'black'"></app-side-menu>
+<app-side-menu [dark]="content_color === 'dark'"></app-side-menu>

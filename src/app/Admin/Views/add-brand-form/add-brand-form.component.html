@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
                 <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
-                 [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+                  [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
                 </ng-select>
               </div>
             </div>
@@ -88,7 +88,7 @@
 
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Brand Logo</label>
-          <p class="muted text-left m-0 p-0"> Any size is ok, recommended:  Width: 100px x Height: 100px </p>
+          <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
           <div *ngIf="brand?.logoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
             <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
@@ -191,21 +191,53 @@
 
         <div class="form-group">
           <label for="headerBackgroundColor">Background color</label>
-          <input [disabled]="mode == 'delete' || loading" type="color" value="#ffffff" class="form-control"
-            [(ngModel)]="brand.headerBackgroundColor" name="headerBackgroundColor" #headerBackgroundColor="ngModel">
+          <input [disabled]="mode == 'delete' || loading" type="color" class="form-control" [(ngModel)]="brand.headerBackgroundColor"
+            name="headerBackgroundColor" #headerBackgroundColor="ngModel">
         </div>
 
         <div class="form-group">
           <label for="headerContentColor">Content color</label>
-          <ng-select [items]="headerContentColorOptions" name="headerContentColor"
-           [(ngModel)]="brand.headerContentColor" bindLabel="name" bindValue="name" placeholder="Select header content color">
+          <ng-select [items]="headerContentColorOptions" name="headerContentColor" [(ngModel)]="brand.headerContentColor"
+            bindLabel="name" bindValue="name" placeholder="Select header content color">
           </ng-select>
         </div>
 
         <div class="form-group">
-          <label for="headerBackgroundOpacity">Background Opacity</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$"
-            [(ngModel)]="brand.headerBackgroundOpacity" name="headerBackgroundOpacity" #headerBackgroundOpacity="ngModel">
+          <div class="row">
+            <div class="custom-slider col-6">
+              <ng5-slider [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
+            </div>
+            <div class="col-6 p-0 card">
+              <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.headerContentColor !== 'dark'}">
+                content </div>
+              <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <h3>Brand Page Colors</h3>
+        <br />
+
+        <div class="form-group">
+          <label for="backgroundColor">Background color</label>
+          <input [disabled]="mode == 'delete' || loading" type="color" class="form-control" [(ngModel)]="brand.backgroundColor"
+            name="backgroundColor" #backgroundColor="ngModel">
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-6">
+              <label for="contentColor">Content color</label>
+              <ng-select [items]="contentColor" name="contentColor" [(ngModel)]="brand.contentColor" bindLabel="name"
+                bindValue="name" placeholder="Select content color">
+              </ng-select>
+            </div>
+            <div class="col-6 p-0 card">
+                <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.contentColor !== 'dark'}"> content </div>
+                <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.backgroundColor}"></div>
+              </div>
+          </div>
         </div>
 
 
@@ -216,8 +248,9 @@
 
         <div class="form-group">
           <label for="maximumDiscount">Maximum Discount</label>
-          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" placeholder="(0-100)%"  pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$"
-            [(ngModel)]="brand.maximumDiscount" name="maximumDiscount" #maximumDiscount="ngModel">
+          <input [disabled]="mode == 'delete' || loading" type="number" class="form-control" placeholder="(0-100)%"
+            pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" [(ngModel)]="brand.maximumDiscount" name="maximumDiscount"
+            #maximumDiscount="ngModel">
         </div>
 
       </div>

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   background_color: String | string = '#ffffff';
 
   @Input()
-  content_color: 'black' | 'white' = 'black';
+  content_color: 'dark' | 'light' = 'dark';
 
   @Input()
   opacity = 100;
@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit {
   menuCloseSrc: String;
   paperBagIconSrc: String;
   navMenuOpened: Boolean;
+  chronoWizLogoSrc: String;
 
   constructor(
     private watchTrayService: WatchTrayService,
@@ -85,7 +86,7 @@ export class HeaderComponent implements OnInit {
     // convert background color from hex to rgb
     this._bg_rgb_ = this.HEX2RGB(this.background_color);
 
-    if (this.content_color === 'black') {
+    if (this.content_color === 'dark') {
       if (!this._brandLogo) {
         this._brandLogo = '../../../assets/logo.svg';
       }
@@ -94,6 +95,7 @@ export class HeaderComponent implements OnInit {
       this.menuIconSrc = '../../../assets/menu.svg';
       this.menuCloseSrc = '../../../assets/menucloseblack.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag.svg';
+      this.chronoWizLogoSrc = '../../../assets/logo.svg';
     } else {
       if (!this._brandLogo) {
         this._brandLogo = '../../../assets/logo-white.svg';
@@ -103,6 +105,7 @@ export class HeaderComponent implements OnInit {
       this.menuIconSrc = '../../../assets/menu-white.svg';
       this.menuCloseSrc = '../../../assets/menuclose.svg';
       this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
+      this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
     }
 
   }

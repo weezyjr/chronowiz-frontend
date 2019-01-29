@@ -17,7 +17,7 @@ export class BreadcrumbComponent implements OnInit {
   }];
 
   @Input()
-  content_color: 'black' | 'white' = 'black';
+  content_color: 'dark' | 'light' = 'dark';
 
   constructor() { }
 

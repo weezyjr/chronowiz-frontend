@@ -7,6 +7,7 @@ import { S3Service } from '../../S3/s3.service';
 import { AdminService } from '../../admin.service';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
+import { Options } from 'ng5-slider';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -197,10 +198,16 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     { name: 'Zenith ' },
     { name: 'Other' }];
 
-    headerContentColorOptions: Array<Object> = [
-      { name: 'black'},
-      { name: ' white'}
-    ];
+  headerContentColorOptions: Array<Object> = [
+    { name: 'dark' },
+    { name: ' light' }
+  ];
+
+  options: Options = {
+    floor: 0,
+    ceil: 100,
+    step: 1
+  };
 
   // naviagtion links
   navRoutes: Link[] = [
@@ -216,8 +223,8 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   constructor(private adminService: AdminService,
     private s3Service: S3Service,
     private _notificationsService: NotificationsService) {
-      this.resetBrand();
-    }
+    this.resetBrand();
+  }
 
   ngOnInit() {
   }

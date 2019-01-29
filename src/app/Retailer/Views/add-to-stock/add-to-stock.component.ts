@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Link } from 'src/app/Types/Link';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './add-to-stock.component.html',
   styleUrls: ['./add-to-stock.component.sass']
 })
-export class AddToStockComponent implements OnInit, OnDestroy {
+export class AddToStockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -41,7 +41,11 @@ export class AddToStockComponent implements OnInit, OnDestroy {
     private retailerService: RetailerService,
     private router: Router,
     private _notificationsService: NotificationsService) {
-      this.getBrands();
+
+  }
+
+  ngAfterViewInit() {
+    this.getBrands();
   }
 
   ngOnInit() {

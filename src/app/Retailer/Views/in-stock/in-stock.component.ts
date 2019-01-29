@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Link } from 'src/app/Types/Link';
 import { NotificationsService } from 'angular2-notifications';
 import { Watch } from 'src/app/Types/watch';
@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './in-stock.component.html',
   styleUrls: ['./in-stock.component.sass']
 })
-export class InStockComponent implements OnInit, OnDestroy {
+export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -46,7 +46,6 @@ export class InStockComponent implements OnInit, OnDestroy {
     private router: Router,
     private retailerService: RetailerService,
     private _notificationsService: NotificationsService) {
-    this.getBrands();
 
     this.retailerService.getProfile()
       .pipe(takeUntil(this.destroy$))
@@ -65,6 +64,12 @@ export class InStockComponent implements OnInit, OnDestroy {
         }
       });
   }
+
+
+  ngAfterViewInit() {
+    this.getBrands();
+  }
+
 
   resetFilters() {
     this.filters = { brandID: '', collectionID: '', watchRef: '' };

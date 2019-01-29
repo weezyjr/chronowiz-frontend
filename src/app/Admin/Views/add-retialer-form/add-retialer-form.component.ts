@@ -25,7 +25,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
 
   // mode flag
-  mode: String = 'create';
+  mode: 'create' | 'update' | 'delete';
   selectedEmail: String;
 
   // navigation routes
