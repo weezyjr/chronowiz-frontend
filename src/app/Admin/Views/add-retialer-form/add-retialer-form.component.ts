@@ -30,10 +30,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
 
   // navigation routes
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/app-add-watch-form'),
-    new Link('Collection Form', 'admin/app-add-collection-form'),
-    new Link('Brand Form', 'admin/app-add-brand-form'),
-    new Link('Retailer Form', 'admin/app-add-retailer-form', true),
+    new Link('Watch Form', 'admin/watch'),
+    new Link('Collection Form', 'admin/collection'),
+    new Link('Brand Form', 'admin/brand'),
+    new Link('Retailer Form', 'admin/retailer', true),
     new Link('Orders Form', 'admin/orders'),
     new Link('Users Form', 'admin/users')
 

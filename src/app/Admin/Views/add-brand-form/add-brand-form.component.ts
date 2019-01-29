@@ -211,10 +211,10 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
 
   // naviagtion links
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/app-add-watch-form'),
-    new Link('Collection Form', 'admin/app-add-collection-form'),
-    new Link('Brand Form', 'admin/app-add-brand-form', true),
-    new Link('Retailer Form', 'admin/app-add-retailer-form'),
+    new Link('Watch Form', 'admin/watch'),
+    new Link('Collection Form', 'admin/collection'),
+    new Link('Brand Form', 'admin/brand', true),
+    new Link('Retailer Form', 'admin/retailer'),
     new Link('Orders Form', 'admin/orders'),
     new Link('Users Form', 'admin/users')
 

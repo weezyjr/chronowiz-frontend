@@ -21,10 +21,10 @@ export class OrdersFormComponent implements OnInit, OnDestroy {
   orderObjects: Order[];
 
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/app-add-watch-form'),
-    new Link('Collection Form', 'admin/app-add-collection-form'),
-    new Link('Brand Form', 'admin/app-add-brand-form'),
-    new Link('Retailer Form', 'admin/app-add-retailer-form'),
+    new Link('Watch Form', 'admin/watch'),
+    new Link('Collection Form', 'admin/collection'),
+    new Link('Brand Form', 'admin/brand'),
+    new Link('Retailer Form', 'admin/retailer'),
     new Link('Orders Form', 'admin/orders', true),
     new Link('Users Form', 'admin/users')
   ];
