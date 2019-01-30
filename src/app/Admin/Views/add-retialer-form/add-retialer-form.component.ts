@@ -297,7 +297,15 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            this._notificationsService.success('Success', 'Discount has been saved');
+            if ( !remove)
+            {
+              this._notificationsService.success('Success', 'Discount has been saved');
+            }
+            else{
+              this._notificationsService.success('Success', 'Discount has been deleted');
+
+            }
+
           }
         });
     }
@@ -324,7 +332,14 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            this._notificationsService.success('Success', 'Discount has been saved');
+            if ( !remove)
+            {
+              this._notificationsService.success('Success', 'Discount has been saved');
+            }
+            else{
+              this._notificationsService.success('Success', 'Discount has been deleted');
+
+            }
           }
         });
     }
@@ -351,7 +366,14 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            this._notificationsService.success('Success', 'Discount has been saved');
+            if ( !remove)
+            {
+              this._notificationsService.success('Success', 'Discount has been saved');
+            }
+            else{
+              this._notificationsService.success('Success', 'Discount has been deleted');
+
+            }
           }
         });
     }
@@ -359,6 +381,9 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
       this.removeWatchDiscount();
     }
   }
+
+
+  onBrandDiscountRead(){}
 
 
   async onSubmit() {

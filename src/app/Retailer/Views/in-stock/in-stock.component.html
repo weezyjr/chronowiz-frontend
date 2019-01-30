@@ -64,7 +64,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let watchObjectWrapper of watchObjectWrappers">
-                <td><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
+                <td class="text-center"><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p class="m-0">
                     <span class="bold" *ngIf="watchObjectWrapper?.watchObject?.model">{{watchObjectWrapper?.watchObject?.model}}<span

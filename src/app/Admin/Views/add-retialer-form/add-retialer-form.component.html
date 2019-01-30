@@ -138,157 +138,159 @@
           <br />
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-9">
 
               <h3>Brand Max Discounts</h3>
 
             </div>
-            <div class="col-6">
-              <button class="btn btn-lg primary-btn" (click)="addBrandDiscount()">Add New +</button>
+            <div class="col-3 align-self-end">
+              <button class="btn  btn-auto primary-btn" (click)="addBrandDiscount()">Add New Brand Discount Limit +</button>
             </div>
           </div>
 
           <br />
 
-          <div>
-            <div class="row">
-              <div class="col-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
-                <div class=" form-group row">
-
-                  <div class="col-md-4">
-                    <label>Select Brand</label>
-                    <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand" name="brandDiscounts{{i}}"
-                      [(ngModel)]="brandDiscount.brandObject">
-                    </ng-select>
-                  </div>
-
-                  <div class="col-md-5">
-                    <label>Discount Value</label>
-                    <input [disabled]="mode == 'delete' || loading || !brandDiscount?.brandObject" type="number"
-                      placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
-                      [(ngModel)]="brandDiscount.maximumBrandDiscount" name="brandDiscountsValue{{i}}">
-                  </div>
-
-                  <div class="col-md-3">
-                    <button type="button" class="btn m-1 primary-btn" (click)="updateBrandMaxDiscount(brandDiscount)">Save</button>
-                    <button type="button" class="btn m-1 secondry-btn" (click)="updateBrandMaxDiscount(brandDiscount, true)">remove</button>
-                  </div>
-                  <div class="col-12">
-                    <hr>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-
-
-          <br />
 
           <div class="row">
-            <div class="col-6">
-              <h3>Collection Max Discounts</h3>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-lg primary-btn" (click)="addCollectionDiscount()">Add New +</button>
-            </div>
-          </div>
+            <div class="col-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
+              <div class=" form-group row">
 
-
-          <br />
-
-
-          <div>
-            <div class="row">
-              <div class="col-12 form-group" *ngFor="let collectionDiscount of retailer?.maximumCollectionDiscounts; let i=index">
-                <div class="row">
-                  <div class="col-md-3">
-                    <label>Select Brand</label>
-                    <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
-                      (change)="onBrandSelection($event?._id)">
-                    </ng-select>
-                  </div>
-                  <div class="col-md-3">
-                    <label for="selectionCollection">Select Collection</label>
-                    <ng-select [items]="selectionCollections" name="collectionsMaxDiscounts{{i}}" bindLabel="name"
-                      placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
-                    </ng-select>
-                  </div>
-                  <div class="col-md-3">
-                    <label>Discount Value</label>
-                    <input [disabled]="mode == 'delete' || loading || !collectionDiscount?.collectionObject" type="number"
-                      placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
-                      [(ngModel)]="collectionDiscount.maximumCollectionDiscount" name="maximumCollectionDiscounts{{i}}">
-                  </div>
-                  <div class="col-md-3">
-                    <button type="button" class="btn  m-1 primary-btn" (click)="updateCollectionMaxDiscount(collectionDiscount)">Save</button>
-                    <button type="button" class="btn  m-1 secondry-btn" (click)="updateCollectionMaxDiscount(collectionDiscount, true)">Remove</button>
-                  </div>
-                  <div class="col-12">
-                    <hr>
-                  </div>
+                <div class="col-md-4">
+                  <label>Select Brand</label>
+                  <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand" name="brandDiscounts{{i}}"
+                    [(ngModel)]="brandDiscount.brandObject">
+                  </ng-select>
                 </div>
 
-              </div>
-
-            </div>
-          </div>
-
-          <br />
-          <div class="row">
-            <div class="col-6">
-              <h3>Watch Max Discounts</h3>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-lg primary-btn" (click)="addWatchDiscount()">Add New +</button>
-            </div>
-          </div>
-          <br />
-
-          <div>
-            <div class="row">
-              <div class="col-12" *ngFor="let watchDiscount of retailer?.maximumWatchDiscounts; let i=index">
-                <div class="row form-group">
-                  <div class="col-3">
-                    <label>Select Brand</label>
-                    <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
-                      (change)="onBrandSelection($event?._id)">
-                    </ng-select>
-                  </div>
-                  <div class="col-3">
-                    <label for="selectionCollection">Select Collection</label>
-                    <ng-select [items]="selectionCollections" bindLabel="name" bindValue="_id" placeholder="Select collection"
-                      (change)="onCollectionSelection($event?._id)">
-                    </ng-select>
-                  </div>
-                  <div class="col-3">
-                    <label for="selectionWatch">Watch</label>
-                    <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}" bindLabel="referenceNumber"
-                      placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
-                    </ng-select>
-                  </div>
-                  <div class="col-3">
-                    <label for="selectionWatch">Or reference number</label>
-                    <input type="text" placeholder="Enter reference number" class="form-control" (change)="onWatchSelection(selectionWatchReferenceNumber[i])"
-                      [(ngModel)]="selectionWatchReferenceNumber[i]" name="watchInputReferenceNumber">
-                  </div>
+                <div class="col-md-4">
+                  <label>Discount Value</label>
+                  <input [disabled]="mode == 'delete' || loading || !brandDiscount?.brandObject?._id" type="number"
+                    placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
+                    [(ngModel)]="brandDiscount.maximumBrandDiscount" name="brandDiscountsValue{{i}}">
                 </div>
-                <div class="row">
-                  <div class="col-9">
-                    <label>Discount Value</label>
-                    <input [disabled]="mode == 'delete' || loading || !watchDiscount?.watchObject?._id" type="number"
-                      placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
-                      [(ngModel)]="watchDiscount.maximumWatchDiscount" name="watchesMaxDiscountsValue{{i}}">
-                  </div>
-                  <div class="col-3">
-                    <button type="button" class="btn m-1 primary-btn" (click)="updateWatchMaxDiscount(watchDiscount)">Save</button>
-                    <button type="button" class="btn m-1 secondry-btn" (click)="updateWatchMaxDiscount(watchDiscount, true)">Remove</button>
-                  </div>
+
+                <div class="col-md-2 align-self-end">
+                  <button type="button" class="btn  primary-btn" (click)="updateBrandMaxDiscount(brandDiscount)">Save</button>
+                </div>
+                <div class="col-md-2 align-self-end">
+
+                  <button type="button" class="btn  secondry-btn" (click)="updateBrandMaxDiscount(brandDiscount, true)">remove</button>
                 </div>
                 <div class="col-12">
-                  <hr />
+                  <hr>
                 </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <br />
+
+          <div class="row">
+            <div class="col-9">
+              <h3>Collection Max Discounts</h3>
+            </div>
+            <div class="col-3 align-self-end">
+              <button class="btn btn-auto primary-btn" (click)="addCollectionDiscount()">Add Collection Discount Limit +</button>
+            </div>
+          </div>
+
+
+          <br />
+
+
+          <div class="row">
+            <div class="col-12 form-group" *ngFor="let collectionDiscount of retailer?.maximumCollectionDiscounts; let i=index">
+              <div class="row">
+                <div class="col-md-3">
+                  <label>Select Brand</label>
+                  <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
+                    (change)="onBrandSelection($event?._id)">
+                  </ng-select>
+                </div>
+                <div class="col-md-3">
+                  <label for="selectionCollection">Select Collection</label>
+                  <ng-select [items]="selectionCollections" name="collectionsMaxDiscounts{{i}}" bindLabel="name"
+                    placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
+                  </ng-select>
+                </div>
+                <div class="col-md-2">
+                  <label>Discount Value</label>
+                  <input [disabled]="mode == 'delete' || loading || !collectionDiscount?.collectionObject?._id" type="number"
+                    placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
+                    [(ngModel)]="collectionDiscount.maximumCollectionDiscount" name="maximumCollectionDiscounts{{i}}">
+                </div>
+                <div class="col-md-2 align-self-end">
+                  <button type="button" class="btn btn-100 primary-btn" (click)="updateCollectionMaxDiscount(collectionDiscount)">Save</button>
+                </div>
+                <div class="col-md-2 align-self-end">
+                  <button type="button" class="btn btn-100 secondry-btn" (click)="updateCollectionMaxDiscount(collectionDiscount, true)">Remove</button>
+                </div>
+                <div class="col-12">
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <br />
+          <div class="row">
+            <div class="col-9">
+              <h3>Watch Max Discounts</h3>
+            </div>
+            <div class="col-3 align-self-end">
+              <button class="btn btn-auto primary-btn" (click)="addWatchDiscount()">Add New Watch Discount Limit +</button>
+            </div>
+          </div>
+          <br />
+
+          <div class="row">
+            <div class="col-12" *ngFor="let watchDiscount of retailer?.maximumWatchDiscounts; let i=index">
+              <div class="row form-group">
+                <div class="col-3">
+                  <label>Select Brand</label>
+                  <ng-select [items]="selectionBrands" bindLabel="name" bindValue="_id" placeholder="Select brand"
+                    (change)="onBrandSelection($event?._id)">
+                  </ng-select>
+                </div>
+                <div class="col-3">
+                  <label for="selectionCollection">Select Collection</label>
+                  <ng-select [items]="selectionCollections" bindLabel="name" bindValue="_id" placeholder="Select collection"
+                    (change)="onCollectionSelection($event?._id)">
+                  </ng-select>
+                </div>
+                <div class="col-3">
+                  <label for="selectionWatch">Watch</label>
+                  <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}" bindLabel="referenceNumber"
+                    placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
+                  </ng-select>
+                </div>
+                <div class="col-3">
+                  <label for="selectionWatch">Or reference number</label>
+                  <input type="text" placeholder="Enter reference number" class="form-control" (change)="onWatchSelection(selectionWatchReferenceNumber[i])"
+                    [(ngModel)]="selectionWatchReferenceNumber[i]" name="watchInputReferenceNumber">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <label>Discount Value</label>
+                  <input [disabled]="mode == 'delete' || loading || !watchDiscount?.watchObject?._id" type="number"
+                    placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
+                    [(ngModel)]="watchDiscount.maximumWatchDiscount" name="watchesMaxDiscountsValue{{i}}">
+                </div>
+                <div class="col-2 align-self-end">
+                  <button type="button" class="btn primary-btn" (click)="updateWatchMaxDiscount(watchDiscount)">Save</button>
+                </div>
+                <div class="col-2 align-self-end">
+                  <button type="button" class="btn secondry-btn" (click)="updateWatchMaxDiscount(watchDiscount, true)">Remove</button>
+                </div>
+              </div>
+              <div class="col-12">
+                <hr />
               </div>
             </div>
           </div>
