@@ -138,12 +138,12 @@
           <br />
 
           <div class="row">
-            <div class="col-9">
+            <div class="col-md-9">
 
               <h3>Brand Max Discounts</h3>
 
             </div>
-            <div class="col-3 align-self-end">
+            <div class="col-md-3 align-self-end">
               <button class="btn  btn-auto primary-btn" (click)="addBrandDiscount()">Add New Brand Discount Limit +</button>
             </div>
           </div>
@@ -152,7 +152,7 @@
 
 
           <div class="row">
-            <div class="col-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
+            <div class="col-md-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
               <div class=" form-group row">
 
                 <div class="col-md-4">
@@ -176,7 +176,7 @@
 
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateBrandMaxDiscount(brandDiscount, true)">remove</button>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12">
                   <hr>
                 </div>
               </div>
@@ -190,10 +190,10 @@
           <br />
 
           <div class="row">
-            <div class="col-9">
+            <div class="col-md-9">
               <h3>Collection Max Discounts</h3>
             </div>
-            <div class="col-3 align-self-end">
+            <div class="col-md-3 align-self-end">
               <button class="btn btn-auto primary-btn" (click)="addCollectionDiscount()">Add Collection Discount Limit +</button>
             </div>
           </div>
@@ -203,7 +203,7 @@
 
 
           <div class="row">
-            <div class="col-12 form-group" *ngFor="let collectionDiscount of retailer?.maximumCollectionDiscounts; let i=index">
+            <div class="col-md-12 form-group" *ngFor="let collectionDiscount of retailer?.maximumCollectionDiscounts; let i=index">
               <div class="row">
                 <div class="col-md-3">
                   <label>Select Brand</label>
@@ -231,7 +231,7 @@
                 <div class="col-md-2 align-self-end">
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateCollectionMaxDiscount(collectionDiscount, true)">Remove</button>
                 </div>
-                <div class="col-12">
+                <div class="col-md-12">
                   <hr>
                 </div>
               </div>
@@ -241,19 +241,19 @@
 
           <br />
           <div class="row">
-            <div class="col-9">
+            <div class="col-md-9">
               <h3>Watch Max Discounts</h3>
             </div>
-            <div class="col-3 align-self-end">
+            <div class="col-md-3 align-self-end">
               <button class="btn btn-auto primary-btn" (click)="addWatchDiscount()">Add New Watch Discount Limit +</button>
             </div>
           </div>
           <br />
 
           <div class="row">
-            <div class="col-12" *ngFor="let watchDiscount of retailer?.maximumWatchDiscounts; let i=index">
+            <div class="col-md-12" *ngFor="let watchDiscount of retailer?.maximumWatchDiscounts; let i=index">
               <div class="row form-group">
-                <div class="col-3">
+                <div class="col-md-3">
                   <label>Select Brand</label>
                   <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand"
                   [(ngModel)]="watchDiscount.brandObject"
@@ -261,7 +261,7 @@
                   (change)="onBrandSelection($event?._id)">
                   </ng-select>
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                   <label for="selectionCollection">Select Collection</label>
                   <ng-select [items]="selectionCollections" bindLabel="name" placeholder="Select collection"
                   [(ngModel)]="watchDiscount.collectionObject"
@@ -269,33 +269,33 @@
                   (change)="onCollectionSelection($event?._id)">
                   </ng-select>
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                   <label for="selectionWatch">Watch</label>
                   <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}" bindLabel="referenceNumber"
                     placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
                   </ng-select>
                 </div>
-                <div class="col-3">
+                <div class="col-md-3">
                   <label for="selectionWatch">Or reference number</label>
                   <input type="text" placeholder="Enter reference number" class="form-control" (change)="onWatchSelection(selectionWatchReferenceNumber[i])"
                     [(ngModel)]="selectionWatchReferenceNumber[i]" name="watchInputReferenceNumber">
                 </div>
               </div>
               <div class="row">
-                <div class="col-8">
+                <div class="col-md-8">
                   <label>Discount Value</label>
                   <input [disabled]="mode == 'delete' || loading || !watchDiscount?.watchObject?._id" type="number"
                     placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
                     [(ngModel)]="watchDiscount.maximumWatchDiscount" name="watchesMaxDiscountsValue{{i}}">
                 </div>
-                <div class="col-2 align-self-end">
+                <div class="col-md-2 align-self-end">
                   <button type="button" class="btn btn-100 primary-btn" (click)="updateWatchMaxDiscount(watchDiscount)">Save</button>
                 </div>
-                <div class="col-2 align-self-end">
+                <div class="col-md-2 align-self-end">
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateWatchMaxDiscount(watchDiscount, true)">Remove</button>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-md-12">
                 <hr />
               </div>
             </div>
