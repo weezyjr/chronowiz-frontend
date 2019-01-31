@@ -22,6 +22,14 @@
     display: none
 
 
+.light::ng-deep
+  *:not(.collapsible)
+    color: #fff !important
+    border-color: #fff !important
+  .collapsible
+    color: #000 !important
+
+
 @media screen and (max-width: 600px)
   .collections
     padding-top: 105px;

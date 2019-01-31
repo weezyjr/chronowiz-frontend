@@ -1,22 +1,23 @@
 <div [ngStyle]="{'background-color': watch?.brandObject?.backgroundColor? watch?.brandObject?.backgroundColor: '#fff'}"
   [ngClass]="{'light': watch?.brandObject?.contentColor === 'light'}" class="watch-page">
 
-  <app-header *ngIf="watch?.brandObject"
+  <app-header *ngIf="watch?.brandObject && watch?.brandObject?.name"
   [background_color]="watch?.brandObject?.headerBackgroundColor? watch?.brandObject?.headerBackgroundColor: '#ffffff'"
     [content_color]="watch?.brandObject?.headerContentColor? watch?.brandObject?.headerContentColor: 'dark'"
     [opacity]="watch?.brandObject?.headerBackgroundOpacity? watch?.brandObject?.headerBackgroundOpacity : 75"
-    [_brandName]="watch?.brandObject?.name"
-    [_brandLogo]="watch?.brandObject?.logoPhotoUrl"
+    [lightBrandLogo]="watch?.brandObject?.lightLogoPhotoUrl"
+    [brandName]="watch?.brandObject?.name"
+    [brandLogo]="watch?.brandObject?.logoPhotoUrl"
     [breads]="urlSequence">
   </app-header>
   <app-header *ngIf="!watch?.brandObject"></app-header>
 
   <simple-notifications></simple-notifications>
-  <div class="container mt-3">
+  <div class="container mt-4">
     <div class="text-center" id="top">
       <h1>{{watch?.model}}</h1>
       <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="watch?.collectionObject?._id">
-        <i class="fa"><img src="../../../assets/app-icon.svg" width="9" alt=""></i>
+        <i class="fa"><img [src]="appIconSrc" width="9" alt=""></i>
         View all {{watch?.collectionObject?.name | collectionName}} models
       </a>
       <div class="mx-auto text-center main-watch-photo">
@@ -32,9 +33,10 @@
         </p>
       </div>
       <div class="d-flex p-5 align-items-center justify-content-center">
-        <button (click)="addToWatchTray()" class="add-to-watch-tray"><i class="fa"><img src="../../../assets/paper-bag.svg"
+        <button (click)="addToWatchTray()" class="add-to-watch-tray" [disabled]="addedToWatchTray" [ngClass]="{'added-to-watch-tray': addedToWatchTray}">
+          <i class="fa"><img [src]="paperBagSrc"
               width="12" alt=""></i>
-          add to watch tray</button>
+          {{addedToWatchTray? 'added to watch tray' :'add to watch tray'}}</button>
         <div (click)="scrollTo('technicals')" class="technical-details"> + Technical detail </div>
       </div>
     </div>
@@ -52,13 +54,14 @@
 
     <div class="d-flex p-4 align-items-center justify-content-center">
       <div class="show-price" (click)="showPrice()"> {{price}} </div>
-      <button (click)="addToWatchTray()" class="add-to-watch-tray"><i class="fa"><img src="../../../assets/paper-bag.svg"
+      <button (click)="addToWatchTray()" class="add-to-watch-tray" [disabled]="addedToWatchTray" [ngClass]="{'added-to-watch-tray': addedToWatchTray}">
+      <i class="fa"><img [src]="paperBagSrc"
             width="12" alt=""></i>
-        add to watch tray</button>
+            {{addedToWatchTray? 'added to watch tray' :'add to watch tray'}}</button>
     </div>
 
     <div class="return-to-top text-center mx-auto w-100" (click)="scrollTo('top')">
-      <img src="../../../assets/down-arrow.svg" class="watchdetails_downarrow">
+      <img [src]="downArrowSrc" class="watchdetails_downarrow">
       <div>
         Return to top
       </div>

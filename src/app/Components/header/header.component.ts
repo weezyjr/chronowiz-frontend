@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthenticationService } from 'src/app/Auth/Authentication.service';
-import { Router } from '@angular/router';
 import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.service';
 
 
@@ -13,7 +12,10 @@ export class HeaderComponent implements OnInit {
 
   private _content_color_: 'dark' | 'light';
   private _bg_rgb_: number[] = [];
-
+  /* private _background_color_: String | string;
+   private _brandLogo_: String;
+   private _lightBrandLogo_: String;
+   private _opacity_: number;*/
 
   public menuClosed: Boolean = true;
   public navMenuOpened: Boolean = false;
@@ -39,8 +41,12 @@ export class HeaderComponent implements OnInit {
 
   get content_color(): 'dark' | 'light' {
     if (this._content_color_ === 'light') {
-      if (!this._brandLogo) {
-        this._brandLogo = '../../../assets/logo-white.svg';
+      if (!this.brandLogo) {
+        this.brandLogo = '../../../assets/logo-white.svg';
+      } else {
+        if (this.lightBrandLogo) {
+          this.brandLogo = this.lightBrandLogo;
+        }
       }
       this.userIconSrc = '../../../assets/user-white.svg';
       this.searchIconSrc = '../../../assets/search-white.svg';
@@ -52,12 +58,13 @@ export class HeaderComponent implements OnInit {
     return this._content_color_;
   }
 
-
   @Input() opacity = 100;
 
-  @Input() _brandLogo: String = '../../../assets/logo.svg';
+  @Input() brandLogo: String = '../../../assets/logo.svg';
 
-  @Input() _brandName: String;
+  @Input() lightBrandLogo: String = '../../../assets/logo-white.svg';
+
+  @Input() brandName: String;
 
   @Input() noHeightFix: Boolean = false;
 
@@ -70,11 +77,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  get brandName(): Array<String> {
-    if (!this._brandName) {
+  get brandUrl(): Array<String> {
+    if (!this.brandName) {
       return ['/home'];
     } else {
-      return ['/brand', this._brandName];
+      return ['/brand', this.brandName];
     }
   }
 

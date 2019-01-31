@@ -16,8 +16,13 @@
             </div>
           </div>
           <div class="col-4 align-self-center">
-            <div class="brand">{{orderWatchObject?.watchObject?.brandObject?.name}}</div>
-            <div class="collection">{{orderWatchObject?.watchObject?.collectionObject?.name | collectionName}}</div>
+            <div class="brand" *ngIf="orderWatchObject?.watchObject?.brandObject?.name">{{orderWatchObject?.watchObject?.brandObject?.name}}</div>
+            <div class="brand" *ngIf="!orderWatchObject?.watchObject?.brandObject?.name">{{orderWatchObject?.watchObject?.model}}</div>
+
+            <div class="collection" *ngIf="orderWatchObject?.watchObject?.collectionObject?.name | collectionName">{{orderWatchObject?.watchObject?.collectionObject?.name | collectionName}}</div>
+            <div class="collection" *ngIf="!orderWatchObject?.watchObject?.collectionObject?.name | collectionName">{{orderWatchObject?.watchObject?.brand}}</div>
+
+
             <div class="ref">{{orderWatchObject?.watchObject?.referenceNumber}}</div>
           </div>
           <div class="col-2 align-self-end">

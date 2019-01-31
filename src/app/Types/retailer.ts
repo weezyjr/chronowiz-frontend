@@ -12,18 +12,24 @@ export class BrandDiscount {
 }
 
 export class CollectionDiscount {
+  public brandObject: Brand;
   public collectionObject: Collection;
   public maximumCollectionDiscount: number | null;
   constructor(){
+    this.brandObject = new Brand();
     this.collectionObject = new Collection();
     this.maximumCollectionDiscount = 0;
   }
 }
 
 export class WatchDiscount {
+  public brandObject: Brand;
+  public collectionObject: Collection;
   public watchObject: Watch;
   public maximumWatchDiscount: number | null;
   constructor(){
+    this.brandObject = new Brand();
+    this.collectionObject = new Collection();
     this.watchObject = new Watch();
     this.maximumWatchDiscount = 0;
   }

@@ -20,6 +20,8 @@ export class WatchComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
+  public addedToWatchTray: Boolean = false;
+
   watch: Watch = new Watch();
   price: string | number = 'Show Price';
 
@@ -31,6 +33,37 @@ export class WatchComponent implements OnInit, OnDestroy {
       return [];
     }
   }
+
+  get downArrowSrc(): string {
+    if (this.watch &&
+      this.watch.brandObject &&
+      this.watch.brandObject.contentColor === 'light') {
+      return '../../../../assets/down-arrow.light.svg';
+    } else {
+      return '../../../../assets/down-arrow.svg';
+    }
+  }
+
+  get paperBagSrc(): string {
+    if (this.watch &&
+      this.watch.brandObject &&
+      this.watch.brandObject.contentColor === 'light') {
+      return '../../../../assets/paper-bag-white.svg';
+    } else {
+      return '../../../../assets/paper-bag.svg';
+    }
+  }
+
+  get appIconSrc(): String {
+    if (this.watch &&
+      this.watch.brandObject &&
+      this.watch.brandObject.contentColor === 'light') {
+      return '../../../../assets/app-icon.light.svg';
+    } else {
+      return '../../../../assets/app-icon.svg';
+    }
+  }
+
 
   constructor(private activeRoute: ActivatedRoute,
     private brandsService: BrandsService,
@@ -86,6 +119,7 @@ export class WatchComponent implements OnInit, OnDestroy {
   async addToWatchTray() {
     await this.watchTrayService.addToWatchTray(this.watch);
     if (this.watchTrayService.currentWatchTrayValue) {
+      this.addedToWatchTray = true;
       // change the button
     }
     else {

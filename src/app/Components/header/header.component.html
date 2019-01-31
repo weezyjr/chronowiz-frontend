@@ -1,13 +1,13 @@
 <header class="header" [style.background-color]="backgroundColor">
   <div class="container">
     <div class="logo">
-      <a class="nav-link" [routerLink]="brandName"><img *ngIf="_brandLogo" [ngClass]="{'logo-fix': !_brandName}" [src]="_brandLogo"
+      <a class="nav-link" [routerLink]="brandUrl"><img [ngClass]="{'logo-fix': !brandName}" [src]="brandLogo"
           alt="logo"></a>
     </div>
     <nav class="navbar text-center" role="navigation">
       <ul class="list-inline w-100 text-center">
         <div class="float-left text-left">
-          <li class="chronowiz-logo"><a *ngIf="_brandName" [routerLink]="['/home']">
+          <li class="chronowiz-logo"><a *ngIf="brandName" [routerLink]="['/home']">
               <img *ngIf="chronoWizLogoSrc" [src]="chronoWizLogoSrc" class="img-responsive" alt="chronowiz logo">
             </a>
           </li>

@@ -22,6 +22,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
 
   // Files
   logoPhotoFile: File;
+  lightLogoPhotoFile: File;
   headerPhotoFile: File;
   banner1PhotoFile: File;
   banner2PhotoFile: File;
@@ -235,6 +236,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   resetBrand(): void {
     this.brand = new Brand();
     this.logoPhotoFile = null;
+    this.lightLogoPhotoFile = null;
     this.headerPhotoFile = null;
     this.banner1PhotoFile = null;
     this.banner2PhotoFile = null;
@@ -306,6 +308,21 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
         });
   }
 
+  async uploadLightLogoPhoto() {
+    await this.s3Service.upload(this.lightLogoPhotoFile, this.brandsUrlPathGenerator('lightLogoPhotoUrl'))
+      .then(async (url: string) => {
+        this._notificationsService.success(`Succes ${this.lightLogoPhotoFile.name} uploaded successfully`);
+        this.brand.lightLogoPhotoUrl = url;
+      },
+        async () => {
+          if (this.mode !== 'delete') {
+            // LogoPhoto is required in case of create
+            throw new Error('Missing Files');
+          }
+          this.brand.lightLogoPhotoUrl = '';
+        });
+  }
+
   async uploadHeaderFile() {
     await this.s3Service.upload(this.headerPhotoFile, this.brandsUrlPathGenerator('headerPhotoUrl'))
       .then(async (url: string) => {
@@ -354,6 +371,12 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.brand.logoPhotoFile = null;
     this.logoPhotoFile = null;
     this.brand.logoPhotoUrl = '';
+  }
+
+  clearLightLogoPhoto(): void {
+    this.brand.lightLogoPhotoFile = null;
+    this.lightLogoPhotoFile = null;
+    this.brand.lightLogoPhotoUrl = '';
   }
 
   clearHeaderPhoto(): void {
@@ -469,6 +492,10 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
       /** wait for files uploading */
       if (!this.brand.logoPhotoUrl) {
         await this.uploadLogoPhoto();
+      }
+
+      if (!this.brand.lightLogoPhotoUrl) {
+        await this.uploadLightLogoPhoto();
       }
 
       if (!this.brand.headerPhotoUrl) {

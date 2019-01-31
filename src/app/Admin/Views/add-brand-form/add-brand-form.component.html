@@ -87,7 +87,7 @@
         <br />
 
         <div class="form-field py-2">
-          <label for="logoPhotoFileInput">Brand Logo</label>
+          <label for="logoPhotoFileInput">Dark Brand Logo</label>
           <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
           <div *ngIf="brand?.logoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
@@ -106,6 +106,30 @@
             </div>
           </div>
           <div [hidden]="!brandForm.submitted || logoPhotoFileRef.valid || logoPhotoFileRef.pristine" class="alert alert-danger">Logo
+            Photo is
+            required</div>
+        </div>
+
+        <div class="form-field py-2">
+          <label for="logoPhotoFileInput">Light Brand Logo</label>
+          <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
+          <div *ngIf="brand?.logoPhotoUrl" class="preview">
+            <h6> Current Logo Photo </h6>
+            <img [src]="brand?.lightLogoPhotoUrl" [alt]="brand?.name + ' light logo'" class="img-responsive">
+          </div>
+          <div class="row">
+            <div class="col-sm-10 col-6">
+              <div class="form-group">
+                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [(ngModel)]="brand.lightLogoPhotoFile"
+                  (change)="onLogoPhotoChange($event)" [required]="!brand.lightLogoPhotoUrl" name="lightLogoPhotoFileRef"
+                  #lightLogoPhotoFileRef="ngModel">
+              </div>
+            </div>
+            <div class="col-sm-2 col-6">
+              <button class="btn btn-lg secondry-btn" (click)="clearLightLogoPhoto()">Clear</button>
+            </div>
+          </div>
+          <div [hidden]="!brandForm.submitted || lightLogoPhotoFileRef.valid || lightLogoPhotoFileRef.pristine" class="alert alert-danger">Logo
             Photo is
             required</div>
         </div>

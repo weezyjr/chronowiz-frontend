@@ -69,6 +69,12 @@
     img
       margin: auto
 
+  .added-to-watch-tray
+    background: #3e0b08
+    color: white
+    i
+      display: none
+
 
   .show-price
     font-size: 16px
@@ -77,9 +83,18 @@
     padding: 25px
     cursor: pointer
 
+.light::ng-deep
+  *:not(.add-to-watch-tray)
+    color: #fff !important
+    border-color: #fff !important
+  .add-to-watch-tray
+    color: #000 !important
 
 @media screen and (max-width: 576px)
   .watch-page
     .main-watch-photo
       img
         max-height: 290px
+    .add-to-watch-tray
+      padding: 12px
+      font-size: 10px
