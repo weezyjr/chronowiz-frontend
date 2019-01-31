@@ -11,32 +11,17 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ErrorInterceptor } from './API/error.interceptor';
-import { HeaderComponent } from './Components/header/header.component';
-import { FooterComponent } from './Components/footer/footer.component';
-import { BrandComponent } from './Views/brand/brand.component';
 import { ItemCardComponent } from './Components/item-card/item-card.component';
-import { BreadcrumbComponent } from './Components/breadcrumb/breadcrumb.component';
 import { HomeComponent } from './Views/home/home.component';
-import { HeroComponent } from './Components/hero/hero.component';
-import { CollectionsComponent } from './Views/collections/collections.component';
-import { GenderPipe } from './Filters/gender.pipe';
-
-import { CollapsibleComponent } from './Components/collapsible/collapsible.component';
-import { FilterCollapsibleComponent } from './Components/filter-collapsible/filter-collapsible.component';
-import { WatchComponent } from './Views/watch/watch.component';
-import { AttributeTableComponent } from './Components/attribute-table/attribute-table.component';
-import { WatchSectionComponent } from './Components/watch-section/watch-section.component';
 import { FormHeaderComponent } from './Components/forms/form-header/form-header.component';
 import { TabsComponent } from './Components/forms/tabs/tabs.component';
 import { ToggleBtnComponent } from './Components/toggle-btn/toggle-btn.component';
-import { SideMenuComponent } from './Components/side-menu/side-menu.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { LoginComponent } from './Views/login/login.component';
 import { SearchComponent } from './Views/search/search.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { CarouselComponent } from './Components/carousel/carousel.component';
 import { AdvancedSearchComponent } from './Views/search/advanced-search/advanced-search.component';
-import { CollectionSectionComponent } from './Components/collection-section/collection-section.component';
 import { ConfirmPasswordDirective } from './Views/register/confirmPassword.directive';
 import { ResetPasswordComponent } from './Views/reset-password/reset-password.component';
 import { WatchTrayComponent } from './Views/watch-tray/watch-tray.component';
@@ -44,8 +29,6 @@ import { CheckoutComponent } from './Views/checkout/checkout.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AdminSelectionComponent } from './Components/admin-selection/admin-selection.component';
-import { SafeUrlPipe } from './Filters/safeUrl.pipe';
-import { CollectionNamePipe } from './Filters/collectionName.pipe';
 import { RetailerLoginComponent } from './Retailer/Views/login/login.component';
 import { AddRetialerFormComponent } from './Admin/Views/add-retialer-form/add-retialer-form.component';
 import { AddToStockComponent } from './Retailer/Views/add-to-stock/add-to-stock.component';
@@ -74,16 +57,15 @@ import { ShippingComponent } from './Views/checkout/shipping/shipping.component'
 import { PaymentComponent } from './Views/checkout/payment/payment.component';
 import { ConfirmationComponent } from './Views/checkout/confirmation/confirmation.component';
 import { OrderComponent } from './Views/checkout/order/order.component';
-import { WatchesService } from './User/Services/Watch/watches.service';
 import { SearchService } from './User/Services/Search/search.service';
-import { BrandsService } from './User/Services/Brand/brands.service';
 import { WatchTrayService } from './User/Services/WatchTray/watch-tray.service';
 import { CheckoutService } from './User/Services/WatchTray/checkout.service';
-import { CollectionsService } from './User/Services/Collection/collections.service';
 import { OrderService } from './User/Services/WatchTray/order.service';
 import { ContactUsService } from './User/Services/ContactUs/contactUs.service';
 import { EditUserFormComponent } from './Admin/Views/edit-user-form/edit-user-form.component';
 import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.component';
+import { UIcomponentsModule } from './uicomponents/uicomponents.module';
+import { BrandsModule } from './Views/brands/brands.module';
 @NgModule({
   declarations: [
     ConfirmPasswordDirective,
@@ -94,36 +76,20 @@ import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.compo
     AddBrandFormComponent,
     AddCollectionFormComponent,
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BrandComponent,
     ItemCardComponent,
-    BreadcrumbComponent,
     HomeComponent,
-    HeroComponent,
-    CollectionsComponent,
-    CollectionNamePipe,
-    SafeUrlPipe,
-    GenderPipe,
-    CollapsibleComponent,
-    FilterCollapsibleComponent,
-    WatchComponent,
-    AttributeTableComponent,
-    WatchSectionComponent,
     AddRetialerFormComponent,
     FormHeaderComponent,
     TabsComponent,
     AddToStockComponent,
     ToggleBtnComponent,
     InStockComponent,
-    SideMenuComponent,
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
     SearchComponent,
     CarouselComponent,
     AdvancedSearchComponent,
-    CollectionSectionComponent,
     ResetPasswordComponent,
     SetNewPasswordComponent,
     WatchTrayComponent,
@@ -147,6 +113,8 @@ import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.compo
     OrdersFormComponent
   ],
   imports: [
+    UIcomponentsModule,
+    BrandsModule,
     NgSelectModule,
     Ng5SliderModule,
     BrowserModule,
@@ -172,13 +140,10 @@ import { OrdersFormComponent } from './Admin/Views/orders-form/orders-form.compo
     ContactUsService,
     OrderService,
     HttpErrorHandlerService,
-    WatchesService,
     SearchService,
-    BrandsService,
     WatchTrayService,
     CheckoutService,
     AuthenticationService,
-    CollectionsService,
     RetailerService,
     AdminService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

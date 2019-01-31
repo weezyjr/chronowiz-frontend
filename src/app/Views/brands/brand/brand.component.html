@@ -1,0 +1,12 @@
+<div
+[ngStyle]="{'background-color': brandObject?.backgroundColor? brandObject?.backgroundColor: '#fff'}"
+[ngClass]="{'light': brandObject?.contentColor === 'light'}">
+
+  <app-header *ngIf="brandObject" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
+    [content_color]="brandObject?.headerContentColor? brandObject?.headerContentColor: 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
+    [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl" [breads]="urlSequence" [noHeightFix]="true">
+  </app-header>
+  <app-header *ngIf="!brandObject"></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>

@@ -1,12 +1,23 @@
-<div class="watch-page">
+<div [ngStyle]="{'background-color': watch?.brandObject?.backgroundColor? watch?.brandObject?.backgroundColor: '#fff'}"
+  [ngClass]="{'light': watch?.brandObject?.contentColor === 'light'}" class="watch-page">
+
+  <app-header *ngIf="watch?.brandObject"
+  [background_color]="watch?.brandObject?.headerBackgroundColor? watch?.brandObject?.headerBackgroundColor: '#ffffff'"
+    [content_color]="watch?.brandObject?.headerContentColor? watch?.brandObject?.headerContentColor: 'dark'"
+    [opacity]="watch?.brandObject?.headerBackgroundOpacity? watch?.brandObject?.headerBackgroundOpacity : 75"
+    [_brandName]="watch?.brandObject?.name"
+    [_brandLogo]="watch?.brandObject?.logoPhotoUrl"
+    [breads]="urlSequence">
+  </app-header>
+  <app-header *ngIf="!watch?.brandObject"></app-header>
+
   <simple-notifications></simple-notifications>
-  <app-header [_brandName]="brandName" [_brandLogo]="brandLogo" [breads]="breads"></app-header>
-  <div class="container mt-2">
+  <div class="container mt-3">
     <div class="text-center" id="top">
       <h1>{{watch?.model}}</h1>
-      <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="collectionName">
+      <a [routerLink]="collectionRoute" class="view-all-btn text-center" *ngIf="watch?.collectionObject?._id">
         <i class="fa"><img src="../../../assets/app-icon.svg" width="9" alt=""></i>
-        View all {{watch?.collectionObject?.name}} models
+        View all {{watch?.collectionObject?.name | collectionName}} models
       </a>
       <div class="mx-auto text-center main-watch-photo">
         <img [src]="watch?.mainPhotoUrl ? watch?.mainPhotoUrl : 'http://placehold.it/480x720/FFFFFF/FFFFFF'" alt="watch?.model"

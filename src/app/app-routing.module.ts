@@ -6,9 +6,6 @@ import { AddWatchFormComponent } from './Admin/Views/add-watch-form/add-watch-fo
 import { AddBrandFormComponent } from './Admin/Views/add-brand-form/add-brand-form.component';
 import { AddCollectionFormComponent } from './Admin/Views/add-collection-form/add-collection-form.component';
 import { HomeComponent } from './Views/home/home.component';
-import { BrandComponent } from './Views/brand/brand.component';
-import { CollectionsComponent } from './Views/collections/collections.component';
-import { WatchComponent } from './Views/watch/watch.component';
 import { RetailerGuard } from './Auth/RetailerAuth.guard';
 import { RetailerLoginComponent } from './Retailer/Views/login/login.component';
 import { AddRetialerFormComponent } from './Admin/Views/add-retialer-form/add-retialer-form.component';
@@ -93,28 +90,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  },
-  {
-    path: 'brand',
-    children: [{
-      path: ':name/:id/:ref',
-      component: WatchComponent
-    }, {
-      path: ':name/:id',
-      component: CollectionsComponent
-    },
-    {
-      path: ':name',
-      component: BrandComponent
-    }]
-  },
-  {
-    path: 'collection/:id',
-    component: CollectionsComponent
-  },
-  {
-    path: 'watch/:ref',
-    component: WatchComponent
   },
   {
     path: 'search',

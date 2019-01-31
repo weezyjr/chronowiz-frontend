@@ -11,28 +11,55 @@ import { WatchTrayService } from 'src/app/User/Services/WatchTray/watch-tray.ser
 })
 export class HeaderComponent implements OnInit {
 
+  private _content_color_: 'dark' | 'light';
   private _bg_rgb_: number[] = [];
 
-  @Input()
-  breads: Array<Object>;
 
-  @Input()
-  background_color: String | string = '#ffffff';
+  public menuClosed: Boolean = true;
+  public navMenuOpened: Boolean = false;
 
-  @Input()
-  content_color: 'dark' | 'light' = 'dark';
+  public userIconSrc: String = '../../../assets/user.svg';
+  public searchIconSrc: String = '../../../assets/search.svg';
+  public menuIconSrc: String = '../../../assets/menu.svg';
+  public menuCloseSrc: String = '../../../assets/menucloseblack.svg';
+  public paperBagIconSrc: String = '../../../assets/paper-bag.svg';
+  public chronoWizLogoSrc: String = '../../../assets/logo.svg';
 
-  @Input()
-  opacity = 100;
+  @Input() breads: Array<Object>;
 
-  @Input()
-  _brandLogo: String;
+  @Input() background_color: String | string = '#ffffff';
 
-  @Input()
-  _brandName: String;
+  @Input() set content_color(color: 'dark' | 'light') {
+    if (color) {
+      this._content_color_ = color;
+    } else {
+      this._content_color_ = 'dark';
+    }
+  }
 
-  @Input()
-  noHeightFix: Boolean = false;
+  get content_color(): 'dark' | 'light' {
+    if (this._content_color_ === 'light') {
+      if (!this._brandLogo) {
+        this._brandLogo = '../../../assets/logo-white.svg';
+      }
+      this.userIconSrc = '../../../assets/user-white.svg';
+      this.searchIconSrc = '../../../assets/search-white.svg';
+      this.menuIconSrc = '../../../assets/menu-white.svg';
+      this.menuCloseSrc = '../../../assets/menuclose.svg';
+      this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
+      this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
+    }
+    return this._content_color_;
+  }
+
+
+  @Input() opacity = 100;
+
+  @Input() _brandLogo: String = '../../../assets/logo.svg';
+
+  @Input() _brandName: String;
+
+  @Input() noHeightFix: Boolean = false;
 
   get logged(): Boolean {
     if (this.authenticationService.currentUserValue) {
@@ -51,19 +78,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  menuClosed: Boolean = true;
-  userIconSrc: String;
-  searchIconSrc: String;
-  menuIconSrc: String;
-  menuCloseSrc: String;
-  paperBagIconSrc: String;
-  navMenuOpened: Boolean;
-  chronoWizLogoSrc: String;
 
   constructor(
     private watchTrayService: WatchTrayService,
-    private authenticationService: AuthenticationService,
-    private router: Router) {
+    private authenticationService: AuthenticationService) {
 
   }
 
@@ -74,6 +92,7 @@ export class HeaderComponent implements OnInit {
   }
 
   get backgroundColor(): string {
+    this._bg_rgb_ = this.HEX2RGB(this.background_color);
     if (this.opacity && this.opacity !== 0) {
       return `rgba(${this._bg_rgb_[0]},${this._bg_rgb_[1]},${this._bg_rgb_[2]}, ${this.opacity / 100} )`;
     } else {
@@ -83,31 +102,6 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    // convert background color from hex to rgb
-    this._bg_rgb_ = this.HEX2RGB(this.background_color);
-
-    if (this.content_color === 'dark') {
-      if (!this._brandLogo) {
-        this._brandLogo = '../../../assets/logo.svg';
-      }
-      this.userIconSrc = '../../../assets/user.svg';
-      this.searchIconSrc = '../../../assets/search.svg';
-      this.menuIconSrc = '../../../assets/menu.svg';
-      this.menuCloseSrc = '../../../assets/menucloseblack.svg';
-      this.paperBagIconSrc = '../../../assets/paper-bag.svg';
-      this.chronoWizLogoSrc = '../../../assets/logo.svg';
-    } else {
-      if (!this._brandLogo) {
-        this._brandLogo = '../../../assets/logo-white.svg';
-      }
-      this.userIconSrc = '../../../assets/user-white.svg';
-      this.searchIconSrc = '../../../assets/search-white.svg';
-      this.menuIconSrc = '../../../assets/menu-white.svg';
-      this.menuCloseSrc = '../../../assets/menuclose.svg';
-      this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
-      this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
-    }
-
   }
 
   HEX2RGB(hex: String): number[] {
@@ -147,16 +141,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openUserMenu() {
-    if (this.logged) {
-      if (this.menuClosed) {
-        this.menuClosed = false;
-      } else {
-        this.menuClosed = true;
-      }
-    }
-    else {
-      this.router.navigateByUrl('/login');
-    }
+    this.menuClosed = !this.menuClosed;
   }
 
   toggleNav() {

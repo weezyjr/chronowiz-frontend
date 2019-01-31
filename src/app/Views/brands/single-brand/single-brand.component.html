@@ -1,10 +1,4 @@
-<div class="brand-page" [ngStyle]="{'background-color': brandObject?.backgroundColor? brandObject?.backgroundColor: '#fff'}">
-  <app-header
-    *ngIf="brandObject" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
-    [content_color]="brandObject?.headerContentColor? brandObject?.headerContentColor: 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
-    [_brandName]="brandObject?.name" [_brandLogo]="brandObject?.logoPhotoUrl" [breads]="breads" [noHeightFix]="true">
-  </app-header>
-
+<div class="brand-page">
   <div class="mx-auto hero-container">
     <video *ngIf="brandObject?.headerPhotoUrl && isVideo(brandObject?.headerPhotoUrl)" class="main-vid" autoplay loop
       muted oncanplay="this.play()" onloadedmetadata="this.muted = true">
@@ -22,21 +16,21 @@
 
     <div class="tabs">
       <ul class="list-inline">
-        <li class="list-inline-item" *ngFor="let gender of genders" (click)="filterGender(gender)" [class.active]="currentGender === gender">
+        <li class="list-inline-item" *ngFor="let gender of genders" (click)="filterByGender(gender)" [class.active]="currentGender === gender">
           {{gender}} </li>
       </ul>
     </div>
 
-    <app-collection-section *ngFor="let collection of collections | slice: 0:collectionLimit" [collection]="collection"
+    <app-collection-section *ngFor="let collection of brandObject?.collectionObjects | slice: 0:collectionLimit" [collection]="collection"
       [gender]="currentGender"></app-collection-section>
 
-    <div class="text-center my-5" *ngIf="!collections?.length">
+    <div class="text-center my-5" *ngIf="!brandObject?.collectionObjects?.length">
       <p> There is no collections</p>
     </div>
 
-    <div class="text-center mx-auto show-more my-5" *ngIf="collections?.length">
+
+    <div class="text-center mx-auto show-more my-5" *ngIf="brandObject?.collectionObjects?.length > 4">
       <button class="btn primary-btn" (click)="toggleShowMore()">Show {{isShowMoreOn ? 'Less' : 'More'}}</button>
     </div>
   </div>
-  <app-footer></app-footer>
 </div>

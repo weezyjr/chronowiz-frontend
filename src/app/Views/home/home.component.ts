@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BrandsService } from 'src/app/User/Services/Brand/brands.service';
 import { Brand } from 'src/app/Types/brand';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
@@ -7,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BrandsService } from '../brands/brands.service';
 
 @Component({
   selector: 'app-home',

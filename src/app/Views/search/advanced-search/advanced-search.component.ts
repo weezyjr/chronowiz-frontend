@@ -5,12 +5,12 @@ import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { NotificationsService } from 'angular2-notifications';
 import { Options } from 'ng5-slider';
-import { BrandsService } from 'src/app/User/Services/Brand/brands.service';
 import { ParamMap, ActivatedRoute } from '@angular/router';
 import { SearchService } from 'src/app/User/Services/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BrandsService } from '../../brands/brands.service';
 
 interface BrandCheckBox {
   _id: string;

@@ -1,34 +1,38 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { CollectionsService } from 'src/app/User/Services/Collection/collections.service';
+import { Subject } from 'rxjs';
+import { Collection } from 'src/app/Types/collection';
 import { NotificationsService } from 'angular2-notifications';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { BrandsService } from '../brands.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
-import { Collection } from 'src/app/Types/collection';
 import { Watch } from 'src/app/Types/watch';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Link } from 'src/app/Types/Link';
 
 @Component({
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.sass']
+  selector: 'app-collection',
+  templateUrl: './collection.component.html',
+  styleUrls: ['./collection.component.sass']
 })
-export class CollectionsComponent implements OnInit, OnDestroy {
+export class CollectionComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  collection: Collection;
-  watches: Watch[];
-  watchsLimit = 12;
+  public collection: Collection;
 
-  breads = [{
-    name: 'Home', url: '/home',
-  }, {
-    name: 'Brand', url: '/home'
-  }];
+  public watchsLimit = 12;
 
-  filters = {
+   // breadcrumps links
+   public get urlSequence(): Link[] {
+    if (this.brandsService.urlSequence) {
+      return this.brandsService.urlSequence;
+    } else {
+      return [];
+    }
+  }
+
+  public currentFilters = {
     size: 'Any size',
     material: 'Any material',
     bezel: 'Any bezel',
@@ -36,8 +40,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     marker: 'Any hour markers'
   };
 
-  /*filters*/
-  filtersRows = [
+  filtersOptions = [
     { name: 'size', title: 'Choose a size', options: ['Any size', 'Mid-size', 'Large size'] },
     { name: 'material', title: 'Choose A material', options: ['Any material', 'Yellow Gold', 'Pink Gold', 'White Gold', 'Platinum'] },
     { name: 'bezel', title: 'Choose a bezel', options: ['Any bezel', 'Smooth bezel', 'Fluted bezel', 'Gem-set bezel'] },
@@ -45,7 +48,9 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     { name: 'marker', title: 'Choose an hour marker style', options: ['Any hour markers', 'Arabic Numerals', 'Roman Numerals', 'Classic Hour Markers', 'Gem-Set Hour Markers'] }
   ];
 
-  constructor(private activeRoute: ActivatedRoute, private collectionsService: CollectionsService, private _notificationsService: NotificationsService) { }
+  constructor(private activeRoute: ActivatedRoute,
+    private brandsService: BrandsService,
+    private _notificationsService: NotificationsService) { }
 
   // render the show more list
   toggleShowMore() {
@@ -64,52 +69,56 @@ export class CollectionsComponent implements OnInit, OnDestroy {
 
   get isMobile() { return document.documentElement.clientWidth < 720; }
 
+
+  async getCollectionById(id: string | String) {
+    await this.brandsService.readCollectionById(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((responseData: ResponseData) => {
+        console.log(responseData);
+
+        const response: ResponseObject = responseData.response;
+
+        if (response.type.match('ERROR')) {
+          this._notificationsService.error('Error', response.message.en);
+        } else {
+          const collection = <Collection>response.payload;
+          this.brandsService.currentCollection = collection;
+          this.collection = collection;
+        }
+      });
+  }
+
   ngOnInit() {
-
-    let collectionID: string | String;
     this.activeRoute.paramMap.subscribe((params: ParamMap) => {
-      collectionID = params.get('id');
-      this.collectionsService.readCollectionById(collectionID)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((responseData: ResponseData) => {
-          console.log(responseData);
+      const collectionID: string | String = params.get('id');
+      if (this.brandsService.currentCollection &&
+        this.brandsService.currentCollection._id === collectionID) {
+        this.collection = this.brandsService.currentCollection;
+      } else {
+        this.getCollectionById(collectionID);
+      }
 
-          const response: ResponseObject = responseData.response;
-
-          if (response.type.match('ERROR')) {
-            this._notificationsService.error('Error', response.message.en);
-          } else {
-            this.collection = <Collection>response.payload;
-
-            // back up the watches
-            this.watches = this.collection.watchObjects;
-
-            this.renderWatches();
-            // update bread crumbs
-            this.breads.push({ name: this.collection.brandObject.name, url: `/brand/${this.collection.brandObject._id}` });
-            this.breads.push({
-              name:
-                (this.collection.name !== 'UNDEFINED') &&
-                  (this.collection.name) ? this.collection.name : 'Collection', url: ''
-            });
-          }
-        });
     });
   }
 
-  renderWatches() {
-    this.watches = this.filter(this.collection.watchObjects);
+  filterWatches() {
+    if (this.collection &&
+      this.collection.watchObjects) {
+      this.collection = Object.assign(<Collection>{}, this.brandsService.currentCollection);
+      this.collection.watchObjects =
+        this.filterWatchesByOptions(this.brandsService.currentCollection.watchObjects);
+    }
   }
 
-  filter(watches: Watch[]): Watch[] {
+  filterWatchesByOptions(watches: Watch[]): Watch[] {
     if (!watches) {
-      return [];
+      return undefined;
     }
-    if ((this.filters.size === 'Any size') &&
-      (this.filters.material === 'Any material') &&
-      (this.filters.bezel === 'Any bezel') &&
-      (this.filters.braclet === 'Any braclet') &&
-      (this.filters.marker === 'Any hour markers') ){
+    if ((this.currentFilters.size === 'Any size') &&
+      (this.currentFilters.material === 'Any material') &&
+      (this.currentFilters.bezel === 'Any bezel') &&
+      (this.currentFilters.braclet === 'Any braclet') &&
+      (this.currentFilters.marker === 'Any hour markers')) {
       return watches;
     }
     else {
@@ -120,16 +129,16 @@ export class CollectionsComponent implements OnInit, OnDestroy {
           bracletFilterMatch = true,
           markerFilterMatch = true;
 
-        if (this.filters.size !== 'Any size') {
+        if (this.currentFilters.size !== 'Any size') {
           if (watch.caseDiameter) {
-            if (this.filters.size === 'Small size') {
+            if (this.currentFilters.size === 'Small size') {
               sizeFilterMatch = Number(watch.caseDiameter) < 36;
             }
-            else if (this.filters.size === 'Mid size') {
+            else if (this.currentFilters.size === 'Mid size') {
               sizeFilterMatch = Number(watch.caseDiameter) >= 36 &&
                 Number(watch.caseDiameter) < 40;
             }
-            else if (this.filters.size === 'Large size') {
+            else if (this.currentFilters.size === 'Large size') {
               sizeFilterMatch = Number(watch.caseDiameter) >= 40;
             }
             else {
@@ -140,37 +149,37 @@ export class CollectionsComponent implements OnInit, OnDestroy {
           }
         }
 
-        if (this.filters.material !== 'Any material') {
+        if (this.currentFilters.material !== 'Any material') {
           if (watch.caseMaterial) {
             materialFilterMatch = (watch.caseMaterial.toLowerCase().trim())
-              .localeCompare(this.filters.material.toLowerCase().trim()) === 0;
+              .localeCompare(this.currentFilters.material.toLowerCase().trim()) === 0;
           } else {
             materialFilterMatch = false;
           }
         }
 
-        if (this.filters.bezel !== 'Any bezel') {
+        if (this.currentFilters.bezel !== 'Any bezel') {
           if (watch.caseBezelMaterial) {
             bezelFilterMatch = (watch.caseBezelMaterial.toLowerCase().trim())
-              .localeCompare(this.filters.bezel.toLowerCase().trim()) === 0;
+              .localeCompare(this.currentFilters.bezel.toLowerCase().trim()) === 0;
           } else {
             bezelFilterMatch = false;
           }
         }
 
-        if (this.filters.braclet !== 'Any braclet') {
+        if (this.currentFilters.braclet !== 'Any braclet') {
           if (watch.bandMaterial) {
             bracletFilterMatch = (watch.bandMaterial.toLowerCase().trim())
-              .localeCompare(this.filters.braclet.toLowerCase().trim()) === 0;
+              .localeCompare(this.currentFilters.braclet.toLowerCase().trim()) === 0;
           } else {
             bracletFilterMatch = false;
           }
         }
 
-        if (this.filters.marker !== 'Any hour markers') {
+        if (this.currentFilters.marker !== 'Any hour markers') {
           if (watch.dialIndex) {
             markerFilterMatch = (watch.dialIndex.toLowerCase().trim())
-              .localeCompare(this.filters.marker.toLowerCase().trim()) === 0;
+              .localeCompare(this.currentFilters.marker.toLowerCase().trim()) === 0;
           } else {
             markerFilterMatch = false;
           }
