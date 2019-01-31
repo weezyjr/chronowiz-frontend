@@ -16,19 +16,19 @@
 
       <div class="form-group">
         <div class="row">
-          <div class="col-3">
+          <div class="col-md-3">
             <label for="selectionBrand">Brand</label>
             <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
               bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
             </ng-select>
           </div>
-          <div class="col-3">
+          <div class="col-md-3">
             <label for="selectionCollection">Collection</label>
             <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
               placeholder="Select collection" (change)="onCollectionSelection($event?._id)">
             </ng-select>
           </div>
-          <div class="col-3">
+          <div class="col-md-3">
             <div class="form-group">
               <label for="selectionWatch">Watch</label>
               <ng-select [items]="selectedCollection?.watchObjects" name="selectionWatch" bindLabel="referenceNumber"
@@ -36,7 +36,7 @@
               </ng-select>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-md-3">
               <label for="selectionWatch">Reference Number</label>
               <input type="text" class="form-control" placeholder="Enter reference number" (change)="onWatchSelection(selectionWatchReferenceNumber)"   [(ngModel)]="selectionWatchReferenceNumber"
               name="watchInputReferenceNumber" #watchInputReferenceNumber="ngModel">
@@ -51,8 +51,8 @@
       <br />
 
       <div class="row">
-        <div class="col-12">
-          <table class="watch-table">
+        <div class="col-md-12">
+          <table class="watch-table table-responsive-sm">
             <thead>
               <tr>
                 <th>Item</th>
