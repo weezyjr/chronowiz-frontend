@@ -40,22 +40,26 @@ export class HeaderComponent implements OnInit {
   }
 
   get content_color(): 'dark' | 'light' {
-    if (this._content_color_ === 'light') {
-      if (!this.brandLogo) {
-        this.brandLogo = '../../../assets/logo-white.svg';
-      } else {
-        if (this.lightBrandLogo) {
-          this.brandLogo = this.lightBrandLogo;
+    if (this._content_color_) {
+      if (this._content_color_ === 'light') {
+        if (!this.brandLogo) {
+          this.brandLogo = '../../../assets/logo-white.svg';
+        } else {
+          if (this.lightBrandLogo) {
+            this.brandLogo = this.lightBrandLogo;
+          }
         }
+        this.userIconSrc = '../../../assets/user-white.svg';
+        this.searchIconSrc = '../../../assets/search-white.svg';
+        this.menuIconSrc = '../../../assets/menu-white.svg';
+        this.menuCloseSrc = '../../../assets/menuclose.svg';
+        this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
+        this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
       }
-      this.userIconSrc = '../../../assets/user-white.svg';
-      this.searchIconSrc = '../../../assets/search-white.svg';
-      this.menuIconSrc = '../../../assets/menu-white.svg';
-      this.menuCloseSrc = '../../../assets/menuclose.svg';
-      this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
-      this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
+      return this._content_color_;
+    } else {
+      return 'dark';
     }
-    return this._content_color_;
   }
 
   @Input() opacity = 100;
