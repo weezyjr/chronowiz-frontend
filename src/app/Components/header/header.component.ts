@@ -111,10 +111,6 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-
-  ngOnInit() {
-  }
-
   HEX2RGB(hex: String): number[] {
     if (hex && hex.length && typeof hex === 'string') {
       if (hex.charAt(0) === '#') {
@@ -146,6 +142,10 @@ export class HeaderComponent implements OnInit {
       return [r, g, b];
     }
   }
+
+  ngOnInit() {
+  }
+
 
   logout() {
     this.authenticationService.logout('user');

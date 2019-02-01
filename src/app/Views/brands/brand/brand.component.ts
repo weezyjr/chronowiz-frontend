@@ -61,6 +61,10 @@ export class BrandComponent implements OnInit, OnDestroy {
       });
   }
 
+  get backgroundColor(): string {
+    return this.brandsService.RGBandOpacityToRGBA(this.brandObject);
+  }
+
   ngOnInit() {
     this.activatedRoute.paramMap.pipe(takeUntil(this.destroy$))
       .subscribe((params: ParamMap) => {

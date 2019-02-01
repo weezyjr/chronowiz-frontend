@@ -6,14 +6,14 @@ export class Brand {
   public name: string;
 
   public logoPhotoUrl: string;
-  public lightLogoPhotoUrl?: string;
+  public darkLogoPhotoUrl?: string;
   public headerPhotoUrl?: string;
   public banner1PhotoUrl: string;
   public banner2PhotoUrl: string;
 
   public collectionObjects?: Collection[];
   public logoPhotoFile?: File;
-  public lightLogoPhotoFile?: File;
+  public darkLogoPhotoFile?: File;
   public headerPhotoFile?: File;
   public banner1PhotoFile?: File;
   public banner2PhotoFile?: File;
@@ -21,11 +21,12 @@ export class Brand {
   public maximumDiscount?: number;
 
   public headerBackgroundColor?: string; // hexadecimel e.g. #ffffff
-  public headerContentColor?: string; // dark or light
+  public headerContentColor?: boolean; // dark or light
   public headerBackgroundOpacity?: number; // 0 - 100 %
 
-  public backgroundColor?: string; // hexadecimel e.g. #ffffff
-  public contentColor?: string; // dark or light
+  public pageBackgroundColor?: string; // hexadecimel e.g. #ffffff
+  public pageContentColor?: boolean; // dark or light
+  public pageBackgroundOpacity?: number;
 
   constructor(name?: string) {
     this._id = '';
@@ -39,11 +40,12 @@ export class Brand {
     this.banner1PhotoUrl = '';
     this.banner2PhotoUrl = '';
     this.logoPhotoUrl = '';
-    this.lightLogoPhotoUrl = '';
+    this.darkLogoPhotoUrl = '';
     this.headerBackgroundColor = '#ffffff';
-    this.headerContentColor = 'dark';
-    this.backgroundColor = '#ffffff';
-    this.contentColor = 'dark';
+    this.headerContentColor = false;
+    this.pageBackgroundColor = '#ffffff';
+    this.pageContentColor = false;
     this.headerBackgroundOpacity = 75;
+    this.pageBackgroundOpacity = 100;
   }
 }

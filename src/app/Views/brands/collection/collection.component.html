@@ -1,12 +1,12 @@
 <div
-[ngStyle]="{'background-color': collection?.brandObject?.backgroundColor? collection?.brandObject?.backgroundColor: '#fff'}"
-[ngClass]="{'light': collection?.brandObject?.contentColor === 'light'}"
+[ngStyle]="{'background-color': backgroundColor}"
+[ngClass]="{'light': collection?.brandObject?.pageContentColor}"
 class="collections-page">
   <app-header *ngIf="collection?.brandObject && collection?.brandObject?.name"
     [background_color]="collection?.brandObject?.headerBackgroundColor? collection?.brandObject?.headerBackgroundColor: '#ffffff'"
-    [content_color]="collection?.brandObject?.headerContentColor? collection?.brandObject?.headerContentColor: 'dark'"
+    [content_color]="collection?.brandObject?.headerContentColor? 'light': 'dark'"
     [opacity]="collection?.brandObject?.headerBackgroundOpacity? collection?.brandObject?.headerBackgroundOpacity : 75"
-    [lightBrandLogo]="collection?.brandObject?.lightLogoPhotoUrl"
+    [lightBrandLogo]="collection?.brandObject?.darkLogoPhotoUrl"
     [brandName]="collection?.brandObject?.name"
     [brandLogo]="collection?.brandObject?.logoPhotoUrl"
     [breads]="urlSequence">

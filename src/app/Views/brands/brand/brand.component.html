@@ -1,10 +1,10 @@
 <div
-[ngStyle]="{'background-color': brandObject?.backgroundColor? brandObject?.backgroundColor: '#fff'}"
-[ngClass]="{'light': brandObject?.contentColor === 'light'}">
+[ngStyle]="{'background-color': backgroundColor}"
+[ngClass]="{'light': brandObject?.pageContentColor}">
 
   <app-header *ngIf="brandObject && brandObject?.name" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
-    [content_color]="brandObject?.headerContentColor? brandObject?.headerContentColor: 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
-    [lightBrandLogo]="brandObject?.lightLogoPhotoUrl"
+    [content_color]="brandObject?.headerContentColor? 'light': 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
+    [lightBrandLogo]="brandObject?.darkLogoPhotoUrl"
     [brandName]="brandObject?.name" [brandLogo]="brandObject?.logoPhotoUrl" [breads]="urlSequence" [noHeightFix]="true">
   </app-header>
   <app-header *ngIf="!brandObject"></app-header>

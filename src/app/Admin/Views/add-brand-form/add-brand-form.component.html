@@ -1,6 +1,6 @@
 <simple-notifications></simple-notifications>
 <div class="container-fluid form-container mx-auto">
-  <div class="form-page container">
+  <div class="form-page container-fluid">
     <app-form-header userType="admin"></app-form-header>
 
     <div class="my-5">
@@ -87,7 +87,7 @@
         <br />
 
         <div class="form-field py-2">
-          <label for="logoPhotoFileInput">Dark Brand Logo</label>
+          <label for="logoPhotoFileInput">Light Brand Logo</label>
           <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
           <div *ngIf="brand?.logoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
@@ -111,25 +111,25 @@
         </div>
 
         <div class="form-field py-2">
-          <label for="logoPhotoFileInput">Light Brand Logo</label>
+          <label for="logoPhotoFileInput">Dark Brand Logo</label>
           <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
-          <div *ngIf="brand?.logoPhotoUrl" class="preview">
+          <div *ngIf="brand?.darkLogoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
-            <img [src]="brand?.lightLogoPhotoUrl" [alt]="brand?.name + ' light logo'" class="img-responsive">
+            <img [src]="brand?.darkLogoPhotoUrl" [alt]="brand?.name + ' dark logo'" class="img-responsive">
           </div>
           <div class="row">
             <div class="col-sm-10 col-6">
               <div class="form-group">
-                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [(ngModel)]="brand.lightLogoPhotoFile"
-                  (change)="onLogoPhotoChange($event)" [required]="!brand.lightLogoPhotoUrl" name="lightLogoPhotoFileRef"
-                  #lightLogoPhotoFileRef="ngModel">
+                <input [disabled]="mode == 'delete' || loading" type="file" class="form-control" [(ngModel)]="brand.darkLogoPhotoFile"
+                  (change)="onDarkLogoPhotoChange($event)" [required]="!brand.darkLogoPhotoUrl" name="darkLogoPhotoFileRef"
+                  #darkLogoPhotoFileRef="ngModel">
               </div>
             </div>
             <div class="col-sm-2 col-6">
-              <button class="btn btn-lg secondry-btn" (click)="clearLightLogoPhoto()">Clear</button>
+              <button class="btn btn-lg secondry-btn" (click)="clearDarkLogoPhoto()">Clear</button>
             </div>
           </div>
-          <div [hidden]="!brandForm.submitted || lightLogoPhotoFileRef.valid || lightLogoPhotoFileRef.pristine" class="alert alert-danger">Logo
+          <div [hidden]="!brandForm.submitted || darkLogoPhotoFileRef.valid || darkLogoPhotoFileRef.pristine" class="alert alert-danger">Logo
             Photo is
             required</div>
         </div>
@@ -220,9 +220,9 @@
         </div>
 
         <div class="form-group">
-          <label for="headerContentColor">Content color</label>
-          <ng-select [items]="headerContentColorOptions" name="headerContentColor" [(ngModel)]="brand.headerContentColor"
-            bindLabel="name" bindValue="name" placeholder="Select header content color">
+          <label for="headerContentColor">Content theme</label>
+          <ng-select [items]="contentColorOptions" bindValue="value" name="headerContentColor" [(ngModel)]="brand.headerContentColor"
+            bindLabel="name" placeholder="Select header content theme">
           </ng-select>
         </div>
 
@@ -245,22 +245,28 @@
 
         <div class="form-group">
           <label for="backgroundColor">Background color</label>
-          <input [disabled]="mode == 'delete' || loading" type="color" class="form-control" [(ngModel)]="brand.backgroundColor"
+          <input [disabled]="mode == 'delete' || loading" type="color" class="form-control" [(ngModel)]="brand.pageBackgroundColor"
             name="backgroundColor" #backgroundColor="ngModel">
         </div>
 
         <div class="form-group">
+          <label for="pageContentColor">Content theme</label>
+          <ng-select [items]="contentColorOptions" name="pageContentColor" [(ngModel)]="brand.pageContentColor"
+            bindLabel="name" bindValue="value" placeholder="Select page content theme">
+          </ng-select>
+        </div>
+
+
+        <div class="form-group">
           <div class="row">
-            <div class="col-6">
-              <label for="contentColor">Content color</label>
-              <ng-select [items]="contentColor" name="contentColor" [(ngModel)]="brand.contentColor" bindLabel="name"
-                bindValue="name" placeholder="Select content color">
-              </ng-select>
+            <div class="custom-slider col-6">
+              <ng5-slider [(value)]="brand.pageBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
-                <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.contentColor !== 'dark'}"> content </div>
-                <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.backgroundColor}"></div>
-              </div>
+              <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.pageContentColor !== 'dark'}">
+                content </div>
+              <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.pageBackgroundColor, 'opacity': brand?.pageBackgroundOpacity*0.01}"></div>
+            </div>
           </div>
         </div>
 

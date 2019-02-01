@@ -5,9 +5,11 @@ import { Collection } from './collection';
 export class BrandDiscount {
   public brandObject: Brand;
   public maximumBrandDiscount: number | null;
-  constructor(){
+  public readOnly: Boolean;
+  constructor() {
     this.brandObject = new Brand();
     this.maximumBrandDiscount = 0;
+    this.readOnly = false;
   }
 }
 
@@ -15,10 +17,12 @@ export class CollectionDiscount {
   public brandObject: Brand;
   public collectionObject: Collection;
   public maximumCollectionDiscount: number | null;
-  constructor(){
+  public readOnly: Boolean;
+  constructor() {
     this.brandObject = new Brand();
     this.collectionObject = new Collection();
     this.maximumCollectionDiscount = 0;
+    this.readOnly = false;
   }
 }
 
@@ -27,11 +31,13 @@ export class WatchDiscount {
   public collectionObject: Collection;
   public watchObject: Watch;
   public maximumWatchDiscount: number | null;
-  constructor(){
+  public readOnly: Boolean;
+  constructor() {
     this.brandObject = new Brand();
     this.collectionObject = new Collection();
     this.watchObject = new Watch();
     this.maximumWatchDiscount = 0;
+    this.readOnly = false;
   }
 }
 
@@ -62,8 +68,12 @@ export class Retailer {
   maximumCollectionDiscounts?: CollectionDiscount[];
   maximumWatchDiscounts?: WatchDiscount[];
 
-  constructor() {
-    this.email = '';
+  constructor(email?: string) {
+    if (email) {
+      this.email = email;
+    } else {
+      this.email = '';
+    }
     this.password = '';
     this.maximumBrandDiscounts = [new BrandDiscount()];
     this.maximumCollectionDiscounts = [new CollectionDiscount()];

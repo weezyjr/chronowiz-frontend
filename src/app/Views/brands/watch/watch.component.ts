@@ -64,6 +64,9 @@ export class WatchComponent implements OnInit, OnDestroy {
     }
   }
 
+  get backgroundColor(): string {
+    return this.brandsService.RGBandOpacityToRGBA(this.watch.brandObject);
+  }
 
   constructor(private activeRoute: ActivatedRoute,
     private brandsService: BrandsService,

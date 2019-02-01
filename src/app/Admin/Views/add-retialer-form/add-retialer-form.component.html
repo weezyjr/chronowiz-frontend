@@ -1,6 +1,6 @@
 <simple-notifications></simple-notifications>
 <div class="container-fluid form-container mx-auto">
-  <div class="form-page container">
+  <div class="form-page container-fluid">
     <app-form-header userType="admin"></app-form-header>
 
     <div class="my-5">
@@ -31,17 +31,29 @@
       <br />
       <h3>Select Retailer By Email</h3>
       <br />
+      .add-watch
+        margin: auto;
+        background: white;
+        width: 100%;
+        padding: 40px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
 
-      <div class="row">
-        <div class="col-8">
+      .container-fluid
+        background: #f5f5f5;
+        min-height: 100vh;
+
+
+      <form #retailerSelectForm="ngForm" class="row" (ngSubmit)="onRetailerSelection()">
+        <div class="col-7">
           <div class="form-group">
             <input type="text" class="form-control" id="retailerID" [(ngModel)]="selectedEmail" name="retailerID">
           </div>
         </div>
-        <div class="col-4">
-          <button class="btn btn-lg primary-btn" (click)="onRetailerSelection()">Search</button>
+        <div class="col-5">
+          <button class="btn btn-lg primary-btn" type="submit">Search</button>
         </div>
-      </div>
+      </form>
     </div>
 
     <form #retailerForm="ngForm" *ngIf="(mode == 'create') || (retailer.email)">
@@ -155,24 +167,24 @@
             <div class="col-md-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
               <div class=" form-group row">
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label>Select Brand</label>
-                  <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand" name="brandDiscounts{{i}}"
-                    [(ngModel)]="brandDiscount.brandObject">
+                  <ng-select [disabled]="brandDiscount?.readOnly" [items]="selectionBrands" bindLabel="name"
+                    placeholder="Select brand" name="brandDiscounts{{i}}" [(ngModel)]="brandDiscount.brandObject">
                   </ng-select>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-8">
                   <label>Discount Value</label>
                   <input [disabled]="mode == 'delete' || loading || !brandDiscount?.brandObject?._id" type="number"
                     placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
                     [(ngModel)]="brandDiscount.maximumBrandDiscount" name="brandDiscountsValue{{i}}">
                 </div>
 
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                   <button type="button" class="btn btn-100 primary-btn" (click)="updateBrandMaxDiscount(brandDiscount)">Save</button>
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
 
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateBrandMaxDiscount(brandDiscount, true)">remove</button>
                 </div>
@@ -205,30 +217,29 @@
           <div class="row">
             <div class="col-md-12 form-group" *ngFor="let collectionDiscount of retailer?.maximumCollectionDiscounts; let i=index">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label>Select Brand</label>
-                  <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand"
-                  [(ngModel)]="collectionDiscount.brandObject"
-                  name="collectionBrandSelection{{i}}"
-                  (change)="onBrandSelection($event?._id)">
-                  </ng-select>
-                </div>
-                <div class="col-md-3">
-                  <label for="selectionCollection">Select Collection</label>
-                  <ng-select [items]="selectionCollections" name="collectionsMaxDiscounts{{i}}" bindLabel="name"
-                    placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
+                  <ng-select [disabled]="collectionDiscount?.readOnly" [items]="selectionBrands" bindLabel="name"
+                    placeholder="Select brand" [(ngModel)]="collectionDiscount.brandObject" name="collectionBrandSelection{{i}}"
+                    (change)="onBrandSelection($event?._id)">
                   </ng-select>
                 </div>
                 <div class="col-md-2">
+                  <label for="selectionCollection">Select Collection</label>
+                  <ng-select [disabled]="collectionDiscount?.readOnly" [items]="selectionCollections" name="collectionsMaxDiscounts{{i}}"
+                    bindLabel="name" placeholder="Select collection" [(ngModel)]="collectionDiscount.collectionObject">
+                  </ng-select>
+                </div>
+                <div class="col-md-6">
                   <label>Discount Value</label>
                   <input [disabled]="mode == 'delete' || loading || !collectionDiscount?.collectionObject?._id" type="number"
                     placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
                     [(ngModel)]="collectionDiscount.maximumCollectionDiscount" name="maximumCollectionDiscounts{{i}}">
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                   <button type="button" class="btn btn-100 primary-btn" (click)="updateCollectionMaxDiscount(collectionDiscount)">Save</button>
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateCollectionMaxDiscount(collectionDiscount, true)">Remove</button>
                 </div>
                 <div class="col-md-12">
@@ -253,47 +264,44 @@
           <div class="row">
             <div class="col-md-12" *ngFor="let watchDiscount of retailer?.maximumWatchDiscounts; let i=index">
               <div class="row form-group">
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label>Select Brand</label>
-                  <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand"
-                  [(ngModel)]="watchDiscount.brandObject"
-                  name="watchBrandSelection{{i}}"
-                  (change)="onBrandSelection($event?._id)">
+                  <ng-select [disabled]="watchDiscount?.readOnly" [items]="selectionBrands" bindLabel="name"
+                    placeholder="Select brand" [(ngModel)]="watchDiscount.brandObject" name="watchBrandSelection{{i}}"
+                    (change)="onBrandSelection($event?._id)">
                   </ng-select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="selectionCollection">Select Collection</label>
-                  <ng-select [items]="selectionCollections" bindLabel="name" placeholder="Select collection"
-                  [(ngModel)]="watchDiscount.collectionObject"
-                  name="watchCollectionSelection{{i}}"
-                  (change)="onCollectionSelection($event?._id)">
+                  <ng-select [disabled]="watchDiscount?.readOnly" [items]="selectionCollections" bindLabel="name"
+                    placeholder="Select collection" [(ngModel)]="watchDiscount.collectionObject" name="watchCollectionSelection{{i}}"
+                    (change)="onCollectionSelection($event?._id)">
                   </ng-select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="selectionWatch">Watch</label>
-                  <ng-select [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}" bindLabel="referenceNumber"
-                    placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
+                  <ng-select [disabled]="watchDiscount?.readOnly" [items]="selectedCollection?.watchObjects" name="watchesMaxDiscounts{{i}}"
+                    bindLabel="referenceNumber" placeholder="Select watch" [(ngModel)]="watchDiscount.watchObject">
                   </ng-select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2" *ngIf="!watchDiscount?.readOnly">
                   <label for="selectionWatch">Or reference number</label>
                   <input type="text" placeholder="Enter reference number" class="form-control" (change)="onWatchSelection(selectionWatchReferenceNumber[i])"
                     [(ngModel)]="selectionWatchReferenceNumber[i]" name="watchInputReferenceNumber">
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div [ngClass]="{'col-md-2': !watchDiscount?.readOnly, 'col-md-4': watchDiscount?.readOnly}">
                   <label>Discount Value</label>
                   <input [disabled]="mode == 'delete' || loading || !watchDiscount?.watchObject?._id" type="number"
                     placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
                     [(ngModel)]="watchDiscount.maximumWatchDiscount" name="watchesMaxDiscountsValue{{i}}">
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                   <button type="button" class="btn btn-100 primary-btn" (click)="updateWatchMaxDiscount(watchDiscount)">Save</button>
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-md-1 align-self-end">
                   <button type="button" class="btn btn-100 secondry-btn" (click)="updateWatchMaxDiscount(watchDiscount, true)">Remove</button>
                 </div>
+
               </div>
               <div class="col-md-12">
                 <hr />
@@ -312,7 +320,7 @@
             <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg secondry-btn" (click)=" resetRetailer(); retailerForm.reset();">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)="resetRetailer(); retailerForm.reset(); ">Clear</button>
           </div>
         </div>
       </div>

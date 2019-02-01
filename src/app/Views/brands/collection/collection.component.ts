@@ -67,6 +67,10 @@ export class CollectionComponent implements OnInit, OnDestroy {
     return this.watchsLimit === Infinity;
   }
 
+  get backgroundColor(): string {
+    return this.brandsService.RGBandOpacityToRGBA(this.collection.brandObject);
+  }
+
   get isMobile() { return document.documentElement.clientWidth < 720; }
 
 

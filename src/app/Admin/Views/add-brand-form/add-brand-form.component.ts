@@ -22,7 +22,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
 
   // Files
   logoPhotoFile: File;
-  lightLogoPhotoFile: File;
+  darkLogoPhotoFile: File;
   headerPhotoFile: File;
   banner1PhotoFile: File;
   banner2PhotoFile: File;
@@ -199,9 +199,9 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     { name: 'Zenith ' },
     { name: 'Other' }];
 
-  headerContentColorOptions: Array<Object> = [
-    { name: 'dark' },
-    { name: ' light' }
+  contentColorOptions: Array<Object> = [
+    { name: 'light theme', value: true },
+    { name: 'dark theme', value: false }
   ];
 
   options: Options = {
@@ -236,7 +236,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   resetBrand(): void {
     this.brand = new Brand();
     this.logoPhotoFile = null;
-    this.lightLogoPhotoFile = null;
+    this.darkLogoPhotoFile = null;
     this.headerPhotoFile = null;
     this.banner1PhotoFile = null;
     this.banner2PhotoFile = null;
@@ -277,6 +277,33 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
         }
         else {
           this.brand = <Brand>response.payload;
+          // post process old data
+          if (this.brand) {
+            if (!this.brand.headerBackgroundColor) {
+              this.brand.headerBackgroundColor = '#ffffff';
+            }
+
+            if (!this.brand.headerBackgroundOpacity) {
+              this.brand.headerBackgroundOpacity = 75;
+            }
+
+            if (this.brand.headerContentColor === undefined){
+              this.brand.headerContentColor = false;
+            }
+
+            if (!this.brand.pageBackgroundColor) {
+              this.brand.pageBackgroundColor = '#ffffff';
+            }
+
+            if (this.brand.pageContentColor === undefined){
+              this.brand.pageContentColor = false;
+            }
+
+            if (!this.brand.pageBackgroundOpacity) {
+              this.brand.pageBackgroundOpacity = 100;
+            }
+
+          }
         }
       });
   }
@@ -308,18 +335,18 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
         });
   }
 
-  async uploadLightLogoPhoto() {
-    await this.s3Service.upload(this.lightLogoPhotoFile, this.brandsUrlPathGenerator('lightLogoPhotoUrl'))
+  async uploadDarkLogoPhoto() {
+    await this.s3Service.upload(this.darkLogoPhotoFile, this.brandsUrlPathGenerator('darkLogoPhotoUrl'))
       .then(async (url: string) => {
-        this._notificationsService.success(`Succes ${this.lightLogoPhotoFile.name} uploaded successfully`);
-        this.brand.lightLogoPhotoUrl = url;
+        this._notificationsService.success(`Succes ${this.darkLogoPhotoFile.name} uploaded successfully`);
+        this.brand.darkLogoPhotoUrl = url;
       },
         async () => {
           if (this.mode !== 'delete') {
             // LogoPhoto is required in case of create
             throw new Error('Missing Files');
           }
-          this.brand.lightLogoPhotoUrl = '';
+          this.brand.darkLogoPhotoUrl = '';
         });
   }
 
@@ -373,10 +400,10 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.brand.logoPhotoUrl = '';
   }
 
-  clearLightLogoPhoto(): void {
-    this.brand.lightLogoPhotoFile = null;
-    this.lightLogoPhotoFile = null;
-    this.brand.lightLogoPhotoUrl = '';
+  clearDarkLogoPhoto(): void {
+    this.brand.darkLogoPhotoFile = null;
+    this.darkLogoPhotoFile = null;
+    this.brand.darkLogoPhotoUrl = '';
   }
 
   clearHeaderPhoto(): void {
@@ -411,6 +438,13 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.logoPhotoFile = event.target.files[0];
     // reset the url till it upload
     this.brand.logoPhotoUrl = '';
+  }
+
+
+  onDarkLogoPhotoChange(event: { target: { files: any[]; }; }) {
+    this.darkLogoPhotoFile = event.target.files[0];
+    // reset the url till it upload
+    this.brand.darkLogoPhotoUrl = '';
   }
 
   onHeaderPhotoChange(event: { target: { files: any[]; }; }) {
@@ -494,8 +528,8 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
         await this.uploadLogoPhoto();
       }
 
-      if (!this.brand.lightLogoPhotoUrl) {
-        await this.uploadLightLogoPhoto();
+      if (!this.brand.darkLogoPhotoUrl) {
+        await this.uploadDarkLogoPhoto();
       }
 
       if (!this.brand.headerPhotoUrl) {

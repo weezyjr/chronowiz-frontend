@@ -116,9 +116,9 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
   /**
    * Retailer Selection
    */
-  onRetailerSelection() {
+  async onRetailerSelection() {
     console.log(this.selectedEmail);
-    this.adminService.getRetailerByEmail(this.selectedEmail)
+    await this.adminService.getRetailerByEmail(this.selectedEmail)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
@@ -129,6 +129,14 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
         }
         else {
           this.retailer = <Retailer>response.payload;
+
+          const discounts = [...this.retailer.maximumBrandDiscounts,
+          ...this.retailer.maximumCollectionDiscounts,
+          ...this.retailer.maximumWatchDiscounts];
+
+          for (const discount of discounts) {
+            discount.readOnly = true;
+          }
         }
       });
   }
@@ -137,7 +145,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
    * Reset the Retailer
    */
   resetRetailer() {
-    this.retailer = new Retailer();
+      this.retailer = new Retailer();
   }
 
   createRetailer() {
@@ -297,11 +305,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if ( !remove)
-            {
+            if (!remove) {
               this._notificationsService.success('Success', 'Discount has been saved');
             }
-            else{
+            else {
               this._notificationsService.success('Success', 'Discount has been deleted');
 
             }
@@ -332,11 +339,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if ( !remove)
-            {
+            if (!remove) {
               this._notificationsService.success('Success', 'Discount has been saved');
             }
-            else{
+            else {
               this._notificationsService.success('Success', 'Discount has been deleted');
 
             }
@@ -366,11 +372,10 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if ( !remove)
-            {
+            if (!remove) {
               this._notificationsService.success('Success', 'Discount has been saved');
             }
-            else{
+            else {
               this._notificationsService.success('Success', 'Discount has been deleted');
 
             }
@@ -383,7 +388,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
   }
 
 
-  onBrandDiscountRead(){}
+  onBrandDiscountRead() { }
 
 
   async onSubmit() {
