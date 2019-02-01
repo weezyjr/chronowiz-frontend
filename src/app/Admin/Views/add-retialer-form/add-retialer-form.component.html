@@ -144,7 +144,7 @@
 
             </div>
             <div class="col-md-3 align-self-end">
-              <button class="btn  btn-auto primary-btn" (click)="addBrandDiscount()">Add Brand Max Discount +</button>
+              <button class="btn  btn-100 primary-btn" (click)="addBrandDiscount()">Add Brand Max Discount +</button>
             </div>
           </div>
 
@@ -155,14 +155,14 @@
             <div class="col-md-12" *ngFor="let brandDiscount of retailer?.maximumBrandDiscounts; let i=index">
               <div class=" form-group row">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label>Select Brand</label>
                   <ng-select [items]="selectionBrands" bindLabel="name" placeholder="Select brand" name="brandDiscounts{{i}}"
                     [(ngModel)]="brandDiscount.brandObject">
                   </ng-select>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <label>Discount Value</label>
                   <input [disabled]="mode == 'delete' || loading || !brandDiscount?.brandObject?._id" type="number"
                     placeholder="(0-100)%" pattern="^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$" class="form-control"
@@ -194,7 +194,7 @@
               <h3>Collection Max Discounts</h3>
             </div>
             <div class="col-md-3 align-self-end">
-              <button class="btn btn-auto primary-btn" (click)="addCollectionDiscount()">Add Collection Max Discount +</button>
+              <button class="btn btn-100 primary-btn" (click)="addCollectionDiscount()">Add Collection Max Discount +</button>
             </div>
           </div>
 
@@ -245,7 +245,7 @@
               <h3>Watch Max Discounts</h3>
             </div>
             <div class="col-md-3 align-self-end">
-              <button class="btn btn-auto primary-btn" (click)="addWatchDiscount()">Add Watch Max Discount +</button>
+              <button class="btn btn-100 primary-btn" (click)="addWatchDiscount()">Add Watch Max Discount +</button>
             </div>
           </div>
           <br />
