@@ -42,18 +42,24 @@ export class BrandComponent implements OnInit, OnDestroy {
         console.log(response);
 
         if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
+          if (response.message && response.message.en) {
+            this._notificationsService.error('Error', response.message.en);
+          } else {
+            this._notificationsService.error('Error', 'Please check your connection');
+          }
         } else {
           this.brandObject = <Brand>response.payload;
           console.log(this.brandObject);
           // remove empty collections
           if (this.brandObject && this.brandObject.collectionObjects) {
             const _collection_ = <Collection[]>this.brandObject.collectionObjects;
-            this.brandObject.collectionObjects = _collection_.filter((collection: Collection) => {
-              if (collection.watchObjects) {
-                return collection.watchObjects.length > 0;
-              }
-            });
+            if (_collection_ && _collection_.length) {
+              this.brandObject.collectionObjects = _collection_.filter((collection: Collection) => {
+                if (collection.watchObjects) {
+                  return collection.watchObjects.length > 0;
+                }
+              });
+            }
           }
           // update brandService
           this.brandsService.currentBrand = this.brandObject;

@@ -54,18 +54,6 @@
         <h3>Brand Details</h3>
         <br />
 
-        <!--  <div class="form-group">
-          <label for="name">Brand name</label>
-          <select [disabled]="mode == 'delete' || loading" type="text" class="form-control" required [ngModel]="brand?.name"
-            (ngModelChange)="brand.name = $event" name="name" #name="ngModel">
-            <option value=""></option>
-            <option [value]="brand?.name" *ngFor="let brand of staticBrandNames"> {{brand.name}} </option>
-          </select>
-          <input [disabled]="mode == 'delete' || loading" type="text" class="form-control" [(ngModel)]="brand.name"
-            name="nameText" #nameText="ngModel">
-          <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
-            name is required</div>
-        </div> -->
         <div class="form-group">
           <ng-select [disabled]="mode == 'delete' || loading" [items]="staticBrandNames" #BrandName="ngModel" name="BrandName"
             required bindLabel="name" bindValue="name" [addTag]="addCustomBrand" placeholder="Select brand name"
@@ -75,12 +63,6 @@
             Brand name is required
           </div>
         </div>
-        <!--
-
-        <div [hidden]="name.valid || name.pristine || nameText.valid || nameText.pristine" class="alert alert-danger">Brand
-          name is required</div>
-        </div>
-      -->
 
         <br />
         <h3>Brand Media Section</h3>
@@ -229,10 +211,11 @@
         <div class="form-group">
           <div class="row">
             <div class="custom-slider col-6">
+              <label>opacity</label>
               <ng5-slider [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
-              <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.headerContentColor !== 'dark'}">
+              <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.headerContentColor}">
                 content </div>
               <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
             </div>
@@ -260,10 +243,11 @@
         <div class="form-group">
           <div class="row">
             <div class="custom-slider col-6">
+              <label>opacity</label>
               <ng5-slider [(value)]="brand.pageBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
-              <div class="content-text p-3 text-center" [ngClass]="{'text-light': brand?.pageContentColor !== 'dark'}">
+              <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.pageContentColor}">
                 content </div>
               <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.pageBackgroundColor, 'opacity': brand?.pageBackgroundOpacity*0.01}"></div>
             </div>

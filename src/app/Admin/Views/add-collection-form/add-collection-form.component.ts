@@ -31,12 +31,12 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
 
   // naviagtion links
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/watch'),
-    new Link('Collection Form', 'admin/collection', true),
-    new Link('Brand Form', 'admin/brand'),
-    new Link('Retailer Form', 'admin/retailer'),
-    new Link('Orders Form', 'admin/orders'),
-    new Link('Users Form', 'admin/users')
+    new Link('Watch', 'admin/watch'),
+    new Link('Collection', 'admin/collection', true),
+    new Link('Brand', 'admin/brand'),
+    new Link('Retailer', 'admin/retailer'),
+    new Link('Orders', 'admin/orders'),
+    new Link('Users', 'admin/users')
 
   ];
 
@@ -181,7 +181,7 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
         throw new Error('Unspecified mode');
       }
     } catch (error) {
-      this._notificationsService.error('Error', 'Failed to submit the form due to missing data');
+      this._notificationsService.error('Error', 'Failed to submit due to missing data');
     }
     finally {
       this.loading = false;

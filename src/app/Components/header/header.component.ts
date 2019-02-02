@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   private _content_color_: 'dark' | 'light';
   private _bg_rgb_: number[] = [];
+  private _noHeightFix_: Boolean = false;
   /* private _background_color_: String | string;
    private _brandLogo_: String;
    private _lightBrandLogo_: String;
@@ -70,7 +71,21 @@ export class HeaderComponent implements OnInit {
 
   @Input() brandName: String;
 
-  @Input() noHeightFix: Boolean = false;
+  @Input() set noHeightFix(state: Boolean) {
+    if (state !== undefined) {
+      this._noHeightFix_ = state;
+    } else {
+      this._noHeightFix_ = false;
+    }
+  }
+
+  get noHeightFix(): Boolean {
+    if (this._noHeightFix_ !== undefined) {
+      return this._noHeightFix_;
+    } else {
+      return false;
+    }
+  }
 
   get logged(): Boolean {
     if (this.authenticationService.currentUserValue) {

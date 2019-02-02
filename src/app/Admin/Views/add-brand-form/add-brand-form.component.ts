@@ -200,8 +200,8 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     { name: 'Other' }];
 
   contentColorOptions: Array<Object> = [
-    { name: 'light theme', value: true },
-    { name: 'dark theme', value: false }
+    { name: 'light theme', value: false },
+    { name: 'dark theme', value: true }
   ];
 
   options: Options = {
@@ -212,12 +212,12 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
 
   // naviagtion links
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/watch'),
-    new Link('Collection Form', 'admin/collection'),
-    new Link('Brand Form', 'admin/brand', true),
-    new Link('Retailer Form', 'admin/retailer'),
-    new Link('Orders Form', 'admin/orders'),
-    new Link('Users Form', 'admin/users')
+    new Link('Watch', 'admin/watch'),
+    new Link('Collection', 'admin/collection'),
+    new Link('Brand', 'admin/brand', true),
+    new Link('Retailer', 'admin/retailer'),
+    new Link('Orders', 'admin/orders'),
+    new Link('Users', 'admin/users')
 
   ];
 
@@ -558,7 +558,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
       }
     }
     catch (error) {
-      this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+      this._notificationsService.error('Error', 'Failed to submit due to missing data or photos');
     }
     finally {
       this.loading = false;

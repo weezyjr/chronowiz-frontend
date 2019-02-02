@@ -18,12 +18,12 @@ export class EditUserFormComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/watch'),
-    new Link('Collection Form', 'admin/collection'),
-    new Link('Brand Form', 'admin/brand'),
-    new Link('Retailer Form', 'admin/retailer'),
-    new Link('Orders Form', 'admin/orders'),
-    new Link('Users Form', 'admin/users', true)
+    new Link('Watch', 'admin/watch'),
+    new Link('Collection', 'admin/collection'),
+    new Link('Brand', 'admin/brand'),
+    new Link('Retailer', 'admin/retailer'),
+    new Link('Orders', 'admin/orders'),
+    new Link('Users', 'admin/users', true)
   ];
 
 

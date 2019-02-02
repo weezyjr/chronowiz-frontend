@@ -30,12 +30,12 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
 
   // navigation routes
   navRoutes: Link[] = [
-    new Link('Watch Form', 'admin/watch'),
-    new Link('Collection Form', 'admin/collection'),
-    new Link('Brand Form', 'admin/brand'),
-    new Link('Retailer Form', 'admin/retailer', true),
-    new Link('Orders Form', 'admin/orders'),
-    new Link('Users Form', 'admin/users')
+    new Link('Watch', 'admin/watch'),
+    new Link('Collection', 'admin/collection'),
+    new Link('Brand', 'admin/brand'),
+    new Link('Retailer', 'admin/retailer', true),
+    new Link('Orders', 'admin/orders'),
+    new Link('Users', 'admin/users')
 
   ];
 
@@ -405,7 +405,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
       }
     }
     catch (error) {
-      this._notificationsService.error('Error', 'Failed to submit the form due to missing data or photos');
+      this._notificationsService.error('Error', 'Failed to submit due to missing data or photos');
     }
     finally {
       this.loading = false;

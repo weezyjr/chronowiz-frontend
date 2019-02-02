@@ -23,8 +23,8 @@ export class CollectionComponent implements OnInit, OnDestroy {
 
   public watchsLimit = 12;
 
-   // breadcrumps links
-   public get urlSequence(): Link[] {
+  // breadcrumps links
+  public get urlSequence(): Link[] {
     if (this.brandsService.urlSequence) {
       return this.brandsService.urlSequence;
     } else {
@@ -68,7 +68,11 @@ export class CollectionComponent implements OnInit, OnDestroy {
   }
 
   get backgroundColor(): string {
-    return this.brandsService.RGBandOpacityToRGBA(this.collection.brandObject);
+    if (this.collection && this.collection.brandObject) {
+      return this.brandsService.RGBandOpacityToRGBA(this.collection.brandObject);
+    } else {
+      return `none`;
+    }
   }
 
   get isMobile() { return document.documentElement.clientWidth < 720; }

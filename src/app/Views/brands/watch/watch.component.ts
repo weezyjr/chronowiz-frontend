@@ -37,7 +37,7 @@ export class WatchComponent implements OnInit, OnDestroy {
   get downArrowSrc(): string {
     if (this.watch &&
       this.watch.brandObject &&
-      this.watch.brandObject.contentColor === 'light') {
+      this.watch.brandObject.pageContentColor) {
       return '../../../../assets/down-arrow.light.svg';
     } else {
       return '../../../../assets/down-arrow.svg';
@@ -45,19 +45,19 @@ export class WatchComponent implements OnInit, OnDestroy {
   }
 
   get paperBagSrc(): string {
-    if (this.watch &&
+  /*  if (this.watch &&
       this.watch.brandObject &&
-      this.watch.brandObject.contentColor === 'light') {
+      this.watch.brandObject.contentColor) {
       return '../../../../assets/paper-bag-white.svg';
-    } else {
+    } else {*/
       return '../../../../assets/paper-bag.svg';
-    }
+   /* }*/
   }
 
   get appIconSrc(): String {
     if (this.watch &&
       this.watch.brandObject &&
-      this.watch.brandObject.contentColor === 'light') {
+      this.watch.brandObject.pageContentColor) {
       return '../../../../assets/app-icon.light.svg';
     } else {
       return '../../../../assets/app-icon.svg';
@@ -65,7 +65,11 @@ export class WatchComponent implements OnInit, OnDestroy {
   }
 
   get backgroundColor(): string {
-    return this.brandsService.RGBandOpacityToRGBA(this.watch.brandObject);
+    if (this.watch && this.watch.brandObject){
+      return this.brandsService.RGBandOpacityToRGBA(this.watch.brandObject);
+    } else {
+      return `none`;
+    }
   }
 
   constructor(private activeRoute: ActivatedRoute,
