@@ -14,6 +14,7 @@ export class SearchService
   env = environment;
 
   searchUrl = this.env.backendUrl + 'user/search';
+  advSearchUrl = this.env.backendUrl + 'user/search/advanced';
 
   private handleError: HandleError;
 /*
@@ -31,6 +32,16 @@ export class SearchService
   search(query: String): Observable<ResponseData>
   {
     return this.http.get<ResponseData>(this.searchUrl + '/' + query)
+      .pipe(map(data =>
+      {
+        return data;
+      }));
+  }
+
+
+  advSearch(query: String): Observable<ResponseData>
+  {
+    return this.http.get<ResponseData>(this.advSearchUrl + '/' + query)
       .pipe(map(data =>
       {
         return data;

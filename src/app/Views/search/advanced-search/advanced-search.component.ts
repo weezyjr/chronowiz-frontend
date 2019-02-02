@@ -132,7 +132,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
       this.loading = true;
-      await this.searchService.search(this.query)
+      await this.searchService.advSearch(this.query)
         .pipe(takeUntil(this.destroy$))
         .subscribe((responseData: ResponseData) => {
 
@@ -141,8 +141,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
           if (response.type.match('ERROR')) {
             this._notificationsService.error('Error', response.message.en);
           } else {
-            const RESULTS = <SearchResults>response.payload;
-            this.watchesSearchResults = <Watch[]>RESULTS.watches;
+            this.watchesSearchResults = <Watch[]>response.payload;
             this.renderWatches();
           }
           this.loading = false;
