@@ -8,7 +8,8 @@
       <div class="card">
         <a [routerLink]="['/watch',watch?.referenceNumber]">
           <div class="card-img">
-            <img [src]="watch.mainPhotoUrl? watch.mainPhotoUrl: 'http://placehold.it/360x560/FFFFFF/FFFFFF'" [alt]="watch?.model">
+            <img *ngIf="watch.mainPhotoUrl" [src]="watch.mainPhotoUrl" [alt]="watch?.model">
+            <div *ngIf="!watch.mainPhotoUrl" class="placeholder"></div>
           </div>
           <div class="card-info">
             <p *ngIf="watch?.model">{{watch?.model}}</p>

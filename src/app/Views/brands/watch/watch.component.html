@@ -8,8 +8,6 @@
   </app-header>
   <app-header *ngIf="!watch?.brandObject"></app-header>
 
-
-
   <div [ngClass]="{'light-theme': watch?.brandObject?.pageContentColor}">
 
     <div class="container mt-4">
@@ -20,8 +18,8 @@
           View all {{watch?.collectionObject?.name | collectionName}} models
         </a>
         <div class="mx-auto text-center main-watch-photo">
-          <img [src]="watch?.mainPhotoUrl ? watch?.mainPhotoUrl : 'http://placehold.it/480x720/FFFFFF/FFFFFF'" alt="watch?.model"
-            class="mx-auto img-responsive">
+          <img *ngIf="watch?.mainPhotoUrl " [src]="watch?.mainPhotoUrl" alt="watch?.model" class="mx-auto img-responsive">
+          <div class="p-5" *ngIf="!watch?.mainPhotoUrl"></div>
         </div>
         <div class="watch-short-details">
           <p>
@@ -42,7 +40,7 @@
 
     <div class="banner1container">
       <app-hero [background_md]="true" *ngIf="watch?.banner1PhotoUrl || watch?.brandObject?.banner1PhotoUrl" [cover]="watch?.banner1PhotoUrl ? watch?.banner1PhotoUrl: watch?.brandObject?.banner1PhotoUrl"></app-hero>
-      <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x100/FFFFFF/FFFFFF"></app-hero>
+      <div *ngIf="!watch?.brandObject" class="p-3"></div>
     </div>
 
     <div class="container pb-5">
@@ -67,7 +65,7 @@
 
     <div class="banner2contanier">
       <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
-      <app-hero *ngIf="!watch?.brandObject" cover="http://placehold.it/1920x150/FFFFFF/FFFFFF"></app-hero>
+      <div *ngIf="!watch?.brandObject" class="p-2"></div>
     </div>
     <app-footer></app-footer>
   </div>
