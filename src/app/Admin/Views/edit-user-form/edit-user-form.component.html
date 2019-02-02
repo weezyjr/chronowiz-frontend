@@ -11,16 +11,14 @@
       <br />
       <h3>Select User By E-mail</h3>
       <br />
-      <form #userEditSelectForm="ngForm" (ngSubmit)="onUserSelection()">
-        <div class="row">
-          <div class="col-8">
-            <div class="form-group">
-              <input type="text" class="form-control"  [(ngModel)]="selectedEmail" name="userEmail">
-            </div>
+      <form class="row" #userEditSelectForm="ngForm" (ngSubmit)="onUserSelection()">
+        <div class="col-8">
+          <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="selectedEmail" name="userEmail">
           </div>
-          <div class="col-4">
-            <button class="btn btn-lg primary-btn" type="submit">Search</button>
-          </div>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-lg primary-btn" type="submit">Search</button>
         </div>
       </form>
     </div>
