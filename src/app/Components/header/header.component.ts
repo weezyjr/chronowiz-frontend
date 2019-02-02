@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit {
 
   get backgroundColor(): string {
     this._bg_rgb_ = this.HEX2RGB(this.background_color);
-    if (this.opacity && this.opacity !== 0) {
+    if (this.opacity) {
       return `rgba(${this._bg_rgb_[0]},${this._bg_rgb_[1]},${this._bg_rgb_[2]}, ${this.opacity / 100} )`;
     } else {
       return `none`;
