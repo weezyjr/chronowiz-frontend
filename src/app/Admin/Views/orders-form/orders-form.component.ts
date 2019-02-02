@@ -78,10 +78,11 @@ export class OrdersFormComponent implements OnInit, OnDestroy {
         const response: ResponseObject = responseData.response;
         console.log(response);
         if (response.type.match('ERROR')) {
-          this._notificationService.error('error');
+          this._notificationService.error('Error', response.message.en);
         }
         else {
-          this._notificationService.success('Saved');
+          this._notificationService.success('Success', response.message.en);
+
         }
       });
   }

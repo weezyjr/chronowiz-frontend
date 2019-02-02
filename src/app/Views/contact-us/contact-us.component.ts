@@ -45,7 +45,8 @@ export class ContactUsComponent implements OnInit, OnDestroy {
       if (response.type.match('ERROR')) {
         this._notificationsService.error('Error', response.message.en);
       } else {
-        this._notificationsService.success('Success');
+        this._notificationsService.success('Success', response.message.en);
+
       }
       this.loading = false;
     });

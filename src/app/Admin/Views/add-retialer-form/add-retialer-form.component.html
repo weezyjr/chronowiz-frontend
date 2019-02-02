@@ -31,18 +31,6 @@
       <br />
       <h3>Select Retailer By Email</h3>
       <br />
-      .add-watch
-        margin: auto;
-        background: white;
-        width: 100%;
-        padding: 40px;
-        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
-        border-radius: 6px;
-
-      .container-fluid
-        background: #f5f5f5;
-        min-height: 100vh;
-
 
       <form #retailerSelectForm="ngForm" class="row" (ngSubmit)="onRetailerSelection()">
         <div class="col-7">
@@ -56,7 +44,7 @@
       </form>
     </div>
 
-    <form #retailerForm="ngForm" *ngIf="(mode == 'create') || (retailer.email)">
+    <form #retailerForm="ngForm" (keydown.enter)="$event.preventDefault()" *ngIf="(mode == 'create') || (retailer.email)">
       <div>
         <br />
         <h3>Retailer Account</h3>

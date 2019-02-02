@@ -145,7 +145,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
    * Reset the Retailer
    */
   resetRetailer() {
-      this.retailer = new Retailer();
+    this.retailer = new Retailer();
   }
 
   createRetailer() {
@@ -305,14 +305,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if (!remove) {
-              this._notificationsService.success('Success', 'Discount has been saved');
-            }
-            else {
-              this._notificationsService.success('Success', 'Discount has been deleted');
-
-            }
-
+            this._notificationsService.success('Success', response.message.en);
           }
         });
     }
@@ -339,13 +332,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if (!remove) {
-              this._notificationsService.success('Success', 'Discount has been saved');
-            }
-            else {
-              this._notificationsService.success('Success', 'Discount has been deleted');
-
-            }
+            this._notificationsService.success('Success', response.message.en);
           }
         });
     }
@@ -372,13 +359,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           }
           else {
-            if (!remove) {
-              this._notificationsService.success('Success', 'Discount has been saved');
-            }
-            else {
-              this._notificationsService.success('Success', 'Discount has been deleted');
-
-            }
+            this._notificationsService.success('Success', response.message.en);
           }
         });
     }
