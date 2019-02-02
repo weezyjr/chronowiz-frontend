@@ -215,7 +215,7 @@
               <ng5-slider [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
-              <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.headerContentColor}">
+              <div class="content-text p-4 text-center" [ngClass]="{'text-light': !brand?.headerContentColor}">
                 content </div>
               <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
             </div>
