@@ -200,8 +200,8 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     { name: 'Other' }];
 
   contentColorOptions: Array<Object> = [
-    { name: 'light theme', value: false },
-    { name: 'dark theme', value: true }
+    { name: 'light theme', value: true },
+    { name: 'dark theme', value: false }
   ];
 
   options: Options = {

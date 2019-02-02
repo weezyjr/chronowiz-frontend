@@ -42,9 +42,9 @@ export class Brand {
     this.logoPhotoUrl = '';
     this.darkLogoPhotoUrl = '';
     this.headerBackgroundColor = '#ffffff';
-    this.headerContentColor = false;
+    this.headerContentColor = true;
     this.pageBackgroundColor = '#ffffff';
-    this.pageContentColor = false;
+    this.pageContentColor = true;
     this.headerBackgroundOpacity = 75;
     this.pageBackgroundOpacity = 100;
   }

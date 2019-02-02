@@ -217,7 +217,7 @@
             <div class="col-6 p-0 card">
               <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.headerContentColor}">
                 content </div>
-              <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
+              <div class="header-bkgd-preview" [ngStyle]="{'background-color': !brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
             </div>
           </div>
         </div>
@@ -247,7 +247,7 @@
               <ng5-slider [(value)]="brand.pageBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
-              <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.pageContentColor}">
+              <div class="content-text p-4 text-center" [ngClass]="{'text-light': !brand?.pageContentColor}">
                 content </div>
               <div class="header-bkgd-preview" [ngStyle]="{'background-color': brand?.pageBackgroundColor, 'opacity': brand?.pageBackgroundOpacity*0.01}"></div>
             </div>
