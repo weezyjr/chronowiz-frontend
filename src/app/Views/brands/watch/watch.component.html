@@ -2,8 +2,8 @@
 
 <div [ngStyle]="{'background-color': backgroundColor}" class="watch-page">
   <app-header *ngIf="watch?.brandObject && watch?.brandObject?.name" [background_color]="watch?.brandObject?.headerBackgroundColor? watch?.brandObject?.headerBackgroundColor: '#ffffff'"
-    [content_color]="!watch?.brandObject?.headerContentColor? 'light': 'dark'" [opacity]="watch?.brandObject?.headerBackgroundOpacity? watch?.brandObject?.headerBackgroundOpacity : 75"
-    [lightBrandLogo]="watch?.brandObject?.darkLogoPhotoUrl" [brandName]="watch?.brandObject?.name" [brandLogo]="watch?.brandObject?.logoPhotoUrl"
+    [content_color]="!watch?.brandObject?.headerContentColor? 'light': 'dark'" [opacity]="watch?.brandObject?.headerBackgroundOpacity != undefined? watch?.brandObject?.headerBackgroundOpacity : 75"
+    [lightBrandLogo]="watch?.brandObject?.darkLogoPhotoUrl" [brandName]="watch?.brandObject?.name" [darkBrandLogo]="watch?.brandObject?.logoPhotoUrl"
     [breads]="urlSequence">
   </app-header>
   <app-header *ngIf="!watch?.brandObject"></app-header>

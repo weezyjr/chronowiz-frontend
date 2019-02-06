@@ -4,9 +4,9 @@
 
   <div>
     <app-header *ngIf="collection?.brandObject && collection?.brandObject?.name" [background_color]="collection?.brandObject?.headerBackgroundColor? collection?.brandObject?.headerBackgroundColor: '#ffffff'"
-      [content_color]="!collection?.brandObject?.headerContentColor? 'light': 'dark'" [opacity]="collection?.brandObject?.headerBackgroundOpacity? collection?.brandObject?.headerBackgroundOpacity : 75"
+      [content_color]="!collection?.brandObject?.headerContentColor? 'light': 'dark'" [opacity]="collection?.brandObject?.headerBackgroundOpacity != undefined? collection?.brandObject?.headerBackgroundOpacity : 75"
       [lightBrandLogo]="collection?.brandObject?.darkLogoPhotoUrl" [brandName]="collection?.brandObject?.name"
-      [brandLogo]="collection?.brandObject?.logoPhotoUrl" [breads]="urlSequence">
+      [darkBrandLogo]="collection?.brandObject?.logoPhotoUrl" [breads]="urlSequence">
     </app-header>
     <app-header *ngIf="!collection?.brandObject"></app-header>
   </div>

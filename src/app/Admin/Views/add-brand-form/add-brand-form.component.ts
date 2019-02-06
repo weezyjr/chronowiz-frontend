@@ -10,6 +10,11 @@ import { Subject } from 'rxjs';
 import { Options } from 'ng5-slider';
 import { takeUntil } from 'rxjs/operators';
 
+interface FormStoreValues {
+  mode: 'create' | 'update' | 'delete';
+  selectedId: string;
+}
+
 @Component({
   templateUrl: './add-brand-form.component.html',
   styleUrls: ['./add-brand-form.component.sass']
@@ -19,6 +24,10 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   brand: Brand = new Brand();
+  formStoreValuse: FormStoreValues = {
+    mode: 'create',
+    selectedId: ''
+  };
 
   // Files
   logoPhotoFile: File;
@@ -32,7 +41,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
 
   // mode flag
-  mode: String = 'create';
+  mode: 'create' | 'update' | 'delete' = 'create';
 
   // selection brands retrieved from the server
   selectionBrands: Brand[];
@@ -227,7 +236,24 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.resetBrand();
   }
 
+  store() {
+    this.formStoreValuse.mode = this.mode;
+    this.formStoreValuse.selectedId = this.selectionBrandId;
+    console.log(this.formStoreValuse);
+    sessionStorage.setItem('brandForm', JSON.stringify(this.formStoreValuse));
+  }
+
   ngOnInit() {
+    const brandFormStoredValues: FormStoreValues =
+      <FormStoreValues>JSON.parse(sessionStorage.getItem('brandForm'));
+
+    if (brandFormStoredValues) {
+      this.mode = brandFormStoredValues.mode;
+      if (brandFormStoredValues.mode !== 'create' && brandFormStoredValues.selectedId) {
+        this.selectionBrandId = brandFormStoredValues.selectedId;
+        this.onBrandSelection(this.selectionBrandId);
+      }
+    }
   }
   /**
   * Reset Brand
@@ -287,7 +313,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.headerBackgroundOpacity = 75;
             }
 
-            if (this.brand.headerContentColor === undefined){
+            if (this.brand.headerContentColor === undefined) {
               this.brand.headerContentColor = false;
             }
 
@@ -295,7 +321,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.pageBackgroundColor = '#ffffff';
             }
 
-            if (this.brand.pageContentColor === undefined){
+            if (this.brand.pageContentColor === undefined) {
               this.brand.pageContentColor = false;
             }
 

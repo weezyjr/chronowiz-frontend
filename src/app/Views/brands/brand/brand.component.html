@@ -1,8 +1,8 @@
 <div [ngStyle]="{'background-color': backgroundColor}" class="brands-page">
 
   <app-header *ngIf="brandObject && brandObject?.name" [background_color]="brandObject?.headerBackgroundColor? brandObject?.headerBackgroundColor: '#ffffff'"
-    [content_color]="!brandObject?.headerContentColor? 'light': 'dark'" [opacity]="brandObject?.headerBackgroundOpacity? brandObject?.headerBackgroundOpacity : 75"
-    [lightBrandLogo]="brandObject?.darkLogoPhotoUrl" [brandName]="brandObject?.name" [brandLogo]="brandObject?.logoPhotoUrl"
+    [content_color]="!brandObject?.headerContentColor? 'light': 'dark'" [opacity]="brandObject?.headerBackgroundOpacity != undefined? brandObject?.headerBackgroundOpacity : 75"
+    [lightBrandLogo]="brandObject?.darkLogoPhotoUrl" [brandName]="brandObject?.name" [darkBrandLogo]="brandObject?.logoPhotoUrl"
     [breads]="urlSequence" [noHeightFix]="brandObject?.headerPhotoUrl != undefined">
   </app-header>
   <app-header *ngIf="!brandObject"></app-header>

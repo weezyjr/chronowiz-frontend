@@ -14,18 +14,18 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="create"
-          [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
+          value="create" [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="update"
-          [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
+          value="update" [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="brandForm.reset(); resetBrand();" name="mode" value="delete"
-          [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
+          value="delete" [(ngModel)]="mode">
         Delete
       </label>
     </div>
@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
                 <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
-                  [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
+                  [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="store(); onBrandSelection($event?._id)">
                 </ng-select>
               </div>
             </div>
@@ -95,7 +95,7 @@
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Dark Brand Logo</label>
           <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
-          <div *ngIf="brand?.darkLogoPhotoUrl" class="preview">
+          <div [ngStyle]="{'background': '#000'}" *ngIf="brand?.darkLogoPhotoUrl" class="preview">
             <h6> Current Logo Photo </h6>
             <img [src]="brand?.darkLogoPhotoUrl" [alt]="brand?.name + ' dark logo'" class="img-responsive">
           </div>
@@ -210,14 +210,33 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="custom-slider col-6">
+            <div class="custom-slider col-12">
               <label>opacity</label>
               <ng5-slider [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
-            <div class="col-6 p-0 card">
-              <div class="content-text p-4 text-center" [ngClass]="{'text-light': brand?.headerContentColor}">
-                content </div>
-              <div class="header-bkgd-preview" [ngStyle]="{'background-color': !brand?.headerBackgroundColor, 'opacity': brand?.headerBackgroundOpacity*0.01}"></div>
+          </div>
+        </div>
+
+
+        <label>Header preview</label>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-12 card pb-5">
+              <app-header *ngIf="brand" [background_color]="brand?.headerBackgroundColor? brand?.headerBackgroundColor: '#ffffff'"
+                [content_color]="!brand?.headerContentColor? 'light': 'dark'" [opacity]="brand?.headerBackgroundOpacity != undefined? brand?.headerBackgroundOpacity : 75"
+                [lightBrandLogo]="brand?.darkLogoPhotoUrl" [brandName]="brand?.name !== '' ? brand?.name: 'home'"
+                [darkBrandLogo]="brand?.logoPhotoUrl" [noHeightFix]="brand?.headerPhotoUrl">
+              </app-header>
+
+              <div class="hero">
+                <img *ngIf="brand?.headerPhotoUrl && !s3Service.isVideo(brand?.headerPhotoUrl)" [src]="brand?.headerPhotoUrl"
+                  [alt]="brand?.name + ' header'" class="img-responsive">
+                <video *ngIf="brand?.headerPhotoUrl && s3Service.isVideo(brand?.headerPhotoUrl)" class="main-vid"
+                  autoplay loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
+                  <source [src]="brand?.headerPhotoUrl" type="video/mp4">
+                </video>
+              </div>
+
             </div>
           </div>
         </div>
@@ -279,7 +298,7 @@
             </button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg secondry-btn" (click)="resetBrand(); brandForm.reset(); ">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)="brandForm.reset();  resetBrand(); ">Clear</button>
           </div>
         </div>
       </div>
