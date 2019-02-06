@@ -14,17 +14,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
           value="create" [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
           value="update" [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
           value="delete" [(ngModel)]="mode">
         Delete
       </label>
@@ -52,7 +52,7 @@
         <div class="form-group">
           <label for="selectionCollection">Collection</label>
           <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
-          [(ngModel)]="selectionCollectionId"  placeholder="Select Collection" (change)="onSelectionCollectionSelected($event?._id)">
+          [(ngModel)]="selectionCollectionId"  placeholder="Select Collection" (change)="store(); onCollectionSelection($event?._id)">
           </ng-select>
         </div>
       </div>
@@ -107,7 +107,7 @@
             </button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-lg secondry-btn" (click)="resetCollection(); collectionForm.reset(); ">Clear</button>
+            <button type="button" class="btn btn-lg secondry-btn" (click)=" collectionForm.reset(); resetCollection();">Clear</button>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   brand: Brand = new Brand();
-  formStoreValuse: FormStoreValues = {
+  formStoreValues: FormStoreValues = {
     mode: 'create',
     selectedId: ''
   };
@@ -237,10 +237,10 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   }
 
   store() {
-    this.formStoreValuse.mode = this.mode;
-    this.formStoreValuse.selectedId = this.selectionBrandId;
-    console.log(this.formStoreValuse);
-    sessionStorage.setItem('brandForm', JSON.stringify(this.formStoreValuse));
+    this.formStoreValues.mode = this.mode;
+    this.formStoreValues.selectedId = this.selectionBrandId;
+    console.log(this.formStoreValues);
+    sessionStorage.setItem('brandForm', JSON.stringify(this.formStoreValues));
   }
 
   ngOnInit() {

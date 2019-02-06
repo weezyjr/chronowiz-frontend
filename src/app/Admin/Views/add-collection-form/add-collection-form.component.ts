@@ -9,6 +9,10 @@ import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+interface FormStoreValues {
+  mode: 'create' | 'update' | 'delete';
+  selectedId: string;
+}
 
 @Component({
   templateUrl: './add-collection-form.component.html',
@@ -26,9 +30,6 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
   // loading flag
   loading: Boolean = false;
 
-  // mode flag
-  mode: String = 'create';
-
   // naviagtion links
   navRoutes: Link[] = [
     new Link('Watch', 'admin/watch'),
@@ -45,12 +46,37 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
   selectedBrand: Brand = new Brand();
   selectionCollections: Collection[];
 
+  // mode flag
+  mode: 'create' | 'update' | 'delete' = 'create';
+
+  formStoreValues: FormStoreValues = {
+    mode: 'create',
+    selectedId: ''
+  };
+
   constructor(private adminService: AdminService,
     private _notificationsService: NotificationsService) {
     this.resetCollection();
   }
 
   ngOnInit() {
+    const brandFormStoredValues: FormStoreValues =
+      <FormStoreValues>JSON.parse(sessionStorage.getItem('brandForm'));
+
+    if (brandFormStoredValues) {
+      this.mode = brandFormStoredValues.mode;
+      if (brandFormStoredValues.mode !== 'create' && brandFormStoredValues.selectedId) {
+        this.selectionBrandId = brandFormStoredValues.selectedId;
+        this.onCollectionSelection(this.selectionBrandId);
+      }
+    }
+  }
+
+  store() {
+    this.formStoreValues.mode = this.mode;
+    this.formStoreValues.selectedId = this.selectionBrandId;
+    console.log(this.formStoreValues);
+    sessionStorage.setItem('brandForm', JSON.stringify(this.formStoreValues));
   }
 
   /**
@@ -89,7 +115,7 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSelectionCollectionSelected(selectedCollectionId: String): void {
+  onCollectionSelection(selectedCollectionId: String): void {
     this.adminService.readCollectionById(selectedCollectionId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
