@@ -36,25 +36,26 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
+      this.watches = [];
       this.loading = true;
       await this.searchService.search(this.query)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((responseData: ResponseData) => {
-        console.log(responseData);
+        .toPromise()
+        .then((responseData: ResponseData) => {
+          console.log(responseData);
 
-        const response: ResponseObject = responseData.response;
+          const response: ResponseObject = responseData.response;
 
-        if (response.type.match('ERROR')) {
-          this._notificationsService.error('Error', response.message.en);
-        } else {
-          const RESULTS = <SearchResults>response.payload;
-          this.brands = <Brand[]>RESULTS.brands;
-          this.collections = <Collection[]>RESULTS.collections;
-          this.watches = <Watch[]>RESULTS.watches;
-          console.log(RESULTS);
-        }
-        this.loading = false;
-      });
+          if (response.type.match('ERROR')) {
+            this._notificationsService.error('Error', response.message.en);
+          } else {
+            const RESULTS = <SearchResults>response.payload;
+            this.brands = <Brand[]>RESULTS.brands;
+            this.collections = <Collection[]>RESULTS.collections;
+            this.watches = <Watch[]>RESULTS.watches;
+            console.log(RESULTS);
+          }
+          this.loading = false;
+        });
     }
     else {
       this.resetResults();

@@ -24,15 +24,13 @@ export class WatchComponent implements OnInit, OnDestroy {
 
   set addedToWatchTray(bool: Boolean) {
     if (bool) {
+      this._addedToWatchTray_ = true;
       new Promise((resolve) => {
         setTimeout(() => {
-          this._addedToWatchTray_ = true;
-          console.log('here', this.addToWatchTray);
           resolve();
-        }, 2000);
+        }, 1000);
       }).then(() => {
         this._addedToWatchTray_ = false;
-        console.log('after', this.addToWatchTray);
       });
     }
     else {

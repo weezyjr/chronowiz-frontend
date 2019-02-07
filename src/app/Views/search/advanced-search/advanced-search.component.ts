@@ -131,6 +131,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
+      this.watches = [];
       this.loading = true;
       await this.searchService.advSearch(this.query)
         .toPromise().then((responseData: ResponseData) => {
