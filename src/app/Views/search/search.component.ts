@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
-      this.watches = [];
+      this.resetResults();
       this.loading = true;
       await this.searchService.search(this.query)
         .toPromise()

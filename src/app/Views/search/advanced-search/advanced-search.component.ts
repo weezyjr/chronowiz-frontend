@@ -131,7 +131,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
-      this.watches = [];
+      this.resetResults();
       this.loading = true;
       await this.searchService.advSearch(this.query)
         .toPromise().then((responseData: ResponseData) => {
@@ -146,11 +146,15 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
           }
           this.loading = false;
         });
+    } else {
+      this.resetResults();
     }
   }
 
   resetResults() {
     this.watchesSearchResults = [];
+    this.watches = [];
+    this.resultWatches = [];
   }
 
   // render the show more list
