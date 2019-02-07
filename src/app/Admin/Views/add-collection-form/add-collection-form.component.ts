@@ -61,6 +61,8 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
         console.log('there');
       }
     }
+    this.adminService.currentPage = '/admin/collection';
+
   }
 
   updateMode() {

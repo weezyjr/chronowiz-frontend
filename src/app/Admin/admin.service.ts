@@ -38,6 +38,25 @@ export class AdminService {
     selectedId: ''
   };
 
+  get currentPage(): '/admin/watch' | '/admin/collection' | '/admin/brand' |
+    '/admin/user' | '/admin/retailer' | '/admin/orders' {
+    const page = sessionStorage.getItem('currentPage');
+    if (page) {
+      return <'/admin/watch' | '/admin/collection' | '/admin/brand' |
+        '/admin/user' | '/admin/retailer' | '/admin/orders'> page;
+    } else {
+      return '/admin/watch';
+    }
+  }
+
+  set currentPage(page: '/admin/watch' | '/admin/collection' | '/admin/brand' |
+    '/admin/user' | '/admin/retailer' | '/admin/orders') {
+    if (page) {
+      sessionStorage.setItem('currentPage', page);
+    } else {
+      sessionStorage.setItem('currentPage', '/admin/watch');
+    }
+  }
 
   private handleError: HandleError;
 

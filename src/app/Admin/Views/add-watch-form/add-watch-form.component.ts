@@ -171,6 +171,9 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
         this.onWatchSelection(selectionRef);
       }
     }
+
+    this.adminService.currentPage = '/admin/watch';
+
   }
 
   updateMode() {

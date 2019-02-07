@@ -239,6 +239,8 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
         this.onBrandSelection(this.selectionBrandId);
       }
     }
+
+    this.adminService.currentPage = '/admin/brand';
   }
 
   onChangeDisabled(): void {

@@ -63,6 +63,9 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
         this.onRetailerSelection();
       }
     }
+
+    this.adminService.currentPage = '/admin/retailer';
+
   }
 
   updateMode() {

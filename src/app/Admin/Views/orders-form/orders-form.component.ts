@@ -88,6 +88,8 @@ export class OrdersFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.adminService.currentPage =  '/admin/orders';
+
   }
 
 

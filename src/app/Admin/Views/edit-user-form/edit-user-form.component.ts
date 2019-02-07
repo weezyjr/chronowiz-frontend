@@ -65,6 +65,9 @@ export class EditUserFormComponent implements OnInit, OnDestroy {
         this.onUserSelection();
       }
     }
+
+    this.adminService.currentPage = '/admin/user';
+
   }
 
 
