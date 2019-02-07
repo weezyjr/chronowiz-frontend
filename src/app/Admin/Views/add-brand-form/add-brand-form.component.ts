@@ -4,11 +4,12 @@ import { Link } from 'src/app/Types/Link';
 import { ResponseData } from 'src/app/API/response-data';
 import { Brand } from 'src/app/Types/brand';
 import { S3Service } from '../../S3/s3.service';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
 import { Options } from 'ng5-slider';
 import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   templateUrl: './add-brand-form.component.html',
@@ -32,7 +33,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   loading: Boolean = false;
 
   // mode flag
-  mode: String = 'create';
+  mode: 'create' | 'update' | 'delete' = 'create';
 
   // selection brands retrieved from the server
   selectionBrands: Brand[];
@@ -207,7 +208,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   options: Options = {
     floor: 0,
     ceil: 100,
-    step: 1
+    step: 1,
   };
 
   // naviagtion links
@@ -227,8 +228,36 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.resetBrand();
   }
 
+
   ngOnInit() {
+    const formStoredValues: FormStoreValues = this.adminService.getStore('brandObject');
+
+    if (formStoredValues) {
+      this.mode = formStoredValues.mode;
+      if (formStoredValues.mode !== 'create' && formStoredValues.selectedId) {
+        this.selectionBrandId = formStoredValues.selectedId;
+        this.onBrandSelection(this.selectionBrandId);
+      }
+    }
+
+    this.adminService.currentPage = '/admin/brand';
   }
+
+  onChangeDisabled(): void {
+    if ((this.mode === 'delete' || this.loading)) {
+      this.options = Object.assign({}, this.options, { disabled: true });
+    }
+  }
+
+
+  updateMode() {
+    this.adminService.store('brandObject', this.mode, '');
+    this.resetBrand();
+    if (this.mode !== 'delete') {
+      this.onChangeDisabled();
+    }
+  }
+
   /**
   * Reset Brand
   */
@@ -265,7 +294,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   /**
    * Retrive Brand Data from the server
    */
-  onBrandSelection(selectedBrandId: String) {
+  onBrandSelection(selectedBrandId: string) {
     this.adminService.readBrandById(selectedBrandId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
@@ -283,11 +312,11 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.headerBackgroundColor = '#ffffff';
             }
 
-            if (!this.brand.headerBackgroundOpacity) {
+            if (this.brand.headerBackgroundOpacity === undefined) {
               this.brand.headerBackgroundOpacity = 75;
             }
 
-            if (this.brand.headerContentColor === undefined){
+            if (this.brand.headerContentColor === undefined) {
               this.brand.headerContentColor = false;
             }
 
@@ -295,13 +324,15 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.pageBackgroundColor = '#ffffff';
             }
 
-            if (this.brand.pageContentColor === undefined){
+            if (this.brand.pageContentColor === undefined) {
               this.brand.pageContentColor = false;
             }
 
-            if (!this.brand.pageBackgroundOpacity) {
+            if (this.brand.pageBackgroundOpacity === undefined) {
               this.brand.pageBackgroundOpacity = 100;
             }
+
+            this.adminService.store('brandObject', this.mode, selectedBrandId);
 
           }
         }
@@ -562,6 +593,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     }
     finally {
       this.loading = false;
+      this.adminService.clearStore('brandObject');
     }
   }
 

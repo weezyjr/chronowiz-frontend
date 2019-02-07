@@ -9,7 +9,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 import { SearchService } from 'src/app/User/Services/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { BrandsService } from '../../brands/brands.service';
 
 interface BrandCheckBox {
@@ -131,10 +131,10 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
 
   async search() {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
+      this.resetResults();
       this.loading = true;
       await this.searchService.advSearch(this.query)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((responseData: ResponseData) => {
+        .toPromise().then((responseData: ResponseData) => {
 
           const response: ResponseObject = responseData.response;
 
@@ -146,11 +146,15 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
           }
           this.loading = false;
         });
+    } else {
+      this.resetResults();
     }
   }
 
   resetResults() {
     this.watchesSearchResults = [];
+    this.watches = [];
+    this.resultWatches = [];
   }
 
   // render the show more list
@@ -314,6 +318,20 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
           priceFilterMatch;
       });
     }
+  }
+
+  async waitThenSearch() {
+    const Q = this.query;
+    this.loading = true;
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    }).then(() => {
+      if (Q === this.query) {
+        this.search();
+      }
+    });
   }
 
   ngOnDestroy() {

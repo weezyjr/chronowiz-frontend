@@ -7,6 +7,7 @@ import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AdminService } from '../../admin.service';
 
 @Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.sass'] })
 export class AdminLoginComponent implements OnInit, OnDestroy {
@@ -22,27 +23,29 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private adminService: AdminService,
     private authenticationService: AuthenticationService,
     private _notificationsService: NotificationsService
   ) {
-    // redirect to admin if already logged in
+
+    // get return url from route parameters or default
+    this.returnUrl = this.adminService.currentPage || '/admin/watch';
+    console.log(this.returnUrl);
+
     if (this.authenticationService.currentAdminValue) {
-      this.router.navigate(['/admin/login']);
+      this.router.navigate([this.returnUrl]);
     }
+
   }
 
   ngOnInit() {
+
+
+
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    if (this.authenticationService.currentAdminValue) {
-      this.router.navigateByUrl('/admin');
-    }
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
   }
 
   // convenience getter for easy access to form fields
@@ -75,7 +78,6 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
             this._notificationsService.success('Success', response.message.en);
             this.loading = false;
             this.router.navigate([this.returnUrl]);
-            console.log(this.returnUrl);
           }
         });
   }

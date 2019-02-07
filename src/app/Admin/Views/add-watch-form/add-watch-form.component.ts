@@ -4,7 +4,7 @@ import { Watch } from 'src/app/Types/watch';
 import { Link } from 'src/app/Types/Link';
 import { Brand } from 'src/app/Types/brand';
 import { Collection } from 'src/app/Types/collection';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { S3Service } from '../../S3/s3.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
@@ -28,7 +28,7 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
   watch: Watch = new Watch();
 
   // mode flag
-  mode: String = 'create';
+  mode: 'create' | 'update' | 'delete' = 'create';
 
   // navigation links
   navRoutes: Link[] = [
@@ -162,7 +162,25 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const formStoredValues: FormStoreValues = this.adminService.getStore('watchObject');
+
+    if (formStoredValues) {
+      this.mode = formStoredValues.mode;
+      if (formStoredValues.mode !== 'create' && formStoredValues.selectedId) {
+        const selectionRef: string = formStoredValues.selectedId;
+        this.onWatchSelection(selectionRef);
+      }
+    }
+
+    this.adminService.currentPage = '/admin/watch';
+
   }
+
+  updateMode() {
+    this.adminService.store('watchObject', this.mode, '');
+    this.resetWatch();
+  }
+
 
   /**
    * Add Custom Brand Name
@@ -297,6 +315,7 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
               this.watch = <Watch>postProcessedWatch;
               this.onWatchBrandSelectiond(this.watch.brandObject._id);
             });
+            this.adminService.store('watchObject', this.mode, selectedWatchRef);
           }
         });
     }
@@ -700,6 +719,7 @@ export class AddWatchFormComponent implements OnInit, OnDestroy {
     }
     finally {
       this.loading = false;
+      this.adminService.clearStore('watchObject');
     }
   }
 

@@ -12,22 +12,51 @@ import { Watch } from '../Types/watch';
 import { Retailer, BrandDiscount, CollectionDiscount, WatchDiscount } from '../Types/retailer';
 import { User } from '../Types/User';
 
+export interface FormStoreValues {
+  mode: 'create' | 'update' | 'delete';
+  selectedId: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
   env = environment;
 
-  brandsUrl = this.env.backendUrl + 'admin/brands';
-  collectionsUrl = this.env.backendUrl + 'admin/collections';
-  watchesUrl = this.env.backendUrl + 'admin/watches';
-  retailerAdminUrl = this.env.backendUrl + 'admin/retailers';
-  retailerBrandMaxDiscountUrl = this.retailerAdminUrl + '/brandMaxDiscount';
-  retailerCollectionMaxDiscountUrl = this.retailerAdminUrl + '/collectionMaxDiscount';
-  retailerWatchMaxDiscountUrl = this.retailerAdminUrl + '/watchMaxDiscount';
-  usersUrl = this.env.backendUrl + 'admin/users/';
-  ordersUrl = this.env.backendUrl + 'admin/orders/';
+  private brandsUrl = this.env.backendUrl + 'admin/brands';
+  private collectionsUrl = this.env.backendUrl + 'admin/collections';
+  private watchesUrl = this.env.backendUrl + 'admin/watches';
+  private retailerAdminUrl = this.env.backendUrl + 'admin/retailers';
+  private retailerBrandMaxDiscountUrl = this.retailerAdminUrl + '/brandMaxDiscount';
+  private retailerCollectionMaxDiscountUrl = this.retailerAdminUrl + '/collectionMaxDiscount';
+  private retailerWatchMaxDiscountUrl = this.retailerAdminUrl + '/watchMaxDiscount';
+  private usersUrl = this.env.backendUrl + 'admin/users/';
+  private ordersUrl = this.env.backendUrl + 'admin/orders/';
+  private formStoreValues: FormStoreValues = {
+    mode: 'create',
+    selectedId: ''
+  };
 
+  get currentPage(): '/admin/watch' | '/admin/collection' | '/admin/brand' |
+    '/admin/user' | '/admin/retailer' | '/admin/orders' {
+    const page = sessionStorage.getItem('currentPage');
+    if (page) {
+      return <'/admin/watch' | '/admin/collection' | '/admin/brand' |
+        '/admin/user' | '/admin/retailer' | '/admin/orders'> page;
+    } else {
+      return '/admin/watch';
+    }
+  }
+
+  set currentPage(page: '/admin/watch' | '/admin/collection' | '/admin/brand' |
+    '/admin/user' | '/admin/retailer' | '/admin/orders') {
+    if (page) {
+      sessionStorage.setItem('currentPage', page);
+    } else {
+      sessionStorage.setItem('currentPage', '/admin/watch');
+    }
+  }
 
   private handleError: HandleError;
 
@@ -49,6 +78,28 @@ export class AdminService {
         'Authorization': `JWT ${authenticationService.currentAdminValue.jwt}`
       })
     };
+  }
+
+  /**
+   *
+   * @param store form
+   */
+
+  store(formname: string, mode: 'create' | 'update' | 'delete', selectionId?: string) {
+    this.formStoreValues.mode = mode;
+    if (selectionId) {
+      this.formStoreValues.selectedId = selectionId;
+    }
+    console.log(this.formStoreValues);
+    sessionStorage.setItem(formname, JSON.stringify(this.formStoreValues));
+  }
+
+  clearStore(formname: string) {
+    sessionStorage.removeItem(formname);
+  }
+
+  getStore(formname: string): FormStoreValues {
+    return <FormStoreValues>JSON.parse(sessionStorage.getItem(formname));
   }
 
   /**
@@ -209,53 +260,53 @@ export class AdminService {
 
   updateRetailerBrandMaxDiscount(retailerId: string, discount: BrandDiscount) {
     return this.http.put<ResponseData>(this.retailerBrandMaxDiscountUrl + '/' + retailerId,
-    { 'payload': discount }, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      { 'payload': discount }, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
 
   updateRetailerCollectionMaxDiscount(retailerId: string, discount: CollectionDiscount) {
     return this.http.put<ResponseData>(this.retailerCollectionMaxDiscountUrl + '/' + retailerId,
-    { 'payload': discount }, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      { 'payload': discount }, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
 
 
   updateRetailerWatchMaxDiscount(retailerId: string, discount: WatchDiscount) {
     return this.http.put<ResponseData>(this.retailerWatchMaxDiscountUrl + '/' + retailerId,
-    { 'payload': discount }, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      { 'payload': discount }, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   /** @param User APIs */
 
   updateUser(userId: string, user: User) {
     return this.http.put<ResponseData>(this.usersUrl + '/' + userId,
-    { 'payload': user }, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      { 'payload': user }, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   getAllUsers() {
     return this.http.get<ResponseData>(this.usersUrl, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   getUserByEmail(userEmail: string) {
     return this.http.get<ResponseData>(this.usersUrl + '/' + userEmail, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
 
@@ -264,24 +315,24 @@ export class AdminService {
 
   updateOrder(orderId: string, status: string) {
     return this.http.put<ResponseData>(this.ordersUrl + '/' + orderId,
-    { 'payload': {status} }, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      { 'payload': { status } }, this.httpOptions)
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   getAllOrders() {
     return this.http.get<ResponseData>(this.ordersUrl, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
   getOrderByNumber(orderNumber: string) {
     return this.http.get<ResponseData>(this.ordersUrl + '/' + orderNumber, this.httpOptions)
-    .pipe(map(data => {
-      return data;
-    }));
+      .pipe(map(data => {
+        return data;
+      }));
   }
 
 

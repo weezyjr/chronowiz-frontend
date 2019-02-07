@@ -14,17 +14,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="watchForm.reset(); resetWatch()" name="mode" value="create"
+        <input class="form-check-input" type="radio" (change)="updateMode(); watchForm.reset();" name="mode" value="create"
           [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="watchForm.reset(); resetWatch()" name="mode" value="update"
+        <input class="form-check-input" type="radio" (change)="updateMode(); watchForm.reset();" name="mode" value="update"
           [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="watchForm.reset(); resetWatch()" name="mode" value="delete"
+        <input class="form-check-input" type="radio" (change)="updateMode(); watchForm.reset();" name="mode" value="delete"
           [(ngModel)]="mode">
         Delete
       </label>

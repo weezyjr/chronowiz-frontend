@@ -63,7 +63,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let watchObjectWrapper of watchObjectWrappers">
+              <tr *ngFor="let watchObjectWrapper of watchObjectWrappers" [ngClass]="{'overlay': watchObjectWrapper?.watchObject?.removedFromStock}">
                 <td class="text-center"><img class="table-img" [src]="watchObjectWrapper?.watchObject?.mainPhotoUrl? watchObjectWrapper?.watchObject?.mainPhotoUrl: 'http://placehold.it/360x460/FFFFFF/FFFFFF'"></td>
                 <td>
                   <p class="m-0">
@@ -82,7 +82,8 @@
                     watchObjectWrapper?.watchObject?.priceCurrency }} </p>
                 </td>
                 <td>
-                  <app-toggle-btn [status]="true" (toggle)="addToStock($event,watchObjectWrapper?.watchObject?._id)"></app-toggle-btn>
+                  <app-toggle-btn [status]="true"
+                  (toggle)="addToStock($event,watchObjectWrapper?.watchObject?._id);  watchObjectWrapper?.watchObject? watchObjectWrapper.watchObject.removedFromStock = true : null;"></app-toggle-btn>
                 </td>
                 <td>
                   <input class="form-input" [(ngModel)]="watchObjectWrapper.retailerWatchDiscount" placeholder="(0-100)%"

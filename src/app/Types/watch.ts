@@ -13,6 +13,8 @@ export class Watch {
   public _id?: string;
   public updatedAt?: string;
 
+  public removedFromStock?: boolean;
+
   public brandObject?: any;
   public collectionObject?: any;
   public model?: string;

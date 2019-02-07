@@ -109,9 +109,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    redirectTo: 'admin/watch',
-    pathMatch: 'full',
-    canActivate: [AdminGuard]
+    redirectTo: 'admin/login',
+    pathMatch: 'full'
   },
   {
     path: 'admin/watch',

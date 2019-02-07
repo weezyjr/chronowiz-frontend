@@ -7,7 +7,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Watch } from 'src/app/Types/watch';
 import { Collection } from 'src/app/Types/collection';
 import { Brand } from 'src/app/Types/brand';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -26,7 +26,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
 
   // mode flag
   mode: 'create' | 'update' | 'delete' = 'create';
-  selectedEmail: String;
+  selectedEmail: string;
 
   // navigation routes
   navRoutes: Link[] = [
@@ -54,8 +54,24 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const formStoredValues: FormStoreValues = this.adminService.getStore('retailerObject');
+
+    if (formStoredValues) {
+      this.mode = formStoredValues.mode;
+      if (formStoredValues.mode !== 'create' && formStoredValues.selectedId) {
+        this.selectedEmail = formStoredValues.selectedId;
+        this.onRetailerSelection();
+      }
+    }
+
+    this.adminService.currentPage = '/admin/retailer';
+
   }
 
+  updateMode() {
+    this.adminService.store('retailerObject', this.mode, '');
+    this.resetRetailer();
+  }
   addBrandDiscount() {
     if (this.retailer.maximumBrandDiscounts) {
       this.retailer.maximumBrandDiscounts.push(new BrandDiscount());
@@ -137,6 +153,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
           for (const discount of discounts) {
             discount.readOnly = true;
           }
+          this.adminService.store('retailerObject', this.mode, this.selectedEmail);
         }
       });
   }
@@ -390,6 +407,7 @@ export class AddRetialerFormComponent implements OnInit, OnDestroy {
     }
     finally {
       this.loading = false;
+      this.adminService.clearStore('retailerObject');
     }
   }
 

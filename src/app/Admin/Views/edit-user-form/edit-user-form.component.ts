@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Link } from 'src/app/Types/Link';
 import { User } from 'src/app/Types/User';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { ResponseData } from 'src/app/API/response-data';
 import { takeUntil } from 'rxjs/operators';
@@ -47,6 +47,7 @@ export class EditUserFormComponent implements OnInit, OnDestroy {
         }
         else {
           this.user = <User>response.payload;
+          this.adminService.store('userObject', 'update', this.selectedEmail);
         }
       });
   }
@@ -56,8 +57,19 @@ export class EditUserFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const formStoredValues: FormStoreValues = this.adminService.getStore('userObject');
+
+    if (formStoredValues) {
+      if (formStoredValues.selectedId) {
+        this.selectedEmail = formStoredValues.selectedId;
+        this.onUserSelection();
+      }
+    }
+
+    this.adminService.currentPage = '/admin/user';
 
   }
+
 
   onSubmit(){
     this.adminService.updateUser(this.user._id, this.user)
@@ -71,6 +83,7 @@ export class EditUserFormComponent implements OnInit, OnDestroy {
       }
       else {
         this._notificationsService.success('Success', response.message.en);
+        this.adminService.clearStore('userObject');
       }
     });
   }

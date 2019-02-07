@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
   private _content_color_: 'dark' | 'light';
   private _bg_rgb_: number[] = [];
   private _noHeightFix_: Boolean = false;
+  private _theOtherLogo_: String;
+  private DEFAULT_LIGHT_LOGO = '../../../assets/logo-white.svg';
+  private DEFAULT_DARK_LOGO = '../../../assets/logo.svg';
+
   /* private _background_color_: String | string;
    private _brandLogo_: String;
    private _lightBrandLogo_: String;
@@ -44,10 +48,12 @@ export class HeaderComponent implements OnInit {
     if (this._content_color_) {
       if (this._content_color_ === 'light') {
         if (!this.brandLogo) {
-          this.brandLogo = '../../../assets/logo-white.svg';
+          this.brandLogo = this.DEFAULT_LIGHT_LOGO;
+        } else if (this.brandLogo === this.DEFAULT_DARK_LOGO) {
+          this.brandLogo = this.DEFAULT_LIGHT_LOGO;
         } else {
           if (this.lightBrandLogo) {
-            this.brandLogo = this.lightBrandLogo;
+           this.brandLogo = this.lightBrandLogo;
           }
         }
         this.userIconSrc = '../../../assets/user-white.svg';
@@ -56,6 +62,21 @@ export class HeaderComponent implements OnInit {
         this.menuCloseSrc = '../../../assets/menuclose.svg';
         this.paperBagIconSrc = '../../../assets/paper-bag-white.svg';
         this.chronoWizLogoSrc = '../../../assets/logo-white.svg';
+      } else {
+        if (!this.brandLogo) {
+          this.brandLogo = this.DEFAULT_DARK_LOGO;
+        }
+        if (this.brandLogo === this.DEFAULT_LIGHT_LOGO) {
+          this.brandLogo = this.DEFAULT_DARK_LOGO;
+        } else if (this.brandLogo && this.lightBrandLogo) {
+          this.brandLogo = this.darkBrandLogo;
+        }
+        this.userIconSrc = '../../../assets/user.svg';
+        this.searchIconSrc = '../../../assets/search.svg';
+        this.menuIconSrc = '../../../assets/menu.svg';
+        this.menuCloseSrc = '../../../assets/menucloseblack.svg';
+        this.paperBagIconSrc = '../../../assets/paper-bag.svg';
+        this.chronoWizLogoSrc = '../../../assets/logo.svg';
       }
       return this._content_color_;
     } else {
@@ -65,9 +86,11 @@ export class HeaderComponent implements OnInit {
 
   @Input() opacity = 100;
 
-  @Input() brandLogo: String = '../../../assets/logo.svg';
+  @Input() darkBrandLogo: String = this.DEFAULT_DARK_LOGO;
 
-  @Input() lightBrandLogo: String = '../../../assets/logo-white.svg';
+  @Input() brandLogo: String = this.DEFAULT_DARK_LOGO;
+
+  @Input() lightBrandLogo: String = this.DEFAULT_LIGHT_LOGO;
 
   @Input() brandName: String;
 
@@ -122,7 +145,7 @@ export class HeaderComponent implements OnInit {
     if (this.opacity) {
       return `rgba(${this._bg_rgb_[0]},${this._bg_rgb_[1]},${this._bg_rgb_[2]}, ${this.opacity / 100} )`;
     } else {
-      return `none`;
+      return `rgba(${this._bg_rgb_[0]},${this._bg_rgb_[1]},${this._bg_rgb_[2]}, 0)`;
     }
   }
 

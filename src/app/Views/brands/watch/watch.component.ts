@@ -20,7 +20,29 @@ export class WatchComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  public addedToWatchTray: Boolean = false;
+  public _addedToWatchTray_: Boolean = false;
+
+  set addedToWatchTray(bool: Boolean) {
+    if (bool) {
+      this._addedToWatchTray_ = true;
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      }).then(() => {
+        this._addedToWatchTray_ = false;
+      });
+    }
+    else {
+      this._addedToWatchTray_ = false;
+    }
+  }
+
+  get addedToWatchTray(): Boolean {
+    if (this._addedToWatchTray_) {
+      return this._addedToWatchTray_;
+    } else { return false; }
+  }
 
   watch: Watch = new Watch();
   price: string | number = 'Show Price';
@@ -37,7 +59,7 @@ export class WatchComponent implements OnInit, OnDestroy {
   get downArrowSrc(): string {
     if (this.watch &&
       this.watch.brandObject &&
-      this.watch.brandObject.pageContentColor) {
+      !this.watch.brandObject.pageContentColor) {
       return '../../../../assets/down-arrow.light.svg';
     } else {
       return '../../../../assets/down-arrow.svg';
@@ -45,19 +67,19 @@ export class WatchComponent implements OnInit, OnDestroy {
   }
 
   get paperBagSrc(): string {
-  /*  if (this.watch &&
-      this.watch.brandObject &&
-      this.watch.brandObject.contentColor) {
-      return '../../../../assets/paper-bag-white.svg';
-    } else {*/
-      return '../../../../assets/paper-bag.svg';
-   /* }*/
+    /*  if (this.watch &&
+        this.watch.brandObject &&
+        this.watch.brandObject.contentColor) {
+        return '../../../../assets/paper-bag-white.svg';
+      } else {*/
+    return '../../../../assets/paper-bag.svg';
+    /* }*/
   }
 
   get appIconSrc(): String {
     if (this.watch &&
       this.watch.brandObject &&
-      this.watch.brandObject.pageContentColor) {
+      !this.watch.brandObject.pageContentColor) {
       return '../../../../assets/app-icon.light.svg';
     } else {
       return '../../../../assets/app-icon.svg';
@@ -65,7 +87,7 @@ export class WatchComponent implements OnInit, OnDestroy {
   }
 
   get backgroundColor(): string {
-    if (this.watch && this.watch.brandObject){
+    if (this.watch && this.watch.brandObject) {
       return this.brandsService.RGBandOpacityToRGBA(this.watch.brandObject);
     } else {
       return `none`;
@@ -123,10 +145,20 @@ export class WatchComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateAddToWatchTray() {
+    this.addedToWatchTray = true;
+  }
+
   async addToWatchTray() {
-    await this.watchTrayService.addToWatchTray(this.watch);
+
     if (this.watchTrayService.currentWatchTrayValue) {
+
+
       this.addedToWatchTray = true;
+      await this.watchTrayService.addToWatchTray(this.watch);
+
+
+
       // change the button
     }
     else {

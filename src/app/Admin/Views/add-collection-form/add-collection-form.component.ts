@@ -3,12 +3,11 @@ import { NotificationsService } from 'angular2-notifications';
 import { Collection } from 'src/app/Types/collection';
 import { Link } from 'src/app/Types/Link';
 import { Brand } from 'src/app/Types/brand';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { ResponseData } from 'src/app/API/response-data';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 
 @Component({
   templateUrl: './add-collection-form.component.html',
@@ -26,9 +25,6 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
   // loading flag
   loading: Boolean = false;
 
-  // mode flag
-  mode: String = 'create';
-
   // naviagtion links
   navRoutes: Link[] = [
     new Link('Watch', 'admin/watch'),
@@ -45,12 +41,33 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
   selectedBrand: Brand = new Brand();
   selectionCollections: Collection[];
 
+  // mode flag
+  mode: 'create' | 'update' | 'delete' = 'create';
+
   constructor(private adminService: AdminService,
     private _notificationsService: NotificationsService) {
     this.resetCollection();
   }
 
   ngOnInit() {
+    const formStoredValues: FormStoreValues = this.adminService.getStore('collectionObject');
+
+    if (formStoredValues) {
+      this.mode = formStoredValues.mode;
+      if (formStoredValues.mode !== 'create' && formStoredValues.selectedId) {
+        const selectionCollectionId = formStoredValues.selectedId;
+        console.log('hi');
+        this.onCollectionSelection(selectionCollectionId);
+        console.log('there');
+      }
+    }
+    this.adminService.currentPage = '/admin/collection';
+
+  }
+
+  updateMode() {
+    this.adminService.store('collectionObject', this.mode, '');
+    this.resetCollection();
   }
 
   /**
@@ -89,8 +106,8 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSelectionCollectionSelected(selectedCollectionId: String): void {
-    this.adminService.readCollectionById(selectedCollectionId)
+  async onCollectionSelection(selectedCollectionId: string) {
+    await this.adminService.readCollectionById(selectedCollectionId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: ResponseData) => {
 
@@ -101,7 +118,15 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
         }
         else {
           this.collection = <Collection>response.payload;
-          this.collection.brandObject = this.selectedBrand._id;
+          if (!this.collection.brandObject) {
+            this.collection.brandObject = this.selectedBrand._id;
+          } else if (this.collection.brandObject && this.collection.brandObject._id) {
+            this.collection.brandObject = this.collection.brandObject._id;
+          } else if (! this.collection.brandObject){
+            this.collection.brandObject = '';
+          }
+          console.log('im here', this.collection);
+          this.adminService.store('collectionObject', this.mode, selectedCollectionId);
         }
       });
   }
@@ -185,6 +210,7 @@ export class AddCollectionFormComponent implements OnInit, OnDestroy {
     }
     finally {
       this.loading = false;
+      this.adminService.clearStore('collectionObject');
     }
   }
 
