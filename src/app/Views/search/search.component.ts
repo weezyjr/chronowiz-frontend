@@ -62,6 +62,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  async waitThenSearch() {
+    const Q = this.query;
+    this.loading = true;
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    }).then(() => {
+      if (Q === this.query) {
+        this.search();
+      }
+    });
+  }
+
   resetResults() {
     this.brands = [];
     this.collections = [];

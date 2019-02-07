@@ -5,7 +5,6 @@
     [lightBrandLogo]="brandObject?.darkLogoPhotoUrl" [brandName]="brandObject?.name" [darkBrandLogo]="brandObject?.logoPhotoUrl"
     [breads]="urlSequence" [noHeightFix]="brandObject?.headerPhotoUrl != undefined">
   </app-header>
-  <app-header *ngIf="!brandObject"></app-header>
 
   <div [ngClass]="{'light-theme': !brandObject?.pageContentColor}">
     <router-outlet></router-outlet>

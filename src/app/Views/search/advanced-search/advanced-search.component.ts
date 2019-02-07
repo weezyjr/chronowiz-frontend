@@ -320,6 +320,20 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  async waitThenSearch() {
+    const Q = this.query;
+    this.loading = true;
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    }).then(() => {
+      if (Q === this.query) {
+        this.search();
+      }
+    });
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
