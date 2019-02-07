@@ -14,18 +14,18 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
-          value="create" [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); updateMode();" name="mode" value="create"
+          [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
-          value="update" [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); updateMode();" name="mode" value="update"
+          [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); brandForm.reset(); resetBrand();" name="mode"
-          value="delete" [(ngModel)]="mode">
+        <input class="form-check-input" type="radio" (change)="brandForm.reset(); updateMode();" name="mode" value="delete"
+          [(ngModel)]="mode">
         Delete
       </label>
     </div>
@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="selectionBrand">Brand</label>
                 <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="selectionBrands"
-                  [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="store(); onBrandSelection($event?._id)">
+                  [(ngModel)]="selectionBrandId" bindLabel="name" bindValue="_id" placeholder="Select brand" (change)="onBrandSelection($event?._id)">
                 </ng-select>
               </div>
             </div>
@@ -70,11 +70,16 @@
 
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Light Brand Logo</label>
-          <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
-          <div *ngIf="brand?.logoPhotoUrl" class="preview">
-            <h6> Current Logo Photo </h6>
-            <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
+          <div class="row">
+            <div class="col-6">
+              <p class="muted text-left m-0 p-0">Recommended: png image (Width: 100px x Height: 100px) </p>
+              <div *ngIf="brand?.logoPhotoUrl" class="preview">
+                <h6> Current Logo Photo </h6>
+                <img [src]="brand?.logoPhotoUrl" [alt]="brand?.name + ' logo'" class="img-responsive">
+              </div>
+            </div>
           </div>
+
           <div class="row">
             <div class="col-sm-10 col-6">
               <div class="form-group">
@@ -94,11 +99,16 @@
 
         <div class="form-field py-2">
           <label for="logoPhotoFileInput">Dark Brand Logo</label>
-          <p class="muted text-left m-0 p-0"> Any size is ok, recommended: Width: 100px x Height: 100px </p>
-          <div [ngStyle]="{'background': '#000'}" *ngIf="brand?.darkLogoPhotoUrl" class="preview">
-            <h6> Current Logo Photo </h6>
-            <img [src]="brand?.darkLogoPhotoUrl" [alt]="brand?.name + ' dark logo'" class="img-responsive">
+          <div class="row">
+            <div class="col-6">
+              <p class="muted text-left m-0 p-0"> Recommended: png image (Width: 100px x Height: 100px)</p>
+              <div [ngStyle]="{'background': '#000'}" *ngIf="brand?.darkLogoPhotoUrl" class="preview">
+                <h6> Current Logo Photo </h6>
+                <img [src]="brand?.darkLogoPhotoUrl" [alt]="brand?.name + ' dark logo'" class="img-responsive">
+              </div>
+            </div>
           </div>
+
           <div class="row">
             <div class="col-sm-10 col-6">
               <div class="form-group">
@@ -203,7 +213,7 @@
 
         <div class="form-group">
           <label for="headerContentColor">Content theme</label>
-          <ng-select [items]="contentColorOptions" bindValue="value" name="headerContentColor" [(ngModel)]="brand.headerContentColor"
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="contentColorOptions" bindValue="value" name="headerContentColor" [(ngModel)]="brand.headerContentColor"
             bindLabel="name" placeholder="Select header content theme">
           </ng-select>
         </div>
@@ -212,7 +222,7 @@
           <div class="row">
             <div class="custom-slider col-12">
               <label>opacity</label>
-              <ng5-slider [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
+              <ng5-slider (change)="onChangeDisabled()" [(value)]="brand.headerBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
           </div>
         </div>
@@ -253,7 +263,7 @@
 
         <div class="form-group">
           <label for="pageContentColor">Content theme</label>
-          <ng-select [items]="contentColorOptions" name="pageContentColor" [(ngModel)]="brand.pageContentColor"
+          <ng-select [disabled]="mode == 'delete' || loading" [items]="contentColorOptions" name="pageContentColor" [(ngModel)]="brand.pageContentColor"
             bindLabel="name" bindValue="value" placeholder="Select page content theme">
           </ng-select>
         </div>
@@ -263,7 +273,7 @@
           <div class="row">
             <div class="custom-slider col-6">
               <label>opacity</label>
-              <ng5-slider [(value)]="brand.pageBackgroundOpacity" [options]="options"></ng5-slider>
+              <ng5-slider (change)="onChangeDisabled()" [(value)]="brand.pageBackgroundOpacity" [options]="options"></ng5-slider>
             </div>
             <div class="col-6 p-0 card">
               <div class="content-text p-4 text-center" [ngClass]="{'text-light': !brand?.pageContentColor}">

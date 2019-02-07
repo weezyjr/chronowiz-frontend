@@ -68,6 +68,6 @@
         </div>
       </div>
     </div>
-    <app-footer></app-footer>
+    <app-footer *ngIf="collection?.brandObject && collection?.brandObject?.name"></app-footer>
   </div>
 </div>

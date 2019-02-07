@@ -14,17 +14,17 @@
       <h3>Mode</h3>
       <br />
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)=" collectionForm.reset(); updateMode();" name="mode"
           value="create" [(ngModel)]="mode">
         Create
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)=" collectionForm.reset(); updateMode();" name="mode"
           value="update" [(ngModel)]="mode">
         Update
       </label>
       <label class="form-check-inline">
-        <input class="form-check-input" type="radio" (change)="store(); resetCollection(); collectionForm.reset();" name="mode"
+        <input class="form-check-input" type="radio" (change)=" collectionForm.reset(); updateMode();" name="mode"
           value="delete" [(ngModel)]="mode">
         Delete
       </label>
@@ -52,7 +52,7 @@
         <div class="form-group">
           <label for="selectionCollection">Collection</label>
           <ng-select [items]="selectionCollections" name="selectionCollection" bindLabel="name" bindValue="_id"
-          [(ngModel)]="selectionCollectionId"  placeholder="Select Collection" (change)="store(); onCollectionSelection($event?._id)">
+          [(ngModel)]="selectionCollectionId"  placeholder="Select Collection" (change)="onCollectionSelection($event?._id)">
           </ng-select>
         </div>
       </div>
@@ -65,7 +65,11 @@
           <label for="brandObject">Brand</label>
 
           <ng-select [items]="selectionBrands" [loading]="selectionBrands?.length === 0" name="brandObject"
-            bindLabel="name" bindValue="_id" placeholder="Select brand" [(ngModel)]="collection.brandObject"
+            bindLabel="name" bindValue="_id" placeholder="Select brand"
+
+            [ngModel]="collection?.brandObject"
+            (ngModelChange)="collection.brandObject = $event"
+
             #brandObject="ngModel"
             required>
           </ng-select>

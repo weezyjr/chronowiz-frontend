@@ -67,6 +67,6 @@
       <app-hero [background_sm]="true" *ngIf="watch?.banner2PhotoUrl || watch?.brandObject?.banner2PhotoUrl" [cover]="watch?.banner2PhotoUrl ? watch?.banner2PhotoUrl: watch?.brandObject?.banner2PhotoUrl"></app-hero>
       <div *ngIf="!watch?.brandObject" class="p-2"></div>
     </div>
-    <app-footer></app-footer>
+    <app-footer *ngIf="watch?.brandObject && watch?.brandObject?.name"></app-footer>
   </div>
 </div>

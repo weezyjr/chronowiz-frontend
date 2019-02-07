@@ -9,7 +9,7 @@ import { ParamMap, ActivatedRoute } from '@angular/router';
 import { SearchService } from 'src/app/User/Services/Search/search.service';
 import { SearchResults } from 'src/app/Types/SearchResults';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, take } from 'rxjs/operators';
 import { BrandsService } from '../../brands/brands.service';
 
 interface BrandCheckBox {
@@ -133,8 +133,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
     if (this.query && (this.query !== '' || this.query.length !== 0)) {
       this.loading = true;
       await this.searchService.advSearch(this.query)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((responseData: ResponseData) => {
+        .toPromise().then((responseData: ResponseData) => {
 
           const response: ResponseObject = responseData.response;
 

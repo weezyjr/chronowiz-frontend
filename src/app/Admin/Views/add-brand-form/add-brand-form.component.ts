@@ -4,16 +4,12 @@ import { Link } from 'src/app/Types/Link';
 import { ResponseData } from 'src/app/API/response-data';
 import { Brand } from 'src/app/Types/brand';
 import { S3Service } from '../../S3/s3.service';
-import { AdminService } from '../../admin.service';
+import { AdminService, FormStoreValues } from '../../admin.service';
 import { ResponseObject } from 'src/app/API/responseObject';
 import { Subject } from 'rxjs';
 import { Options } from 'ng5-slider';
 import { takeUntil } from 'rxjs/operators';
 
-interface FormStoreValues {
-  mode: 'create' | 'update' | 'delete';
-  selectedId: string;
-}
 
 @Component({
   templateUrl: './add-brand-form.component.html',
@@ -24,10 +20,6 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
   brand: Brand = new Brand();
-  formStoreValues: FormStoreValues = {
-    mode: 'create',
-    selectedId: ''
-  };
 
   // Files
   logoPhotoFile: File;
@@ -216,7 +208,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   options: Options = {
     floor: 0,
     ceil: 100,
-    step: 1
+    step: 1,
   };
 
   // naviagtion links
@@ -236,25 +228,31 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     this.resetBrand();
   }
 
-  store() {
-    this.formStoreValues.mode = this.mode;
-    this.formStoreValues.selectedId = this.selectionBrandId;
-    console.log(this.formStoreValues);
-    sessionStorage.setItem('brandForm', JSON.stringify(this.formStoreValues));
-  }
 
   ngOnInit() {
-    const brandFormStoredValues: FormStoreValues =
-      <FormStoreValues>JSON.parse(sessionStorage.getItem('brandForm'));
+    const formStoredValues: FormStoreValues = this.adminService.getStore('brandObject');
 
-    if (brandFormStoredValues) {
-      this.mode = brandFormStoredValues.mode;
-      if (brandFormStoredValues.mode !== 'create' && brandFormStoredValues.selectedId) {
-        this.selectionBrandId = brandFormStoredValues.selectedId;
+    if (formStoredValues) {
+      this.mode = formStoredValues.mode;
+      if (formStoredValues.mode !== 'create' && formStoredValues.selectedId) {
+        this.selectionBrandId = formStoredValues.selectedId;
         this.onBrandSelection(this.selectionBrandId);
       }
     }
   }
+
+  onChangeDisabled(): void {
+    if ((this.mode === 'delete' || this.loading)) {
+      this.options = Object.assign({}, this.options, { disabled: true });
+    }
+  }
+
+
+  updateMode() {
+    this.adminService.store('brandObject', this.mode, '');
+    this.resetBrand();
+  }
+
   /**
   * Reset Brand
   */
@@ -291,7 +289,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   /**
    * Retrive Brand Data from the server
    */
-  onBrandSelection(selectedBrandId: String) {
+  onBrandSelection(selectedBrandId: string) {
     this.adminService.readBrandById(selectedBrandId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
@@ -309,7 +307,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.headerBackgroundColor = '#ffffff';
             }
 
-            if (!this.brand.headerBackgroundOpacity) {
+            if (this.brand.headerBackgroundOpacity === undefined) {
               this.brand.headerBackgroundOpacity = 75;
             }
 
@@ -325,9 +323,11 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
               this.brand.pageContentColor = false;
             }
 
-            if (!this.brand.pageBackgroundOpacity) {
+            if (this.brand.pageBackgroundOpacity === undefined) {
               this.brand.pageBackgroundOpacity = 100;
             }
+
+            this.adminService.store('brandObject', this.mode, selectedBrandId);
 
           }
         }
@@ -588,6 +588,7 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
     }
     finally {
       this.loading = false;
+      this.adminService.clearStore('brandObject');
     }
   }
 
