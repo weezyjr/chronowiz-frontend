@@ -10,6 +10,7 @@ import { Watch } from 'src/app/Types/watch';
 import { RetailerService } from '../../retailer.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { WindowService } from '../in-stock/window.service';
 
 @Component({
   selector: 'app-add-to-stock',
@@ -37,10 +38,14 @@ export class AddToStockComponent implements OnInit, OnDestroy, AfterViewInit {
     new Link('In Stock', 'retailer/in-stock')
   ];
 
+  nativeWindow: Window;
+
   constructor(
+    private windowService: WindowService,
     private retailerService: RetailerService,
     private router: Router,
     private _notificationsService: NotificationsService) {
+      this.nativeWindow = windowService.getNativeWindow();
 
   }
 
@@ -53,7 +58,8 @@ export class AddToStockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   viewWatch(ref: String) {
     console.log(ref);
-    this.router.navigate(['/watch', ref]);
+    this.nativeWindow.open(`/watch/${ref}`);
+   // this.router.navigate(['/watch', ref]);
   }
 
   getBrands() {

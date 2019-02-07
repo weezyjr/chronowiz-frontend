@@ -11,6 +11,7 @@ import { Retailer, WatchObjects } from 'src/app/Types/retailer';
 import { RetailerService } from '../../retailer.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { WindowService } from './window.service';
 
 
 @Component({
@@ -42,10 +43,15 @@ export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
     new Link('In Stock', 'retailer/in-stock', true)
   ];
 
+  nativeWindow: Window;
+
   constructor(
+    private windowService: WindowService,
     private router: Router,
     private retailerService: RetailerService,
     private _notificationsService: NotificationsService) {
+
+    this.nativeWindow = windowService.getNativeWindow();
 
     this.retailerService.getProfile()
       .pipe(takeUntil(this.destroy$))
@@ -64,7 +70,6 @@ export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
   }
-
 
   ngAfterViewInit() {
     this.getBrands();
@@ -91,7 +96,7 @@ export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
             console.log(responseData);
           }
           else {
-            this._notificationsService.success('Success', response.message.en);
+            this._notificationsService.success('Added successfully', response.message.en);
           }
         });
     }
@@ -107,7 +112,7 @@ export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
             console.log(responseData);
           }
           else {
-            this._notificationsService.success('Success', response.message.en);
+            this._notificationsService.success('Removed successfully', response.message.en);
           }
         });
     }
@@ -268,7 +273,9 @@ export class InStockComponent implements OnInit, OnDestroy, AfterViewInit {
 
   viewWatch(ref: String) {
     console.log(ref);
-    this.router.navigate(['/watch', ref]);
+    // window.open('http://chronowiz.com/watch/ref');
+    this.nativeWindow.open(`/watch/${ref}`);
+    // this.router.navigate(['/watch', ref]);
   }
 
   ngOnDestroy() {

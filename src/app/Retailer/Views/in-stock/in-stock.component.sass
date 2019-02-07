@@ -10,13 +10,26 @@
   tr
     border-bottom: 1px solid #979797
   td
+    position: relative
     p
       font-weight: 300
       padding: 10px
       text-align: left !important
   .table-img
     height: 100px
-    max-width: 100%
+
+  .overlay td:after
+    position: absolute
+    z-index: 1
+    display: block
+    text-align: center
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    content: ""
+    background-color: rgba(194, 197, 202, 0.5)
+    color: white
 
 .bold
   font-weight: 400

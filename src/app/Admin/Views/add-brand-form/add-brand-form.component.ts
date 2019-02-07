@@ -253,6 +253,9 @@ export class AddBrandFormComponent implements OnInit, OnDestroy {
   updateMode() {
     this.adminService.store('brandObject', this.mode, '');
     this.resetBrand();
+    if (this.mode !== 'delete') {
+      this.onChangeDisabled();
+    }
   }
 
   /**
