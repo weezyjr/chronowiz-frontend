@@ -17,4 +17,18 @@ export class WatchSectionComponent implements OnInit {
   ngOnInit() {
   }
 
+  isVideo(str: string): boolean {
+    if (str && str !== '' && typeof str === 'string') {
+      return str.toLowerCase().endsWith('.mp4') ||
+        str.toLowerCase().endsWith('.avi') ||
+        str.toLowerCase().endsWith('.flv') ||
+        str.toLowerCase().endsWith('webm') ||
+        str.toLowerCase().endsWith('.mkv') ||
+        str.toLowerCase().endsWith('.wmv') ||
+        str.toLowerCase().endsWith('.m4v') ||
+        str.toLowerCase().endsWith('.3gp') ||
+        str.toLowerCase().endsWith('.ogg');
+    }
+  }
+
 }

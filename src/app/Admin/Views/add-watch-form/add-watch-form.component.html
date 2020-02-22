@@ -390,14 +390,6 @@
         </div>
 
         <div class="form-group">
-          <label for="caseFront">Case Front</label>
-          <ng-select [disabled]="mode == 'delete' || loading" [items]="caseFrontOptions" #caseFront="ngModel" name="caseFront"
-            bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.caseFront" (ngModelChange)="watch.caseFront = $event">
-          </ng-select>
-        </div>
-
-
-        <div class="form-group">
           <label for="caseBack">Case Front</label>
           <ng-select [disabled]="mode == 'delete' || loading" [items]="caseBackOptions" #caseBack="ngModel" name="caseBack"
             bindLabel="name" bindValue="name" [addTag]="addCustomOption" [ngModel]="watch?.caseBack" (ngModelChange)="watch.caseBack = $event">
@@ -676,7 +668,11 @@
           <p class="muted text-left m-0 p-0"> Width: 1000px x Height: 1000px </p>
           <div *ngIf="watch?.section1PhotoUrl" class="preview">
             <h6> Current Section 1 Photo </h6>
-            <img [src]="watch?.section1PhotoUrl" class="img-responsive">
+            <img *ngIf="!s3Service.isVideo(watch?.section1PhotoUrl)" [src]="watch?.section1PhotoUrl" class="img-responsive">
+            <video *ngIf="s3Service.isVideo(watch?.section1PhotoUrl)" class="main-vid" autoplay
+              loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
+              <source [src]="watch?.section1PhotoUrl" type="video/mp4">
+            </video>
           </div>
           <div class="row">
             <div class="col-sm-10 col-6">
@@ -713,7 +709,11 @@
           <p class="muted text-left m-0 p-0"> Width: 1000px x Height: 1000px </p>
           <div *ngIf="watch?.section2PhotoUrl" class="preview">
             <h6> Current Section 2 Photo </h6>
-            <img [src]="watch?.section2PhotoUrl" class="img-responsive">
+            <img  *ngIf="!s3Service.isVideo(watch?.section2PhotoUrl)" [src]="watch?.section2PhotoUrl" class="img-responsive">
+            <video *ngIf="s3Service.isVideo(watch?.section2PhotoUrl)" class="main-vid" autoplay
+              loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
+              <source [src]="watch?.section2PhotoUrl" type="video/mp4">
+            </video>
           </div>
           <div class="row">
             <div class="col-sm-10 col-6">
@@ -750,7 +750,11 @@
           <p class="muted text-left m-0 p-0"> Width: 1000px x Height: 1000px </p>
           <div *ngIf="watch?.section3PhotoUrl" class="preview">
             <h6> Current Section 3 Photo </h6>
-            <img [src]="watch?.section3PhotoUrl" class="img-responsive">
+            <img *ngIf="!s3Service.isVideo(watch?.section3PhotoUrl)" [src]="watch?.section3PhotoUrl" class="img-responsive">
+            <video *ngIf="s3Service.isVideo(watch?.section3PhotoUrl)" class="main-vid" autoplay
+              loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
+              <source [src]="watch?.section3PhotoUrl" type="video/mp4">
+            </video>
           </div>
           <div class="row">
             <div class="col-sm-10 col-6">
@@ -789,7 +793,11 @@
           <p class="muted text-left m-0 p-0"> Width: 1000px x Height: 1000px </p>
           <div *ngIf="watch?.section4PhotoUrl" class="preview">
             <h6> Current Section 4 Photo </h6>
-            <img [src]="watch?.section4PhotoUrl" class="img-responsive">
+            <img  *ngIf="!s3Service.isVideo(watch?.section4PhotoUrl)" [src]="watch?.section4PhotoUrl" class="img-responsive">
+            <video *ngIf="s3Service.isVideo(watch?.section4PhotoUrl)" class="main-vid" autoplay
+              loop muted text-left oncanplay="this.play()" onloadedmetadata="this.muted">
+              <source [src]="watch?.section4PhotoUrl" type="video/mp4">
+            </video>
           </div>
           <div class="row">
             <div class="col-sm-10 col-6">

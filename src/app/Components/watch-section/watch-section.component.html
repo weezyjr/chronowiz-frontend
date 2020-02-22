@@ -1,5 +1,5 @@
 <div class="watch-section">
-  <div class="row" *ngIf="watch?.section1Title && watch?.section1Paragraph && watch?.section1PhotoUrl">
+  <div class="row" *ngIf="watch?.section1Title || watch?.section1Paragraph || watch?.section1PhotoUrl">
     <div class="col-md-6 col-12 align-self-center">
       <div class="feature">
         <div class="sassy-text">Model features</div>
@@ -8,10 +8,17 @@
       </div>
     </div>
     <div class="col-md-6 col-12 align-self-center p-0">
-      <img [src]="watch?.section1PhotoUrl" alt="" class="img-responsive" srcset="">
+      <div *ngIf="watch?.section1PhotoUrl">
+        <img *ngIf="!isVideo(watch?.section1PhotoUrl)" [src]="watch?.section1PhotoUrl" alt="" class="img-responsive"
+          srcset="">
+        <video *ngIf="isVideo(watch?.section1PhotoUrl)" class="main-vid" autoplay loop muted text-left oncanplay="this.play()"
+          onloadedmetadata="this.muted">
+          <source [src]="watch?.section1PhotoUrl" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
-  <div class="row" *ngIf="watch?.section2Title && watch?.section2Paragraph && watch?.section2PhotoUrl">
+  <div class="row" *ngIf="watch?.section2Title || watch?.section2Paragraph || watch?.section2PhotoUrl">
     <div class="col-md-6 col-12 align-self-center order-md-2">
       <div class="feature">
         <div class="sassy-text">Model features</div>
@@ -20,10 +27,17 @@
       </div>
     </div>
     <div class="col-md-6 col-12 align-self-center p-0 order-md-1">
-      <img [src]="watch?.section2PhotoUrl" alt="" class="img-responsive" srcset="">
+      <div *ngIf="watch?.section1PhotoUrl">
+        <img *ngIf="!isVideo(watch?.section2PhotoUrl)" [src]="watch?.section1PhotoUrl" alt="" class="img-responsive"
+          srcset="">
+        <video *ngIf="isVideo(watch?.section2PhotoUrl)" class="main-vid" autoplay loop muted text-left oncanplay="this.play()"
+          onloadedmetadata="this.muted">
+          <source [src]="watch?.section2PhotoUrl" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
-  <div class="row" *ngIf="watch?.section3Title && watch?.section3Paragraph && watch?.section3PhotoUrl">
+  <div class="row" *ngIf="watch?.section3Title || watch?.section3Paragraph || watch?.section3PhotoUrl">
     <div class="col-md-6 col-12 align-self-center">
       <div class="feature">
         <div class="sassy-text">Model features</div>
@@ -32,11 +46,18 @@
       </div>
     </div>
     <div class="col-md-6 col-12 align-self-center p-0">
-      <img [src]="watch?.section3PhotoUrl" alt="" class="img-responsive" srcset="">
+      <div *ngIf="watch?.section1PhotoUrl">
+        <img *ngIf="!isVideo(watch?.section3PhotoUrl)" [src]="watch?.section1PhotoUrl" alt="" class="img-responsive"
+          srcset="">
+        <video *ngIf="isVideo(watch?.section3PhotoUrl)" class="main-vid" autoplay loop muted text-left oncanplay="this.play()"
+          onloadedmetadata="this.muted">
+          <source [src]="watch?.section3PhotoUrl" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
-  <div class="row" *ngIf="watch?.section4Title && watch?.section4Paragraph && watch?.section4PhotoUrl">
-    <div class="col-md-6 col-12 align-self-center order-md-2" >
+  <div class="row" *ngIf="watch?.section4Title || watch?.section4Paragraph || watch?.section4PhotoUrl">
+    <div class="col-md-6 col-12 align-self-center order-md-2">
       <div class="feature">
         <div class="sassy-text">Model features</div>
         <h5>{{watch?.section4Title}}</h5>
@@ -44,7 +65,14 @@
       </div>
     </div>
     <div class="col-md-6 col-12 align-self-center p-0 order-md-1">
-      <img [src]="watch?.section4PhotoUrl" alt="" class="img-responsive" srcset="">
+      <div *ngIf="watch?.section1PhotoUrl">
+        <img *ngIf="!isVideo(watch?.section4PhotoUrl)" [src]="watch?.section1PhotoUrl" alt="" class="img-responsive"
+          srcset="">
+        <video *ngIf="isVideo(watch?.section4PhotoUrl)" class="main-vid" autoplay loop muted text-left oncanplay="this.play()"
+          onloadedmetadata="this.muted">
+          <source [src]="watch?.section4PhotoUrl" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
 </div>

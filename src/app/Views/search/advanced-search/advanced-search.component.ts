@@ -142,6 +142,12 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy {
             this._notificationsService.error('Error', response.message.en);
           } else {
             this.watchesSearchResults = <Watch[]>response.payload;
+            // to remove duplicates
+            const removeDuplicates =
+              (watches: Watch[]) => watches.filter((v, i) => watches.indexOf(v) === i);
+            this.watchesSearchResults = removeDuplicates(this.watchesSearchResults);
+
+            // filter the watches and render
             this.renderWatches();
           }
           this.loading = false;
